@@ -1,7 +1,8 @@
 # XSD
-
+[![Gem Version](https://badge.fury.io/rb/xsd.svg)][gem]
 [![Ruby](https://github.com/ekzo-dev/ruby-xsd/actions/workflows/main.yml/badge.svg)][githubactions]
 
+[gem]: https://badge.fury.io/rb/xsd
 [githubactions]: https://github.com/omniauth/omniauth/actions/workflows/main.yml
 
 The Ruby XSD library is an [XML Schema](https://www.w3.org/2001/XMLSchema) implementation for Ruby. Provides easy and
