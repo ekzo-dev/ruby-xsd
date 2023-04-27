@@ -1,0 +1,46 @@
+# Ignore bundler config. Environment normalisation:
+*.gem
+/.bundle/
+/vendor/bundle
+/lib/bundler/man/
+external
+Gemfile.lock
+Gemfile.*.lock
+.ruby-version
+
+# Editors
+.idea
+
+# Ignore all logfiles and tempfiles.
+/tmp/
+/log/
+
+# OS
+.DS_STORE
+Thumbs.db
+
+# Emacs backup file
+*~
+*#
+
+## Documentation cache and generated files:
+/.yardoc/
+/_yardoc/
+/doc/
+/rdoc/
+
+## Specific to RubyMotion:
+.dat*
+.repl_history
+build/
+
+# rspec
+.rspec_status
+/spec/reports/
+
+# Other
+/coverage/
+/pkg/
+*.rbc
+/.config
+/InstalledFiles

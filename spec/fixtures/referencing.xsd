@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' elementFormDefault='qualified'>
+    <xs:element name='Album'>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref='Source'/>
+                <xs:element ref='Tracks'/>
+                <xs:element name='Foo'>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element maxOccurs='3' name='Bar' type='xs:string' maxOccurs='3' />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name='Source' type='xs:string'/>
+    <xs:element name='Tracks'>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref='Track'/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name='Track'>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref='ISRC'/>
+                <xs:element ref='Artist'/>
+                <xs:element ref='Title'/>
+                <xs:element ref='DiscNumber'/>
+                <xs:element ref='TrackNumber'/>
+                <xs:element ref='Duration'/>
+                <xs:element ref='Label'/>
+                <xs:element ref='Company'/>
+                <xs:element ref='CompanyCountry'/>
+                <xs:element ref='RecordedCountry'/>
+                <xs:element ref='RecordedYear'/>
+                <xs:element ref='ReleaseDate'/>
+                <xs:element ref='Contributors'/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name='ISRC' type='xs:NCName'/>
+    <xs:element name='DiscNumber' type='xs:integer'/>
+    <xs:element name='TrackNumber' type='xs:integer'/>
+    <xs:element name='Duration' type='xs:integer'/>
+    <xs:element name='RecordedCountry' type='xs:NCName'/>
+    <xs:element name='RecordedYear' type='xs:integer'/>
+    <xs:element name='Contributors'>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs='unbounded' ref='Contributor'/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name='Contributor'>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref='Name'/>
+                <xs:element ref='Role'/>
+                <xs:element ref='Instrument'/>
+            </xs:sequence>
+          	<xs:attribute name="credited" type="xs:boolean" />
+        </xs:complexType>
+    </xs:element>
+    <xs:element name='Name' type='xs:string'/>
+    <xs:element name='Role' type='xs:NCName'/>
+    <xs:element name='Instrument' type='xs:NCName'/>
+    <xs:element name='Title' type='xs:string'/>
+    <xs:element name='Artist' type='xs:string'/>
+    <xs:element name='Label' type='xs:string'/>
+    <xs:element name='Company' type='xs:string'/>
+    <xs:element name='CompanyCountry' type='xs:NCName'/>
+    <xs:element name='ReleaseDate' type='xs:NMTOKEN'/>
+</xs:schema>
