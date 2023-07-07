@@ -2,8 +2,8 @@
 
 require_relative 'spec_helper'
 
-RSpec.describe XSD::XML do
-  subject(:reader) { described_class.open(file, :logger => spec_logger, resource_resolver: resource_resolver(file)) }
+RSpec.describe XSD do
+  subject(:reader) { described_class::XML.open(file, :logger => spec_logger, resource_resolver: resource_resolver(file)) }
 
   context 'with ddex-v36 example files' do
     let(:file) { fixture_file(%w[ddex-v36 ddex-ern-v36.xsd], read: false) }
@@ -178,13 +178,13 @@ RSpec.describe XSD::XML do
       it 'gives the referenced element' do
         expect(element.reference.class).to eq XSD::Element
         expect(element.reference.name).to eq 'Contributor'
-        expect(element.reference).to_not eq element
+        expect(element.reference).not_to eq element
       end
     end
 
     describe '# elements' do
       it 'gives elements of the referenced element' do
-        expect(element.all_elements.map(&:name)).to eq ['Name', 'Role', 'Instrument']
+        expect(element.all_elements.map(&:name)).to eq %w[Name Role Instrument]
       end
     end
 

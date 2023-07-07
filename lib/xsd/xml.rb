@@ -167,8 +167,10 @@ module XSD
 
     private
 
-    def collect(items, *args)
-      schemas.map { |schema| schema.send(items, *args) }.flatten
+    def collect(name, *args)
+      result = Set.new
+      schemas.each { |schema| result.merge(schema.send(name, *args)) }
+      result.to_a
     end
 
     def default_logger
