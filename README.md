@@ -26,7 +26,7 @@ gem 'xsd'
 require 'xsd'
 
 # Load ruby-xsd
-reader = XSD::XML.new(:xsd_file => 'some.xsd')
+reader = XSD::XML.open('some.xsd')
 
 # Get attributes
 attribute = reader['NewReleaseMessage']['@MessageSchemaVersionId']
