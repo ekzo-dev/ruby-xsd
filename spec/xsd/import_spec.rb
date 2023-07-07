@@ -3,12 +3,12 @@
 require_relative '../spec_helper'
 
 RSpec.describe XSD::Import do
-  subject(:reader) { XSD::XML.new(file, logger: spec_logger) }
+  subject(:reader) { XSD::XML.open(file, logger: spec_logger, resource_resolver: resource_resolver(file)) }
 
   context 'with ddex-v36 example files' do
-    subject(:import) { reader.imports[0] }
+    subject(:import) { reader.schema.imports[0] }
 
-    let(:file) { fixture_file(%w[ddex-v36 ddex-ern-v36.xsd]) }
+    let(:file) { fixture_file(%w[ddex-v36 ddex-ern-v36.xsd], read: false) }
 
     it 'gives the namespace' do
       expect(import.namespace).to eq 'http://ddex.net/xml/avs/avs'
@@ -18,33 +18,16 @@ RSpec.describe XSD::Import do
       expect(import.schema_location).to eq 'avs.xsd'
     end
 
-    # ToFix:  NoMethodError: undefined method `uri' for #<XSD::Import
-    # it 'gives a download uri' do
-    #   expect(import.uri).to eq 'http://ddex.net/xml/avs/avs.xsd'
-    # end
-
     it 'gives a reader for the external XSD' do
-      expect(import.reader.class).to eq XSD::XML
-    end
-
-    it 'gives a download_path to save the imported xsd file to, if an xsd_file options is provided, containing the path to the parent xsd' do
-      expect(import.options[:xsd_file]).to eq reader.options[:xsd_file]
-      # ToFix: NoMethodError: undefined method `download_path' for #<XSD::Import
-      # expect(import.download_path).to eq File.expand_path(File.join(File.dirname(__FILE__), 'examples', 'ddex-v36', 'avs.xsd'))
+      expect(import.imported_schema.class).to eq XSD::Schema
     end
 
     it 'downloads related xsd files' do
-      # r1 = XSD::XML.new(fixture_file(%w[ddex-v36 avs.xsd]), logger: spec_logger)
-      # r2 = import.reader
-      # p r1.elements.map(&:name)
-      # p r2.elements.map(&:name)
-      # expect(r1.elements.map(&:name)).to eq r2.elements.map(&:name)
-      # expect(r1.simple_types.map(&:name)).to eq r2.simple_types.map(&:name)
-    end
+      s1 = XSD::XML.open(fixture_file(%w[ddex-v36 avs.xsd], read: false), logger: spec_logger, resource_resolver: resource_resolver(file)).schema
+      s2 = import.imported_schema
 
-    it 'automatically saves related xsd content' do
-      # expect(import.reader.options[:xsd_file]).to eq File.expand_path(File.join(File.dirname(__FILE__), 'fixtures', 'avs.xsd'))
-      # expect(File.file?(import.download_path)).to eq true
+      expect(s1.all_elements.map(&:name)).to eq s2.all_elements.map(&:name)
+      expect(s1.simple_types.map(&:name)).to eq s2.simple_types.map(&:name)
     end
   end
 end

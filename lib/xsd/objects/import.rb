@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rest-client'
-
 module XSD
   # The import element is used to add multiple schemas with different target namespace to a document.
   # Parent elements: schema
@@ -17,51 +15,24 @@ module XSD
     # @return [String, nil]
     property :schemaLocation, :string
 
-    # Get imported reader
-    # @return [XSD:XML]
-    def imported_reader
-      return @imported_reader if @imported_reader
+    # Get imported schema
+    # @return XSD:Schema
+    def imported_schema
+      schema = reader.schema_for_namespace(namespace)
+      return schema if schema
 
-      xml = if reader.imported_xsd[namespace]
-              # check in imported xsd by namespace
-              reader.imported_xsd[namespace]
-            elsif schema_location =~ /^https?:/
-              # check http(s) schema location
-              download_uri(schema_location)
-            elsif (path = local_path)
-              # check local relative path
-              path
-            elsif namespace =~ /^https?:/
-              # check http(s) namespace
-              # TODO: investigate spec conformance
-              download_uri(namespace.gsub(/#{File.basename(schema_location, '.*')}$/, '').to_s + schema_location)
-            else
-              raise ImportError, "Failed to locate import '#{schema_location}' for namespace '#{namespace}'"
-            end
-
-      # TODO: pass all provided options
-      @imported_reader = XSD::XML.new(xml, imported_xsd: reader.imported_xsd, logger: reader.logger)
-    end
-
-    def local_path
-      return unless reader.xsd.is_a?(Pathname)
-
-      path = reader.xsd.dirname.join(schema_location)
-      path.file? ? path : nil
-    end
-
-    private
-
-    def download_uri(uri)
-      reader.logger.debug(XSD) { "Downloading import schema for namespace '#{namespace}' from '#{uri}'" }
-
-      begin
-        response = RestClient.get(uri)
-      rescue RestClient::Exception => e
-        raise ImportError, e.message
+      unless schema_location
+        raise ImportError, "Schema location not provided for namespace '#{namespace}', use add_schema_xml()/add_schema_node()"
       end
 
-      response.body
+      xml = reader.resource_resolver.call(schema_location, namespace)
+      schema = reader.add_schema_xml(xml)
+
+      unless namespace == schema.target_namespace
+        raise ImportError, 'Import location does not match imported schema targetNamespace'
+      end
+
+      schema
     end
   end
 end

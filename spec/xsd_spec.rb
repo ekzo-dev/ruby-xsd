@@ -2,46 +2,16 @@
 
 require_relative 'spec_helper'
 
-RSpec.describe XSD do
-  subject(:reader) { described_class::XML.new(file, :logger => spec_logger) }
+RSpec.describe XSD::XML do
+  subject(:reader) { described_class.open(file, :logger => spec_logger, resource_resolver: resource_resolver(file)) }
 
   context 'with ddex-v36 example files' do
-    let(:file) { fixture_file(%w[ddex-v36 ddex-ern-v36.xsd]) }
-
-    describe 'caching' do
-      it 'start with caches empty' do
-        cache_names = %i[direct_elements attributes all_elements sequences choices
-                         complex_types linked_complex_type simple_contents extensions]
-
-        expect(
-          cache_names.map { |name| "#{name}: #{reader.instance_variable_get("@#{name}").inspect}" }
-        ).to eq(cache_names.map { |name| "#{name}: #{nil.inspect}" })
-      end
-
-      it 'caches some relationships to improve performance' do
-        expect(reader.instance_variable_get(:@schema)).to be_nil
-        expect(reader.instance_variable_get(:@elements)).to be_nil
-        # the next line causes new caches to be created
-        expect(reader['NewReleaseMessage'].instance_variable_get(:@all_elements)).to be_nil
-        expect(reader.instance_variable_get(:@schema).class).to eq XSD::Schema
-
-        # ToFix: "NoMethodError: undefined method `length' for nil:NilClasss"
-        # expect(reader.schema.instance_variable_get(:@direct_elements).length).to eq 2
-
-        # the next line causes new caches to be created
-        expect(reader['NewReleaseMessage']['NewReleaseMessage'].instance_variable_get(:@all_elements)).to be_nil
-
-        # ToFix: "NoMethodError: undefined method `first' for nil:NilClass"
-        # expect(reader['NewReleaseMessage'].instance_variable_get(:@all_elements).first.name).to eq 'MessageHeader'
-      end
-    end
+    let(:file) { fixture_file(%w[ddex-v36 ddex-ern-v36.xsd], read: false) }
 
     describe '#elements' do
       it 'gives all child element definitions' do
-        expect(reader.elements.map(&:name)).to eq %w[NewReleaseMessage CatalogListMessage]
-
-        # ToFix: undefined method `elements' for #<XSD::Element
-        # expect(reader.elements[0].elements[0].name).to eq 'MessageHeader'
+        expect(reader.all_elements.map(&:name)).to eq %w[NewReleaseMessage CatalogListMessage]
+        expect(reader.all_elements[0].all_elements[0].name).to eq 'MessageHeader'
       end
     end
 
@@ -135,72 +105,60 @@ RSpec.describe XSD do
 
     describe 'imports' do
       it 'finds imported types for elements' do
-        skip 'to fix'
-        # ToFix: loop
-        # simple_type =
-        #   reader['NewReleaseMessage']['DealList']['ReleaseDeal']['Deal']['DealTerms']['WebPolicy']['AccessLimitation']
-        #     .linked_simple_type
+        simple_type = reader['NewReleaseMessage']['DealList']['ReleaseDeal']['Deal']['DealTerms']['WebPolicy']['AccessLimitation'].simple_type
 
-        # expect(simple_type.class).to eq XSD::SimpleType
-        # expect(simple_type.name).to eq 'AccessLimitation'
-        #  # byebug
-        # expect(simple_type.schema).to be reader.imports[0].reader.schema
+        expect(simple_type.class).to eq XSD::SimpleType
+        expect(simple_type.name).to eq 'AccessLimitation'
+        expect(simple_type.schema).to be reader.schema.imports[0].imported_schema
       end
     end
 
     describe '#linked_complex_type' do
       it 'finds complex types for elements within the same schema' do
-        skip 'to fix'
-        # el = reader['NewReleaseMessage']['MessageHeader']
-        # ToFix: linked_complex_type
-        # ct = el.linked_complex_type
+        el = reader['NewReleaseMessage']['MessageHeader']
+        ct = el.complex_type
 
-        # expect(ct.class).to eq XSD::ComplexType
-        # expect(ct.name).to eq 'MessageHeader'
-        # expect(ct.schema).to be el.schema
+        expect(ct.class).to eq XSD::ComplexType
+        expect(ct.name).to eq 'MessageHeader'
+        expect(ct.schema).to be el.schema
       end
     end
   end
 
   context 'with ddex-v32 example files' do
-    let(:file) { fixture_file(%w[ddex-v32 ern-main.xsd]) }
+    let(:file) { fixture_file(%w[ddex-v32 ern-main.xsd], read: false) }
 
     describe '#all_elements' do
       it 'includes elements from linked complex types from an imported schema' do
-        element           = reader['NewReleaseMessage']['CollectionList']['Collection']['Title']
+        element = reader['NewReleaseMessage']['CollectionList']['Collection']['Title']
         expected_elements = %w[TitleText SubTitle]
 
         expect(element.all_elements.map(&:name)).to eq expected_elements
       end
 
-      # ToFix: undefined method `elements' for #<XSD::Element
-      # it 'includes elements from extensions in linked complex types' do
-      #   el = reader['NewReleaseMessage']['ResourceList']['SoundRecording']['SoundRecordingDetailsByTerritory']
-      #   expected_elements = %w[TerritoryCode ExcludedTerritoryCode Title DisplayArtist ResourceContributor
-      #                          IndirectResourceContributor RightsAgreementId LabelName RightsController RemasteredDate
-      #                          OriginalResourceReleaseDate PLine CourtesyLine SequenceNumber HostSoundCarrier
-      #                          MarketingComment Genre ParentalWarningType AvRating TechnicalSoundRecordingDetails
-      #                          FulfillmentDate Keywords Synopsis]
-      #
-      #   expect(el.elements.map(&:name)).to eq expected_elements
-      # end
+      it 'includes elements from extensions in linked complex types' do
+        el = reader['NewReleaseMessage']['ResourceList']['SoundRecording']['SoundRecordingDetailsByTerritory']
+        expected_elements = %w[TerritoryCode ExcludedTerritoryCode Title DisplayArtist ResourceContributor
+                               IndirectResourceContributor RightsAgreementId LabelName RightsController RemasteredDate
+                               OriginalResourceReleaseDate PLine CourtesyLine SequenceNumber HostSoundCarrier
+                               MarketingComment Genre ParentalWarningType AvRating TechnicalSoundRecordingDetails
+                               FulfillmentDate Keywords Synopsis]
+
+        expect(el.all_elements.map(&:name)).to eq expected_elements
+      end
     end
 
     describe '#schema_for_namespace' do
       it 'returns the schema object for a specified namespace' do
-        skip 'to fix'
-        # ToFix: XSD::Error:
-        # Schema not found for namespace 'http://ddex.net/xml/2010/ern-main/32' in 'http://ddex.net/xml/2010/ern-main/32
-        # namespace = 'http://ddex.net/xml/2010/ern-main/32'
-        # expect(reader.schema_for_namespace(namespace).target_namespace).to eq namespace
-        # expect(reader.schema_for_namespace(namespace)).to be reader.schema
-        # expect(reader.schema.schema_for_namespace(namespace)).to be reader.schema
-        # expect(reader['NewReleaseMessage'].schema_for_namespace(namespace)).to be reader.schema
+        namespace = 'http://ddex.net/xml/2010/ern-main/32'
+        expect(reader.schema.schema_for_namespace(namespace).target_namespace).to eq namespace
+        expect(reader.schema.schema_for_namespace(namespace)).to be reader.schema
+        expect(reader.schema.schema_for_namespace(namespace)).to be reader.schema
+        expect(reader['NewReleaseMessage'].schema_for_namespace(namespace)).to be reader.schema
       end
 
       it 'returns the schema object for a specified namespace code' do
-        expect(reader.schema_for_namespace('ernm').target_namespace).to eq 'http://ddex.net/xml/2010/ern-main/32'
-        expect(reader.schema_for_namespace('ernm')).to be reader.schema
+        expect(reader.schema.schema_for_namespace('ernm').target_namespace).to eq 'http://ddex.net/xml/2010/ern-main/32'
         expect(reader.schema.schema_for_namespace('ernm')).to be reader.schema
         expect(reader['NewReleaseMessage']['ResourceList'].schema_for_namespace('ernm')).to be reader.schema
       end
@@ -208,11 +166,9 @@ RSpec.describe XSD do
       it 'finds imported schemas' do
         namespace = 'http://ddex.net/xml/20100712/ddexC'
 
-        expect(reader.schema_for_namespace(namespace).target_namespace).to eq namespace
-        expect(reader.schema_for_namespace('ddexC').target_namespace).to eq namespace
-
-        expect(reader.schema.schema_for_namespace('ddex').target_namespace)
-          .to eq 'http://ddex.net/xml/20100712/ddex'
+        expect(reader.schema.schema_for_namespace(namespace).target_namespace).to eq namespace
+        expect(reader.schema.schema_for_namespace('ddexC').target_namespace).to eq namespace
+        expect(reader.schema.schema_for_namespace('ddex').target_namespace).to eq 'http://ddex.net/xml/20100712/ddex'
 
         # ToFix: infinite loop
         # expect(reader.schema_for_namespace(namespace)).to be reader.imports[1].reader.schema
@@ -225,31 +181,27 @@ RSpec.describe XSD do
   context 'with referencing example file' do
     subject(:element) { reader['Album', 'Tracks', 'Track', 'Contributors', 'Contributor'] }
 
-    let(:file) { fixture_file(%w[referencing.xsd]) }
+    let(:file) { fixture_file(%w[referencing.xsd], read: false) }
 
     describe '#referenced_element' do
       it 'gives the referenced element' do
-        skip 'to fix'
-        # ToFix: referenced_element
-        # expect(element.referenced_element.class).to eq XSD::Element
-        # expect(element.referenced_element.name).to eq 'Contributor'
-        # expect(element.referenced_element).to_not eq element
+        expect(element.reference.class).to eq XSD::Element
+        expect(element.reference.name).to eq 'Contributor'
+        expect(element.reference).to_not eq element
       end
     end
 
-    # ToFix elements' for #<XSD::Element
-    # describe '#elements' do
-    #   it 'gives alements of the referenced element' do
-    #   expect(element.elements.map(&:name)).to eq ['Name', 'Role', 'Instrument']
-    # end
-    # end
+    describe '# elements' do
+      it 'gives elements of the referenced element' do
+        expect(element.all_elements.map(&:name)).to eq ['Name', 'Role', 'Instrument']
+      end
+    end
 
-    # ToFix elements' for #<XSD::Element
-    # describe '#attributes' do
-    #   it 'gives the attributes of the referenced element' do
-    #     expect(element.attributes.map(&:name)).to eq ['credited']
-    #   end
-    # end
+    describe '#attributes' do
+      it 'gives the attributes of the referenced element' do
+        expect(element.all_attributes.map(&:name)).to eq ['credited']
+      end
+    end
 
     describe '#[]' do
       it 'lets the caller acces elements of the referenced element' do
@@ -275,10 +227,10 @@ RSpec.describe XSD do
     end
 
     # ToFix: undefined method `sequences' for #<XSD::ComplexType
-    # describe '#complex_type' do
-    #   it 'gives the complex type object of the referenced element' do
-    #     expect(element.complex_type.sequences.first.elements.map(&:name)).to eq %w[Name Role Instrument]
-    #   end
-    # end
+    describe '#complex_type' do
+      it 'gives the complex type object of the referenced element' do
+        expect(element.complex_type.sequence.elements.map(&:name)).to eq %w[Name Role Instrument]
+      end
+    end
   end
 end

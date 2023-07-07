@@ -66,16 +66,16 @@ module XSD
       node.xpath("./xs:#{name}", { 'xs' => XML_SCHEMA })
     end
 
-    # Get schema object for specified namespace prefix
-    # @param [String] prefix
-    # @return [Schema]
-    def schema_for_namespace(prefix)
-      if schema.targets_namespace?(prefix)
+    # Get schema by namespace or namespace prefix
+    # @param [String] namespace
+    # @return Schema
+    def schema_for_namespace(namespace)
+      if schema.targets_namespace?(namespace)
         schema
-      elsif (import = schema.import_by_namespace(prefix))
-        import.imported_reader.schema
+      elsif (import = schema.import_by_namespace(namespace))
+        import.imported_schema
       else
-        raise Error, "Schema not found for namespace '#{prefix}' in '#{schema.id || schema.target_namespace}'"
+        raise Error, "Schema not found for namespace '#{namespace}' in '#{schema.id || schema.target_namespace}'"
       end
     end
 

@@ -80,9 +80,9 @@ module XSD
     # @return [Array<Group>]
     child :groups, [:group]
 
-    # Get nested groups
+    # Schema imports
     # @!attribute imports
-    # @return [Array<Import>]
+    # @return Array<Import>
     child :imports, [:import]
 
     # Get current schema object
@@ -116,39 +116,39 @@ module XSD
     end
 
     # Check if namespace is a target namespace
-    # @param [String] prefix
-    # @return [Boolean]
-    def targets_namespace?(prefix)
-      namespaces[prefix.empty? ? 'xmlns' : "xmlns:#{prefix}"] == target_namespace
+    # @param [String] namespace
+    # @return Boolean
+    def targets_namespace?(namespace)
+      namespace == target_namespace || namespaces[namespace.empty? ? 'xmlns' : "xmlns:#{namespace}"] == target_namespace
     end
 
     # Override map_children on schema to get objects from all imported schemas
     # @param [Symbol] name
-    # @return [Array<BaseObject>]
+    # @return Array<BaseObject>
     def map_children(name, cache = {})
       super(name) + import_map_children(name, cache)
     end
 
     # Get children from all imported schemas
     # @param [Symbol] name
-    # @return [Array<BaseObject>]
-    # TODO: better recursion handling, may be refactor needed 1 reader for all schemas with centralized cache
+    # @return Array<BaseObject>
     def import_map_children(name, cache)
       return [] if name.to_sym == :import
 
       imports.map do |import|
         if cache[import.namespace]
-          reader.logger.debug(XSD) { "Schema '#{import.namespace}' already parsed, skiping" }
           nil
         else
           cache[import.namespace] = true
-          import.imported_reader.schema.map_children(name, cache)
+          import.imported_schema.map_children(name, cache)
         end
       end.compact.flatten
     end
 
+    # Get import by namespace
+    # @return Import
     def import_by_namespace(ns)
-      aliases = [ns, namespaces["xmlns:#{(ns || '').gsub(/^xmlns:/, '')}"]].compact
+      aliases = [ns, namespaces["xmlns:#{(ns || '').gsub(/^xmlns:/, '')}"], reader.namespace_prefixes[ns]].compact
       imports.find { |import| aliases.include?(import.namespace) }
     end
   end

@@ -3,14 +3,10 @@
 require_relative '../spec_helper'
 
 RSpec.describe XSD::XML do
-  subject(:reader) { described_class.new(file, :logger => spec_logger) }
+  subject(:reader) { described_class.open(file, :logger => spec_logger, resource_resolver: resource_resolver(file)) }
 
   context 'with ddex-v36 example files' do
-    let(:file) { fixture_file(%w[ddex-v36 ddex-ern-v36.xsd]) }
-
-    it 'gives a schema_node name' do
-      expect(reader.schema_node.name).to eq 'schema'
-    end
+    let(:file) { fixture_file(%w[ddex-v36 ddex-ern-v36.xsd], read: false) }
 
     it 'gives a schema_node namespaces' do
       node_namespaces = {
@@ -19,7 +15,7 @@ RSpec.describe XSD::XML do
         'xmlns:avs' => 'http://ddex.net/xml/avs/avs'
       }
 
-      expect(reader.schema_node.namespaces).to eq(node_namespaces)
+      expect(reader.schema.namespaces).to eq(node_namespaces)
     end
 
     it 'gives a schema reader' do
@@ -27,16 +23,15 @@ RSpec.describe XSD::XML do
     end
 
     it "gives an elements shortcut to its schema's shortcuts" do
-      expect(reader.elements.map(&:name)).to eq reader.schema.elements.map(&:name)
+      expect(reader.all_elements.map(&:name)).to eq reader.schema.all_elements.map(&:name)
     end
   end
 
   context 'with ddex-mlc example files' do
-    let(:file) { fixture_file(%w[ddex-mlc music-licensing-companies.xsd]) }
+    let(:file) { fixture_file(%w[ddex-mlc music-licensing-companies.xsd], read: false) }
 
     it 'reads referenced schemas which bind the xmlschema namespace to the root namespace instead of xs' do
-      # ToFix:
-      # expect(reader['DeclarationOfSoundRecordingRightsClaimMessage'].elements.first.name).to eq 'MessageHeader'
+      expect(reader['DeclarationOfSoundRecordingRightsClaimMessage'].all_elements.first.name).to eq 'MessageHeader'
     end
   end
 end

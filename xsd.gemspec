@@ -34,7 +34,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'builder', '~> 3.2'
   spec.add_dependency 'nokogiri', '~> 1.11'
   spec.add_dependency 'rake', '~> 13.0'
-  spec.add_dependency 'rest-client', '~> 2.1'
 
   spec.add_development_dependency 'logger', '~> 1.5'
   spec.add_development_dependency 'rspec', '~> 3.12'

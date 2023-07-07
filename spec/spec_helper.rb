@@ -19,3 +19,15 @@ RSpec.configure do |config|
 
   config.shared_context_metadata_behavior = :apply_to_host_groups
 end
+
+def resource_resolver(file)
+  pathname = Pathname.new(file)
+
+  proc do |location, _|
+    if location =~ /^https?:/
+      Net::HTTP.get(URI(location))
+    else
+      File.read(pathname.dirname.join(location).to_s)
+    end
+  end
+end
