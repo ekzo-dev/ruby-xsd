@@ -34,7 +34,7 @@ module XSD
 
     # Optional. Specifies a unique ID for the element
     # @!attribute id
-    # @return [String]
+    # @return String
     # property :id, :string
     def id
       node['id']
@@ -48,20 +48,20 @@ module XSD
     end
 
     # Get current XML node
-    # @return [Nokogiri::XML::Node]
+    # @return Nokogiri::XML::Node
     def node
       options[:node]
     end
 
     # Get current namespaces
-    # @return [Hash]
+    # @return Hash
     def namespaces
       node.namespaces || {}
     end
 
     # Get child nodes
     # @param [Symbol] name
-    # @return [Nokogiri::XML::NodeSet]
+    # @return Nokogiri::XML::NodeSet
     def nodes(name = :*)
       node.xpath("./xs:#{name}", { 'xs' => XML_SCHEMA })
     end
@@ -80,7 +80,7 @@ module XSD
     end
 
     # Get element or attribute by path
-    # @return [Element, Attribute, nil]
+    # @return Element, Attribute, nil
     def [](*args)
       result = self
 
@@ -102,7 +102,7 @@ module XSD
     # Search node by name in all available schemas and return its object
     # @param [Symbol] node_name
     # @param [String] name
-    # @return [BaseObject, nil]
+    # @return BaseObject, nil
     def object_by_name(node_name, name)
       # get prefix and local name
       name_prefix = get_prefix(name)
@@ -122,7 +122,7 @@ module XSD
 
     # Get reader object for node
     # @param [Nokogiri::XML::Node]
-    # @return [BaseObject]
+    # @return BaseObject
     def node_to_object(node)
       # check object in cache first
       # TODO: проверить работу!
@@ -135,60 +135,60 @@ module XSD
     end
 
     # Get xml parent object
-    # @return [BaseObject, nil]
+    # @return BaseObject, nil
     def parent
       node.respond_to?(:parent) && node.parent ? node_to_object(node.parent) : nil
     end
 
     # Get current schema object
-    # @return [Schema]
+    # @return Schema
     def schema
       options[:schema]
     end
 
     # Get child objects
     # @param [Symbol] name
-    # @return [Array<BaseObject>]
+    # @return Array<BaseObject>
     def map_children(name)
       nodes(name).map { |node| node_to_object(node) }
     end
 
     # Get child object
     # @param [Symbol] name
-    # @return [BaseObject, nil]
+    # @return BaseObject, nil
     def map_child(name)
       map_children(name).first
     end
 
     # Strip namespace prefix from node name
     # @param [String, nil] name Name to strip from
-    # @return [String, nil]
+    # @return String, nil
     def strip_prefix(name)
       name&.include?(':') ? name.split(':').last : name
     end
 
     # Get namespace prefix from node name
     # @param [String, nil] name Name to strip from
-    # @return [String]
+    # @return String
     def get_prefix(name)
       name&.include?(':') ? name.split(':').first : ''
     end
 
     # Return element documentation
-    # @return [Array<String>]
+    # @return Array<String>
     def documentation
       documentation_for(node)
     end
 
     # Return documentation for specified node
     # @param [Nokogiri::XML::Node] node
-    # @return [Array<String>]
+    # @return Array<String>
     def documentation_for(node)
       node.xpath('./xs:annotation/xs:documentation/text()', { 'xs' => XML_SCHEMA }).map(&:to_s).map(&:strip)
     end
 
     # Get all available elements on the current stack level
-    # @return [Array<Element>]
+    # @return Array<Element>
     def all_elements(*)
       # exclude element that can not have elements
       return [] if NO_ELEMENTS_CONTAINER.include?(self.class.mapped_name)
@@ -209,7 +209,7 @@ module XSD
     end
 
     # Get all available attributes on the current stack level
-    # @return [Array<Attribute>]
+    # @return Array<Attribute>
     def all_attributes(*)
       # exclude element that can not have elements
       return [] if NO_ATTRIBUTES_CONTAINER.include?(self.class.mapped_name)
@@ -230,7 +230,7 @@ module XSD
     end
 
     # Get reader instance
-    # @return [XML]
+    # @return XML
     def reader
       options[:reader]
     end
@@ -334,7 +334,7 @@ module XSD
     end
 
     # Get mapped element name
-    # @return [Symbol]
+    # @return Symbol
     def self.mapped_name
       # @mapped_name ||= XML::CLASS_MAP.each { |k, v| return k.to_sym if v == self }
       @mapped_name ||= begin

@@ -32,7 +32,7 @@ module XSD
     private
 
     # Get Nokogiri::XML::Schema object to validate against
-    # @return [Nokogiri::XML::Schema]
+    # @return Nokogiri::XML::Schema
     def schema_validator
       return @schema_validator if @schema_validator
 

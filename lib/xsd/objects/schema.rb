@@ -13,7 +13,7 @@ module XSD
     # are not required to be qualified with the namespace prefix. "qualified" indicates that attributes from the target
     # namespace must be qualified with the namespace prefix
     # @!attribute attribute_form_default
-    # @return [String]
+    # @return String
     property :attributeFormDefault, :string, default: 'unqualified'
 
     # Optional. The form for elements declared in the target namespace of this schema. The value must be "qualified"
@@ -21,7 +21,7 @@ module XSD
     # not required to be qualified with the namespace prefix. "qualified" indicates that elements from the target
     # namespace must be qualified with the namespace prefix
     # @!attribute element_form_default
-    # @return [String]
+    # @return String
     property :elementFormDefault, :string, default: 'unqualified'
 
     # Optional. Specifies the default value of the block attribute on element and complexType elements in the target
@@ -33,7 +33,7 @@ module XSD
     #   substitution - prevents substitution of elements
     #   #all - prevents all derived complex types
     # @!attribute block_default
-    # @return [String]
+    # @return String
     property :blockDefault, :string
 
     # Optional. Specifies the default value of the final attribute on element, simpleType, and complexType elements in
@@ -46,38 +46,38 @@ module XSD
     #   union - prevents derivation by union
     #   #all - prevents all derivation
     # @!attribute final_default
-    # @return [String]
+    # @return String
     property :finalDefault, :string
 
     # Optional. A URI reference of the namespace of this schema
     # @!attribute target_namespace
-    # @return [String]
+    # @return String
     property :targetNamespace, :string
 
     # Optional. Specifies the version of the schema
     # @!attribute version
-    # @return [String]
+    # @return String
     property :version, :string
 
     # A URI reference that specifies one or more namespaces for use in this schema. If no prefix is assigned, the schema
     # components of the namespace can be used with unqualified references
     # @!attribute xmlns
-    # @return [String]
+    # @return String
     property :xmlns, :string
 
     # Global complex types
     # @!attribute complex_types
-    # @return [Array<ComplexType>]
+    # @return Array<ComplexType>
     child :complex_types, [:complexType]
 
     # Global simple types
     # @!attribute simple_types
-    # @return [Array<SimpleType>]
+    # @return Array<SimpleType>
     child :simple_types, [:simpleType]
 
     # Global groups
     # @!attribute groups
-    # @return [Array<Group>]
+    # @return Array<Group>
     child :groups, [:group]
 
     # Schema imports
@@ -86,31 +86,31 @@ module XSD
     child :imports, [:import]
 
     # Get current schema object
-    # @return [Schema]
+    # @return Schema
     def schema
       self
     end
 
     # Get all available root elements. Overrides base implementation for better speed
-    # @return [Array<Element>]
+    # @return Array<Element>
     def all_elements(*)
       elements
     end
 
     # Get all available root attributes. Overrides base implementation for better speed
-    # @return [Array<Attribute>]
+    # @return Array<Attribute>
     def all_attributes(*)
       attributes
     end
 
     # Get target namespace prefix. There may be more than one prefix, but we return only first defined
-    # @return [String]
+    # @return String
     def target_namespace_prefix
       @target_namespace_prefix ||= namespaces.key(target_namespace)&.sub(/^xmlns:?/, '') || ''
     end
 
     # Get schema namespace prefix
-    # @return [String]
+    # @return String
     def namespace_prefix
       @namespace_prefix ||= namespaces.key(XML_SCHEMA).sub(/^xmlns:?/, '')
     end

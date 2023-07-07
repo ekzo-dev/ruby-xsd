@@ -8,26 +8,26 @@ module XSD
   class SimpleType < BaseObject
     # Optional. Specifies the name of the attribute. Name and ref attributes cannot both be present
     # @!attribute name
-    # @return [String]
+    # @return String
     property :name, :string
 
     # Nested restriction
     # @!attribute restriction
-    # @return [Restriction, nil]
+    # @return Restriction, nil
     child :restriction, :restriction
 
     # Nested union
     # @!attribute union
-    # @return [Union, nil]
+    # @return Union, nil
     child :union, :union
 
     # Nested list
     # @!attribute list
-    # @return [List, nil]
+    # @return List, nil
     child :list, :list
 
     # Determine if this is a linked type
-    # @return [Boolean]
+    # @return Boolean
     def linked?
       !name.nil?
     end

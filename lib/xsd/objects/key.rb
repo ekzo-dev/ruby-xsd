@@ -9,17 +9,17 @@ module XSD
     # The name must be a no-colon-name (NCName) as defined in the XML Namespaces specification.
     # The name must be unique within an identity constraint set. Required.
     # @!attribute name
-    # @return [String]
+    # @return String
     property :name, :string, required: true
 
     # Get nested selector object
     # @!attribute selector
-    # @return [Selector]
+    # @return Selector
     child :selector, :selector
 
     # Get nested field objects
     # @!attribute fields
-    # @return [Array<Field>]
+    # @return Array<Field>
     child :fields, [:field]
   end
 end

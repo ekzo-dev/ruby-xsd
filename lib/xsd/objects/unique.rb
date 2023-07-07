@@ -7,12 +7,12 @@ module XSD
   class Unique < BaseObject
     # Get nested selector object
     # @!attribute selector
-    # @return [Selector]
+    # @return Selector
     child :selector, :selector
 
     # Get nested field objects
     # @!attribute fields
-    # @return [Array<Field>]
+    # @return Array<Field>
     child :fields, [:field]
   end
 end

@@ -8,12 +8,12 @@ module XSD
   class Annotation < BaseObject
     # Nested appinfos
     # @!attribute appinfos
-    # @return [Array<Appinfo>]
+    # @return Array<Appinfo>
     child :appinfos, [:appinfo]
 
     # Nested documentations
     # @!attribute documentations
-    # @return [Array<Documentation>]
+    # @return Array<Documentation>
     child :documentations, [:documentation]
   end
 end

@@ -12,22 +12,22 @@ module XSD
 
     # Nested groups
     # @!attribute groups
-    # @return [Array<Group>]
+    # @return Array<Group>
     child :groups, [:group]
 
     # Nested choices
     # @!attribute choices
-    # @return [Array<Choice>]
+    # @return Array<Choice>
     child :choices, [:choice]
 
     # Nested sequences
     # @!attribute sequences
-    # @return [Array<Sequence>]
+    # @return Array<Sequence>
     child :sequences, [:sequence]
 
     # Nested anys
     # @!attribute anys
-    # @return [Array<Any>]
+    # @return Array<Any>
     child :anys, [:any]
   end
 end

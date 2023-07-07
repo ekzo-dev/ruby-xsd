@@ -12,7 +12,7 @@ module XSD
 
     # Optional. Specifies the name of the attribute. Name and ref attributes cannot both be present
     # @!attribute name
-    # @return [String]
+    # @return String
     property :name, :string
   end
 end

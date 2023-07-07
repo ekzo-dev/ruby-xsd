@@ -7,7 +7,7 @@ module XSD
   class Field < BaseObject
     # Required. Identifies a single element or attribute whose content or value is used for the constraint
     # @!attribute xpath
-    # @return [String]
+    # @return String
     property :xpath, :string, required: true
   end
 end

@@ -51,14 +51,6 @@ RSpec.describe XSD::XML do
       end
     end
 
-    # ToFix: infinite loop
-    # describe '#child_elements?' do
-    #   it 'returns wether an element has child element definitions or not' do
-    #     expect(reader['NewReleaseMessage'].child_elements?).to eq true
-    #     expect(reader['NewReleaseMessage']['MessageHeader']['MessageThreadId'].child_elements?).to eq false
-    #   end
-    # end
-
     describe '#min_occurs' do
       it 'gives the minOccurs attribute as an integer' do
         expect(reader['NewReleaseMessage']['ResourceList']['SoundRecording'].min_occurs).to eq 0
@@ -170,10 +162,9 @@ RSpec.describe XSD::XML do
         expect(reader.schema.schema_for_namespace('ddexC').target_namespace).to eq namespace
         expect(reader.schema.schema_for_namespace('ddex').target_namespace).to eq 'http://ddex.net/xml/20100712/ddex'
 
-        # ToFix: infinite loop
-        # expect(reader.schema_for_namespace(namespace)).to be reader.imports[1].reader.schema
-        # expect(reader.schema.schema_for_namespace('ddex')).to be reader.imports[0].reader.schema
-        # expect(reader.schema_for_namespace('ddexC')).to be reader.imports[1].reader.schema
+        expect(reader.schema.schema_for_namespace(namespace)).to be reader.schema.imports[1].imported_schema
+        expect(reader.schema.schema_for_namespace('ddex')).to be reader.schema.imports[0].imported_schema
+        expect(reader.schema.schema_for_namespace('ddexC')).to be reader.schema.imports[1].imported_schema
       end
     end
   end
@@ -226,7 +217,6 @@ RSpec.describe XSD::XML do
       end
     end
 
-    # ToFix: undefined method `sequences' for #<XSD::ComplexType
     describe '#complex_type' do
       it 'gives the complex type object of the referenced element' do
         expect(element.complex_type.sequence.elements.map(&:name)).to eq %w[Name Role Instrument]

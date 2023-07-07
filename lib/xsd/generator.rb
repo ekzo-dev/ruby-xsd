@@ -8,7 +8,7 @@ module XSD
     # @param [Hash] data
     # @param [String, Array<String>] element
     # @param [Builder::XmlMarkup] builder
-    # @return [Builder::XmlMarkup]
+    # @return Builder::XmlMarkup
     def generate(data, element = nil, builder = nil)
       # find root element
       root = find_root_element(element)
@@ -103,7 +103,7 @@ module XSD
     # @param [Element] element
     # @param [Hash] attributes
     # @param [Hash] namespaces
-    # @return [String]
+    # @return String
     def get_namespace_prefix(element, attributes, namespaces)
       namespace = (element.referenced? ? element.reference : element).target_namespace
       prefix    = namespaces.key(namespace)

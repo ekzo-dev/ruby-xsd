@@ -9,17 +9,17 @@ module XSD
     # Optional. Specifies whether character data is allowed to appear between the child elements of this complexType
     # element. Default is false
     # @!attribute mixed
-    # @return [Boolean]
+    # @return Boolean
     property :mixed, :boolean, default: false
 
     # Get nested extension
     # @!attribute extension
-    # @return [Extension, nil]
+    # @return Extension, nil
     child :extension, :extension
 
     # Get nested restriction
     # @!attribute restriction
-    # @return [Restriction, nil]
+    # @return Restriction, nil
     child :restriction, :restriction
   end
 end

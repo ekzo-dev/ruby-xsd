@@ -10,19 +10,19 @@ module XSD
 
     # Optional. Specifies the name of the attribute. Name and ref attributes cannot both be present
     # @!attribute name
-    # @return [String]
+    # @return String
     property :name, :string
 
     # Optional. Specifies whether the complex type can be used in an instance document. True indicates that an element
     # cannot use this complex type directly but must use a complex type derived from this complex type. Default is false
     # @!attribute abstract
-    # @return [Boolean]
+    # @return Boolean
     property :abstract, :boolean, default: false
 
     # Optional. Specifies whether character data is allowed to appear between the child elements of this complexType
     # element. Default is false. If a simpleContent element is a child element, the mixed attribute is not allowed!
     # @!attribute mixed
-    # @return [Boolean]
+    # @return Boolean
     property :mixed, :boolean, default: false
 
     # Optional. Prevents a complex type that has a specified type of derivation from being used in place of this
@@ -31,7 +31,7 @@ module XSD
     #   restriction - prevents complex types derived by restriction
     #   #all - prevents all derived complex types
     # @!attribute block
-    # @return [String, nil]
+    # @return String, nil
     property :block, :string
 
     # Optional. Prevents a specified type of derivation of this complex type element. Can contain #all or a list
@@ -40,41 +40,41 @@ module XSD
     #   restriction - prevents derivation by restriction
     #   #all - prevents all derivation
     # @!attribute final
-    # @return [String, nil]
+    # @return String, nil
     property :final, :string
 
     # Simple content object
     # @!attribute simple_content
-    # @return [SimpleContent]
+    # @return SimpleContent
     child :simple_content, :simpleContent
 
     # Complex content object
     # @!attribute complex_content
-    # @return [ComplexContent]
+    # @return ComplexContent
     child :complex_content, :complexContent
 
     # Nested group
     # @!attribute group
-    # @return [Group]
+    # @return Group
     child :group, :group
 
     # Nested all
     # @!attribute all
-    # @return [All]
+    # @return All
     child :all, :all
 
     # Nested choice
     # @!attribute choice
-    # @return [Choice]
+    # @return Choice
     child :choice, :choice
 
     # Nested sequence
     # @!attribute sequence
-    # @return [Sequence]
+    # @return Sequence
     child :sequence, :sequence
 
     # Determine if this is a linked type
-    # @return [Boolean]
+    # @return Boolean
     def linked?
       !name.nil?
     end

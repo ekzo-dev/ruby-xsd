@@ -11,12 +11,12 @@ module XSD
 
     # Optional. Specifies the minimum number of times the element can occur. The value can be 0 or 1. Default value is 1
     # @!attribute min_occurs
-    # @return [Integer]
+    # @return Integer
     property :minOccurs, :integer, default: 1
 
     # Optional. Specifies the maximum number of times the element can occur. The value must be 1.
     # @!attribute max_occurs
-    # @return [Integer]
+    # @return Integer
     property :maxOccurs, :integer, default: 1
   end
 end

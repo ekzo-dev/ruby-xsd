@@ -7,7 +7,7 @@ module XSD
   class Appinfo < BaseObject
     # Optional. A URI reference that specifies the source of the application information
     # @!attribute source
-    # @return [String]
+    # @return String
     property :source, :string
   end
 end

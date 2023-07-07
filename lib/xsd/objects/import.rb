@@ -7,12 +7,12 @@ module XSD
   class Import < BaseObject
     # Optional. Specifies the URI of the namespace to import
     # @!attribute namespace
-    # @return [String, nil]
+    # @return String, nil
     property :namespace, :string
 
     # Optional. Specifies the URI to the schema for the imported namespace
     # @!attribute schema_location
-    # @return [String, nil]
+    # @return String, nil
     property :schemaLocation, :string
 
     # Get imported schema

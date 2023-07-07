@@ -11,22 +11,22 @@ module XSD
 
     # Optional. Specifies the name of the attribute. Name and ref attributes cannot both be present
     # @!attribute name
-    # @return [String]
+    # @return String
     property :name, :string
 
     # Nested all object
     # @!attribute all
-    # @return [All]
+    # @return All
     child :all, :all
 
     # Nested choice object
     # @!attribute choice
-    # @return [Choice]
+    # @return Choice
     child :choice, :choice
 
     # Nested sequence object
     # @!attribute sequence
-    # @return [Sequence]
+    # @return Sequence
     child :sequence, :sequence
   end
 end

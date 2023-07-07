@@ -9,7 +9,7 @@ module XSD
     # The name must be a no-colon-name (NCName) as defined in the XML Namespaces specification.
     # The name must be unique within an identity constraint set. Required.
     # @!attribute name
-    # @return [String]
+    # @return String
     property :name, :string, required: true
 
     # The name of a key or unique element defined in this schema
@@ -17,17 +17,17 @@ module XSD
     # The refer value must be a qualified name (QName).
     # The type can include a namespace prefix. Required.
     # @!attribute refer
-    # @return [String]
+    # @return String
     property :refer, :string, required: true
 
     # Get nested selector object
     # @!attribute selector
-    # @return [Selector]
+    # @return Selector
     child :selector, :selector
 
     # Get nested field objects
     # @!attribute fields
-    # @return [Array<Field>]
+    # @return Array<Field>
     child :fields, [:field]
   end
 end

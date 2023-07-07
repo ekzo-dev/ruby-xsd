@@ -4,7 +4,7 @@ module XSD
   module ElementContainer
     # Nested elements
     # @!attribute elements
-    # @return [Array<Element>]
+    # @return Array<Element>
     def self.included(obj)
       obj.child :elements, [:element]
     end

@@ -14,7 +14,7 @@ module XSD
     #     List of {URI references of namespaces, ##targetNamespace, ##local} - attributes from a space-delimited list
     #                        of the namespaces can be present
     # @!attribute namespace
-    # @return [String]
+    # @return String
     property :namespace, :string, default: '##any'
 
     # Optional. Specifies how the XML processor should handle validation against the elements specified by this any
@@ -24,7 +24,7 @@ module XSD
     #   lax    - same as strict but; if the schema cannot be obtained, no errors will occur
     #   skip   - The XML processor does not attempt to validate any elements from the specified namespaces
     # @!attribute process_contents
-    # @return [String, nil]
+    # @return String, nil
     property :processContents, :string, default: 'strict'
   end
 end

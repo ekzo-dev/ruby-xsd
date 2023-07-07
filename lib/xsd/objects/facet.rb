@@ -6,7 +6,7 @@ module XSD
   class Facet < BaseObject
     # Returns facet value
     # @!attribute value
-    # @return [String]
+    # @return String
     property :value, :string
   end
 end

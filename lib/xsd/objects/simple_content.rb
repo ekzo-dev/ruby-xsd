@@ -8,12 +8,12 @@ module XSD
   class SimpleContent < BaseObject
     # Nested extension
     # @!attribute extension
-    # @return [Extension, nil]
+    # @return Extension, nil
     child :extension, :extension
 
     # Nested restriction
     # @!attribute restriction
-    # @return [Restriction, nil]
+    # @return Restriction, nil
     child :restriction, :restriction
   end
 end

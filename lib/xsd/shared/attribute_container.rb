@@ -4,11 +4,11 @@ module XSD
   module AttributeContainer
     # Nested attributes
     # @!attribute attributes
-    # @return [Array<Attribute>]
+    # @return Array<Attribute>
 
     # Nested attribute groups
     # @!attribute attribute_groups
-    # @return [Array<AttributeGroup>]
+    # @return Array<AttributeGroup>
     def self.included(obj)
       obj.child :attributes, [:attribute]
       obj.child :attribute_groups, [:attributeGroup]

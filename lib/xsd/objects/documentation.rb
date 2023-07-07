@@ -7,12 +7,12 @@ module XSD
   class Documentation < BaseObject
     # Optional. A URI reference that specifies the source of the application information
     # @!attribute source
-    # @return [String]
+    # @return String
     property :source, :string
 
     # Optional. Specifies the language used in the contents
     # @!attribute xml_lang
-    # @return [String]
+    # @return String
     property :'xml:lang', :string
   end
 end
