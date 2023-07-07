@@ -23,15 +23,15 @@ module XSD
     # Get all available elements on the current stack level, optionally including base type elements
     # @param [Boolean] include_base
     # @return Array<Element>
-    def all_elements(include_base = true)
-      (include_base && base_complex_type ? base_complex_type.all_elements : []) + super
+    def collect_elements(include_base = true)
+      (include_base && base_complex_type ? base_complex_type.collect_elements : []) + super
     end
 
     # Get all available attributes on the current stack level, optionally including base type attributes
     # @param [Boolean] include_base
     # @return Array<Attribute>
-    def all_attributes(include_base = true)
-      (include_base && base_complex_type ? base_complex_type.all_attributes : []) + super
+    def collect_attributes(include_base = true)
+      (include_base && base_complex_type ? base_complex_type.collect_attributes : []) + super
     end
   end
 end

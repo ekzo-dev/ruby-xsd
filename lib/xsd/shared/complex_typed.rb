@@ -14,15 +14,15 @@ module XSD
     # Get all available elements on the current stack level or linked type elements
     # @param [Boolean] linked_type
     # @return Array<Element>
-    def all_elements(linked_type = true)
-      (linked_type && complex_type&.linked? ? complex_type.all_elements : super)
+    def collect_elements(linked_type = true)
+      (linked_type && complex_type&.linked? ? complex_type.collect_elements : super)
     end
 
     # Get all available attributes on the current stack level or linked type attributes
     # @param [Boolean] linked_type
     # @return Array<Attribute>
-    def all_attributes(linked_type = true)
-      (linked_type && complex_type&.linked? ? complex_type.all_attributes : super)
+    def collect_attributes(linked_type = true)
+      (linked_type && complex_type&.linked? ? complex_type.collect_attributes : super)
     end
   end
 end

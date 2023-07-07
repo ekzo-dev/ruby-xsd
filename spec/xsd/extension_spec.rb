@@ -29,7 +29,7 @@ RSpec.describe XSD::Extension do
                                MarketingComment Genre ParentalWarningType AvRating TechnicalSoundRecordingDetails
                                FulfillmentDate Keywords Synopsis]
 
-        expect(extension.all_elements.map(&:name)).to eq expected_elements
+        expect(extension.collect_elements.map(&:name)).to eq expected_elements
       end
     end
 
@@ -38,7 +38,7 @@ RSpec.describe XSD::Extension do
         el = reader['NewReleaseMessage']['ResourceList']['Video']['VideoDetailsByTerritory']
         expected = %w[TerritoryCode ExcludedTerritoryCode Title DisplayArtist ResourceContributor IndirectResourceContributor RightsAgreementId LabelName RightsController RemasteredDate OriginalResourceReleaseDate PLine CourtesyLine SequenceNumber HostSoundCarrier MarketingComment Genre ParentalWarningType AvRating FulfillmentDate Keywords Synopsis CLine TechnicalVideoDetails Character]
 
-        expect(el.all_elements.map(&:name)).to eq expected
+        expect(el.collect_elements.map(&:name)).to eq expected
       end
     end
   end

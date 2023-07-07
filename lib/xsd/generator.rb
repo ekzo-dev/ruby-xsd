@@ -59,13 +59,13 @@ module XSD
       # configure namespaces
       # TODO: попытаться использовать collect_namespaces?
       attributes = {}
-      all_attributes = element.all_attributes
+      collect_attributes = element.collect_attributes
       if element.complex?
-        all_elements = element.all_elements
+        collect_elements = element.collect_elements
 
         # get namespaces for current element and it's children
         prefix = nil
-        [*all_elements, element].each do |elem|
+        [*collect_elements, element].each do |elem|
           prefix = get_namespace_prefix(elem, attributes, namespaces)
         end
       else
@@ -75,7 +75,7 @@ module XSD
       # iterate through each item
       data.each do |item|
         # prepare attributes
-        all_attributes.each do |attribute|
+        collect_attributes.each do |attribute|
           value = item["@#{attribute.name}"]
           if value
             attributes[attribute.name] = value
@@ -88,7 +88,7 @@ module XSD
         if element.complex?
           # generate tag recursively
           xml.tag!("#{prefix}:#{element.name}", attributes) do
-            all_elements.each do |elem|
+            collect_elements.each do |elem|
               build_element(xml, elem, item, namespaces.dup)
             end
           end

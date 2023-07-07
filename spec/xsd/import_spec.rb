@@ -26,7 +26,7 @@ RSpec.describe XSD::Import do
       s1 = XSD::XML.open(fixture_file(%w[ddex-v36 avs.xsd], read: false), logger: spec_logger, resource_resolver: resource_resolver(file)).schema
       s2 = import.imported_schema
 
-      expect(s1.all_elements.map(&:name)).to eq s2.all_elements.map(&:name)
+      expect(s1.collect_elements.map(&:name)).to eq s2.collect_elements.map(&:name)
       expect(s1.simple_types.map(&:name)).to eq s2.simple_types.map(&:name)
     end
   end

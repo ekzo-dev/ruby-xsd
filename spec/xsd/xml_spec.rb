@@ -23,7 +23,7 @@ RSpec.describe XSD::XML do
     end
 
     it "gives an elements shortcut to its schema's shortcuts" do
-      expect(reader.all_elements.map(&:name)).to eq reader.schema.all_elements.map(&:name)
+      expect(reader.elements.map(&:name)).to eq reader.schema.collect_elements.map(&:name)
     end
   end
 
@@ -31,7 +31,7 @@ RSpec.describe XSD::XML do
     let(:file) { fixture_file(%w[ddex-mlc music-licensing-companies.xsd], read: false) }
 
     it 'reads referenced schemas which bind the xmlschema namespace to the root namespace instead of xs' do
-      expect(reader['DeclarationOfSoundRecordingRightsClaimMessage'].all_elements.first.name).to eq 'MessageHeader'
+      expect(reader['DeclarationOfSoundRecordingRightsClaimMessage'].collect_elements.first.name).to eq 'MessageHeader'
     end
   end
 end

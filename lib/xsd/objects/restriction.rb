@@ -41,7 +41,7 @@ module XSD
     # Get all available elements on the current stack level, optionally including base type elements
     # @param [Boolean] include_base
     # @return Array<Element>
-    def all_elements(include_base = false)
+    def collect_elements(include_base = false)
       # By default we do not include base element for complex restrictions
       super
     end

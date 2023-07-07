@@ -91,15 +91,15 @@ module XSD
       self
     end
 
-    # Get all available root elements. Overrides base implementation for better speed
+    # Get all available elements on the current stack level, for schema same as elements
     # @return Array<Element>
-    def all_elements(*)
+    def collect_elements(*)
       elements
     end
 
-    # Get all available root attributes. Overrides base implementation for better speed
+    # Get all available attributes on the current stack level, for schema same as attributes
     # @return Array<Attribute>
-    def all_attributes(*)
+    def collect_attributes(*)
       attributes
     end
 

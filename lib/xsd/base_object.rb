@@ -90,9 +90,9 @@ module XSD
         curname = curname.to_s
 
         if curname[0] == '@'
-          result = result.all_attributes.find { |attr| attr.name == curname[1..-1] }
+          result = result.collect_attributes.find { |attr| attr.name == curname[1..-1] }
         else
-          result = result.all_elements.find { |elem| elem.name == curname }
+          result = result.collect_elements.find { |elem| elem.name == curname }
         end
       end
 
@@ -189,12 +189,12 @@ module XSD
 
     # Get all available elements on the current stack level
     # @return Array<Element>
-    def all_elements(*)
+    def collect_elements(*)
       # exclude element that can not have elements
       return [] if NO_ELEMENTS_CONTAINER.include?(self.class.mapped_name)
 
       if is_a?(Referenced) && ref
-        reference.all_elements
+        reference.collect_elements
       else
         # map children recursive
         map_children(:*).map do |obj|
@@ -202,7 +202,7 @@ module XSD
             obj
           else
             # get elements considering references
-            (obj.is_a?(Referenced) && obj.ref ? obj.reference : obj).all_elements
+            (obj.is_a?(Referenced) && obj.ref ? obj.reference : obj).collect_elements
           end
         end.flatten
       end
@@ -210,12 +210,12 @@ module XSD
 
     # Get all available attributes on the current stack level
     # @return Array<Attribute>
-    def all_attributes(*)
+    def collect_attributes(*)
       # exclude element that can not have elements
       return [] if NO_ATTRIBUTES_CONTAINER.include?(self.class.mapped_name)
 
       if is_a?(Referenced) && ref
-        reference.all_attributes
+        reference.collect_attributes
       else
         # map children recursive
         map_children(:*).map do |obj|
@@ -223,7 +223,7 @@ module XSD
             obj
           else
             # get attributes considering references
-            (obj.is_a?(Referenced) && obj.ref ? obj.reference : obj).all_attributes
+            (obj.is_a?(Referenced) && obj.ref ? obj.reference : obj).collect_attributes
           end
         end.flatten
       end

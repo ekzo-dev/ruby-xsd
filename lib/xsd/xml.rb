@@ -141,27 +141,27 @@ module XSD
       nil
     end
 
-    def all_elements(*args)
-      collect(:all_elements, *args)
+    def elements(*args)
+      collect(:elements, *args)
     end
 
-    def all_attributes(*args)
-      collect(:all_attributes, *args)
+    def attributes(*args)
+      collect(:attributes, *args)
     end
 
-    def all_attribute_groups
+    def attribute_groups
       collect(:attribute_groups)
     end
 
-    def all_complex_types
+    def complex_types
       collect(:complex_types)
     end
 
-    def all_simple_types
+    def simple_types
       collect(:simple_types)
     end
 
-    def all_groups
+    def groups
       collect(:groups)
     end
 

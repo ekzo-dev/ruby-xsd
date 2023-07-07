@@ -10,8 +10,8 @@ RSpec.describe XSD do
 
     describe '#elements' do
       it 'gives all child element definitions' do
-        expect(reader.all_elements.map(&:name)).to eq %w[NewReleaseMessage CatalogListMessage]
-        expect(reader.all_elements[0].all_elements[0].name).to eq 'MessageHeader'
+        expect(reader.elements.map(&:name)).to eq %w[NewReleaseMessage CatalogListMessage]
+        expect(reader.elements[0].collect_elements[0].name).to eq 'MessageHeader'
       end
     end
 
@@ -21,7 +21,7 @@ RSpec.describe XSD do
       end
 
       it 'supports linking' do
-        attribute_names = reader['NewReleaseMessage']['ReleaseList']['Release'].all_attributes.map(&:name)
+        attribute_names = reader['NewReleaseMessage']['ReleaseList']['Release'].collect_attributes.map(&:name)
 
         expect(attribute_names).to eq %w[LanguageAndScriptCode IsMainRelease]
       end
@@ -40,8 +40,8 @@ RSpec.describe XSD do
       it 'automatically turns symbol arguments into strings (supports linking)' do
         expected_attributes = %w[LanguageAndScriptCode IsMainRelease]
 
-        expect(reader[:NewReleaseMessage]['ReleaseList'][:Release].all_attributes.map(&:name)).to eq expected_attributes
-        expect(reader[:NewReleaseMessage, 'ReleaseList', :Release].all_attributes.map(&:name)).to eq expected_attributes
+        expect(reader[:NewReleaseMessage]['ReleaseList'][:Release].collect_attributes.map(&:name)).to eq expected_attributes
+        expect(reader[:NewReleaseMessage, 'ReleaseList', :Release].collect_attributes.map(&:name)).to eq expected_attributes
       end
 
       it "return nil and doesn't raise an exceptions when getting invalid input" do
@@ -120,12 +120,12 @@ RSpec.describe XSD do
   context 'with ddex-v32 example files' do
     let(:file) { fixture_file(%w[ddex-v32 ern-main.xsd], read: false) }
 
-    describe '#all_elements' do
+    describe '#collect_elements' do
       it 'includes elements from linked complex types from an imported schema' do
         element = reader['NewReleaseMessage']['CollectionList']['Collection']['Title']
         expected_elements = %w[TitleText SubTitle]
 
-        expect(element.all_elements.map(&:name)).to eq expected_elements
+        expect(element.collect_elements.map(&:name)).to eq expected_elements
       end
 
       it 'includes elements from extensions in linked complex types' do
@@ -136,7 +136,7 @@ RSpec.describe XSD do
                                MarketingComment Genre ParentalWarningType AvRating TechnicalSoundRecordingDetails
                                FulfillmentDate Keywords Synopsis]
 
-        expect(el.all_elements.map(&:name)).to eq expected_elements
+        expect(el.collect_elements.map(&:name)).to eq expected_elements
       end
     end
 
@@ -184,13 +184,13 @@ RSpec.describe XSD do
 
     describe '# elements' do
       it 'gives elements of the referenced element' do
-        expect(element.all_elements.map(&:name)).to eq %w[Name Role Instrument]
+        expect(element.collect_elements.map(&:name)).to eq %w[Name Role Instrument]
       end
     end
 
     describe '#attributes' do
       it 'gives the attributes of the referenced element' do
-        expect(element.all_attributes.map(&:name)).to eq ['credited']
+        expect(element.collect_attributes.map(&:name)).to eq ['credited']
       end
     end
 

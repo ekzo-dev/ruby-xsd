@@ -6,12 +6,12 @@ RSpec.describe XSD::Element do
   subject(:reader) { XSD::XML.open(file, :logger => spec_logger, resource_resolver: resource_resolver(file)) }
 
   context 'with ddex-v36 example files' do
-    subject(:element) { reader.all_elements[0] }
+    subject(:element) { reader.elements[0] }
 
     let(:file) { fixture_file(%w[ddex-v36 ddex-ern-v36.xsd], read: false) }
 
     it "gives an element's child" do
-      expect(reader['NewReleaseMessage']).to eq reader.all_elements[0]
+      expect(reader['NewReleaseMessage']).to eq reader.elements[0]
     end
 
     it "gives the element's name" do
@@ -39,39 +39,39 @@ RSpec.describe XSD::Element do
                              NumberOfProductsPerCarton RightsClaimPolicy WebPolicy]
 
       expect(reader['NewReleaseMessage']['DealList']['ReleaseDeal']['Deal']['DealTerms']
-               .all_elements.map(&:name)).to eq expected_elements
+               .collect_elements.map(&:name)).to eq expected_elements
     end
 
     it 'includes elements within a choice node' do
-      el = element.all_elements[3]
+      el = element.collect_elements[3]
       expect(el.name).to eq 'CatalogTransfer'
       elements_with = ['CatalogTransferCompleted', 'EffectiveTransferDate', 'CatalogReleaseReferenceList', 'TerritoryCode', 'ExcludedTerritoryCode', 'TransferringFrom', 'TransferringTo']
-      expect(el.complex_type.all_elements.map(&:name)).to eq elements_with
+      expect(el.complex_type.collect_elements.map(&:name)).to eq elements_with
     end
 
     it 'gives child elements defined within a complex type' do
       expected_elements = %w[MessageHeader UpdateIndicator IsBackfill CatalogTransfer WorkList
                              CueSheetList ResourceList CollectionList ReleaseList DealList]
 
-      expect(element.all_elements.map(&:name)).to eq expected_elements
+      expect(element.collect_elements.map(&:name)).to eq expected_elements
     end
 
     it 'gives attributes defined in a complexType' do
       expected_attributes = %w[MessageSchemaVersionId BusinessProfileVersionId
                                ReleaseProfileVersionId LanguageAndScriptCode]
 
-      expect(element.all_attributes.map(&:name)).to eq expected_attributes
+      expect(element.collect_attributes.map(&:name)).to eq expected_attributes
       expect(element.complex_type.attributes.map(&:name)).to eq expected_attributes
     end
 
     it 'gives attributes defined in a simpleContent extension' do
       element_result = element['ResourceList']['SoundRecording']['SoundRecordingDetailsByTerritory']['DisplayArtist']['ArtistRole']
 
-      expect(element_result.all_attributes.map(&:name)).to eq %w[Namespace UserDefinedValue]
+      expect(element_result.collect_attributes.map(&:name)).to eq %w[Namespace UserDefinedValue]
     end
 
     describe 'External type definition' do
-      let(:header) { element.all_elements.first }
+      let(:header) { element.collect_elements.first }
 
       it 'gives the type string' do
         expect(header.type).to eq 'ern:MessageHeader'
@@ -85,7 +85,7 @@ RSpec.describe XSD::Element do
         expected_elements = %w[MessageThreadId MessageId MessageFileName MessageSender SentOnBehalfOf MessageRecipient
                                MessageCreatedDateTime MessageAuditTrail Comment MessageControlType]
 
-        expect(header.all_elements.map(&:name)).to eq expected_elements
+        expect(header.collect_elements.map(&:name)).to eq expected_elements
       end
     end
   end
@@ -98,7 +98,7 @@ RSpec.describe XSD::Element do
     end
 
     it "gives the element's name obtained through reference" do
-      expect(reader.all_elements[0].all_elements[0].name).to eq 'Source'
+      expect(reader.elements[0].collect_elements[0].name).to eq 'Source'
     end
 
     it "gives an element's ref attribute value" do
@@ -113,14 +113,14 @@ RSpec.describe XSD::Element do
       expected_elements = %w[ISRC Artist Title DiscNumber TrackNumber Duration Label
                              Company CompanyCountry RecordedCountry RecordedYear ReleaseDate Contributors]
 
-      expect(reader['Album', 'Tracks'].all_elements.map(&:name)).to eq ['Track']
-      expect(reader['Album', 'Tracks', 'Track'].all_elements.map(&:name)).to eq expected_elements
+      expect(reader['Album', 'Tracks'].collect_elements.map(&:name)).to eq ['Track']
+      expect(reader['Album', 'Tracks', 'Track'].collect_elements.map(&:name)).to eq expected_elements
 
     end
 
     it 'gives attributes defined in the referenced element' do
-      expect(reader['Album', 'Tracks', 'Track'].all_attributes).to eq []
-      expect(reader['Album', 'Tracks', 'Track', 'Contributors', 'Contributor'].all_attributes.map(&:name)).to eq ['credited']
+      expect(reader['Album', 'Tracks', 'Track'].collect_attributes).to eq []
+      expect(reader['Album', 'Tracks', 'Track', 'Contributors', 'Contributor'].collect_attributes.map(&:name)).to eq ['credited']
     end
   end
 end
