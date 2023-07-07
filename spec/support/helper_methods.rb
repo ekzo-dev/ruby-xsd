@@ -12,7 +12,7 @@ module HelperMethods
   end
 
   def fixture_file(path, read: true)
-    path = path.is_a?(Array) ? File.join(fixture_path, path) : path
+    path = File.join(fixture_path, path) if path.is_a?(Array)
     file = File.expand_path(path)
     return File.read(file) if read
 

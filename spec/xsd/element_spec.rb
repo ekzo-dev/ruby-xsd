@@ -45,7 +45,7 @@ RSpec.describe XSD::Element do
     it 'includes elements within a choice node' do
       el = element.collect_elements[3]
       expect(el.name).to eq 'CatalogTransfer'
-      elements_with = ['CatalogTransferCompleted', 'EffectiveTransferDate', 'CatalogReleaseReferenceList', 'TerritoryCode', 'ExcludedTerritoryCode', 'TransferringFrom', 'TransferringTo']
+      elements_with = %w[CatalogTransferCompleted EffectiveTransferDate CatalogReleaseReferenceList TerritoryCode ExcludedTerritoryCode TransferringFrom TransferringTo]
       expect(el.complex_type.collect_elements.map(&:name)).to eq elements_with
     end
 
@@ -115,7 +115,6 @@ RSpec.describe XSD::Element do
 
       expect(reader['Album', 'Tracks'].collect_elements.map(&:name)).to eq ['Track']
       expect(reader['Album', 'Tracks', 'Track'].collect_elements.map(&:name)).to eq expected_elements
-
     end
 
     it 'gives attributes defined in the referenced element' do
