@@ -16,6 +16,26 @@ module XSD
       fractionDigits length minLength maxLength enumeration whiteSpace pattern
     ].freeze
 
+    # Nested group
+    # @!attribute group
+    # @return Group
+    child :group, :group
+
+    # Nested all
+    # @!attribute all
+    # @return All
+    child :all, :all
+
+    # Nested choice
+    # @!attribute choice
+    # @return Choice
+    child :choice, :choice
+
+    # Nested sequence
+    # @!attribute sequence
+    # @return Sequence
+    child :sequence, :sequence
+
     # Get restriction facets
     # @return Hash
     def facets

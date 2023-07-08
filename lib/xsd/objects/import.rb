@@ -16,23 +16,24 @@ module XSD
     property :schemaLocation, :string
 
     # Get imported schema
-    # @return XSD:Schema
+    # @return Schema
     def imported_schema
-      schema = reader.schema_for_namespace(namespace)
-      return schema if schema
+      if (known_schema = reader.schema_for_namespace(namespace))
+        return known_schema
+      end
 
       unless schema_location
         raise ImportError, "Schema location not provided for namespace '#{namespace}', use add_schema_xml()/add_schema_node()"
       end
 
       xml = reader.resource_resolver.call(schema_location, namespace)
-      schema = reader.add_schema_xml(xml)
+      new_schema = reader.add_schema_xml(xml)
 
-      unless namespace == schema.target_namespace
-        raise ImportError, 'Import location does not match imported schema targetNamespace'
+      unless namespace == new_schema.target_namespace
+        raise ImportError, 'Import namespace does not match imported schema targetNamespace'
       end
 
-      schema
+      new_schema
     end
   end
 end

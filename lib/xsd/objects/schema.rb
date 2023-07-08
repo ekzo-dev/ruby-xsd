@@ -85,6 +85,11 @@ module XSD
     # @return Array<Import>
     child :imports, [:import]
 
+    # Schema includes
+    # @!attribute includes
+    # @return Array<Include>
+    child :includes, [:include]
+
     # Get current schema object
     # @return Schema
     def schema
@@ -122,24 +127,25 @@ module XSD
       namespace == target_namespace || namespaces[namespace.empty? ? 'xmlns' : "xmlns:#{namespace}"] == target_namespace
     end
 
-    # Override map_children on schema to get objects from all imported schemas
+    # Override map_children on schema to get objects from all loaded schemas
     # @param [Symbol] name
     # @return Array<BaseObject>
     def map_children(name, cache = {})
       super(name) + import_map_children(name, cache)
     end
 
-    # Get children from all imported schemas
+    # Get children from all loaded schemas
     # @param [Symbol] name
     # @return Array<BaseObject>
     def import_map_children(name, cache)
-      return [] if name.to_sym == :import
+      return [] if %i[import include].include?(name.to_sym)
 
-      imports.map do |import|
-        if cache[import.namespace]
+      (imports + includes).map do |import|
+        key = import.namespace || include.schema_location
+        if cache.key?(key)
           nil
         else
-          cache[import.namespace] = true
+          cache[key] = true
           import.imported_schema.map_children(name, cache)
         end
       end.compact.flatten

@@ -92,7 +92,7 @@ module XSD
       Nokogiri::XML(xml)
     end
 
-    # Get imported schema
+    # Add schema xml to reader instance
     # @return XSD:Schema
     def add_schema_xml(xml)
       doc = read_document(xml)
@@ -101,15 +101,17 @@ module XSD
       add_schema_node(doc.root)
     end
 
-    # Get imported schema
+    # Add schema node to reader instance. Duplicated namespaces are discarded by default
     # @return Schema
-    def add_schema_node(node)
+    def add_schema_node(node, force = false)
       raise Error, 'Added schema must be of type Nokogiri::XML::Node' unless node.is_a?(Nokogiri::XML::Node)
 
-      schema = Schema.new(self.options.merge(node: node, reader: self))
-      schemas.push(schema)
+      new_schema = Schema.new(options.merge(node: node, reader: self))
+      found = schemas.find { |s| s.target_namespace == new_schema.target_namespace }
+      return found if !found.nil? && !force
 
-      schema
+      schemas.push(new_schema)
+      new_schema
     end
 
     # Add prefixes defined outside of processed schemas, for example in WSDL document

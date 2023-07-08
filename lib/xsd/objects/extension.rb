@@ -8,7 +8,26 @@ module XSD
     TYPE_PROPERTY = nil
 
     include Based
-    include SimpleTyped
     include AttributeContainer
+
+    # Nested group
+    # @!attribute group
+    # @return Group
+    child :group, :group
+
+    # Nested all
+    # @!attribute all
+    # @return All
+    child :all, :all
+
+    # Nested choice
+    # @!attribute choice
+    # @return Choice
+    child :choice, :choice
+
+    # Nested sequence
+    # @!attribute sequence
+    # @return Sequence
+    child :sequence, :sequence
   end
 end
