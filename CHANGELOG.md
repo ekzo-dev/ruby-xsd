@@ -1,5 +1,10 @@
 ## [Unreleased]
 
+## [2.1.0] - 2023-07-10
+
+- Add support for &lt;xs:include&gt; element
+- Changed method "schema_for_namespace(namespace) -> XSD::Schema" signature to "schemas_for_namespace(namespace) -> Array&lt;XSD::Schema&gt;"
+
 ## [2.0.0] - 2023-07-07
 
 - Change XSD::XML.new(file, **options) -> XSD::XML.open(file, **options)
