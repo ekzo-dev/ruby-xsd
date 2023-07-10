@@ -1,5 +1,10 @@
 ## [Unreleased]
 
+## [2.2.0] - 2023-07-10
+
+- Fixed built-in types detection for unprefixed schema namespace
+- Move validation to Schema object
+
 ## [2.1.0] - 2023-07-10
 
 - Add support for &lt;xs:include&gt; element
