@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'tmpdir'
+require 'securerandom'
 
 module XSD
   # The schema element defines the root element of a schema.
