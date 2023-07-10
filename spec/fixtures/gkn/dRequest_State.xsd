@@ -1,0 +1,700 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:simpleType name="Request_State">
+		<xs:annotation>
+			<xs:documentation>Состояния заявки</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="000000001">
+				<xs:annotation>
+					<xs:documentation>Загружена</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="001000000">
+				<xs:annotation>
+					<xs:documentation>Кадастровый учет ОН. Проект закона</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="001001001">
+				<xs:annotation>
+					<xs:documentation>Обращение учтено</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="001001002">
+				<xs:annotation>
+					<xs:documentation>Заявка принята</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="001001003">
+				<xs:annotation>
+					<xs:documentation>Отказано в приеме</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="001001004">
+				<xs:annotation>
+					<xs:documentation>Проверка прошла успешно</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="001001005">
+				<xs:annotation>
+					<xs:documentation>Недостаточно документов для определения полномочий</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="001001006">
+				<xs:annotation>
+					<xs:documentation>Несоответствие акта формирования</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="001001007">
+				<xs:annotation>
+					<xs:documentation>Решение о проведении ГКУ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="001001008">
+				<xs:annotation>
+					<xs:documentation>Объект внесен в кадастр</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="001001009">
+				<xs:annotation>
+					<xs:documentation>КП изготовлен</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="001001010">
+				<xs:annotation>
+					<xs:documentation>КП удостоверен</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="001001011">
+				<xs:annotation>
+					<xs:documentation>Решение о приостановлении ГКУ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="001001012">
+				<xs:annotation>
+					<xs:documentation>Уведомление о приостановлении изготовлено</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="001001013">
+				<xs:annotation>
+					<xs:documentation>Изменения предоставлены</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="001001014">
+				<xs:annotation>
+					<xs:documentation>Решение об отказе в ГКУ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="001001015">
+				<xs:annotation>
+					<xs:documentation>Изменения не предоставлены в срок</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="001001016">
+				<xs:annotation>
+					<xs:documentation>Уведомление об отказе выдано</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="001001017">
+				<xs:annotation>
+					<xs:documentation>КП выдан</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="001001018">
+				<xs:annotation>
+					<xs:documentation>Изменения зарегистрированы</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="001001019">
+				<xs:annotation>
+					<xs:documentation>Ошибка при внесении в ГКН</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="001001020">
+				<xs:annotation>
+					<xs:documentation>Уведомление о приостановлении удостоверено</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="001001021">
+				<xs:annotation>
+					<xs:documentation>Уведомление о приостановлении выдано</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="001001022">
+				<xs:annotation>
+					<xs:documentation>Уведомление об отказе изготовлено</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="001001023">
+				<xs:annotation>
+					<xs:documentation>Уведомление об отказе удостоверено</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="001001024">
+				<xs:annotation>
+					<xs:documentation>Уведомление о приеме изготовлено</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="001001025">
+				<xs:annotation>
+					<xs:documentation>Уведомление о приеме удостоверено</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="001001026">
+				<xs:annotation>
+					<xs:documentation>Уведомление о приеме выдано</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="001001027">
+				<xs:annotation>
+					<xs:documentation>Сведения введены</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="001001028">
+				<xs:annotation>
+					<xs:documentation>Полномочия заявителя подтверждены</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="001001029">
+				<xs:annotation>
+					<xs:documentation>Сведения удостоверены</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="002001001">
+				<xs:annotation>
+					<xs:documentation>Поиск земельного участка</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="002001002">
+				<xs:annotation>
+					<xs:documentation>Изготовление справки об отсутствии сведений</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="002001003">
+				<xs:annotation>
+					<xs:documentation>Удостоверение справки об отсутствии сведений</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="002001004">
+				<xs:annotation>
+					<xs:documentation>Выдача справки об отсутствии сведений</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="002001005">
+				<xs:annotation>
+					<xs:documentation>Формирование выписки</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="002001006">
+				<xs:annotation>
+					<xs:documentation>Сведения ГЗК предоставлены</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="002001007">
+				<xs:annotation>
+					<xs:documentation>Сведения ГЗК не предоставлены</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="003001001">
+				<xs:annotation>
+					<xs:documentation>Выбор типа процедуры</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="003001002">
+				<xs:annotation>
+					<xs:documentation>Выбор земельного участка</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="003001003">
+				<xs:annotation>
+					<xs:documentation>Ввод сведений о земельном участке</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="003001004">
+				<xs:annotation>
+					<xs:documentation>Внесение сведений в ГКН</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="003001005">
+				<xs:annotation>
+					<xs:documentation>Изменение статусов</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="003001006">
+				<xs:annotation>
+					<xs:documentation>ЗУ не найден</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="003001010">
+				<xs:annotation>
+					<xs:documentation>Выбор удостоверенного ЗУ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="003001011">
+				<xs:annotation>
+					<xs:documentation>Ввод сведений об удостоверенном ЗУ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="003001012">
+				<xs:annotation>
+					<xs:documentation>Внесение сведений в ГКН об удостоверенном ЗУ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="003001013">
+				<xs:annotation>
+					<xs:documentation>Изменение статусов ЗУ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="003001020">
+				<xs:annotation>
+					<xs:documentation>Выбор зарегистрированного ЗУ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="003001021">
+				<xs:annotation>
+					<xs:documentation>Ввод сведений о зарегистрированном ЗУ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="003001022">
+				<xs:annotation>
+					<xs:documentation>Внесение сведений в ГКН о зарегистрированном ЗУ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="003001030">
+				<xs:annotation>
+					<xs:documentation>Выбор ЗУ с сервитутом (ограничением)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="003001031">
+				<xs:annotation>
+					<xs:documentation>Ввод сведений о ЗУ с сервитутом (ограничением)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="003001032">
+				<xs:annotation>
+					<xs:documentation>Внесение сведений в ГКН о ЗУ с сервитутом (ограничением)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="004000001">
+				<xs:annotation>
+					<xs:documentation>Принята (лично)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="004000002">
+				<xs:annotation>
+					<xs:documentation>Принята (по почте)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="004000003">
+				<xs:annotation>
+					<xs:documentation>Отказано в приеме (лично)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="004000004">
+				<xs:annotation>
+					<xs:documentation>Отказано в приеме (по почте)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="004000005">
+				<xs:annotation>
+					<xs:documentation>Отказано в учете</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="004000006">
+				<xs:annotation>
+					<xs:documentation>Приостановление ТУ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="004000007">
+				<xs:annotation>
+					<xs:documentation>Сведения внесены в ЕГРОКС</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="004000008">
+				<xs:annotation>
+					<xs:documentation>Сведения удостоверены в ЕГРОКС</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="004000009">
+				<xs:annotation>
+					<xs:documentation>Ошибка при внесении в ЕГРОКС</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="004000010">
+				<xs:annotation>
+					<xs:documentation>Внесение в ЕГРОКС аннулировано</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="004000105">
+				<xs:annotation>
+					<xs:documentation>Отказ в учете не утвержден</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="004000106">
+				<xs:annotation>
+					<xs:documentation>Приоставноление ТУ не утверждено</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="004000107">
+				<xs:annotation>
+					<xs:documentation>Внесение в ЕГРОКС не утверждено</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="004000205">
+				<xs:annotation>
+					<xs:documentation>Отказ в учете утвержден</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="004000206">
+				<xs:annotation>
+					<xs:documentation>Приостановление утверждено</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="004000207">
+				<xs:annotation>
+					<xs:documentation>Внесение в ЕГРОКС утверждено</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="006000001">
+				<xs:annotation>
+					<xs:documentation>Сформирован</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="006000002">
+				<xs:annotation>
+					<xs:documentation>Изготовлен</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="006000003">
+				<xs:annotation>
+					<xs:documentation>Утвержден</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="006000004">
+				<xs:annotation>
+					<xs:documentation>Не утвержден</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="006000005">
+				<xs:annotation>
+					<xs:documentation>Выдан лично</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="006000006">
+				<xs:annotation>
+					<xs:documentation>Выдан по почте</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="006000007">
+				<xs:annotation>
+					<xs:documentation>Передан в архив</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="006000008">
+				<xs:annotation>
+					<xs:documentation>Ожидается</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="009000001">
+				<xs:annotation>
+					<xs:documentation>Проверка пройдена успешно</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="009000002">
+				<xs:annotation>
+					<xs:documentation>Ошибки ввода данных</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="009000003">
+				<xs:annotation>
+					<xs:documentation>Полномочия не подтверждены</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="009000004">
+				<xs:annotation>
+					<xs:documentation>Требования законодательства не соблюдены</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="009000005">
+				<xs:annotation>
+					<xs:documentation>Акт формирования противоречит сведениям ЕГРОКС</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="009000006">
+				<xs:annotation>
+					<xs:documentation>Ошибки при проверке в кадастре</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="009000007">
+				<xs:annotation>
+					<xs:documentation>Обнаружены ошибки при проверке</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="009000008">
+				<xs:annotation>
+					<xs:documentation>Возврат на проверку документов</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="009000010">
+				<xs:annotation>
+					<xs:documentation>Пакет документов сформирован</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="009000011">
+				<xs:annotation>
+					<xs:documentation>Ожидание ответа от АИС ГКН</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="009000012">
+				<xs:annotation>
+					<xs:documentation>Отказ в загрузке в АИС ГКН</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="009000013">
+				<xs:annotation>
+					<xs:documentation>Загружена в АИС ГКН</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="009000014">
+				<xs:annotation>
+					<xs:documentation>Выгружена с ошибками</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="011000006">
+				<xs:annotation>
+					<xs:documentation>Приостановление ГКУ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="011000007">
+				<xs:annotation>
+					<xs:documentation>Сведения внесены в ГКН</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="011000008">
+				<xs:annotation>
+					<xs:documentation>Сведения удостоверены в ГКН</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="011000009">
+				<xs:annotation>
+					<xs:documentation>Ошибка при внесении в ГКН</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="011000010">
+				<xs:annotation>
+					<xs:documentation>Внесение в ГКН аннулировано</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="011000105">
+				<xs:annotation>
+					<xs:documentation>Отказ в учете не утвержден</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="011000106">
+				<xs:annotation>
+					<xs:documentation>Приостановление ГКУ не утверждено</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="011000107">
+				<xs:annotation>
+					<xs:documentation>Внесение в ГКН не утверждено</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="011000205">
+				<xs:annotation>
+					<xs:documentation>Отказ в учете утвержден</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="011000206">
+				<xs:annotation>
+					<xs:documentation>Приостановление ГКУ утверждено</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="011000207">
+				<xs:annotation>
+					<xs:documentation>Внесение в ГКН утверждено</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="012000001">
+				<xs:annotation>
+					<xs:documentation>Границы КК были изменены</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="012000002">
+				<xs:annotation>
+					<xs:documentation>Границы КК не изменялись</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="021001001">
+				<xs:annotation>
+					<xs:documentation>Поиск объекта недвижимости</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="021001002">
+				<xs:annotation>
+					<xs:documentation>Изготовление справки об отсутствии сведений</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="021001005">
+				<xs:annotation>
+					<xs:documentation>Формирование выписки</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="021001006">
+				<xs:annotation>
+					<xs:documentation>Сведения ЕГРОКС предоставлены</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="021001007">
+				<xs:annotation>
+					<xs:documentation>Сведения ЕГРОКС не предоставлены</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="022001001">
+				<xs:annotation>
+					<xs:documentation>Ввод сведений о ЗУ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="022001002">
+				<xs:annotation>
+					<xs:documentation>Проверка на правильность ввода</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="022001003">
+				<xs:annotation>
+					<xs:documentation>Внесение сведений в кадастр</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="022001004">
+				<xs:annotation>
+					<xs:documentation>Сведения внесены</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="023001001">
+				<xs:annotation>
+					<xs:documentation>Ввод сведений об объектах</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="023001002">
+				<xs:annotation>
+					<xs:documentation>Проверка на правильность ввода</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="023001003">
+				<xs:annotation>
+					<xs:documentation>Внесение сведений в кадастр</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="023001004">
+				<xs:annotation>
+					<xs:documentation>Сведения внесены</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="023001005">
+				<xs:annotation>
+					<xs:documentation>Формирование выписки</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="023001006">
+				<xs:annotation>
+					<xs:documentation>Выписка сформирована</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="023001007">
+				<xs:annotation>
+					<xs:documentation>Утверждение решения</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="023001008">
+				<xs:annotation>
+					<xs:documentation>Решение утверждено</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="024001001">
+				<xs:annotation>
+					<xs:documentation>Ввод сведений об ОКС</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="024001002">
+				<xs:annotation>
+					<xs:documentation>Проверка на правильность ввода</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="024001003">
+				<xs:annotation>
+					<xs:documentation>Внесение сведений в ЕГРОКС</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="024001004">
+				<xs:annotation>
+					<xs:documentation>Сведения внесены</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="024002001">
+				<xs:annotation>
+					<xs:documentation>Ввод сведений об ОКС</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="024002002">
+				<xs:annotation>
+					<xs:documentation>Проверка на правильность ввода</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="024002003">
+				<xs:annotation>
+					<xs:documentation>Внесение сведений в ЕГРОКС</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="024002004">
+				<xs:annotation>
+					<xs:documentation>Сведения внесены</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="027001001">
+				<xs:annotation>
+					<xs:documentation>Ввод декларации</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="027001002">
+				<xs:annotation>
+					<xs:documentation>Проверка соответствия данных с ЕГРОКС</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="027001003">
+				<xs:annotation>
+					<xs:documentation>Формирование запроса</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="027001004">
+				<xs:annotation>
+					<xs:documentation>Ожидание ответа на запрос</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="027001005">
+				<xs:annotation>
+					<xs:documentation>Регистрация прекращена</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="027001006">
+				<xs:annotation>
+					<xs:documentation>Ответ предоставлен</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="027001015">
+				<xs:annotation>
+					<xs:documentation>Срок истек</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="028001001">
+				<xs:annotation>
+					<xs:documentation>Аннулирование</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="999999999">
+				<xs:annotation>
+					<xs:documentation>Аварийное завершение процесса</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

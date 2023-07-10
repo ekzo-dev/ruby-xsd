@@ -140,31 +140,31 @@ RSpec.describe XSD do
       end
     end
 
-    describe '#schema_for_namespace' do
+    describe '#schemas_for_namespace' do
       it 'returns the schema object for a specified namespace' do
         namespace = 'http://ddex.net/xml/2010/ern-main/32'
-        expect(reader.schema.schema_for_namespace(namespace).target_namespace).to eq namespace
-        expect(reader.schema.schema_for_namespace(namespace)).to be reader.schema
-        expect(reader.schema.schema_for_namespace(namespace)).to be reader.schema
-        expect(reader['NewReleaseMessage'].schema_for_namespace(namespace)).to be reader.schema
+        expect(reader.schema.schemas_for_namespace(namespace).first.target_namespace).to eq namespace
+        expect(reader.schema.schemas_for_namespace(namespace).first).to be reader.schema
+        expect(reader.schema.schemas_for_namespace(namespace).first).to be reader.schema
+        expect(reader['NewReleaseMessage'].schemas_for_namespace(namespace).first).to be reader.schema
       end
 
       it 'returns the schema object for a specified namespace code' do
-        expect(reader.schema.schema_for_namespace('ernm').target_namespace).to eq 'http://ddex.net/xml/2010/ern-main/32'
-        expect(reader.schema.schema_for_namespace('ernm')).to be reader.schema
-        expect(reader['NewReleaseMessage']['ResourceList'].schema_for_namespace('ernm')).to be reader.schema
+        expect(reader.schema.schemas_for_namespace('ernm').first.target_namespace).to eq 'http://ddex.net/xml/2010/ern-main/32'
+        expect(reader.schema.schemas_for_namespace('ernm').first).to be reader.schema
+        expect(reader['NewReleaseMessage']['ResourceList'].schemas_for_namespace('ernm').first).to be reader.schema
       end
 
       it 'finds imported schemas' do
         namespace = 'http://ddex.net/xml/20100712/ddexC'
 
-        expect(reader.schema.schema_for_namespace(namespace).target_namespace).to eq namespace
-        expect(reader.schema.schema_for_namespace('ddexC').target_namespace).to eq namespace
-        expect(reader.schema.schema_for_namespace('ddex').target_namespace).to eq 'http://ddex.net/xml/20100712/ddex'
+        expect(reader.schema.schemas_for_namespace(namespace).first.target_namespace).to eq namespace
+        expect(reader.schema.schemas_for_namespace('ddexC').first.target_namespace).to eq namespace
+        expect(reader.schema.schemas_for_namespace('ddex').first.target_namespace).to eq 'http://ddex.net/xml/20100712/ddex'
 
-        expect(reader.schema.schema_for_namespace(namespace)).to be reader.schema.imports[1].imported_schema
-        expect(reader.schema.schema_for_namespace('ddex')).to be reader.schema.imports[0].imported_schema
-        expect(reader.schema.schema_for_namespace('ddexC')).to be reader.schema.imports[1].imported_schema
+        expect(reader.schema.schemas_for_namespace(namespace).first).to be reader.schema.imports[1].imported_schema
+        expect(reader.schema.schemas_for_namespace('ddex').first).to be reader.schema.imports[0].imported_schema
+        expect(reader.schema.schemas_for_namespace('ddexC').first).to be reader.schema.imports[1].imported_schema
       end
     end
   end

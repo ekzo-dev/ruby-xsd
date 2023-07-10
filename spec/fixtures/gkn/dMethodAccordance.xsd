@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:simpleType name="dMethodAccordance">
+		<xs:annotation>
+			<xs:documentation>Способ предоставления сведений</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="786001000000">
+				<xs:annotation>
+					<xs:documentation>на бумажном носителе</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="786002000000">
+				<xs:annotation>
+					<xs:documentation>в электронном виде</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

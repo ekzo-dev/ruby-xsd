@@ -18,9 +18,8 @@ module XSD
     # Get imported schema
     # @return Schema
     def imported_schema
-      if (known_schema = reader.schema_for_namespace(namespace))
-        return known_schema
-      end
+      known_schemas = reader.schemas_for_namespace(namespace)
+      return known_schemas.first if known_schemas.any?
 
       unless schema_location
         raise ImportError, "Schema location not provided for namespace '#{namespace}', use add_schema_xml()/add_schema_node()"

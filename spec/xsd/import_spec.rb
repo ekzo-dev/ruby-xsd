@@ -10,15 +10,15 @@ RSpec.describe XSD::Import do
 
     let(:file) { fixture_file(%w[ddex-v36 ddex-ern-v36.xsd], read: false) }
 
-    it 'gives the namespace' do
+    it 'gives a namespace' do
       expect(import.namespace).to eq 'http://ddex.net/xml/avs/avs'
     end
 
-    it 'gives the schema location' do
+    it 'gives a schema location' do
       expect(import.schema_location).to eq 'avs.xsd'
     end
 
-    it 'gives a reader for the external XSD' do
+    it 'gives a schema for the external XSD' do
       expect(import.imported_schema.class).to eq XSD::Schema
     end
 

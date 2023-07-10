@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<!-- edited with XMLSpy v2007 (http://www.altova.com) by beynenson (FCC) -->
+<!--  edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by rs (uszn)   -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:simpleType name="dRealty">
+		<xs:annotation>
+			<xs:documentation>Типы объектов учета</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="002001000000">
+				<xs:annotation>
+					<xs:documentation>Земли</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="002001001000">
+				<xs:annotation>
+					<xs:documentation>Земельный участок</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="002001002000">
+				<xs:annotation>
+					<xs:documentation>Иные земли</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="002002000000">
+				<xs:annotation>
+					<xs:documentation>Объекты капитального строительства</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="002002001000">
+				<xs:annotation>
+					<xs:documentation>Здание</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="002002002000">
+				<xs:annotation>
+					<xs:documentation>Помещение</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="002002004000">
+				<xs:annotation>
+					<xs:documentation>Сооружение</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="002002005000">
+				<xs:annotation>
+					<xs:documentation>Объекты незавершенного строительства</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="002003000000">
+				<xs:annotation>
+					<xs:documentation>Границы</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="002003001000">
+				<xs:annotation>
+					<xs:documentation>Государственная граница Российской Федерации</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="002003002000">
+				<xs:annotation>
+					<xs:documentation>Граница между субъектами Российской Федерации</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="002003003000">
+				<xs:annotation>
+					<xs:documentation>Граница муниципального образования</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="002003004000">
+				<xs:annotation>
+					<xs:documentation>Граница населенного пункта</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="002004000000">
+				<xs:annotation>
+					<xs:documentation>Зоны</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="002004001000">
+				<xs:annotation>
+					<xs:documentation>Зоны с особыми условиями использования территорий</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="002004003000">
+				<xs:annotation>
+					<xs:documentation>Территориальные зоны</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="002005000000">
+				<xs:annotation>
+					<xs:documentation>Предприятие как имущественный комплекс (ПИК)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="002006000000">
+				<xs:annotation>
+					<xs:documentation>Участок недр, насаждения</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

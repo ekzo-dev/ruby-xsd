@@ -67,13 +67,13 @@ module XSD
     end
 
     # Get schema by namespace or namespace prefix
-    # @param [String] namespace
-    # @return Schema
-    def schema_for_namespace(namespace)
+    # @param [String, nil] namespace
+    # @return Array<Schema>
+    def schemas_for_namespace(namespace)
       if schema.targets_namespace?(namespace)
-        schema
+        [schema, *schema.includes.map(&:imported_schema)]
       elsif (import = schema.import_by_namespace(namespace))
-        import.imported_schema
+        [import.imported_schema]
       else
         raise Error, "Schema not found for namespace '#{namespace}' in '#{schema.id || schema.target_namespace}'"
       end
@@ -112,12 +112,15 @@ module XSD
       return nil if schema.namespace_prefix == name_prefix
 
       # determine schema for namespace
-      search_schema = schema_for_namespace(name_prefix)
+      search_schemas = schemas_for_namespace(name_prefix)
 
       # find element in target schema
-      result = search_schema.node.xpath("./xs:#{node_name}[@name=\"#{name_local}\"]", { 'xs' => XML_SCHEMA }).first
+      search_schemas.each do |s|
+        node = s.node.xpath("./xs:#{node_name}[@name=\"#{name_local}\"]", { 'xs' => XML_SCHEMA }).first
+        return s.node_to_object(node) if node
+      end
 
-      result ? search_schema.node_to_object(result) : nil
+      nil
     end
 
     # Get reader object for node
@@ -169,9 +172,9 @@ module XSD
 
     # Get namespace prefix from node name
     # @param [String, nil] name Name to strip from
-    # @return String
+    # @return String, nil
     def get_prefix(name)
-      name&.include?(':') ? name.split(':').first : ''
+      name&.include?(':') ? name.split(':').first : nil
     end
 
     # Return element documentation

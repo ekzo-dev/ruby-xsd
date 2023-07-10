@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<!-- edited with XMLSpy v2005 sp1 U (http://www.xmlspy.com) by any (Ru-Board) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:complexType name="tEDocument">
+		<xs:annotation>
+			<xs:documentation>Электронный документ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Sender">
+				<xs:annotation>
+					<xs:documentation>Отправитель</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:attribute name="Kod" use="required">
+						<xs:annotation>
+							<xs:documentation>Код организации отправителя</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="12"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="Name" use="required">
+						<xs:annotation>
+							<xs:documentation>При отсутствии кода организации отправителя – наименование отправителя</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="Date_Upload" type="xs:date" use="optional">
+						<xs:annotation>
+							<xs:documentation>Дата выгрузки информации</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="Number" use="optional">
+						<xs:annotation>
+							<xs:documentation>Номер исходящего документа</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="50"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="Appointment" use="optional">
+						<xs:annotation>
+							<xs:documentation>Должность представителя отправляющей стороны</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="50"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="FIO" use="optional">
+						<xs:annotation>
+							<xs:documentation>Фамилия и инициалы представителя отправляющей стороны</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="100"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="E_Mail">
+						<xs:annotation>
+							<xs:documentation> Электронный адрес представителя отправляющей стороны</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="60"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="Telephone" use="optional">
+						<xs:annotation>
+							<xs:documentation>Номер телефона</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="50"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Recipient" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Получатель</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:attribute name="Kod" use="optional">
+						<xs:annotation>
+							<xs:documentation>Код органа получателя</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="12"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="Name" use="optional">
+						<xs:annotation>
+							<xs:documentation>При отсутствии кода организации в справочнике  – наименование получателя</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

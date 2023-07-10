@@ -121,7 +121,7 @@ module XSD
     end
 
     # Check if namespace is a target namespace
-    # @param [String] namespace
+    # @param [String, nil] namespace
     # @return Boolean
     def targets_namespace?(namespace)
       namespace == target_namespace || namespaces[namespace.empty? ? 'xmlns' : "xmlns:#{namespace}"] == target_namespace
@@ -140,8 +140,8 @@ module XSD
     def import_map_children(name, cache)
       return [] if %i[import include].include?(name.to_sym)
 
-      (imports + includes).map do |import|
-        key = import.namespace || include.schema_location
+      (includes + imports).map do |import|
+        key = import.respond_to?(:namespace) && import.namespace ? import.namespace : import.schema_location
         if cache.key?(key)
           nil
         else

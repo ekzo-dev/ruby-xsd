@@ -1,0 +1,24 @@
+<!-- edited with XMLSPY v2004 rel. 4 U (http://www.xmlspy.com) by rs (uszn) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="1.0">
+	<xs:simpleType name="dParcels">
+		<xs:annotation>
+			<xs:documentation>Вид земельного участка.</xs:documentation>
+			<xs:documentation>
+			01 - Землепользование
+			02 - Единое землепользование 
+			03 - Обособленный участок
+			04 - Условный участок
+			05 - Многоконтурный участок
+			06 - Значение отсутствует
+</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+			<xs:enumeration value="05"/>
+			<xs:enumeration value="06"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

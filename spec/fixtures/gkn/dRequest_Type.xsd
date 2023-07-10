@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:simpleType name="dRequest_Type">
+		<xs:annotation>
+			<xs:documentation>Заявления</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="558100000000">
+				<xs:annotation>
+					<xs:documentation>ЗАЯВЛЕНИЯ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558101000000">
+				<xs:annotation>
+					<xs:documentation>Заявления  и запросы, связанные с кадастровым учетом</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558101010000">
+				<xs:annotation>
+					<xs:documentation>Запрос в орган кадастрового учета о предоставлении сведений ГКН</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558101020000">
+				<xs:annotation>
+					<xs:documentation>Заявление о постановке на кадастровый учет объекта недвижимости</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558101030000">
+				<xs:annotation>
+					<xs:documentation>Заявление о государственном учете изменений объекта недвижимости</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558101040000">
+				<xs:annotation>
+					<xs:documentation>Заявление  о внесении в Единый государственный реестр объектов капитального строительства сведений об объекте капитального строительства</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558101050000">
+				<xs:annotation>
+					<xs:documentation>Заявление о предоставлении сведений об объектах капитального строительства</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558101060000">
+				<xs:annotation>
+					<xs:documentation>Заявление о снятии с кадастрового учета объекта недвижимости</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558101070000">
+				<xs:annotation>
+					<xs:documentation>Заявление о внесении в ГКН сведений о ранее учтенном объекте недвижимости</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558101080000">
+				<xs:annotation>
+					<xs:documentation>Заявление об исправлении кадастровой ошибки</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558101090000">
+				<xs:annotation>
+					<xs:documentation>Заявление об исправлении технической ошибки</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558101100000">
+				<xs:annotation>
+					<xs:documentation>Заявление о представление дополнительных документов на кадастровый учет</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558101110000">
+				<xs:annotation>
+					<xs:documentation>Внутриведомственный запрос информации ГКН</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558102000000">
+				<xs:annotation>
+					<xs:documentation>Заявления, связанные с регистрацией прав</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558102010000">
+				<xs:annotation>
+					<xs:documentation>Заявление о государственной регистрации прав на недвижимое имущество и сделок с ним</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558102020000">
+				<xs:annotation>
+					<xs:documentation>Заявление о внесении в Единый государственный реестр прав на недвижимое имущество и сделок с ним записи о прекращении права (ограничения (обременения) права)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558102030000">
+				<xs:annotation>
+					<xs:documentation>Заявление о внесении изменений в Единый государственный реестр прав на недвижимое имущество и сделок с ним</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558102040000">
+				<xs:annotation>
+					<xs:documentation>Заявление об исправлении технической ошибки</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558102050000">
+				<xs:annotation>
+					<xs:documentation>Заявление о представлении дополнительных документов для государственной регистрации прав</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558102060000">
+				<xs:annotation>
+					<xs:documentation>Заявление о приостановлении государственной регистрации прав на недвижимое имущество и сделок с ним</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558102070000">
+				<xs:annotation>
+					<xs:documentation>Заявление о возобновлении государственной регистрации</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558102080000">
+				<xs:annotation>
+					<xs:documentation>Заявление о прекращении  государственной регистрации</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558102090000">
+				<xs:annotation>
+					<xs:documentation>Заявление о повторной выдаче свидетельства о государственной регистрации права</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558102100000">
+				<xs:annotation>
+					<xs:documentation>Заявление о предоставлении информации, копий договоров и иных документов, выражающих содержание односторонних сделок, совершенных в простой письменной форме</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558102110000">
+				<xs:annotation>
+					<xs:documentation>Заявление о постановке на учет бесхозяйного имущества</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558102120000">
+				<xs:annotation>
+					<xs:documentation>Заявление о выдаче закладной (новой закладной, дубликата закладной, аннулированной закладной)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558103000000">
+				<xs:annotation>
+					<xs:documentation>Иное заявление</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

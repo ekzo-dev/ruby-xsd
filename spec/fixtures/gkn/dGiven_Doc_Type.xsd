@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<!--  edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by rs (uszn)   -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:simpleType name="dGiven_Doc_Type">
+		<xs:annotation>
+			<xs:documentation>Типы предоставленных документов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="55840100000">
+				<xs:annotation>
+					<xs:documentation>Правоустанавливающий документ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="008001000000">
+				<xs:annotation>
+					<xs:documentation>Документ, удостоверяющий личность ФЛ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="008002000000">
+				<xs:annotation>
+					<xs:documentation>Документ, подтверждающий факт внесения записи о юридическом лице в Единый государственный реестр юридических лиц</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558100000000">
+				<xs:annotation>
+					<xs:documentation>Заявление</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558200000000">
+				<xs:annotation>
+					<xs:documentation>ДОКУМЕНТЫ, СОДЕРЖАЩИЕ ОПИСАНИЕ ОБЪЕКТА НЕДВИЖИМОСТИ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558201000000">
+				<xs:annotation>
+					<xs:documentation>Описание земельных участков</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558202000000">
+				<xs:annotation>
+					<xs:documentation>Землеустроительное дело</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558203000000">
+				<xs:annotation>
+					<xs:documentation>Межевой план</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558204000000">
+				<xs:annotation>
+					<xs:documentation>Документ (копия), на основании которого сведения об объекте недвижимости внесены в государственный кадастр недвижимости</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558205000000">
+				<xs:annotation>
+					<xs:documentation>Технический паспорт объекта учета</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558207000000">
+				<xs:annotation>
+					<xs:documentation>Документ (копия), подтверждающего разрешение земельного спора о согласовании местоположения границ земельного участка</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558208000000">
+				<xs:annotation>
+					<xs:documentation>Документ (копия), подтверждающий принадлежность земельного участка к определенной категории земель</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558209000000">
+				<xs:annotation>
+					<xs:documentation>Документ (копия), подтверждающий установленное разрешенное использование земельного участка</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558219000000">
+				<xs:annotation>
+					<xs:documentation>Акт обследования, подтверждающий прекращение существования объекта недвижимости</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558300000000">
+				<xs:annotation>
+					<xs:documentation>ДОКУМЕНТЫ, СОДЕРЖАЩИЕ ОПИСАНИЕ ЗАЯВИТЕЛЯ ИЛИ ЕГО ПРЕДСТАВИТЕЛЯ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558301000000">
+				<xs:annotation>
+					<xs:documentation>Документы, подтверждающие полномочия представителя</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558301010000">
+				<xs:annotation>
+					<xs:documentation>Доверенность</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558302000000">
+				<xs:annotation>
+					<xs:documentation>Документы ЮЛ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558302010000">
+				<xs:annotation>
+					<xs:documentation>Учредительный документ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558302050000">
+				<xs:annotation>
+					<xs:documentation>Свидетельство (или уведомление) о постановке на учет в налоговом органе с указанием ИНН</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558400000000">
+				<xs:annotation>
+					<xs:documentation>ДОКУМЕНТЫ О ПРАВАХ, СДЕЛКАХ,  ОГРАНИЧЕНИЯХ (ОБРЕМЕНЕНИЯХ)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558401000000">
+				<xs:annotation>
+					<xs:documentation>Правоустанавливающие документы</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558401081200">
+				<xs:annotation>
+					<xs:documentation>Документ, подтверждающий установленное или устанавливаемое ограничение (обременение) вещных прав на объект недвижимости в пользу заявителя</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="555004000001">
+				<xs:annotation>
+					<xs:documentation>Тип платежного документа</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="555004000000">
+				<xs:annotation>
+					<xs:documentation>Прочие документы</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="558403170000">
+				<xs:annotation>
+					<xs:documentation>Иной документ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="WINDOWS-1251"?>
+<!-- edited with XMLSpy v2005 sp1 U (http://www.xmlspy.com) by any (Ru-Board) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:simpleType name="sPurposeKind">
+		<xs:annotation>
+			<xs:documentation>Словарь целей предоставления сведений</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="001">
+				<xs:annotation>
+					<xs:documentation>Для государственной  регистрации прав</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="002">
+				<xs:annotation>
+					<xs:documentation>Для внесения уточнений в ЕГРП о... </xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="003">
+				<xs:annotation>
+					<xs:documentation>В соответствии с заявлением для ...</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="004">
+				<xs:annotation>
+					<xs:documentation>В соответствии с заявлением </xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="005">
+				<xs:annotation>
+					<xs:documentation>Для иных целей</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="006">
+				<xs:annotation>
+					<xs:documentation>Для предоставления сведений о кадастровой стоимости</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="007">
+				<xs:annotation>
+					<xs:documentation>Для проведения кадастровых работ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="008">
+				<xs:annotation>
+					<xs:documentation>Для предоставления сведений об адресах правообладателей для согласования границ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="009">
+				<xs:annotation>
+					<xs:documentation>Для предоставления сведений о земельных участках в кадастровом квартале</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="010">
+				<xs:annotation>
+					<xs:documentation>Для предоставления сведений о пунктах ОМС в кадастровом квартале</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="011">
+				<xs:annotation>
+					<xs:documentation>Для предоставления сведений о земельных участках и пунктах ОМС в кадастровом квартале</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

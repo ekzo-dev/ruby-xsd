@@ -1,0 +1,1292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2007 (http://www.altova.com) by Lourier (FCC) -->
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by TEAM (RENEGADE) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<!--Справочник субъектов РФ-->
+	<xs:include schemaLocation="dRegionsRF.xsd"/>
+	<!--Классификатор "Предмет регистрации и учета"(Права)-->
+	<!--Классификатор типов  объектов технического учета-->
+	<xs:include schemaLocation="dRealty.xsd"/>
+	<!--Справочник "Вид земельного участка"-->
+	<xs:include schemaLocation="dParcels.xsd"/>
+	<!--Справочник Целей предоставления документов-->
+	<xs:include schemaLocation="sPurposeKind.xsd"/>
+	<!--Словарь Типов предоставленных документов-->
+	<xs:include schemaLocation="dGiven_Doc_Type.xsd"/>
+	<!--Словарь Типов выданных документов-->
+	<xs:include schemaLocation="dAllDocuments_Out.xsd"/>
+	<!--Словарь текущих изменений-->
+	<xs:include schemaLocation="dCurrentChanges.xsd"/>
+	<!--Классификатор типов заявок объектов технического учета-->
+	<xs:include schemaLocation="dRequest_Type.xsd"/>
+	<!--Подключение подсхемы Документ -->
+	<xs:include schemaLocation="R01_Document.xsd"/>
+	<!--Подключение подсхемы Физическое лицо -->
+	<xs:include schemaLocation="R01_Person.xsd"/>
+	<!--Подключение подсхемы Юр. лицо -->
+	<xs:include schemaLocation="R02_Organization.xsd"/>
+	<xs:include schemaLocation="R01_Governance.xsd"/>
+	<!--Подключение подсхемы АДРЕС-->
+	<xs:include schemaLocation="V035_STD_Address.xsd"/>
+	<!--Подключение подсхемы Приложенный документ-->
+	<!--Справочник "Типы адресных объектов (по КЛАДР). 5-й уровень (геоним)"-->
+	<xs:include schemaLocation="dAppliedFiles.xsd"/>
+	<!--Справочник способов образования-->
+	<xs:include schemaLocation="dMethod.xsd"/>
+	<xs:include schemaLocation="tSpecial.xsd"/>
+	<xs:include schemaLocation="dPayDocKind.xsd"/>
+	<xs:include schemaLocation="dWayReception.xsd"/>
+	<xs:include schemaLocation="dMethodAccordance.xsd"/>
+	<xs:include schemaLocation="tSpecial.xsd"/>
+	<xs:include schemaLocation="dAction.xsd"/>
+	<!--10.06.2008 Добавлены элементы Address, E-mail, Phone в тип tGovernance-->
+	<!--Версия V12_CR_ZС_REQ_Reqest-->
+	<!--10.06.2008 Добавлен элемент Phone втип tOrganization -->
+	<!--10.06.2008 Добавлен элемент Phone в тип tPerson-->
+	<!--10.06.2008 Элементы Book_Number, Number в Rubric сделаны необязательными-->
+	<!--10.06.2008 Добавлен атрибут Method_Accordance в структуру Request_Document-->
+	<!--10.06.2008 Добавлен тип sMethodAccordance (способ предоставления сведений)-->
+	<!--10.06.2008 В структуру Object/Parcels/SubParcel добавлен элемент Destignation (обозначение)-->
+	<!--17.06.2008 Добавлен тип dInformationCPT (состав сведений для КПТ)-->
+	<!--17.06.2008 Добавлен элемент Information_CPTs в структуру Request_GZK_Realty-->
+	<!--23.06.2008 Удален элемент Place_Reception из Declarant\Delivery -->
+	<!--23.06.2008 Элементы Title/Organization_OKU_BTI и Title/Executive сделаны необязательными-->
+	<!--03.06.2008 Добавлен элемент Request_Text в типе tRubric-->
+	<!--23.06.2008 Добавлен элемент Method в Title/Rubric-->
+	<!--17.06.2008 Изменен классификатор sPayDocType-->
+	<!--26.06.08 Изменен классификатор dRequest_Type-->
+	<!--26.06.08 Увеличина длина Image/Name до 255 символов-->
+	<!--26.08.08 Изменены коды в классификаторе sPurposeKind-->
+	<!--28.08.08 Изменения в справочнике dRealty-->
+	<!--28.08.08 Удален элемент Assignation_Code-->
+	<!--28.08.08 Удален классификатор dAssignation.xsd-->
+	<!--28.08.08 Изменены классификаторы sMethodAccodance, sPochta, sRecipient - добавлены коды-->
+	<!--29.08.08 Изменен классификатор sPurposeKind-->
+	<!--13.10.2008 К элементу Applied_Document добавлен раздел AppliedFiles-->
+	<!--16.10.2008 Добавлен элемент Time в tRubric-->
+	<!--30.10.2008 Для упорядочения внешнего вида схемы внесены изменения :имя подсхемы Физическое лицо  - V041_STD_Person.xsd-->
+	<!--                  имя подсхемы Юр. лицо  - V041_STD_Organization.xsd, классификатор dMethod - Способ образования земельного участка вынесен из тела схемы-->
+	<!--                изменено имя справочника тип файла по классификатору - на dApplied_file_type-->
+	<!--14.11.2008 В классификатор sPerposeKind добавлены значения. Удалена структура Request_GZK_Realty/Information_CPTs. Удален классификатор dInformationCPT-->
+	<!--21.11.2008 Увеличена длина инвентарного номера Realty/Realry_Object/Register/Number_Register/Inventory-->
+	<!--2.12.2008 Изменение  длин элементов и атрибутовсоответствии с длиной полей в базе :Title/Organization_OKU_BTI/Name_OKU,-->
+	<!--      Title /Executive Appointment, Parcel /SubParcel/Ord_Num,Parcel /SubParcel/Designation, Register/ Number_Register/ConditionalCadastralNumber-->
+	<!--08.12.2008 Добавлены новые записи в классификатор dRequest_State-->
+	<!--09.12.2008 В Unloading.xsd, Out_Protocol.xsd,  Requests_Protocol.xsd, ReqState_Protocol.xsd элемент State_Code стал строковым (отвязан от классификатора)-->
+	<!--17.02.09 Добавлен классификатор dCurrentChangesSubParcel-->
+	<!--17.02.09 Добавлен элемент Parcel/SubParcels/SubParcel/Current_Change-->
+	<!--11.03.09 Добавлены записи в классификаторы dRequest_Type, dCad_Out_Doc_Type, sMethodAccordance-->
+	<!--24.03.09 Увеличена длина поля Request_Document/PurposeKind_Text-->
+	<xs:annotation>
+		<xs:documentation>10.04.09 Удалена запись с кодом 03 в классификаторе sMethodAccordance</xs:documentation>
+	</xs:annotation>
+	<!--13.05.09 Изменен классификатор dParcels (добавлены Многоконтурные ЗУ)-->
+	<!--21.05.2009 Подсхема Адрес заменена на V033_STD_Address.xsd  (В подсхеме   - типы Адресных объектов не связаны со справочниками)-->
+	<!--21.05.2009 Изменен справочник dRegionsRF.xsd,  удалены справочники, не используемые в схеме.-->
+	<!--Версия V14_CR_ZС_REQ_Reqest (для\ одного окна, в дальнейшем заменяит V12)-->
+	<!--13.01.2010  Подключен справочник Код заявки по классификатору dRequestType в элементе Title/Rubric/Code -по сборнику - 558.1-->
+	<!--+++ Подключен справочник  Справочник учетных и регистрационных действий по обращениям dAction Title/Rubric / Visit_Purpose – 659-->
+	<!--+++ Подключен справочник  Способ предоставления сведений – dMethodAccordance - Request_Documents/ Request_Document/ MethodAccordance-->
+	<!--+++Изменен комплексный тип tDelivery  - Declarants/ Declarant/ Delivery. Элемент Kind_Delivery перенесен на более высокий уровень. Изменен и подключен справочник dWayReception.-->
+	<!--+++Справочник dDocument изменен на обобщенный справочник dALLDocument. Стандартная подсхема V021_STD_Document.xsd изменена на R01_Document.xsd.-->
+	<!--+++Также изменена подсхема V041_STD_Document.xsd - tDocument_spec (Документ - специального типа) на R01_Document.xsd в  Applied_Documents/ Applied_Document-->
+	<!--+++В Applied_Documents/ Applied_Document изменен справочник Типы предоставленных документов dReg_Doc_Type – вставлены коды по сборнику, -->
+	<!--                                                                                                 он переименован в dGiven_Doc_Type и подключен к схеме.-->
+	<!--+++Подключен справочник Тип платежного документа (dPayDocKind). В Payment_Documents/ Payment_Document/ PayDocKind.-->
+	<!--+++Стандартная подсхема V041_STD_Person.xsd изменена на R01_ Person.xsd.-->
+	<!--+++Стандартная подсхема V041_STD_Organization.xsd изменена на R01_Organization.xsd-->
+	<!--+++Изменена подсхема tSpecial.xsd-->
+	<!--+++В Title удален элемент Organization_OKU_BTI-->
+	<!--+++Удален элемент Current_Change в Object/ Parcels/ Parcel /SubParcels/ SubParcel-->
+	<!--18.01.2010 Изменен классификатор AllDocument-->
+	<!--19.01.2010добавлен справочник dGovernance удален составной элемент tGovernance-->
+	<!--Способ получения сведений -->
+	<!--19.01.2010 Добавлен элемент Signature для ЭЦП -->
+	<!--20.01.2010 Элемент Signature для ЭЦП сделан необязательным-->
+	<!--23.01.2010 Элемент Delivery сделан необязательным-->
+	<!--10.02.2010 В стандартной подсхеме R01_Document наименование элемента Cod_Document изменено на Code_Document-->
+	<!--08.02.2010. Увеличены длины полей Адрес по документу (tAdress/Note) до 2500, Наименование юр. лица (tOrganization/Name) до 500 символов-->
+	<!--16.02.2010 Удален элемент ds:Signature -->
+	<!--12.04.2010 !!!!!!!15 схема заявки-->
+	<!--12.04.2010 Изменено значение eDocument/Version = 15-->
+	<!--12.04.2010 Изменен классификатор sExist-->
+	<!--12.04.2010 Изменен элемент Request_GZK_Realty/Current_Changes-->
+	<!--12.04.2010 Изменен классификатор  dCurrentChanges-->
+	<!--12.04.2010 Добавлен справочник sSection_KV, добавлен элемент Request_Document/Sections_KV-->
+	<!--13.04.2010 Добавлен элемент Declarants/Declarant/Delivery/Way_Delivery/Kind_Document - заполняется в случае получения сведений по адресу электронной почты-->
+	<!--16.04.2010 Удалены атрибуты Request_Document/PurposeKind,  Request_Document/PurposeKind_Text-->
+	<!--19.04.2010 Удален элемент Kind у элемента Applied_Document -->
+	<!--20.04.2010 Добавлен атрибут Request_Documents/Request_Document/Name (наименование запрашиваемого документа)-->
+	<!--29.04.2010 Заменена схема R01_Organization.xsd на R02_Organization.xsd-->
+	<xs:element name="Requests_GZK_Realty">
+		<xs:annotation>
+			<xs:documentation>Корневой элемент</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="eDocument">
+					<xs:annotation>
+						<xs:documentation>Электронный документ</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Sender">
+								<xs:annotation>
+									<xs:documentation>Отправитель</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:attribute name="Kod" use="required">
+										<xs:annotation>
+											<xs:documentation>Регистрационный код по справочнику модулей</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:maxLength value="12"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="Name">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:maxLength value="255"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="Date_Upload" type="xs:date"/>
+									<xs:attribute name="Appointment" use="optional">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:maxLength value="50"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="FIO" use="optional">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:maxLength value="100"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="E_Mail">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:maxLength value="60"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="Telephone" use="optional">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:maxLength value="50"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Recipient">
+								<xs:annotation>
+									<xs:documentation>Получатель</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:attribute name="Kod" use="optional">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:maxLength value="12"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="Name" use="optional">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:maxLength value="255"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="CodeType" use="required">
+							<xs:annotation>
+								<xs:documentation>106 -  заявки из БТИ; 111 - заявки из ПК ПВД; 107 - заявки из ПК Регистратор</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:length value="3"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+						<xs:attribute name="Version" type="xs:string" use="required" fixed="15">
+							<xs:annotation>
+								<xs:documentation>Версия схемы</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Request_GZK_Realty">
+					<xs:annotation>
+						<xs:documentation>Заявка</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Title" type="tTitle">
+								<xs:annotation>
+									<xs:documentation>Титул документа</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Declarants">
+								<xs:annotation>
+									<xs:documentation>Заявители</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Declarant" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>Заявитель</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:complexContent>
+													<xs:extension base="tOwner">
+														<xs:sequence>
+															<xs:element name="Delivery" type="tDelivery" minOccurs="0">
+																<xs:annotation>
+																	<xs:documentation>Доставка </xs:documentation>
+																</xs:annotation>
+															</xs:element>
+														</xs:sequence>
+														<xs:attribute name="temp_id" use="required">
+															<xs:annotation>
+																<xs:documentation>Идентификатор</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="40"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:attribute>
+														<xs:attribute name="agent_id" use="optional">
+															<xs:annotation>
+																<xs:documentation>Идентификатор доверенного лица</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="40"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:attribute>
+													</xs:extension>
+												</xs:complexContent>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Agents" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Доверенные лица</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Agent" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>Доверенное лицо</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:complexContent>
+													<xs:extension base="tPerson">
+														<xs:sequence>
+															<xs:element name="Appointment" minOccurs="0">
+																<xs:annotation>
+																	<xs:documentation>Должность</xs:documentation>
+																</xs:annotation>
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:maxLength value="255"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:element>
+														</xs:sequence>
+														<xs:attribute name="temp_id" use="required">
+															<xs:annotation>
+																<xs:documentation>Идентификатор</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="40"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:attribute>
+													</xs:extension>
+												</xs:complexContent>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Object" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Объект заявки </xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:choice>
+										<xs:element name="Parcels" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Земельные участки</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Parcel" maxOccurs="unbounded">
+														<xs:annotation>
+															<xs:documentation>Земельный участок</xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="CadastralNumber" nillable="true" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Кадастровый номер</xs:documentation>
+																	</xs:annotation>
+																	<xs:simpleType>
+																		<xs:restriction base="xs:string">
+																			<xs:maxLength value="40"/>
+																		</xs:restriction>
+																	</xs:simpleType>
+																</xs:element>
+																<xs:element name="Location" type="tAddress" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Описание местоположения</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="Obj_Kind" type="dRealty">
+																	<xs:annotation>
+																		<xs:documentation>Вид объекта по классификатору </xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="Designation" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Условное обозначение</xs:documentation>
+																	</xs:annotation>
+																	<xs:simpleType>
+																		<xs:restriction base="xs:string">
+																			<xs:maxLength value="500"/>
+																		</xs:restriction>
+																	</xs:simpleType>
+																</xs:element>
+																<xs:element name="SubParcels" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Список ЧЗУ, задействованных в заявке</xs:documentation>
+																	</xs:annotation>
+																	<xs:complexType>
+																		<xs:sequence>
+																			<xs:element name="SubParcel" minOccurs="0" maxOccurs="unbounded">
+																				<xs:complexType>
+																					<xs:sequence>
+																						<xs:element name="AppliedFiles" type="tAppliedFile" minOccurs="0">
+																							<xs:annotation>
+																								<xs:documentation>Приложенные файлы с описанием объекта</xs:documentation>
+																							</xs:annotation>
+																						</xs:element>
+																					</xs:sequence>
+																					<xs:attribute name="Ord_Num" use="optional">
+																						<xs:annotation>
+																							<xs:documentation>Учетный номер ЧЗУ</xs:documentation>
+																						</xs:annotation>
+																						<xs:simpleType>
+																							<xs:restriction base="xs:integer">
+																								<xs:totalDigits value="40"/>
+																							</xs:restriction>
+																						</xs:simpleType>
+																					</xs:attribute>
+																					<xs:attribute name="Designation">
+																						<xs:annotation>
+																							<xs:documentation>Обозначение</xs:documentation>
+																						</xs:annotation>
+																						<xs:simpleType>
+																							<xs:restriction base="xs:string">
+																								<xs:maxLength value="255"/>
+																							</xs:restriction>
+																						</xs:simpleType>
+																					</xs:attribute>
+																				</xs:complexType>
+																			</xs:element>
+																		</xs:sequence>
+																	</xs:complexType>
+																</xs:element>
+																<xs:element name="AppliedFiles" type="tAppliedFile" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Приложенные файлы с описанинем объекта</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+															</xs:sequence>
+															<xs:attribute name="exist" type="sExist" use="required">
+																<xs:annotation>
+																	<xs:documentation>Тип ЗУ (Существующий\новый)</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="temp_id" use="required">
+																<xs:annotation>
+																	<xs:documentation>Идентификатор</xs:documentation>
+																</xs:annotation>
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:maxLength value="40"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+															<xs:attribute name="GUID">
+																<xs:annotation>
+																	<xs:documentation>Идентификатор из внешнего источника</xs:documentation>
+																</xs:annotation>
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:maxLength value="50"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+															<xs:attribute name="Name" type="dParcels" use="optional">
+																<xs:annotation>
+																	<xs:documentation>Признак участка</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="AppliedFiles" type="tAppliedFile" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Приложенные файлы с описанием объектов</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="Realty" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Недвижимость</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Realty_Object" maxOccurs="unbounded">
+														<xs:annotation>
+															<xs:documentation>Объект недвижимости</xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Register" type="tRegister">
+																	<xs:annotation>
+																		<xs:documentation>Реестр</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="Location" type="tAddress" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Местоположение</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="Obj_Kind" type="dRealty" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Вид объекта по классификатору </xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="AppliedFiles" type="tAppliedFile" minOccurs="0"/>
+															</xs:sequence>
+															<xs:attribute name="exist" type="sExist" use="required">
+																<xs:annotation>
+																	<xs:documentation>Тип объекта (Существующий\новый)</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="temp_id" use="required">
+																<xs:annotation>
+																	<xs:documentation>Идентификатор</xs:documentation>
+																</xs:annotation>
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:maxLength value="40"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+															<xs:attribute name="GUID">
+																<xs:annotation>
+																	<xs:documentation>Идентификатор из внешнего источника</xs:documentation>
+																</xs:annotation>
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:maxLength value="50"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="AppliedFiles" type="tAppliedFile" minOccurs="0"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="Blocks" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Кадастровые кварталы</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Block" maxOccurs="unbounded">
+														<xs:annotation>
+															<xs:documentation>Кадастровый квартал</xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="CadastralNumber">
+																	<xs:annotation>
+																		<xs:documentation>Кадастровый номер</xs:documentation>
+																	</xs:annotation>
+																	<xs:simpleType>
+																		<xs:restriction base="xs:string">
+																			<xs:maxLength value="40"/>
+																		</xs:restriction>
+																	</xs:simpleType>
+																</xs:element>
+																<xs:element name="AppliedFiles" type="tAppliedFile" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Приложенные файлы с описанием объектов</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+															</xs:sequence>
+															<xs:attribute name="temp_id" use="required">
+																<xs:annotation>
+																	<xs:documentation>Идентификатор</xs:documentation>
+																</xs:annotation>
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:maxLength value="40"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+															<xs:attribute name="GUID">
+																<xs:annotation>
+																	<xs:documentation>Идентификатор из внешнего источника</xs:documentation>
+																</xs:annotation>
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:maxLength value="50"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="AppliedFiles" type="tAppliedFile" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Приложенные файлы с описанием объектов</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:choice>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Applied_Documents">
+								<xs:annotation>
+									<xs:documentation>Представленные документы</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Applied_Document" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>Представленные документы</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:complexContent>
+													<xs:extension base="tDocument">
+														<xs:sequence>
+															<xs:element name="Quantity" type="tQuantity">
+																<xs:annotation>
+																	<xs:documentation>Количество представленных документов</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+															<xs:element name="AppliedFiles" type="tAppliedFile" minOccurs="0">
+																<xs:annotation>
+																	<xs:documentation>Приложенные файлы с описанием объектов</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+														</xs:sequence>
+													</xs:extension>
+												</xs:complexContent>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Payment_Documents" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Платежные документы</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Payment_Document" type="tPayDocument" maxOccurs="unbounded"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Request_Documents" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Запрашиваемые документы</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Request_Document" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>Запрашиваемые документы</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence minOccurs="0">
+													<xs:element name="Sections_KV" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Запрашиваемые разделы кадастровой выписки</xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Section_KV" type="sSection_KV" maxOccurs="6">
+																	<xs:annotation>
+																		<xs:documentation>Раздел кадастровой выписки</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+												<xs:attribute name="SubCode" type="dAllDocuments" use="required">
+													<xs:annotation>
+														<xs:documentation>Вид документа по классификатору Документов, выданных по заявке</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+												<xs:attribute name="Name">
+													<xs:annotation>
+														<xs:documentation>Наименование копии документа</xs:documentation>
+													</xs:annotation>
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:maxLength value="255"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+												<xs:attribute name="Quantity" use="required">
+													<xs:annotation>
+														<xs:documentation>Количество</xs:documentation>
+													</xs:annotation>
+													<xs:simpleType>
+														<xs:restriction base="xs:integer">
+															<xs:totalDigits value="6"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+												<xs:attribute name="declarant_id" use="required">
+													<xs:annotation>
+														<xs:documentation>Идентификатор заявителя</xs:documentation>
+													</xs:annotation>
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:maxLength value="40"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+												<xs:attribute name="object_id" use="required">
+													<xs:annotation>
+														<xs:documentation>Идентификатор объекта</xs:documentation>
+													</xs:annotation>
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:maxLength value="40"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+												<xs:attribute name="Method_Accordance" type="dMethodAccordance">
+													<xs:annotation>
+														<xs:documentation>Способ предоставления сведений</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Out_Documents" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Выданные документы</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Out_Document" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>Документы, выданные по данной заявке</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:complexContent>
+													<xs:extension base="tDocument">
+														<xs:sequence>
+															<xs:element name="Kind" type="dAllDocuments_Out">
+																<xs:annotation>
+																	<xs:documentation>Вид документа по классификатору Документов, выданных по заявке</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+															<xs:element name="Quantity" type="tQuantity">
+																<xs:annotation>
+																	<xs:documentation>Количество выданных документов</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+														</xs:sequence>
+													</xs:extension>
+												</xs:complexContent>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Current_Changes" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Список изменений в случае заявления об учете текущих изменений</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Cur_Change" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>Список изменений в случае заявления об учете текущих изменений</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Cur_Change" type="dCurrentChanges">
+														<xs:annotation>
+															<xs:documentation>Коды по классификатору характеристик текущих изменений</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="Text_Old" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Запись, содержащаяся в ГКН</xs:documentation>
+														</xs:annotation>
+														<xs:simpleType>
+															<xs:restriction base="xs:string">
+																<xs:maxLength value="2000"/>
+															</xs:restriction>
+														</xs:simpleType>
+													</xs:element>
+													<xs:element name="Text_New" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Запись, содержащаяся в документе</xs:documentation>
+														</xs:annotation>
+														<xs:simpleType>
+															<xs:restriction base="xs:string">
+																<xs:maxLength value="2000"/>
+															</xs:restriction>
+														</xs:simpleType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="eDocument">
+		<xs:sequence>
+			<xs:element name="Description">
+				<xs:annotation>
+					<xs:documentation>Описание </xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:attribute name="Motif" type="xs:string" use="optional" default="ПК ЕГРЗ:Заявка ГЗК БТИ:Заявка: 16.06.05"/>
+					<xs:attribute name="Administrant" type="xs:string" use="optional" default='ФКЦ "Земля"'/>
+					<xs:attribute name="Telephone" type="xs:string" use="optional" default="095-928-67-82"/>
+					<xs:attribute name="E_Mail" type="xs:string" use="optional" default="land@fccland.ru"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tDelivery">
+		<xs:sequence>
+			<xs:element name="Kind_Delivery">
+				<xs:annotation>
+					<xs:documentation>По справочнику Способ получения сведений</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="dWayReception">
+						<xs:maxLength value="12"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="Way_Delivery">
+					<xs:annotation>
+						<xs:documentation>Способ доставки документа(почтой, эл. почтой)</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Recipient" type="sRecipient">
+								<xs:annotation>
+									<xs:documentation>Получатель выходных документов</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Address" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Адрес доставки,адрес электронной почты</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="255"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="Kind_Document" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Вид документа ("1" - в виде электронного документа, "2" - в виде ссылки на электронный документ)</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:length value="1"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Organization_RR" type="tOrganization_RR">
+					<xs:annotation>
+						<xs:documentation>Тер. органы Росреестра для получения документов(Орган ОКУ или Органы регистрации прав) </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tExecutive">
+		<xs:annotation>
+			<xs:documentation>Должностное лицо</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="FIO" type="tFIO">
+				<xs:annotation>
+					<xs:documentation>Фамилия, имя, отчество</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Appointment" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Должность </xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="255"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tOwner">
+		<xs:annotation>
+			<xs:documentation>Владелец </xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="Person">
+				<xs:annotation>
+					<xs:documentation>Физическое лицо</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tPerson"/>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Organization">
+				<xs:annotation>
+					<xs:documentation>Юридическое лицо</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tOrganization"/>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Governance" type="tGovernance">
+				<xs:annotation>
+					<xs:documentation>Иностранное юридическое лицо</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="tPayDocument">
+		<xs:sequence>
+			<xs:element name="Doc_Type">
+				<xs:annotation>
+					<xs:documentation>Назначение документа</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="dPayDocKind">
+						<xs:maxLength value="12"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Number">
+				<xs:annotation>
+					<xs:documentation>Номер документа</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="45"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Date" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Дата выдачи документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Sum">
+				<xs:annotation>
+					<xs:documentation>Сумма</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="10"/>
+						<xs:fractionDigits value="2"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Images" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Изображения документа</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Image" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Изображения документа</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:attribute name="Name">
+									<xs:annotation>
+										<xs:documentation>Имя файла </xs:documentation>
+									</xs:annotation>
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="255"/>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:attribute>
+								<xs:attribute name="URL">
+									<xs:annotation>
+										<xs:documentation>Электронный адрес</xs:documentation>
+									</xs:annotation>
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="255"/>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:attribute>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tRegister">
+		<xs:annotation>
+			<xs:documentation>Реестр объекта технического учета</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Number_Register">
+				<xs:annotation>
+					<xs:documentation>Регистрационные номера </xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="CadastralNumber" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Кадастровый номер</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="40"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="ConditionalCadastralNumber" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>условный кадастровый номер</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="100"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="Inventory" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Инвентаризационный номер (номер на плане)</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="100"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="Reg_Num" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Регистрационный номер</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="40"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Name" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="255"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tRubric">
+		<xs:sequence>
+			<xs:element name="Code" type="dRequest_Type">
+				<xs:annotation>
+					<xs:documentation>Код заявки по классификатору Cad_Qual_Dev.V$_Request_type2</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Name">
+				<xs:annotation>
+					<xs:documentation>Название документа</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="2000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Number" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Номер документа</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Date" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата регистрации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Time" type="xs:time" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Время регистрации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Date_Execution" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Ожидаемая дата исполнения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Book_Number" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Номер книги учета заявок</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="255"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Reg_Folder" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Учетное дело</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="GUID" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Уникальный идентификатор</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Method" type="dMethod" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Классификатор способов образования. 1- выдел...</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Request_Text" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Текст</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="5000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Visit_Purpose" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Цель обращения (регистрационные действия)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="dAction">
+						<xs:maxLength value="12"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tTitle">
+		<xs:sequence>
+			<xs:element name="Executive" type="tExecutive" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Должностное лицо</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Rubric">
+				<xs:annotation>
+					<xs:documentation>Заголовок </xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tRubric"/>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tQuantity">
+		<xs:attribute name="Original" use="required">
+			<xs:annotation>
+				<xs:documentation>Кол-во документов </xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:integer">
+					<xs:totalDigits value="6"/>
+					<xs:fractionDigits value="0"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Original_Sheet" use="required">
+			<xs:annotation>
+				<xs:documentation>Количество листов</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:integer">
+					<xs:totalDigits value="6"/>
+					<xs:fractionDigits value="0"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:simpleType name="dDate">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="([0-3][0-9][0-1][0-9][1-2]\d{3})"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!--Словари, не утверждаемый извне.-->
+	<xs:simpleType name="sPochta">
+		<xs:annotation>
+			<xs:documentation>Вид почты</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01">
+				<xs:annotation>
+					<xs:documentation>по почте</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="02">
+				<xs:annotation>
+					<xs:documentation>по электронной почте</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="sRecipient">
+		<xs:annotation>
+			<xs:documentation>Получатель</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01">
+				<xs:annotation>
+					<xs:documentation>заявитель</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="02">
+				<xs:annotation>
+					<xs:documentation>доверенное лицо</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="sExist">
+		<xs:annotation>
+			<xs:documentation>Признак существования объекта</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="yes">
+				<xs:annotation>
+					<xs:documentation>Существующий</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="no">
+				<xs:annotation>
+					<xs:documentation>Образующийся</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="neighbour">
+				<xs:annotation>
+					<xs:documentation>Смежный</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="sSection_KV">
+		<xs:annotation>
+			<xs:documentation>Разделы кадастровой выписки</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01">
+				<xs:annotation>
+					<xs:documentation>КВ.1</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="02">
+				<xs:annotation>
+					<xs:documentation>КВ.2</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="03">
+				<xs:annotation>
+					<xs:documentation>КВ.3</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="04">
+				<xs:annotation>
+					<xs:documentation>КВ.4</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="05">
+				<xs:annotation>
+					<xs:documentation>КВ.5</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="06">
+				<xs:annotation>
+					<xs:documentation>КВ.6</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

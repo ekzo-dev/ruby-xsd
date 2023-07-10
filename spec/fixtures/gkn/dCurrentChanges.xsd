@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:simpleType name="dCurrentChanges">
+		<xs:annotation>
+			<xs:documentation>Словарь текущих изменений</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="284001000000">
+				<xs:annotation>
+					<xs:documentation>Общие сведения об объекте недвижимости (площадь)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="284002000000">
+				<xs:annotation>
+					<xs:documentation>Общие сведения об объекте недвижимости (категория)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="284003000000">
+				<xs:annotation>
+					<xs:documentation>Общие сведения об объекте недвижимости (разрешенное использование)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="284004000000">
+				<xs:annotation>
+					<xs:documentation>Общие сведения об объекте недвижимости (адрес ЗУ, при отсутствии адреса - описание местоположения)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="284005000000">
+				<xs:annotation>
+					<xs:documentation>Общие сведения об объекте недвижимости (сведения о природных объектах - леса, водные объекты, иные природные объекты)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="284006000000">
+				<xs:annotation>
+					<xs:documentation>Общие сведения об объекте недвижимости (иное)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="284007000000">
+				<xs:annotation>
+					<xs:documentation>Сведения о местоположении границ земельного участка</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="284008000000">
+				<xs:annotation>
+					<xs:documentation>Контактный адрес правообладателя</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="284009000000">
+				<xs:annotation>
+					<xs:documentation>Сведения о вещных правах</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="284010000000">
+				<xs:annotation>
+					<xs:documentation>Сведения о частях объекта недвижимости</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="284011000000">
+				<xs:annotation>
+					<xs:documentation>Сведения об ограничениях (обременениях) вещных прав</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="284012000000">
+				<xs:annotation>
+					<xs:documentation>Сведения о кадастровой стоимости</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="284013000000">
+				<xs:annotation>
+					<xs:documentation>Сведения о кадастровом инженере</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="284014000000">
+				<xs:annotation>
+					<xs:documentation>Сведения о прекращении существования объекта недвижимости</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="284015000000">
+				<xs:annotation>
+					<xs:documentation>Иные сведения об объекте недвижимости</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

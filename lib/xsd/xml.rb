@@ -31,6 +31,7 @@ module XSD
       'complexContent' => ComplexContent,
       'extension'      => Extension,
       'import'         => Import,
+      'include'        => Include,
       'simpleType'     => SimpleType,
       'all'            => All,
       'restriction'    => Restriction,
@@ -63,6 +64,10 @@ module XSD
       'pattern'        => Facet
     }.freeze
 
+    # Create reader from a file path
+    # @param [String] path
+    # @param [Hash] options
+    # @return XML
     def self.open(path, **options)
       reader = new(**options)
       reader.add_schema_xml(File.read(path))
@@ -93,7 +98,7 @@ module XSD
     end
 
     # Add schema xml to reader instance
-    # @return XSD:Schema
+    # @return Schema
     def add_schema_xml(xml)
       doc = read_document(xml)
       raise Error, 'Schema node not found, xml does not seem to be a valid XSD' unless doc.root&.name == 'schema'
@@ -101,15 +106,12 @@ module XSD
       add_schema_node(doc.root)
     end
 
-    # Add schema node to reader instance. Duplicated namespaces are discarded by default
+    # Add schema node to reader instance
     # @return Schema
-    def add_schema_node(node, force = false)
+    def add_schema_node(node)
       raise Error, 'Added schema must be of type Nokogiri::XML::Node' unless node.is_a?(Nokogiri::XML::Node)
 
       new_schema = Schema.new(options.merge(node: node, reader: self))
-      found = schemas.find { |s| s.target_namespace == new_schema.target_namespace }
-      return found if !found.nil? && !force
-
       schemas.push(new_schema)
       new_schema
     end
@@ -128,10 +130,11 @@ module XSD
     end
 
     # Get schema by namespace or namespace prefix
-    # @return Schema, nil
-    def schema_for_namespace(namespace)
+    # @param [String, nil] namespace
+    # @return Array<Schema>
+    def schemas_for_namespace(namespace)
       namespace = namespace_prefixes[namespace] if namespace_prefixes.key?(namespace)
-      schemas.find { |schema| schema.target_namespace == namespace }
+      schemas.select { |schema| schema.target_namespace == namespace }
     end
 
     def [](*args)
