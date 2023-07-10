@@ -346,5 +346,12 @@ module XSD
         name.to_sym
       end
     end
+
+    # Return string if it is not empty, or nil otherwise
+    # @param [String, nil] string
+    # @return String, nil
+    def nil_if_empty(string)
+      string&.empty? ? nil : string
+    end
   end
 end

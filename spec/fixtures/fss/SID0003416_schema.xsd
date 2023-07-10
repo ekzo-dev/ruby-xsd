@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:smev="urn://x-artefacts-smev-gov-ru/supplementary/commons/1.0.1" xmlns:reg="http://fss.ru/smev-3/rasch_registration/1.0.2" targetNamespace="http://fss.ru/smev-3/rasch_registration/1.0.2" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<import namespace="urn://x-artefacts-smev-gov-ru/supplementary/commons/1.0.1" schemaLocation="commons/smev-supplementary-commons.xsd"/>
+	<complexType name="CommonDataType">
+		<sequence>
+			<element name="region" type="smev:digits-2"/>
+			<element name="organization" type="smev:string-500"/>
+			<element name="dateStart" type="date"/>
+		</sequence>
+	</complexType>
+	<complexType name="SvedSostRaschJurRequestType">
+		<complexContent>
+			<extension base="reg:CommonDataType">
+				<sequence>
+					<element name="namePayer" type="smev:string-500"/>
+					<element name="innPayer" type="smev:LegalPersonINNType"/>
+					<element name="kppPayer" type="smev:KPPType"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="SvedSostRaschPhysRequestType">
+		<complexContent>
+			<extension base="reg:CommonDataType">
+				<sequence>
+					<element name="iName" type="smev:string-500"/>
+					<element name="fName" type="smev:string-500"/>
+					<element name="mName" type="smev:string-500" minOccurs="0"/>
+					<element name="inn" type="smev:PhysicalPersonINNType"/>
+					<element name="docDateCiv" type="date"/>
+					<element name="codeKind" type="smev:digits-2"/>
+					<element name="seriesNumber" type="smev:string-50"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<element name="SvedSostRaschRequest">
+		<complexType>
+			<sequence>
+				<element name="SvedSostRaschJurRequest" type="reg:SvedSostRaschJurRequestType" minOccurs="0" maxOccurs="1"/>
+				<element name="SvedSostRaschPhysRequest" type="reg:SvedSostRaschPhysRequestType" minOccurs="0" maxOccurs="1"/>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="SvedSostRaschJurResponseType">
+		<complexContent>
+			<extension base="reg:SvedSostRaschJurRequestType">
+				<sequence>
+					<element name="debtsPayer" type="boolean"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="SvedSostRaschPhysResponseType">
+		<complexContent>
+			<extension base="reg:SvedSostRaschPhysRequestType">
+				<sequence>
+					<element name="debtsPayer" type="boolean"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<element name="SvedSostRaschResponse">
+		<complexType>
+			<sequence>
+				<element name="SvedSostRaschJurResponse" type="reg:SvedSostRaschJurResponseType" minOccurs="0" maxOccurs="1"/>
+				<element name="SvedSostRaschPhysResponse" type="reg:SvedSostRaschPhysResponseType" minOccurs="0" maxOccurs="1"/>
+			</sequence>
+		</complexType>
+	</element>
+</schema>

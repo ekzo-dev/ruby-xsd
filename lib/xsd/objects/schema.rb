@@ -108,23 +108,23 @@ module XSD
       attributes
     end
 
-    # Get target namespace prefix. There may be more than one prefix, but we return only first defined
-    # @return String
+    # Get target namespace prefix
+    # @return String, nil
     def target_namespace_prefix
-      @target_namespace_prefix ||= namespaces.key(target_namespace)&.sub(/^xmlns:?/, '') || ''
+      nil_if_empty(@target_namespace_prefix ||= namespaces.key(target_namespace)&.sub(/^xmlns:?/, '') || '')
     end
 
     # Get schema namespace prefix
-    # @return String
+    # @return String, nil
     def namespace_prefix
-      @namespace_prefix ||= namespaces.key(XML_SCHEMA).sub(/^xmlns:?/, '')
+      nil_if_empty(@namespace_prefix ||= namespaces.key(XML_SCHEMA).sub(/^xmlns:?/, ''))
     end
 
     # Check if namespace is a target namespace
     # @param [String, nil] namespace
     # @return Boolean
     def targets_namespace?(namespace)
-      namespace == target_namespace || namespaces[namespace.empty? ? 'xmlns' : "xmlns:#{namespace}"] == target_namespace
+      namespace == target_namespace || namespaces[namespace.nil? ? 'xmlns' : "xmlns:#{namespace}"] == target_namespace
     end
 
     # Override map_children on schema to get objects from all loaded schemas

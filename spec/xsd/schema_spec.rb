@@ -78,4 +78,19 @@ RSpec.describe XSD::Schema do
       expect(schema.simple_types.map(&:name)).to eq %w[ddex_LocalCollectionAnchorReference ddex_LocalResourceAnchorReference AccessLimitation AdministratingRecordCompanyRole AllTerritoryCode ArtistRole AudioCodecType BinaryDataType BusinessContributorRole CalculationType CarrierType CdProtectionType CharacterType CodingType CollectionType CommercialModelType CompilationType ContainerFormat CreationType CreativeContributorRole CueOrigin CueSheetType CueUseType CurrencyCode CurrentTerritoryCode DataMismatchResponseType DataMismatchStatus DataMismatchType DdexTerritoryCode DeductionRateType DeliveryActionType DeliveryMessageType DeprecatedCurrencyCode DeprecatedIsoTerritoryCode DigitizationMode DisputeReason DistributionChannelType DpidStatus DrmEnforcementType DrmPlatformType DsrMessageType EquipmentType ErnMessageType ErncFileStatus ErncProposedActionType ExpressionType ExternallyLinkedResourceType FileStatus FingerprintAlgorithmType GoverningAgreementType HashSumAlgorithmType ImageCodecType ImageType InvoiceAvailabilityStatus IsoCurrencyCode IsoLanguageCode IsoTerritoryCode LabelNameType LicenseOrClaimRefusalReason LicenseOrClaimRequestUpdateReason LicenseOrClaimUpdateReason LicenseRejectionReason LicenseStatus LicensingProcessStatus LodFileStatus LodProposedActionType MembershipType MessageActionType MessageContentRevenueType MessageContextType MessageControlType MidiType MlcMessageType MusicalWorkContributorRole MusicalWorkRightsClaimType MusicalWorkType MwlCaCMessageInBatchType MwnMessageType NewReleaseMessageStatus OperatingSystemType OrderType PLineType ParentalWarningType PartyRelationshipType PercentageType PriceInformationType PriceRangeType PriceType Priority ProductType ProjectContributorRelationshipType Purpose RateModificationType RatingAgency ReasonType RecipientRevenueType RecordingMode RedeliveryReasonType ReferenceUnit RelationalRelator ReleaseAvailabilityStatus ReleaseRelationshipType ReleaseResourceType ReleaseType ReportFormat ReportType RequestReason RequestedActionType ResourceContributorRole ResourceOmissionReason ResourceType RevenueSourceType RightShareRelationshipType RightShareType RightsClaimPolicyType RightsControllerRole RightsControllerType RightsCoverage RoyaltyRateCalculationType RoyaltyRateType SalesReportAvailabilityStatus Sex SheetMusicCodecType SheetMusicType SoftwareType SoundProcessorType SoundRecordingType SupplyChainStatus TaxScope TaxType TerritoryCodeType TerritoryCodeTypeIncludingDeprecatedCodes TextCodecType TextType ThemeType TisTerritoryCode TitleType TrackContributorRelationshipType UnitOfBitRate UnitOfConditionValue UnitOfExtent UnitOfFrameRate UnitOfFrequency UpdateIndicator UseType UserInterfaceType ValueType VideoCodecType VideoContentType VideoDefinitionType VideoType VisualPerceptionType VocalType WsMessageStatus TerritoryCode]
     end
   end
+
+  context 'with empty schema prefix' do
+    let(:file) { fixture_file(%w[fss SID0003416_schema.xsd], read: false) }
+
+    describe '#namespace_prefix' do
+      it 'gives the correct result for empty prefix' do
+        expect(reader.schema.namespace_prefix).to be_nil
+      end
+
+      it 'finds built-in and linked types' do
+        expect(reader['SvedSostRaschRequest']['SvedSostRaschJurRequest']['dateStart'].complex_type).to be_nil
+        expect(reader['SvedSostRaschRequest']['SvedSostRaschJurRequest']['organization'].simple_type.class).to be XSD::SimpleType
+      end
+    end
+  end
 end
