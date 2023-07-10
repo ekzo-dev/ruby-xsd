@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<reg:SvedSostRaschResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:reg="http://fss.ru/smev-3/rasch_registration/1.0.2">
+	<reg:SvedSostRaschPhysResponse>
+		<reg:region>00</reg:region>
+		<reg:organization>a</reg:organization>
+		<reg:dateStart>1957-08-13</reg:dateStart>
+		<reg:iName>a</reg:iName>
+		<reg:fName>a</reg:fName>
+		<reg:mName>a</reg:mName>
+		<reg:inn>000000000000</reg:inn>
+		<reg:docDateCiv>1957-08-13</reg:docDateCiv>
+		<reg:codeKind>00</reg:codeKind>
+		<reg:seriesNumber>a</reg:seriesNumber>
+		<reg:debtsPayer>true</reg:debtsPayer>
+	</reg:SvedSostRaschPhysResponse>
+</reg:SvedSostRaschResponse>
+

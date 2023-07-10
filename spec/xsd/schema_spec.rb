@@ -79,7 +79,7 @@ RSpec.describe XSD::Schema do
     end
   end
 
-  context 'with empty schema prefix' do
+  context 'with fss example files' do
     let(:file) { fixture_file(%w[fss SID0003416_schema.xsd], read: false) }
 
     describe '#namespace_prefix' do
@@ -90,6 +90,16 @@ RSpec.describe XSD::Schema do
       it 'finds built-in and linked types' do
         expect(reader['SvedSostRaschRequest']['SvedSostRaschJurRequest']['dateStart'].complex_type).to be_nil
         expect(reader['SvedSostRaschRequest']['SvedSostRaschJurRequest']['organization'].simple_type.class).to be XSD::SimpleType
+      end
+    end
+
+    describe '#validate' do
+      it 'validates schema with imports' do
+        expect { reader.schema.validate }.not_to raise_error
+      end
+
+      it 'validates xml against schema with imports' do
+        expect { reader.schema.validate_xml(fixture_file(%w[fss samples Request0.xml])) }.not_to raise_error
       end
     end
   end

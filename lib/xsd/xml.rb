@@ -6,7 +6,6 @@ require 'net/http'
 module XSD
   class XML
     include Generator
-    include Validator
 
     attr_reader :options, :object_cache, :schemas, :namespace_prefixes
 

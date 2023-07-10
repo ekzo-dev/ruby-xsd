@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<reg:SvedSostRaschRequest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:reg="http://fss.ru/smev-3/rasch_registration/1.0.2">
+	<reg:SvedSostRaschJurRequest>
+		<reg:region>00</reg:region>
+		<reg:organization>a</reg:organization>
+		<reg:dateStart>1957-08-13</reg:dateStart>
+		<reg:namePayer>a</reg:namePayer>
+		<reg:innPayer>0000000000</reg:innPayer>
+		<reg:kppPayer>000000000</reg:kppPayer>
+	</reg:SvedSostRaschJurRequest>
+</reg:SvedSostRaschRequest>
