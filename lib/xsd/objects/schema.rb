@@ -231,7 +231,7 @@ module XSD
       data = schema.node.to_xml
 
       schema.imports.each do |import|
-        name      = "#{SecureRandom.urlsafe_base64}.xsd"
+        name      = "#{::SecureRandom.urlsafe_base64}.xsd"
         location  = import.schema_location
         namespace = import.namespace
 
