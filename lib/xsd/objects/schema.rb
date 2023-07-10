@@ -199,7 +199,7 @@ module XSD
       # TODO: save file/path map to display in errors
       Dir.mktmpdir('XSD', reader.tmp_dir) do |dir|
         # create primary xsd file
-        file = "#{SecureRandom.urlsafe_base64}.xsd"
+        file = "#{::SecureRandom.urlsafe_base64}.xsd"
 
         # create imported xsd files
         recursive_import_xsd(self, file, Set.new) do |f, data|
