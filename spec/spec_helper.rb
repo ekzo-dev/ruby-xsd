@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'xsd'
+require 'wasabi'
 
 require_relative 'support/helper_methods'
 

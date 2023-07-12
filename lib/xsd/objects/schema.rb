@@ -154,10 +154,15 @@ module XSD
       end.compact.flatten
     end
 
-    # Get import by namespace
+    # Get import by namespace or prefix
+    # @param [String, nil] ns_or_prefix
     # @return Import
-    def import_by_namespace(ns)
-      aliases = [ns, namespaces["xmlns:#{(ns || '').gsub(/^xmlns:/, '')}"], reader.namespace_prefixes[ns]].compact
+    def import_by_namespace(ns_or_prefix)
+      aliases = [
+        ns_or_prefix,
+        namespaces["xmlns:#{(ns_or_prefix || '').gsub(/^xmlns:/, '')}"],
+      ].compact
+
       imports.find { |import| aliases.include?(import.namespace) }
     end
 
@@ -224,12 +229,25 @@ module XSD
     # @param [Set] processed
     def recursive_import_xsd(schema, file, processed, &block)
       # handle recursion
-      namespace = schema.target_namespace
-      return if processed.include?(namespace)
+      return if processed.include?(schema.target_namespace)
 
-      processed.add(namespace)
+      processed.add(schema.target_namespace)
 
-      data = schema.node.to_xml
+      # prepare schema XML with all namespaces included, clone node to avoid mutating original schema
+      node = schema.node
+      if node.namespaces.size != node.namespace_definitions.size
+        prefixes = node.namespace_definitions.map(&:prefix)
+        node = schema.node.dup
+
+        schema.node.namespaces.each do |attr, ns|
+          prefix = attr == 'xmlns' ? nil : attr.sub('xmlns:', '')
+          # does not work!
+          # node.add_namespace_definition(p, ns) unless prefixes.include?(prefix)
+          node[prefix] = ns unless prefixes.include?(prefix)
+        end
+      end
+
+      data = node.to_xml
 
       schema.imports.each do |import|
         name      = "#{::SecureRandom.urlsafe_base64}.xsd"

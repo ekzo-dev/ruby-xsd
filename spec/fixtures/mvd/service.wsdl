@@ -1,0 +1,214 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is Metro/2.2.0-1 (tags/2.2.0u1-7139; 2012-06-02T10:55:19+0000) JAXWS-RI/2.2.6-2 JAXWS/2.2 svn-revision#unknown. -->
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://www.w3.org/ns/ws-policy"
+             xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702"
+             xmlns:sc="http://schemas.sun.com/2006/03/wss/server" xmlns:wspp="http://java.sun.com/xml/ns/wsit/policy"
+             xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+             xmlns:tns="http://v2_4_3.incomingRequests.webservices.kernel.sx.fms.ru"
+             xmlns:smev="http://smev.gosuslugi.ru/rev111111" name="incomingRequests"
+             targetNamespace="http://v2_4_3.incomingRequests.webservices.kernel.sx.fms.ru">
+  <types>
+    <xs:schema targetNamespace="http://v2_4_3.incomingRequests.webservices.kernel.sx.fms.ru">
+
+      <xs:import namespace="http://smev.gosuslugi.ru/rev111111"
+                 schemaLocation="http://smev-mvf.test.gosuslugi.ru:7777/gateway/services/SID0003110/1.00/wsdl/FMS001/a7bb00e0-2bab-4d65-a5e6-5a307db7308f"/>
+      <xs:element name="bookRequest" type="smev:serviceRequestMessage"/>
+      <xs:element name="bookRequestResponse" type="smev:bookRequestResponseMessage"/>
+
+      <xs:element name="getTaskTypes" type="smev:getTaskTypesMessage"/>
+      <xs:element name="getTaskTypesResponse" type="smev:getTaskTypesResponseMessage"/>
+
+      <xs:element name="getDictionaryValues" type="smev:getDictionaryValuesMessage"/>
+      <xs:element name="getDictionaryValuesResponse" type="smev:getDictionaryValuesResponseMessage"/>
+
+      <xs:element name="processTask" type="smev:serviceRequestMessage"/>
+      <xs:element name="processTaskResponse" type="smev:processTaskResponseMessage"/>
+
+      <xs:element name="getResult" type="smev:getResultMessage"/>
+      <xs:element name="getResultResponse" type="smev:getResultResponseMessage"/>
+
+      <xs:element name="sendErrorReport" type="smev:sendErrorReportMessage"/>
+      <xs:element name="sendErrorReportResponse" type="smev:sendErrorReportResponseMessage"/>
+
+    </xs:schema>
+  </types>
+  <message name="bookRequest">
+    <part name="parameters" element="tns:bookRequest"/>
+  </message>
+  <message name="bookRequestResponse">
+    <part name="result" element="tns:bookRequestResponse"/>
+  </message>
+
+  <message name="getTaskTypes">
+    <part name="parameters" element="tns:getTaskTypes"/>
+  </message>
+  <message name="getTaskTypesResponse">
+    <part name="result" element="tns:getTaskTypesResponse"/>
+  </message>
+
+  <message name="getDictionaryValues">
+    <part name="parameters" element="tns:getDictionaryValues"/>
+  </message>
+  <message name="getDictionaryValuesResponse">
+    <part name="result" element="tns:getDictionaryValuesResponse"/>
+  </message>
+
+  <message name="processTask">
+    <part name="parameters" element="tns:processTask"/>
+  </message>
+  <message name="processTaskResponse">
+    <part name="result" element="tns:processTaskResponse"/>
+  </message>
+
+  <message name="getResult">
+    <part name="parameters" element="tns:getResult"/>
+  </message>
+  <message name="getResultResponse">
+    <part name="result" element="tns:getResultResponse"/>
+  </message>
+
+  <message name="sendErrorReport">
+    <part name="parameters" element="tns:sendErrorReport"/>
+  </message>
+  <message name="sendErrorReportResponse">
+    <part name="result" element="tns:sendErrorReportResponse"/>
+  </message>
+
+  <portType name="incomingRequestsService_v2_4_3">
+    <operation name="bookRequest">
+      <input message="tns:bookRequest"/>
+      <output message="tns:bookRequestResponse"/>
+    </operation>
+    <operation name="getTaskTypes">
+      <input message="tns:getTaskTypes"/>
+      <output message="tns:getTaskTypesResponse"/>
+    </operation>
+    <operation name="getDictionaryValues">
+      <input message="tns:getDictionaryValues"/>
+      <output message="tns:getDictionaryValuesResponse"/>
+    </operation>
+    <operation name="processTask">
+      <input message="tns:processTask"/>
+      <output message="tns:processTaskResponse"/>
+    </operation>
+    <operation name="getResult">
+      <input message="tns:getResult"/>
+      <output message="tns:getResultResponse"/>
+    </operation>
+    <operation name="sendErrorReport">
+      <input message="tns:sendErrorReport"/>
+      <output message="tns:sendErrorReportResponse"/>
+    </operation>
+  </portType>
+  <binding name="incomingRequestsBinding" type="tns:incomingRequestsService_v2_4_3">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <operation name="bookRequest">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="getTaskTypes">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="getDictionaryValues">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="processTask">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="getResult">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="sendErrorReport">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="incomingRequests_v2_4_3">
+    <port name="incomingRequestsPort" binding="tns:incomingRequestsBinding">
+      <soap:address location="http://smev-mvf.test.gosuslugi.ru:7777/gateway/services/SID0003110/1.00"/>
+    </port>
+  </service>
+
+  <service name="incomingRequestsWSI">
+    <port name="incomingRequestsWSIPort" binding="tns:incomingRequestsBinding">
+      <wsp:PolicyReference URI="#incomingRequestsWSIBindingPolicy"/>
+      <soap:address location="http://smev-mvf.test.gosuslugi.ru:7777/gateway/services/SID0003110/1.00"/>
+    </port>
+  </service>
+
+  <wsp:Policy wsu:Id="incomingRequestsWSIBindingPolicy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <!--
+                        <sp:TransportBinding>
+                            <wsp:Policy>
+                                <sp:TransportToken>
+                                    <wsp:Policy>
+                                        <sp:HttpsToken RequireClientCertificate="false"/>
+                                    </wsp:Policy>
+                                </sp:TransportToken>
+                                <sp:Layout>
+                                    <wsp:Policy>
+                                        <sp:Lax/>
+                                    </wsp:Policy>
+                                </sp:Layout>
+                                <sp:IncludeTimestamp/>
+                                <sp:AlgorithmSuite>
+                                    <wsp:Policy>
+                                        <sp:Basic128/>
+                                    </wsp:Policy>
+                                </sp:AlgorithmSuite>
+                            </wsp:Policy>
+                        </sp:TransportBinding>
+        -->
+        <sp:SupportingTokens>
+          <wsp:Policy>
+            <sp:UsernameToken
+                    sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/AlwaysToRecipient">
+              <wsp:Policy>
+                <sp:WssUsernameToken10/>
+                <sp:HashPassword/>
+              </wsp:Policy>
+            </sp:UsernameToken>
+          </wsp:Policy>
+        </sp:SupportingTokens>
+
+        <sp:Wss11/>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+</definitions>

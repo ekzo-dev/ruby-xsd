@@ -12,4 +12,5 @@ group :development do
   gem 'rubocop-performance', '~> 1.17'
   gem 'rubocop-rake', '~> 0.6'
   gem 'rubocop-rspec', '~> 2.10'
+  gem 'wasabi', '~> 4.0'
 end

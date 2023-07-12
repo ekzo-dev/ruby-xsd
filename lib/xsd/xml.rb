@@ -7,7 +7,7 @@ module XSD
   class XML
     include Generator
 
-    attr_reader :options, :object_cache, :schemas, :namespace_prefixes
+    attr_reader :options, :object_cache, :schemas
 
     DEFAULT_RESOURCE_RESOLVER = proc do |location, namespace|
       if location =~ /^https?:/
@@ -74,10 +74,9 @@ module XSD
     end
 
     def initialize(**options)
-      @options            = options
-      @object_cache       = {}
-      @schemas            = []
-      @namespace_prefixes = {}
+      @options      = options
+      @object_cache = {}
+      @schemas      = []
     end
 
     def logger
@@ -115,24 +114,16 @@ module XSD
       new_schema
     end
 
-    # Add prefixes defined outside of processed schemas, for example in WSDL document
-    # @param [String] prefix
-    # @param [String] namespace
-    def add_namespace_prefix(prefix, namespace)
-      @namespace_prefixes[prefix] = namespace
-    end
-
     # Get first added (considered primary) schema
     # @return Schema, nil
     def schema
       schemas.first
     end
 
-    # Get schema by namespace or namespace prefix
+    # Get schemas by namespace
     # @param [String, nil] namespace
     # @return Array<Schema>
     def schemas_for_namespace(namespace)
-      namespace = namespace_prefixes[namespace] if namespace_prefixes.key?(namespace)
       schemas.select { |schema| schema.target_namespace == namespace }
     end
 

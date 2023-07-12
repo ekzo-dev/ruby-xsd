@@ -103,4 +103,18 @@ RSpec.describe XSD::Schema do
       end
     end
   end
+
+  context 'with mvd example files' do
+    describe '#validate' do
+
+      it 'validates schema from WSDL document' do
+        wsdl = Wasabi.document(fixture_file(%w[mvd service.wsdl]))
+
+        xsd = XSD::XML.new(logger: spec_logger)
+        xsd.add_schema_node(wsdl.parser.schemas.first)
+
+        expect { xsd.schema.validate }.not_to raise_error
+      end
+    end
+  end
 end
