@@ -160,7 +160,7 @@ module XSD
     def import_by_namespace(ns_or_prefix)
       aliases = [
         ns_or_prefix,
-        namespaces["xmlns:#{(ns_or_prefix || '').gsub(/^xmlns:/, '')}"],
+        namespaces["xmlns:#{(ns_or_prefix || '').gsub(/^xmlns:/, '')}"]
       ].compact
 
       imports.find { |import| aliases.include?(import.namespace) }
