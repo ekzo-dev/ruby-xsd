@@ -1,0 +1,53 @@
+<ns5:processTask xmlns="http://smev.gosuslugi.ru/rev111111" xmlns:ns2="http://www.w3.org/2004/08/xop/include"
+                 xmlns:ns3="http://www.w3.org/2000/09/xmldsig#"
+                 xmlns:ns4="http://baseTypes.border.webservices.kernel.sx.fms.ru"
+                 xmlns:ns5="http://v2_4_3.incomingRequests.webservices.kernel.sx.fms.ru">
+  <Message>
+    <Sender>
+      <Code>FMS001001</Code>
+      <Name>ФМС России</Name>
+    </Sender>
+    <Recipient>
+      <Code>FMS001001</Code>
+      <Name>ФМС России</Name>
+    </Recipient>
+    <Originator>
+      <Code>FMS001001</Code>
+      <Name>ФМС России</Name>
+    </Originator>
+    <TypeCode>GSRV</TypeCode>
+    <Status>REQUEST</Status>
+    <Date>2015-12-15T11:38:50.705+04:00</Date>
+    <ExchangeType>3</ExchangeType>
+    <ServiceCode>10000000611</ServiceCode>
+    <CaseNumber>DuVlwJ0j</CaseNumber>
+    <TestMsg>FMS control example</TestMsg>
+  </Message>
+  <MessageData>
+    <AppData>
+      <ns4:user>
+        <ns4:organization>10000001022</ns4:organization>
+        <ns4:person>
+          <ns4:id>4713967</ns4:id>
+          <ns4:firstName>Тест</ns4:firstName>
+          <ns4:secondName>Тестович</ns4:secondName>
+          <ns4:lastName>Тестов</ns4:lastName>
+        </ns4:person>
+      </ns4:user>
+      <ns4:serviceCode>P001</ns4:serviceCode>
+      <ns4:versionCode>001</ns4:versionCode>
+      <ns4:parameters>
+        <ns4:name>DOC_SERIE</ns4:name>
+        <ns4:value>2002</ns4:value>
+      </ns4:parameters>
+      <ns4:parameters>
+        <ns4:name>DOC_NUMBER</ns4:name>
+        <ns4:value>120012</ns4:value>
+      </ns4:parameters>
+      <ns4:parameters>
+        <ns4:name>DOC_ISSUEDATE</ns4:name>
+        <ns4:value>10.01.2008</ns4:value>
+      </ns4:parameters>
+    </AppData>
+  </MessageData>
+</ns5:processTask>

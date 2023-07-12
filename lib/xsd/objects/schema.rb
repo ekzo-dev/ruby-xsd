@@ -242,8 +242,8 @@ module XSD
         schema.node.namespaces.each do |attr, ns|
           prefix = attr == 'xmlns' ? nil : attr.sub('xmlns:', '')
           # does not work!
-          # node.add_namespace_definition(p, ns) unless prefixes.include?(prefix)
-          node[prefix] = ns unless prefixes.include?(prefix)
+          # node.add_namespace_definition(prefix, ns) unless prefixes.include?(prefix)
+          node[attr] = ns unless prefixes.include?(prefix)
         end
       end
 
