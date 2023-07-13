@@ -8,6 +8,8 @@ module XSD
     TYPE_PROPERTY = nil
 
     include Based
+    # for base links to work
+    include SimpleTyped
     include AttributeContainer
 
     # Nested group
