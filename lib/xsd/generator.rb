@@ -59,13 +59,13 @@ module XSD
       # configure namespaces
       # TODO: попытаться использовать collect_namespaces?
       attributes = {}
-      collect_attributes = element.collect_attributes
+      all_attributes = element.collect_attributes
       if element.complex?
-        collect_elements = element.collect_elements
+        all_elements = element.collect_elements
 
         # get namespaces for current element and it's children
         prefix = nil
-        [*collect_elements, element].each do |elem|
+        [*all_elements, element].each do |elem|
           prefix = get_namespace_prefix(elem, attributes, namespaces)
         end
       else
@@ -75,7 +75,7 @@ module XSD
       # iterate through each item
       data.each do |item|
         # prepare attributes
-        collect_attributes.each do |attribute|
+        all_attributes.each do |attribute|
           value = item["@#{attribute.name}"]
           if value
             attributes[attribute.name] = value
@@ -88,7 +88,7 @@ module XSD
         if element.complex?
           # generate tag recursively
           xml.tag!("#{prefix}:#{element.name}", attributes) do
-            collect_elements.each do |elem|
+            all_elements.each do |elem|
               build_element(xml, elem, item, namespaces.dup)
             end
           end
@@ -119,7 +119,7 @@ module XSD
     # @param [String, Array<String>, nil] lookup
     def find_root_element(lookup)
       if lookup
-        element = schema[*lookup]
+        element = self[*lookup]
         raise Error, "Cant find start element #{lookup}" unless element.is_a?(Element)
 
         element
