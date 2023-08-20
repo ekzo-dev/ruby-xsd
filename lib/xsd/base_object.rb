@@ -62,8 +62,8 @@ module XSD
     # Get child nodes
     # @param [Symbol] name
     # @return Nokogiri::XML::NodeSet
-    def nodes(name = :*)
-      node.xpath("./xs:#{name}", { 'xs' => XML_SCHEMA })
+    def nodes(name = :*, deep = false)
+      node.xpath("./#{deep ? '/' : ''}xs:#{name}", { 'xs' => XML_SCHEMA })
     end
 
     # Get schemas by namespace or prefix

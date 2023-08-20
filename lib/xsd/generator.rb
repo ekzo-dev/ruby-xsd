@@ -93,8 +93,13 @@ module XSD
             end
           end
         else
-          value  = item.is_a?(Hash) ? item['#text'] : item
-          xml.tag!("#{prefix}:#{element.name}", attributes, (value == '' ? nil : value))
+          has_text = item.is_a?(Hash)
+          if has_text && element.complex_type&.nodes(:any, true)&.any?
+            xml.tag!("#{prefix}:#{element.name}", attributes) { |res| res << item['#text'].to_s }
+          else
+            value = has_text ? item['#text'] : item
+            xml.tag!("#{prefix}:#{element.name}", attributes, (value == '' ? nil : value))
+          end
         end
       end
     end
@@ -108,7 +113,7 @@ module XSD
       namespace = (element.referenced? ? element.reference : element).target_namespace
       prefix    = namespaces.key(namespace)
       unless prefix
-        prefix             = "tns#{@namespace_index += 1}"
+        prefix             = "n#{@namespace_index += 1}"
         namespaces[prefix] = attributes["xmlns:#{prefix}"] = namespace
       end
 
