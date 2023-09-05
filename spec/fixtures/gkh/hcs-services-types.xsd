@@ -1,0 +1,1292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://dom.gosuslugi.ru/schema/integration/services/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://dom.gosuslugi.ru/schema/integration/base/" xmlns:premises-base="http://dom.gosuslugi.ru/schema/integration/premises-base/" xmlns:nsi-base="http://dom.gosuslugi.ru/schema/integration/nsi-base/" xmlns:organizations-registry-base="http://dom.gosuslugi.ru/schema/integration/organizations-registry-base/" targetNamespace="http://dom.gosuslugi.ru/schema/integration/services/" elementFormDefault="qualified" attributeFormDefault="unqualified" version="12.2.3.8">
+	<xs:import namespace="http://dom.gosuslugi.ru/schema/integration/base/" schemaLocation="hcs-base.xsd"/>
+	<xs:import namespace="http://dom.gosuslugi.ru/schema/integration/premises-base/" schemaLocation="hcs-premises-base.xsd"/>
+	<xs:import namespace="http://dom.gosuslugi.ru/schema/integration/nsi-base/" schemaLocation="hcs-nsi-base.xsd"/>
+	<xs:import namespace="http://dom.gosuslugi.ru/schema/integration/organizations-registry-base/" schemaLocation="hcs-organizations-registry-base.xsd"/>
+	<xs:element name="importWorkingListRequest">
+		<xs:annotation>
+			<xs:documentation>Импорт перечня работ и услуг на период</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="base:BaseType">
+					<xs:choice>
+						<xs:element name="ApprovedWorkingListData">
+							<xs:annotation>
+								<xs:documentation>Перечень утвержден</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="tns:WorkingListBaseType">
+										<xs:sequence>
+											<xs:element ref="base:TransportGUID"/>
+											<xs:element name="WorkListItem" maxOccurs="unbounded">
+												<xs:annotation>
+													<xs:documentation>Работа/услуга перечня </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:complexContent>
+														<xs:extension base="tns:WorkingListItemType">
+															<xs:sequence>
+																<xs:element ref="base:TransportGUID"/>
+															</xs:sequence>
+														</xs:extension>
+													</xs:complexContent>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+							<xs:unique name="WorkItemNSI_GUID_Unique">
+								<xs:selector xpath="tns:WorkListItem/tns:WorkItemNSI/nsi-base:GUID"/>
+								<xs:field xpath="."/>
+							</xs:unique>
+							<xs:unique name="WorkItemNSI_Code_Unique">
+								<xs:selector xpath="tns:WorkListItem/tns:WorkItemNSI/nsi-base:Code"/>
+								<xs:field xpath="."/>
+							</xs:unique>
+						</xs:element>
+						<xs:element name="CancelWorkingList">
+							<xs:annotation>
+								<xs:documentation>Идентификатор отмененного перечня</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element ref="base:TransportGUID"/>
+									<xs:element name="WorkListGUID" type="base:GUIDType">
+										<xs:annotation>
+											<xs:documentation>Идентификатор перечня</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="AnnulledWorkingList">
+							<xs:annotation>
+								<xs:documentation>Идентификатор аннулированного перечня</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element ref="base:TransportGUID"/>
+									<xs:element name="WorkListGUID" type="base:GUIDType">
+										<xs:annotation>
+											<xs:documentation>Идентификатор перечня</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="ReasonOfAnnulment">
+										<xs:annotation>
+											<xs:documentation>Причина аннулирования</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:maxLength value="1000"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:choice>
+					<xs:attribute ref="base:version" use="required" fixed="10.0.1.1"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+		<xs:key name="importWorkingListRequest_TransportGUIDKey">
+			<xs:selector xpath=".//base:TransportGUID"/>
+			<xs:field xpath="."/>
+		</xs:key>
+	</xs:element>
+	<xs:element name="exportWorkingListRequest">
+		<xs:annotation>
+			<xs:documentation>Экспорт автоматически формируемого черновика с перечнем работ и услуг поставщика данных</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="base:BaseType">
+					<xs:choice>
+						<xs:sequence>
+							<xs:element name="MonthYearFrom">
+								<xs:annotation>
+									<xs:documentation>Период "с"</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="base:Month"/>
+										<xs:element ref="base:Year"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="MonthYearTo">
+								<xs:annotation>
+									<xs:documentation>Период "с"</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="base:Month"/>
+										<xs:element ref="base:Year"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element ref="tns:WorkListStatus" minOccurs="0"/>
+							<xs:element name="FIASHouseGuid" type="premises-base:FIASHouseGUIDType">
+								<xs:annotation>
+									<xs:documentation>Глобальный уникальный идентификатор дома по ФИАС</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+						<xs:element name="WorkListGUID" type="base:GUIDType" maxOccurs="100">
+							<xs:annotation>
+								<xs:documentation>Идентификатор перечня</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:attribute ref="base:version" use="required" fixed="11.1.0.8"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="exportWorkingListResultType">
+		<xs:annotation>
+			<xs:documentation>Результат экспорта автоматически формируемого черновика с перечнем работ и услуг поставщика данных</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="WorkingList">
+				<xs:annotation>
+					<xs:documentation>Перечень работ/услуг</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:WorkingListBaseType">
+							<xs:sequence>
+								<xs:element ref="base:ModificationDate"/>
+								<xs:element ref="tns:WorkListStatus">
+									<xs:annotation>
+										<xs:documentation>Статус:
+(A)PPROVED - Утверждён
+(C)ANCELLED - Отменён
+(AN)NULLED - Аннулирован</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="WorkListItem" minOccurs="0" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>Работа/услуга перечня </xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:complexContent>
+											<xs:extension base="tns:WorkingListItemType">
+												<xs:sequence>
+													<xs:element name="WorkListItemGUID" type="base:GUIDType">
+														<xs:annotation>
+															<xs:documentation>Идентификатор работы/услуги перечня </xs:documentation>
+														</xs:annotation>
+													</xs:element>
+												</xs:sequence>
+											</xs:extension>
+										</xs:complexContent>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="importWorkingPlanRequest">
+		<xs:annotation>
+			<xs:documentation>Импорт актуальных планов по перечню работ/услуг</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="base:BaseType">
+					<xs:sequence>
+						<xs:element name="WorkingPlan" type="tns:WorkingPlanType" maxOccurs="100">
+							<xs:annotation>
+								<xs:documentation>Актуальный план по перечню работ/услуг</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+					<xs:attribute ref="base:version" use="required" fixed="10.0.1.1"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+		<xs:key name="importWorkingPlanRequest_TransportGUIDKey">
+			<xs:selector xpath=".//base:TransportGUID"/>
+			<xs:field xpath="."/>
+		</xs:key>
+	</xs:element>
+	<xs:element name="exportWorkingPlanRequest">
+		<xs:annotation>
+			<xs:documentation>Экспорт плана работ/услуг</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="base:BaseType">
+					<xs:sequence>
+						<xs:element name="work" maxOccurs="100">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="WorkListGUID" type="base:GUIDType">
+										<xs:annotation>
+											<xs:documentation>Идентификатор перечня </xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element ref="base:Year">
+										<xs:annotation>
+											<xs:documentation>Год в рамках периода перечня</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+					<xs:attribute ref="base:version" use="required" fixed="10.0.1.1"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="exportWorkingPlanResultType">
+		<xs:annotation>
+			<xs:documentation>Результат экспорта плана работ/услуг</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="WorkingPlan">
+				<xs:annotation>
+					<xs:documentation>План работ/услуг</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="WorkListGUID" type="base:GUIDType">
+							<xs:annotation>
+								<xs:documentation>Идентификатор перечня работ/услуг</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="base:Year">
+							<xs:annotation>
+								<xs:documentation>Год в рамках периода перечня</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="FIASHouseGuid" type="premises-base:FIASHouseGUIDType">
+							<xs:annotation>
+								<xs:documentation>Глобальный уникальный идентификатор дома по ФИАС</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="ReportingPeriod" maxOccurs="12">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="reportingPeriodGuid" type="base:GUIDType">
+										<xs:annotation>
+											<xs:documentation>Ссылка на период отчётности о выполненных работах</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="MonthYear">
+										<xs:annotation>
+											<xs:documentation>Год и месяц отчетного периода</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element ref="base:Month"/>
+												<xs:element ref="base:Year"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="WorkPlanItem" minOccurs="0" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>План по работе/услуге</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="WorkPlanItemGUID" type="base:GUIDType">
+													<xs:annotation>
+														<xs:documentation>Идентификатор работы/услуги перечня </xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element ref="base:ModificationDate"/>
+												<xs:element name="WorkGUID" type="nsi-base:nsiRef">
+													<xs:annotation>
+														<xs:documentation>Ссылка на работу (услугу) в справочнике видов работ и услуг для организации (НСИ 59)</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="workTypeGUID" type="nsi-base:nsiRef" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Ссылка на вид работы (услуги) в справочнике видов работ и услуг (НСИ 56)</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="sortIndex" type="xs:nonNegativeInteger" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Порядковый номер строки в перечне</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element ref="base:OKEI" minOccurs="0"/>
+												<xs:choice>
+													<xs:element name="WorkDate" type="xs:date" minOccurs="0" maxOccurs="unbounded">
+														<xs:annotation>
+															<xs:documentation>Даты начала работ по плану</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="WorkCount" type="tns:MonthlyWorkCountType">
+														<xs:annotation>
+															<xs:documentation>Количество работ</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+												</xs:choice>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="importCompletedWorksRequest">
+		<xs:annotation>
+			<xs:documentation>Импорт сведений о выполненных работах и услугах</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="base:BaseType">
+					<xs:sequence>
+						<xs:element name="CompletedWorksByPeriod" type="tns:CompletedWorksByPeriodType">
+							<xs:annotation>
+								<xs:documentation>Перечень выполненных работ за отчетный период</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+					<xs:attribute ref="base:version" use="required" fixed="11.5.0.2"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+		<xs:key name="importCompletedWorksRequest_TransportGUIDKey">
+			<xs:selector xpath=".//base:TransportGUID"/>
+			<xs:field xpath="."/>
+		</xs:key>
+	</xs:element>
+	<xs:element name="exportCompletedWorksRequest">
+		<xs:annotation>
+			<xs:documentation>Экспорт сведений о выполненных работах и услугах</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="base:BaseType">
+					<xs:sequence>
+						<xs:element name="reportingPeriodGuid" type="base:GUIDType" maxOccurs="100">
+							<xs:annotation>
+								<xs:documentation>Ссылка на период отчётности о выполненных работах</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+					<xs:attribute ref="base:version" use="required" fixed="10.0.1.1"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="exportCompletedWorksResultType">
+		<xs:annotation>
+			<xs:documentation>Результат экспорта сведений о выполненных работах и услугах</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:CompletedWorksByPeriodExportType"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!---->
+	<xs:element name="exportHMServicesTarifsRequest">
+		<xs:annotation>
+			<xs:documentation>Экспорт тарифов ЖКУ</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="base:BaseType">
+					<xs:sequence>
+						<xs:element name="ServiceType">
+							<xs:annotation>
+								<xs:documentation>Вид жилищно-коммунальной услуги
+(M)unicipal - Коммунальные услуги
+(O)verhaul - Капитальный ремонт
+(S)ocial hiring - Социальный наем
+(R)epair and maintenance - Содержание и ремонт жилого помещения
+(C)ommunal resourses - коммунальные ресурсы
+</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction>
+									<xs:simpleType>
+										<xs:list>
+											<xs:simpleType>
+												<xs:restriction base="xs:token">
+													<xs:enumeration value="M"/>
+													<xs:enumeration value="O"/>
+													<xs:enumeration value="S"/>
+													<xs:enumeration value="R"/>
+													<xs:enumeration value="C"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:list>
+									</xs:simpleType>
+									<xs:minLength value="1"/>
+									<xs:maxLength value="2"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:choice>
+							<xs:element name="Municipalities" type="base:OKTMORefType" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Муниципальные образования</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Region" type="base:RegionType">
+								<xs:annotation>
+									<xs:documentation>Субъект РФ</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:choice>
+						<xs:sequence minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Период, на который установлены тарифы</xs:documentation>
+							</xs:annotation>
+							<xs:element name="EffectivePeriodTo" type="xs:date">
+								<xs:annotation>
+									<xs:documentation>Дата окончания действия тарифа</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="EffectivePeriodFrom" type="xs:date">
+								<xs:annotation>
+									<xs:documentation>Дата начала действия тарифа</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+						<xs:element name="IsPublished" type="xs:boolean" fixed="true">
+							<xs:annotation>
+								<xs:documentation>Экспортируются только опубликованные документы.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+					<xs:attribute ref="base:version" use="required" fixed="10.0.1.1"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="exportHMServicesTarifsResultType">
+		<xs:annotation>
+			<xs:documentation>Результат экспорта тарифов ЖКУ</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:HMServicesTarifsDocType">
+				<xs:sequence>
+					<xs:element name="ServicesTarifDocGUID" type="base:GUIDType">
+						<xs:annotation>
+							<xs:documentation>Идентификатор документа тарифа в ГИС ЖКХ </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="CreationDate" type="xs:dateTime">
+						<xs:annotation>
+							<xs:documentation>Дата создания документа в ГИС ЖКХ</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--Типы асинхронного обмена-->
+	<xs:element name="getStateResult">
+		<xs:annotation>
+			<xs:documentation>Возврат статуса отправленного сообщения</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="base:BaseAsyncResponseType">
+					<xs:choice minOccurs="0">
+						<xs:element ref="base:ErrorMessage"/>
+						<xs:element name="ImportResult" type="base:CommonResultType" maxOccurs="unbounded"/>
+						<xs:element name="exportHMServicesTarifsResult" type="tns:exportHMServicesTarifsResultType" maxOccurs="unbounded"/>
+						<xs:element name="exportCompletedWorksResult" type="tns:exportCompletedWorksResultType" maxOccurs="unbounded"/>
+						<xs:element name="exportWorkingListResult" type="tns:exportWorkingListResultType" maxOccurs="unbounded"/>
+						<xs:element name="exportWorkingPlanResult" type="tns:exportWorkingPlanResultType" maxOccurs="unbounded"/>
+					</xs:choice>
+					<xs:attribute ref="base:version" use="required" fixed="10.0.1.1"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<!---->
+	<xs:complexType name="WorkingListBaseType">
+		<xs:annotation>
+			<xs:documentation>Основные сведения по перечню работ/услуг</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="WorkListGUID" type="base:GUIDType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор перечня</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FIASHouseGuid" type="premises-base:FIASHouseGUIDType">
+				<xs:annotation>
+					<xs:documentation>Глобальный уникальный идентификатор дома по ФИАС</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MonthYearFrom">
+				<xs:annotation>
+					<xs:documentation>Период "с"</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="base:Month"/>
+						<xs:element ref="base:Year"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="MonthYearTo">
+				<xs:annotation>
+					<xs:documentation>Период "по"</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="base:Month"/>
+						<xs:element ref="base:Year"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ContractGUID" type="base:GUIDType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор договора управления ГИС ЖКХ </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WorkingListItemType">
+		<xs:annotation>
+			<xs:documentation>Работа/услуга в перечне</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:choice>
+				<xs:sequence>
+					<xs:element name="Price" type="tns:WorkPriceType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Цена</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Amount" type="tns:WorkAmountType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Объём</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Count" type="tns:WorkCountType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Количество</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TotalCost" type="tns:WorkCostType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Общая стоимость</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:element name="Excluded" type="xs:boolean" fixed="true">
+					<xs:annotation>
+						<xs:documentation>Работа/Услуга исключена из перечня</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+			<xs:element name="WorkItemNSI" type="nsi-base:nsiRef">
+				<xs:annotation>
+					<xs:documentation>Ссылка на работу/услугу организации (НСИ 59)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Index" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Номер строки в перечне работ и услуг</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:nonNegativeInteger">
+						<xs:minInclusive value="1"/>
+						<xs:maxInclusive value="9999"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WorkingPlanType">
+		<xs:annotation>
+			<xs:documentation>План по перечню работ/услуг</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="WorkListGUID" type="base:GUIDType">
+				<xs:annotation>
+					<xs:documentation>Идентификатор перечня работ/услуг</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="base:Year"/>
+			<xs:element name="WorkPlanItem" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>План по работе/услуге</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="WorkListItemGUID" type="base:GUIDType">
+							<xs:annotation>
+								<xs:documentation>Идентификатор работы/услуги перечня </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="base:Month"/>
+						<xs:element ref="base:Year"/>
+						<xs:choice>
+							<xs:element name="WorkDate" type="xs:date" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Даты начала работ по плану</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:sequence>
+								<xs:element name="WorkCount" type="tns:MonthlyWorkCountType">
+									<xs:annotation>
+										<xs:documentation>Количество работ</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:choice>
+						<xs:element ref="base:TransportGUID"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element ref="base:TransportGUID"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MonthlyWorkType">
+		<xs:annotation>
+			<xs:documentation>Базовый тип для запланированной или выполненной работы за месяц</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="count" type="tns:MonthlyWorkCountType">
+				<xs:annotation>
+					<xs:documentation>Количество работ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="WorkDate" type="xs:date" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Даты начала работ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CompletedWorkType">
+		<xs:annotation>
+			<xs:documentation>Базовый тип выполненной работы</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="photos" type="base:AttachmentType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Фото выполненной работы/услуги</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MonthlyWork" type="tns:MonthlyWorkType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Количество выполненных работ (если не было указано в плане или изменилось)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice minOccurs="0">
+				<xs:element name="ActTransportGUID" type="base:GUIDType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Описание работы в новом приложенном акте </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="ActGUID" type="base:GUIDType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Описание работы в ранее загруженном акте </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+			<xs:element name="Price" type="tns:WorkPriceType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Фактическая цена (если не была указана в плане или изменилась).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Amount" type="tns:WorkAmountType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Фактический объём (если не был указан в плане или изменился)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TotalCost" type="tns:WorkCostType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Фактическая стоимость выполненных работ (если не была указана в плане или изменилась)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CompletedWorkExportType">
+		<xs:annotation>
+			<xs:documentation>Базовый тип выполненной работы для экспорта</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="photos" type="base:AttachmentType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Фото выполненной работы/услуги</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MonthlyWork" type="tns:MonthlyWorkType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Количество выполненных работ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ActGUID" type="base:GUIDType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание работы в акте </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Price" type="tns:WorkPriceType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Фактическая цена</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Amount" type="tns:WorkAmountType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Фактический объём</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TotalCost" type="tns:WorkCostType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Фактическая стоимость выполненных работ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CompletedWorksByPeriodType">
+		<xs:annotation>
+			<xs:documentation>Выполненная работа за период</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="reportingPeriodGuid" type="base:GUIDType">
+				<xs:annotation>
+					<xs:documentation>Ссылка на период отчётности о выполненных работах/услугах</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PlannedWork" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Выполненная плановая работа/услуга</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:CompletedWorkType">
+							<xs:sequence>
+								<xs:element name="WorkPlanItemGUID" type="base:GUIDType">
+									<xs:annotation>
+										<xs:documentation>Идентификатор работы/услуги перечня </xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="plannedCount" type="xs:nonNegativeInteger">
+									<xs:annotation>
+										<xs:documentation>Количество работ по плану</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="UnplannedWork" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Выполненная внеплановая работа/услуга</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:CompletedWorkType">
+							<xs:sequence>
+								<xs:choice minOccurs="0">
+									<xs:element name="Accident">
+										<xs:annotation>
+											<xs:documentation>Аварийные работы (tns:UnplannedWork/workType/Code=3)</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="accidentObjectKind" type="nsi-base:nsiRef" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Ссылка на объект аварии (НСИ №57)</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="accidentReason" type="xs:string" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Причина аварии</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="MSType" type="nsi-base:nsiRef" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Вид КУ (НСИ 3) для объектов аварии:
+- Объект инженерной инфраструктуры
+- Объект коммунальной инфраструктуры</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+											<xs:attribute name="workType">
+												<xs:simpleType>
+													<xs:restriction base="xs:string">
+														<xs:enumeration value="3"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:attribute>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="DeliveryRestriction">
+										<xs:annotation>
+											<xs:documentation>По ограничениям поставки (tns:UnplannedWork/workType/Code=5)</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="MSType" type="nsi-base:nsiRef" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Вид КУ (НСИ 3)</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="OrganizationGUID" type="organizations-registry-base:RegOrgType" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Поставщик коммунального ресурса</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+											<xs:attribute name="workType">
+												<xs:simpleType>
+													<xs:restriction base="xs:string">
+														<xs:enumeration value="5"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:attribute>
+										</xs:complexType>
+									</xs:element>
+								</xs:choice>
+								<xs:element name="Comment" type="xs:string" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Комментарий</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="Work" type="nsi-base:nsiRef">
+									<xs:annotation>
+										<xs:documentation>Ссылка на работу (услугу) в справочнике видов работ и услуг для организации (НСИ 59)</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="workType" type="nsi-base:nsiRef">
+									<xs:annotation>
+										<xs:documentation>Ссылка на вид работы (услуги) в справочнике видов работ и услуг (НСИ 56)</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+				<xs:key name="workTypeKey">
+					<xs:selector xpath="tns:workType/nsi-base:Code"/>
+					<xs:field xpath="."/>
+				</xs:key>
+				<xs:keyref name="AccidentWorkKeyConstraint" refer="tns:workTypeKey">
+					<xs:selector xpath="tns:Accident"/>
+					<xs:field xpath="@workType"/>
+				</xs:keyref>
+				<xs:keyref name="DeliveryRestrictionConstraint" refer="tns:workTypeKey">
+					<xs:selector xpath="tns:DeliveryRestriction"/>
+					<xs:field xpath="@workType"/>
+				</xs:keyref>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CompletedWorksByPeriodExportType">
+		<xs:annotation>
+			<xs:documentation>Выполненная работа за период (для экспорта, без TransportGUID)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="reportingPeriodGuid" type="base:GUIDType">
+				<xs:annotation>
+					<xs:documentation>Ссылка на период отчётности о выполненных работах/услугах</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PlannedWork" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Выполненная плановая работа/услуга</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:CompletedWorkExportType">
+							<xs:sequence>
+								<xs:element name="WorkPlanItemGUID" type="base:GUIDType">
+									<xs:annotation>
+										<xs:documentation>Идентификатор работы/услуги перечня </xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="plannedCount" type="xs:nonNegativeInteger">
+									<xs:annotation>
+										<xs:documentation>Количество работ по плану</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="UnplannedWork" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Выполненная внеплановая работа/услуга</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:CompletedWorkExportType">
+							<xs:sequence>
+								<xs:choice minOccurs="0">
+									<xs:element name="Accident">
+										<xs:annotation>
+											<xs:documentation>Аварийные работы (tns:UnplannedWork/workType/Code=3)</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="accidentObjectKind" type="nsi-base:nsiRef" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Ссылка на объект аварии (НСИ №57)</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="accidentReason" type="xs:string" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Причина аварии</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="MSType" type="nsi-base:nsiRef" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Вид КУ (НСИ 3) для объектов аварии:
+- Объект инженерной инфраструктуры
+- Объект коммунальной инфраструктуры</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+											<xs:attribute name="workType">
+												<xs:simpleType>
+													<xs:restriction base="xs:string">
+														<xs:enumeration value="3"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:attribute>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="DeliveryRestriction">
+										<xs:annotation>
+											<xs:documentation>По ограничениям поставки (tns:UnplannedWork/workType/Code=5)</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="MSType" type="nsi-base:nsiRef" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Вид КУ (НСИ 3)</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="OrganizationGUID" type="organizations-registry-base:RegOrgType" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Поставщик коммунального ресурса</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+											<xs:attribute name="workType">
+												<xs:simpleType>
+													<xs:restriction base="xs:string">
+														<xs:enumeration value="5"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:attribute>
+										</xs:complexType>
+									</xs:element>
+								</xs:choice>
+								<xs:element name="Comment" type="xs:string" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Комментарий</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="Work" type="nsi-base:nsiRef">
+									<xs:annotation>
+										<xs:documentation>Ссылка на работу (услугу) в справочнике видов работ и услуг для организации (НСИ 59)</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="workType" type="nsi-base:nsiRef">
+									<xs:annotation>
+										<xs:documentation>Ссылка на вид работы (услуги) в справочнике видов работ и услуг (НСИ 56)</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Act" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Акт</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="base:AttachmentType">
+							<xs:sequence>
+								<xs:element name="Date" type="xs:date">
+									<xs:annotation>
+										<xs:documentation>Дата</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="Number">
+									<xs:annotation>
+										<xs:documentation>Номер</xs:documentation>
+									</xs:annotation>
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:minLength value="1"/>
+											<xs:maxLength value="60"/>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="ContractNumber">
+									<xs:annotation>
+										<xs:documentation>Номер договора</xs:documentation>
+									</xs:annotation>
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:minLength value="1"/>
+											<xs:maxLength value="60"/>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="ActGUID" type="base:GUIDType">
+									<xs:annotation>
+										<xs:documentation>Идентификатор акта</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="WorkListStatus">
+		<xs:annotation>
+			<xs:documentation>Статус:
+(A)PPROVED - Утверждён
+(C)ANCELLED - Отменён</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="A"/>
+				<xs:enumeration value="C"/>
+				<xs:enumeration value="AN"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:simpleType name="WorkPriceType">
+		<xs:annotation>
+			<xs:documentation>Тип для цены работ/услуг</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="14"/>
+			<xs:fractionDigits value="4"/>
+			<xs:minInclusive value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="WorkAmountType">
+		<xs:annotation>
+			<xs:documentation>Тип для объема работ/услуг</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="14"/>
+			<xs:fractionDigits value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="WorkCountType">
+		<xs:annotation>
+			<xs:documentation>Тип для количества работ/услуг в перечне</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:nonNegativeInteger">
+			<xs:maxInclusive value="9999"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MonthlyWorkCountType">
+		<xs:annotation>
+			<xs:documentation>Тип для количества работ/услуг за месяц</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:nonNegativeInteger">
+			<xs:maxInclusive value="99"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="WorkCostType">
+		<xs:annotation>
+			<xs:documentation>Тип для стоимости работ/услуг</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="22"/>
+			<xs:fractionDigits value="2"/>
+			<xs:minInclusive value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="HMServicesTarifsDocType">
+		<xs:annotation>
+			<xs:documentation>Документ. Тарифы ЖКУ</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="base:DocumentPortalType">
+				<xs:sequence>
+					<xs:element name="EffectivePeriodFrom" type="xs:date">
+						<xs:annotation>
+							<xs:documentation>Дата начала действия тарифа</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="EffectivePeriodTo" type="xs:date">
+						<xs:annotation>
+							<xs:documentation>Дата окончания действия тарифа</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="CancelServicesTarifDocGUID" type="base:GUIDType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Отмяеняет прежний документ (ссылка на документ)</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="IsPublished" type="xs:boolean" fixed="true">
+						<xs:annotation>
+							<xs:documentation>Документ всегда приходит в статусе "Опубликован" и публикуется на Портале. Экспортируются только опубликованные документы.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Region" type="base:RegionType">
+						<xs:annotation>
+							<xs:documentation>Субъект РФ</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice>
+						<xs:annotation>
+							<xs:documentation>Тариф на</xs:documentation>
+						</xs:annotation>
+						<xs:element name="GKU">
+							<xs:annotation>
+								<xs:documentation>Вид ЖКУ = "Коммунальные услуги"
+Доступно организациям с полномочием:
+- Орган государственной власти субъекта РФ в сфере ЖКХ
+- Орган местного самоуправления в сфере ЖКХ 
+- Управляющая организация
+</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="MServiceType" type="nsi-base:nsiRef" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>Вид коммунальной услуги (НСИ №3)</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="Municipalities" type="base:OKTMORefType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Муниципальное образование</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="RSOOrganizationGUID" type="organizations-registry-base:RegOrgVersionType" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>Идентификатор РСО</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="SKI" minOccurs="0" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>Система коммунальной инфраструктуры (СКИ)</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="Name">
+													<xs:annotation>
+														<xs:documentation>Наименование СКИ</xs:documentation>
+													</xs:annotation>
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:maxLength value="140"/>
+															<xs:minLength value="1"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="KU">
+							<xs:annotation>
+								<xs:documentation>
+Вид ЖКУ = "Коммунальные ресурсы"
+Доступно организациям с полномочием:
+- Орган исполнительной власти субъекта РФ в области регулирования тарифов
+- Федеральная антимонопольная служба (Федеральная служба по тарифам)
+- Ресурсоснабжающая организация </xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="MServiceType" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>Вид коммунального ресурса (НСИ №2)</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:complexContent>
+												<xs:extension base="nsi-base:nsiRef">
+													<xs:sequence>
+														<xs:element name="Name" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>Уточненное наименование  коммунального ресурса</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:minLength value="1"/>
+																	<xs:maxLength value="100"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:extension>
+											</xs:complexContent>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="IsOverhaul" type="xs:boolean" fixed="true">
+							<xs:annotation>
+								<xs:documentation>
+Вид ЖКУ = "Капитальный ремонт"
+Доступно организациям с полномочиями:
+- Орган государственной власти субъекта РФ в сфере ЖКХ</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:sequence>
+							<xs:annotation>
+								<xs:documentation>Доступно организациям с полномочиями:
+- Орган государственной власти субъекта РФ в сфере ЖКХ</xs:documentation>
+							</xs:annotation>
+							<xs:element name="OKTMOs" type="base:OKTMORefType" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Муниципальные образования</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="ServiceType">
+								<xs:annotation>
+									<xs:documentation>Вид жилищно-коммунальной услуги
+(S)ocial hiring - Социальный наем
+(R)epair and maintenance - Содержание и ремонт жилого помещения
+</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction>
+										<xs:simpleType>
+											<xs:list>
+												<xs:simpleType>
+													<xs:restriction base="xs:token">
+														<xs:enumeration value="S"/>
+														<xs:enumeration value="R"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:list>
+										</xs:simpleType>
+										<xs:minLength value="1"/>
+										<xs:maxLength value="2"/>
+										<xs:enumeration value="S"/>
+										<xs:enumeration value="R"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+					</xs:choice>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

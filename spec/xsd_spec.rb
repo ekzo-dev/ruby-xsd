@@ -223,4 +223,16 @@ RSpec.describe XSD do
       end
     end
   end
+
+  context 'with gkh example file' do
+    subject(:element) { reader['exportHMServicesTarifsRequest', 'ServiceType'] }
+
+    let(:file) { fixture_file(%w[gkh hcs-services-types.xsd], read: false) }
+
+    describe '#base_simple_type' do
+      it 'reads empty base simple type from restriction' do
+        expect(element.simple_type.restriction.base_simple_type).to be_nil
+      end
+    end
+  end
 end
