@@ -232,6 +232,7 @@ RSpec.describe XSD do
     describe '#base_simple_type' do
       it 'reads empty base simple type from restriction' do
         expect(element.simple_type.restriction.base_simple_type).to be_nil
+        expect(element.simple_type.restriction.base).to be_nil
       end
     end
   end
