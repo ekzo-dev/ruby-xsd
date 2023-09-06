@@ -87,6 +87,9 @@ RSpec/NoExpectationExample:
 RSpec/RepeatedExample:
   Enabled: false
 
+Style/ArgumentsForwarding:
+  Enabled: false
+
 Style/ConditionalAssignment:
   Enabled: false
 
