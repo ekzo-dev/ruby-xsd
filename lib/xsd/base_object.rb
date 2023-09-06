@@ -32,14 +32,6 @@ module XSD
       end
     end
 
-    # Optional. Specifies a unique ID for the element
-    # @!attribute id
-    # @return String
-    # property :id, :string
-    def id
-      node['id']
-    end
-
     def initialize(options = {})
       @options = options
       @cache   = {}
@@ -51,6 +43,20 @@ module XSD
     # @return Nokogiri::XML::Node
     def node
       options[:node]
+    end
+
+    # Get object string representation
+    # @return String
+    def inspect
+      "#<#{self.class.name} path=#{node.path}>"
+    end
+
+    # Optional. Specifies a unique ID for the element
+    # @!attribute id
+    # @return String
+    # property :id, :string
+    def id
+      node['id']
     end
 
     # Get current namespaces
