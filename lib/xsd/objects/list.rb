@@ -5,7 +5,7 @@ module XSD
   # Parent elements: simpleType
   # https://www.w3schools.com/xml/el_list.asp
   class List < BaseObject
-    TYPE_PROPERTY = :itemType
+    TYPE_PROPERTY = :item_type
 
     include SimpleTyped
 

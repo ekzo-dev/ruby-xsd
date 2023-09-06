@@ -235,5 +235,11 @@ RSpec.describe XSD do
         expect(element.simple_type.restriction.base).to be_nil
       end
     end
+
+    describe 'list' do
+      it 'reads simple_type from list' do
+        expect(element.simple_type.restriction.simple_type.list.simple_type).not_to be_nil
+      end
+    end
   end
 end
