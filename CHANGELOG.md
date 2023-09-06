@@ -1,5 +1,11 @@
 ## [Unreleased]
 
+## [2.3.0] - 2023-09-06
+
+- Fixed reading of SimpleType in List
+- Add support for Restriction without base
+- Support Any generation in simple scenarios
+
 ## [2.2.0] - 2023-07-10
 
 - Fixed built-in types detection for unprefixed schema namespace

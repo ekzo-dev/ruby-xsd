@@ -193,7 +193,7 @@ module XSD
     # @param [Nokogiri::XML::Node] node
     # @return Array<String>
     def documentation_for(node)
-      node.xpath('./xs:annotation/xs:documentation/text()', { 'xs' => XML_SCHEMA }).map(&:to_s).map(&:strip)
+      node.xpath('./xs:annotation/xs:documentation/text()', { 'xs' => XML_SCHEMA }).map { |x| x.to_s.strip }
     end
 
     # Get all available elements on the current stack level
