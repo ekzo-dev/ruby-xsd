@@ -79,6 +79,10 @@ module XSD
           value = item["@#{attribute.name}"]
           if value
             attributes[attribute.name] = value
+          elsif attribute.required?
+            raise Error, "Attribute #{attribute.name} is required, but no data in provided for it" if attribute.fixed.nil?
+
+            attributes[attribute.name] = attribute.fixed
           else
             attributes.delete(attribute.name)
           end
