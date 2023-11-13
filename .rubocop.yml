@@ -42,6 +42,7 @@ Metrics/AbcSize:
   Enabled: false
 
 Metrics/BlockLength:
+  Max: 40
   Exclude:
     - 'spec/**/*_spec.rb'
 

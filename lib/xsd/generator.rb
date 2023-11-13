@@ -77,7 +77,7 @@ module XSD
         # prepare attributes
         all_attributes.each do |attribute|
           value = item["@#{attribute.name}"]
-          if value
+          if !value.nil?
             attributes[attribute.name] = value
           elsif attribute.required?
             raise Error, "Attribute #{attribute.name} is required, but no data in provided for it" if attribute.fixed.nil?

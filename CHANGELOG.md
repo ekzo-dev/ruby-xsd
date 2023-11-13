@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [2.4.1] - 2023-11-13
+
+- Fix attribute value existence check
+
 ## [2.4.0] - 2023-11-13
 
 - Fixed reading of SimpleType in List
