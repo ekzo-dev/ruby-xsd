@@ -1,5 +1,10 @@
 ## [Unreleased]
 
+## [2.4.3] - 2024-04-04
+
+- Fix detecting types and refs when namespaces are overidden per element
+- Fix documentation encoding issue with no XML declaration
+
 ## [2.4.1] - 2023-11-13
 
 - Fix attribute value existence check
