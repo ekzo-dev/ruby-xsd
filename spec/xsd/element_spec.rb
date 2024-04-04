@@ -122,4 +122,12 @@ RSpec.describe XSD::Element do
       expect(reader['Album', 'Tracks', 'Track', 'Contributors', 'Contributor'].collect_attributes.map(&:name)).to eq ['credited']
     end
   end
+
+  context 'with overriding namespaces per element' do
+    let(:file) { fixture_file(%w[rosavia-epgu/schemas.xsd], read: false) }
+
+    it "correctly resolves complex_type" do
+      expect(reader['FormDataResponse']['changeOrderInfo'].complex_type).not_to be_nil
+    end
+  end
 end

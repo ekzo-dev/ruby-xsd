@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn://x-artefacts-rosavia/rosavia-epgu/1.0.0" attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xz="urn://x-artefacts-rosavia/rosavia-comm-data-univ-gu/1.0.0" xmlns:xz1="urn://x-artefacts-rosavia/rosavia-epgu/1.0.0">
+	<xs:import namespace="urn://x-artefacts-rosavia/rosavia-comm-data-univ-gu/1.0.0" schemaLocation="commons/smev3-rosavia-epgu-univ-domains.xsd"/>
+	<xs:element xmlns:xz1="urn://x-artefacts-rosavia/rosavia-epgu/1.0.0" type="xz1:FormDataType" name="FormData"/>
+	<xs:complexType name="FormDataType">
+		<xs:choice>
+			<xs:sequence>
+				<xs:element xmlns:xz="urn://x-artefacts-rosavia/rosavia-comm-data-univ-gu/1.0.0" type="xz:DIdType" name="orderId" minOccurs="1"/>
+				<xs:element xmlns:xz="urn://x-artefacts-rosavia/rosavia-comm-data-univ-gu/1.0.0" type="xz:DVarchar20Type" name="Department" minOccurs="1"/>
+				<xs:element xmlns:xz="urn://x-artefacts-rosavia/rosavia-comm-data-univ-gu/1.0.0" type="xz:DVarchar20Type" name="ServiceCode" minOccurs="1"/>
+				<xs:element xmlns:xz="urn://x-artefacts-rosavia/rosavia-comm-data-univ-gu/1.0.0" type="xz:DVarchar20Type" name="TargetCode" minOccurs="1"/>
+				<xs:element xmlns:xz="urn://x-artefacts-rosavia/rosavia-comm-data-univ-gu/1.0.0" type="xz:DDateType" name="StatementDate" minOccurs="1"/>
+			</xs:sequence>
+			<xs:element name="cancelRequest" minOccurs="1" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element xmlns:xz="urn://x-artefacts-rosavia/rosavia-comm-data-univ-gu/1.0.0" type="xz:DIdType" name="orderId" minOccurs="1"/>
+						<xs:element xmlns:xz="urn://x-artefacts-rosavia/rosavia-comm-data-univ-gu/1.0.0" type="xz:DVarchar2000Type" name="reason" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="textRequest" minOccurs="1" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element xmlns:xz="urn://x-artefacts-rosavia/rosavia-comm-data-univ-gu/1.0.0" type="xz:DIdType" name="orderId" minOccurs="1"/>
+						<xs:element xmlns:xz="urn://x-artefacts-rosavia/rosavia-comm-data-univ-gu/1.0.0" type="xz:DVarchar2000Type" name="text" minOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="AdditionalInformationRequest" minOccurs="1" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element xmlns:xz="urn://x-artefacts-rosavia/rosavia-comm-data-univ-gu/1.0.0" type="xz:DIdType" name="orderId" minOccurs="1"/>
+						<xs:element xmlns:xz="urn://x-artefacts-rosavia/rosavia-comm-data-univ-gu/1.0.0" type="xz:DVarchar2000Type" name="text" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:choice>
+		<xs:attribute xmlns:xz="urn://x-artefacts-rosavia/rosavia-comm-data-univ-gu/1.0.0" type="xz:DIQEpguS3RosaviaEnvType" use="required" name="env"/>
+	</xs:complexType>
+	<xs:element xmlns:xz1="urn://x-artefacts-rosavia/rosavia-epgu/1.0.0" type="xz1:FormDataResponseType" name="FormDataResponse"/>
+	<xs:complexType name="FormDataResponseType">
+		<xs:choice>
+			<xs:element xmlns:xz="urn://x-artefacts-rosavia/rosavia-epgu/1.0.0" name="changeOrderInfo" type="xz:changeOrderInfoType"/>
+			<xs:element xmlns:xz="urn://x-artefacts-rosavia/rosavia-epgu/1.0.0" name="cancelResponse" type="xz:cancelResponseType"/>
+			<xs:element xmlns:xz="urn://x-artefacts-rosavia/rosavia-epgu/1.0.0" name="textResponse" type="xz:textResponseType"/>
+			<xs:element xmlns:xz="urn://x-artefacts-rosavia/rosavia-epgu/1.0.0" name="AdditionalInformationResponse" type="xz:changeOrderInfoType"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="changeOrderInfoType">
+		<xs:sequence>
+			<xs:element xmlns:xz="urn://x-artefacts-rosavia/rosavia-epgu/1.0.0" name="orderId" type="xz:orderIdType"/>
+			<xs:element xmlns:xz="urn://x-artefacts-rosavia/rosavia-epgu/1.0.0" name="statusCode" type="xz:statusCodeType"/>
+			<xs:element name="comment" type="xz:DVarchar2000Type" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="orderIdType">
+		<xs:sequence>
+			<xs:element name="pguId" type="xs:long"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="statusCodeType">
+		<xs:choice>
+			<xs:element name="orgCode" type="xz:DVarchar20Type"/>
+			<xs:element name="techCode" type="xs:byte"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="cancelResponseType">
+		<xs:sequence>
+			<xs:element name="orderId" type="xs:long"/>
+			<xs:element name="result" type="xz:DVarchar20Type"/>
+			<xs:element name="comment" type="xz:DVarchar2000Type" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="textResponseType">
+		<xs:sequence>
+			<xs:element name="orderId" type="xs:long"/>
+			<xs:element xmlns:xz="urn://x-artefacts-rosavia/rosavia-epgu/1.0.0" name="result" type="xz:TextResponseResultType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="TextResponseResultType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="OK"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

@@ -76,12 +76,16 @@ module XSD
     # @param [String, nil] ns_or_prefix
     # @return Array<Schema>
     def schemas_for_namespace(ns_or_prefix)
-      if schema.targets_namespace?(ns_or_prefix)
+      # resolve namespace for current node if prefix was provided
+      prefix = node.namespaces["xmlns:#{ns_or_prefix}"]
+      ns = prefix || ns_or_prefix
+
+      if schema.targets_namespace?(ns)
         [schema, *schema.includes.map(&:imported_schema)]
-      elsif (import = schema.import_by_namespace(ns_or_prefix))
+      elsif (import = schema.import_by_namespace(ns))
         [import.imported_schema]
       else
-        raise Error, "Schema not found for namespace '#{ns_or_prefix}' in '#{schema.id || schema.target_namespace}'"
+        raise Error, "Schema not found for namespace '#{ns}' in '#{schema.id || schema.target_namespace}'"
       end
     end
 

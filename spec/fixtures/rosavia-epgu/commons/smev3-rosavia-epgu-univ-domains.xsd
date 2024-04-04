@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn://x-artefacts-rosavia/rosavia-comm-data-univ-gu/1.0.0" attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xz="urn://x-artefacts-rosavia/rosavia-comm-data-univ-gu/1.0.0">
+	<xs:simpleType name="DIQEpguS3RosaviaEnvType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"/>
+			<xs:enumeration value="DEV"/>
+			<xs:enumeration value="UAT"/>
+			<xs:enumeration value="EXUAT"/>
+			<xs:enumeration value="SVCDEV"/>
+			<xs:enumeration value="TCOD"/>
+			<xs:enumeration value="PROD"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DIdType">
+		<xs:restriction base="xs:decimal">
+			<xs:fractionDigits value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DVarchar2500Type">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2500"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DVarchar20Type">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DPositiveSmallintType">
+		<xs:restriction base="xs:integer">
+			<xs:maxInclusive value="32767"/>
+			<xs:minInclusive value="-32768"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DIQEpguS3FasResTypeType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"/>
+			<xs:enumeration value="CANCELLED"/>
+			<xs:enumeration value="IN_PROGRESS"/>
+			<xs:enumeration value="REJECTED"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DDateType">
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="DVarchar2000Type">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2000"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
