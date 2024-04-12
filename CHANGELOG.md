@@ -1,4 +1,4 @@
-## [Unreleased]
+## [2.6.0] - 2024-04-12
 
 - Fix XSD boolean attributes
 - Add support for element lookup with namespace
