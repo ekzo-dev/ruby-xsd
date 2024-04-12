@@ -5,7 +5,8 @@ module XSD
     # Get definition namespace
     # @return String
     def namespace
-      schema.target_namespace
+      is_referenced = respond_to?(:referenced?)
+      is_referenced && referenced? ? reference.schema.target_namespace : schema.target_namespace
     end
 
     # Get absolute definition name

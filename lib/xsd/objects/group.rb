@@ -8,8 +8,9 @@ module XSD
   class Group < BaseObject
     include MinMaxOccurs
     include Referenced
+    include Named
 
-    # Optional. Specifies the name of the attribute. Name and ref attributes cannot both be present
+    # Optional. Specifies a name for the group. This attribute is used only when the schema element is the parent of this group element. Name and ref attributes cannot both be present
     # @!attribute name
     # @return String
     property :name, :string

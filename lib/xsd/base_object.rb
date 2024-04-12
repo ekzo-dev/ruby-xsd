@@ -375,20 +375,19 @@ module XSD
     private
 
     def definition_match?(definition, query)
-      actual_definition = definition.referenced? ? definition.reference : definition
-
+      # namespace included in query
       if query.start_with?('{')
         parts = query[1..].split('}')
         raise Error, "Invalid element/attribute query: #{query}" if parts.size != 2
 
         namespace, name = parts
 
-        return false if namespace != actual_definition.namespace
+        return false if namespace != definition.namespace
       else
         name = query
       end
 
-      name == '*' || actual_definition.name == name
+      name == '*' || definition.name == name
     end
   end
 end

@@ -155,5 +155,15 @@ RSpec.describe XSD::Element do
         expect(element.absolute_name).to eq('{http://www.w3.org/2000/09/xmldsig#}SignedInfo')
       end
     end
+
+    describe '#namespace' do
+      it 'calculates namespace (accounting referenced elements)' do
+        result1 = reader['importWorkingListRequest']['ApprovedWorkingListData'].namespace
+        result2 = reader['importWorkingListRequest']['ApprovedWorkingListData']['TransportGUID'].namespace
+
+        expect(result1).to eq('http://dom.gosuslugi.ru/schema/integration/services/')
+        expect(result2).to eq('http://dom.gosuslugi.ru/schema/integration/base/')
+      end
+    end
   end
 end
