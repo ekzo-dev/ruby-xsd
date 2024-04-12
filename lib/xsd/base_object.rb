@@ -34,7 +34,7 @@ module XSD
 
     def initialize(options = {})
       @options = options
-      @cache   = {}
+      @cache = {}
 
       raise Error, "#{self.class}.new expects a hash parameter" unless @options.is_a?(Hash)
     end
@@ -116,7 +116,7 @@ module XSD
     def object_by_name(node_name, name)
       # get prefix and local name
       name_prefix = get_prefix(name)
-      name_local  = strip_prefix(name)
+      name_local = strip_prefix(name)
 
       # do not search for built-in types
       return nil if schema.namespace_prefix == name_prefix
@@ -202,43 +202,49 @@ module XSD
     # Get all available elements on the current stack level
     # @return Array<Element>
     def collect_elements(*)
-      # exclude element that can not have elements
-      return [] if NO_ELEMENTS_CONTAINER.include?(self.class.mapped_name)
+      return @collect_elements if @collect_elements
 
-      if is_a?(Referenced) && ref
-        reference.collect_elements
-      else
-        # map children recursive
-        map_children(:*).map do |obj|
-          if obj.is_a?(Element)
-            obj
+      r = if NO_ELEMENTS_CONTAINER.include?(self.class.mapped_name)
+            []
+          elsif is_a?(Referenced) && ref
+            reference.collect_elements
           else
-            # get elements considering references
-            (obj.is_a?(Referenced) && obj.ref ? obj.reference : obj).collect_elements
+            # map children recursive
+            map_children(:*).map do |obj|
+              if obj.is_a?(Element)
+                obj
+              else
+                # get elements considering references
+                (obj.is_a?(Referenced) && obj.ref ? obj.reference : obj).collect_elements
+              end
+            end.flatten
           end
-        end.flatten
-      end
+
+      @collect_elements = r
     end
 
     # Get all available attributes on the current stack level
     # @return Array<Attribute>
     def collect_attributes(*)
-      # exclude element that can not have elements
-      return [] if NO_ATTRIBUTES_CONTAINER.include?(self.class.mapped_name)
+      return @collect_attributes if @collect_attributes
 
-      if is_a?(Referenced) && ref
-        reference.collect_attributes
-      else
-        # map children recursive
-        map_children(:*).map do |obj|
-          if obj.is_a?(Attribute)
-            obj
+      r = if NO_ATTRIBUTES_CONTAINER.include?(self.class.mapped_name)
+            []
+          elsif is_a?(Referenced) && ref
+            reference.collect_attributes
           else
-            # get attributes considering references
-            (obj.is_a?(Referenced) && obj.ref ? obj.reference : obj).collect_attributes
+            # map children recursive
+            map_children(:*).map do |obj|
+              if obj.is_a?(Attribute)
+                obj
+              else
+                # get attributes considering references
+                (obj.is_a?(Referenced) && obj.ref ? obj.reference : obj).collect_attributes
+              end
+            end.flatten
           end
-        end.flatten
-      end
+
+      @collect_attributes = r
     end
 
     # Get reader instance
@@ -259,8 +265,8 @@ module XSD
     # @param [Hash] options
     def self.property(name, type, options = {}, &block)
       properties[to_underscore(name)] = {
-        name:    name,
-        type:    type,
+        name: name,
+        type: type,
         resolve: block,
         **options
       }
@@ -297,7 +303,7 @@ module XSD
 
       # check for property first
       if (property = self.class.properties[method])
-        value  = property[:resolve] ? property[:resolve].call(self) : node[property[:name].to_s]
+        value = property[:resolve] ? property[:resolve].call(self) : node[property[:name].to_s]
         result = if value.nil?
                    # if object has reference - search property in referenced object
                    node['ref'] ? reference.send(method, *args) : property[:default]
@@ -353,10 +359,10 @@ module XSD
     def self.mapped_name
       # @mapped_name ||= XML::CLASS_MAP.each { |k, v| return k.to_sym if v == self }
       @mapped_name ||= begin
-        name    = self.name.split('::').last
-        name[0] = name[0].downcase
-        name.to_sym
-      end
+                         name = self.name.split('::').last
+                         name[0] = name[0].downcase
+                         name.to_sym
+                       end
     end
 
     # Return string if it is not empty, or nil otherwise
