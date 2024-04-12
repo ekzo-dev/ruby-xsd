@@ -10,10 +10,11 @@ module XSD
 
     include SimpleTyped
     include Referenced
+    include Named
 
     # Optional. Specifies the name of the attribute. Name and ref attributes cannot both be present
     # @!attribute name
-    # @return String
+    # @return String, nil
     property :name, :string
 
     # Optional. Specifies a default value for the attribute. Default and fixed attributes cannot both be present

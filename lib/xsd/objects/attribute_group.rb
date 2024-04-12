@@ -9,10 +9,11 @@ module XSD
   class AttributeGroup < BaseObject
     include Referenced
     include AttributeContainer
+    include Named
 
-    # Optional. Specifies the name of the attribute. Name and ref attributes cannot both be present
+    # Optional. Specifies the name of the attribute group. Name and ref attributes cannot both be present
     # @!attribute name
-    # @return String
+    # @return String, nil
     property :name, :string
   end
 end

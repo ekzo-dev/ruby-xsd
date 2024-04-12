@@ -6,9 +6,12 @@ module XSD
   # Parent elements: attribute, element, list, restriction, schema, union
   # https://www.w3schools.com/xml/el_simpletype.asp
   class SimpleType < BaseObject
-    # Optional. Specifies the name of the attribute. Name and ref attributes cannot both be present
+    include Named
+
+    # Specifies a name for the element. This attribute is required if the simpleType element is a child of the
+    # schema element, otherwise it is not allowed
     # @!attribute name
-    # @return String
+    # @return String, nil
     property :name, :string
 
     # Nested restriction

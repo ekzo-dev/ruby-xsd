@@ -126,7 +126,7 @@ module XSD
 
       # find element in target schema
       search_schemas.each do |s|
-        node = s.node.xpath("./xs:#{node_name}[@name=\"#{name_local}\"]", { 'xs' => XML_SCHEMA }).first
+        node = s.node.at_xpath("./xs:#{node_name}[@name=\"#{name_local}\"]", { 'xs' => XML_SCHEMA })
         return s.node_to_object(node) if node
       end
 
@@ -138,7 +138,6 @@ module XSD
     # @return BaseObject
     def node_to_object(node)
       # check object in cache first
-      # TODO: проверить работу!
       return reader.object_cache[node.object_id] if reader.object_cache[node.object_id]
 
       klass = XML::CLASS_MAP[node.name]
@@ -378,7 +377,7 @@ module XSD
 
         namespace, name = parts
 
-        return false if namespace != actual_definition.target_namespace
+        return false if namespace != actual_definition.namespace
       else
         name = query
       end

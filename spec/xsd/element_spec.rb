@@ -144,9 +144,15 @@ RSpec.describe XSD::Element do
     end
 
     describe '#data_type' do
-      it 'extracts data_type' do
+      it 'calculates data_type' do
         elem = reader['importWorkingListRequest', 'ApprovedWorkingListData', 'TransportGUID']
         expect(elem.data_type).to eq('string')
+      end
+    end
+
+    describe '#absolute_name' do
+      it 'calculates absolute_name' do
+        expect(element.absolute_name).to eq('{http://www.w3.org/2000/09/xmldsig#}SignedInfo')
       end
     end
   end

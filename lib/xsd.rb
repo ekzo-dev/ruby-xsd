@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'xsd/base_object'
+require 'xsd/shared/named'
 require 'xsd/shared/min_max_occurs'
 require 'xsd/shared/referenced'
 require 'xsd/shared/attribute_container'

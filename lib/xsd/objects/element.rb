@@ -11,10 +11,11 @@ module XSD
     include SimpleTyped
     include ComplexTyped
     include Referenced
+    include Named
 
-    # Optional. Specifies the name of the attribute. Name and ref attributes cannot both be present
+    # Optional. Specifies a name for the element. This attribute is required if the parent element is the schema element
     # @!attribute name
-    # @return String
+    # @return String, nil
     property :name, :string
 
     # Optional. Specifies either the name of a built-in data type, or the name of a simpleType or complexType element
@@ -143,12 +144,6 @@ module XSD
       schema.collect_elements.select do |element|
         strip_prefix(element.substitution_group) == name
       end
-    end
-
-    # Get target namespace
-    # @return String
-    def target_namespace
-      schema.target_namespace
     end
 
     # Get base data type

@@ -7,8 +7,9 @@ module XSD
   # https://www.w3schools.com/xml/el_complextype.asp
   class ComplexType < BaseObject
     include AttributeContainer
+    include Named
 
-    # Optional. Specifies the name of the attribute. Name and ref attributes cannot both be present
+    # Optional. Specifies a name for the element
     # @!attribute name
     # @return String
     property :name, :string
