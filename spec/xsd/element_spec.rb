@@ -131,15 +131,23 @@ RSpec.describe XSD::Element do
     end
   end
 
-  context 'with rupm example files' do
-    let(:file) { fixture_file(%w[rupm pmRegistration.xsd], read: false) }
+  context 'with gkh example file' do
+    subject(:element) { reader['importWorkingListRequest', 'Signature', 'SignedInfo'] }
 
-    it "checks for mixed content" do
-      result_true = reader['RequestWrapper', 'Application', 'Utility', 'BibliographicData', 'InventionTitleBag', 'InventionTitle'].mixed_content?
-      result_false = reader['RequestWrapper', 'Application', 'Utility', 'BibliographicData', 'InventionTitleBag'].mixed_content?
+    let(:file) { fixture_file(%w[gkh hcs-services-types.xsd], read: false) }
 
-      expect(result_true).to eq(true)
-      expect(result_false).to eq(false)
+    describe '#mixed_content?' do
+      it 'checks for mixed content' do
+        expect(element).not_to be_mixed_content
+        expect(element['CanonicalizationMethod']).to be_mixed_content
+      end
+    end
+
+    describe '#data_type' do
+      it 'extracts data_type' do
+        elem = reader['importWorkingListRequest', 'ApprovedWorkingListData', 'TransportGUID']
+        expect(elem.data_type).to eq('string')
+      end
     end
   end
 end

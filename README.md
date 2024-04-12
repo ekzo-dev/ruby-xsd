@@ -28,8 +28,13 @@ require 'xsd'
 # Load ruby-xsd
 reader = XSD::XML.open('some.xsd')
 
-# Get elements and their child elements
+# Get element by name with hash lookup 
 element = reader['NewReleaseMessage']
+
+# Get element by namespace + name with hash lookup
+element = reader['{http://ddex.net/xml/ern/36}NewReleaseMessage']
+
+# Get element child elements
 element.collect_elements.map(&:name) # => ['MessageHeader', 'UpdateIndicator', 'IsBackfill', 'CatalogTransfer', 'WorkList', 'CueSheetList', 'ResourceList', 'CollectionList', 'ReleaseList', 'DealList']
 
 # Get attributes
@@ -38,7 +43,7 @@ attribute = reader['NewReleaseMessage']['@MessageSchemaVersionId']
 # Get attribute information
 attribute.name # => 'MessageSchemaVersionId'
 attribute.type # => 'xs:string'
-attribute.data_type # => 'xs:string'
+attribute.data_type # => 'string'
 attribute.required? # => true
 attribute.optional? # => false
 attribute.prohibited? # => true
@@ -50,6 +55,8 @@ element.max_occurs # => :unbounded
 element.type # => 'ern:SoundRecording'
 element.complex_type # => XSD::ComplexType
 element.complex_content? # => true
+element.simple_content? # => false
+element.mixed_content? # => false
 element.multiple_allowed? # => true
 element.required? # => false
 ```

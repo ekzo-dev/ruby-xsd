@@ -20,6 +20,10 @@ RSpec.describe XSD do
         expect(reader['NewReleaseMessage'].name).to eq 'NewReleaseMessage'
       end
 
+      it 'gives a child element object (matching by name and namespace)' do
+        expect(reader['{http://ddex.net/xml/ern/36}NewReleaseMessage'].name).to eq 'NewReleaseMessage'
+      end
+
       it 'supports linking' do
         attribute_names = reader['NewReleaseMessage']['ReleaseList']['Release'].collect_attributes.map(&:name)
 
