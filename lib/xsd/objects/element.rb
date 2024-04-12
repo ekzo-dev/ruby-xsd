@@ -47,7 +47,7 @@ module XSD
     # cannot be used if the parent element is the schema element
     # @!attribute form
     # @return String
-    property :form, :string
+    property :form, :string, default: proc { schema.element_form_default }
 
     # Optional. Specifies whether an explicit null value can be assigned to the element. True enables an instance of
     # the element to have the null attribute set to true. The null attribute is defined as part of the XML Schema

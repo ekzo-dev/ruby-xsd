@@ -165,5 +165,13 @@ RSpec.describe XSD::Element do
         expect(result2).to eq('http://dom.gosuslugi.ru/schema/integration/base/')
       end
     end
+
+    describe '#form' do
+      it 'calculates default form value' do
+        result = reader['importWorkingListRequest'].form
+
+        expect(result).to eq('qualified')
+      end
+    end
   end
 end

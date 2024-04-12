@@ -304,20 +304,24 @@ module XSD
       # check for property first
       if (property = self.class.properties[method])
         value = property[:resolve] ? property[:resolve].call(self) : node[property[:name].to_s]
-        result = if value.nil?
-                   # if object has reference - search property in referenced object
-                   node['ref'] ? reference.send(method, *args) : property[:default]
-                 else
-                   case property[:type]
-                   when :integer
-                     property[:name] == :maxOccurs && value == 'unbounded' ? :unbounded : value.to_i
-                   when :boolean
-                     value == 'true'
-                   else
-                     value
-                   end
-                 end
-        return @cache[method] = result
+        r = if value.nil?
+              if node['ref']
+                # if object has reference - search property in referenced object
+                reference.send(method, *args)
+              else
+                property[:default].is_a?(Proc) ? instance_eval(&property[:default]) : property[:default]
+              end
+            else
+              case property[:type]
+              when :integer
+                property[:name] == :maxOccurs && value == 'unbounded' ? :unbounded : value.to_i
+              when :boolean
+                value == 'true'
+              else
+                value
+              end
+            end
+        return @cache[method] = r
       end
 
       # if object has ref it cannot contain any type and children, so proxy call to target object

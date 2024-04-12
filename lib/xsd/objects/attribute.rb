@@ -28,15 +28,14 @@ module XSD
     property :fixed, :string
 
     # Optional. Specifies the form for the attribute. The default value is the value of the attributeFormDefault
-    # attribute of the element containing the attribute. Can be set to one of the following:
+    # attribute of the schema containing the attribute. Can be set to one of the following:
     #   qualified   - indicates that this attribute must be qualified with the namespace prefix and the no-colon-name
     #                 (NCName) of the attribute
     #   unqualified - indicates that this attribute is not required to be qualified with the namespace prefix and is
     #                 matched against the (NCName) of the attribute
     # @!attribute form
-    # @return String, nil
-    # TODO: support default value from parent
-    property :form, :string
+    # @return String
+    property :form, :string, default: proc { schema.attribute_form_default }
 
     # Optional. Specifies a built-in data type or a simple type. The type attribute can only be present when the
     # content does not contain a simpleType element
