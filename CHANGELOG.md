@@ -1,3 +1,7 @@
+## [2.6.2] - 2024-04-12
+
+- Get default value for element/attribute "form" property from schema
+
 ## [2.6.1] - 2024-04-12
 
 - Correctly detect namespace for referenced elements
