@@ -34,7 +34,7 @@ module XSD
     #                 matched against the (NCName) of the attribute
     # @!attribute form
     # @return String, nil
-    # TODO: поддержка default значения с вычислением родителя
+    # TODO: support default value from parent
     property :form, :string
 
     # Optional. Specifies a built-in data type or a simple type. The type attribute can only be present when the
@@ -67,6 +67,16 @@ module XSD
     # @return Boolean
     def prohibited?
       use == 'prohibited'
+    end
+
+    # Get base data type
+    # @return String, nil
+    def data_type
+      if simple_type
+        simple_type.data_type
+      else
+        strip_prefix(type)
+      end
     end
   end
 end

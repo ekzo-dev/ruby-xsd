@@ -100,9 +100,9 @@ module XSD
         curname = curname.to_s
 
         if curname[0] == '@'
-          result = result.collect_attributes.find { |attr| attr.name == curname[1..-1] }
+          result = result.collect_attributes.find { |attr| definition_match?(attr, curname[1..]) }
         else
-          result = result.collect_elements.find { |elem| elem.name == curname }
+          result = result.collect_elements.find { |elem| definition_match?(elem, curname) }
         end
       end
 
@@ -307,7 +307,7 @@ module XSD
                    when :integer
                      property[:name] == :maxOccurs && value == 'unbounded' ? :unbounded : value.to_i
                    when :boolean
-                     !!value
+                     value == 'true'
                    else
                      value
                    end
@@ -365,6 +365,25 @@ module XSD
     # @return String, nil
     def nil_if_empty(string)
       string&.empty? ? nil : string
+    end
+
+    private
+
+    def definition_match?(definition, query)
+      actual_definition = definition.referenced? ? definition.reference : definition
+
+      if query.start_with?('{')
+        parts = query[1..].split('}')
+        raise Error, "Invalid element/attribute query: #{query}" if parts.size != 2
+
+        namespace, name = parts
+
+        return false if namespace != actual_definition.target_namespace
+      else
+        name = query
+      end
+
+      name == '*' || actual_definition.name == name
     end
   end
 end

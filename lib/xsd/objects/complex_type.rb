@@ -78,5 +78,55 @@ module XSD
     def linked?
       !name.nil?
     end
+
+    # Determine if this type has mixed content definition
+    # @return Boolean
+    def mixed_content?
+      return true if mixed
+
+      if complex_content
+        return true if complex_content.mixed
+
+        return (complex_content.extension || complex_content.restriction).base_complex_type&.mixed_content?
+      end
+
+      false
+    end
+
+    # Determine if this type has complex content definition
+    # @return Boolean
+    def complex_content?
+      if simple_content
+        false
+      elsif complex_content
+        true
+      else
+        group || all || choice || sequence
+      end
+    end
+
+    # Determine if this type has simple content definition
+    # @return Boolean
+    def simple_content?
+      !!simple_content
+    end
+
+    # Get simple content data type
+    # @return String, nil
+    def data_type
+      return nil unless simple_content
+
+      restriction = simple_content.restriction
+      if restriction
+        if restriction.base
+          restriction.base_simple_type&.data_type || strip_prefix(restriction.base)
+        else
+          restriction.simple_type&.data_type
+        end
+      else
+        extension = simple_content.extension
+        extension.base_simple_type&.data_type || strip_prefix(extension.base)
+      end
+    end
   end
 end

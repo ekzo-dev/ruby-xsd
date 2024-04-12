@@ -1,5 +1,10 @@
 ## [Unreleased]
 
+- Fix XSD boolean attributes
+- Add support for element lookup with namespace
+- Add element (with simple content) data type calculation
+- Add element mixed type calculation
+
 ## [2.4.3] - 2024-04-04
 
 - Fix detecting types and refs when namespaces are overidden per element

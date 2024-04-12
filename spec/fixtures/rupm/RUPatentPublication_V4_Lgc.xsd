@@ -1,0 +1,1543 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Created with Liquid Studio 2020 (https://www.liquid-technologies.com)-->
+<xsd:schema xmlns:rupat="urn:ru:rupto:patent/1.1.2" xmlns:rucom="http://rupto.ru/standard/st96/common/1.1.2" xmlns:com="http://www.wipo.int/standards/XMLSchema/ST96/Common/1.1.2" xmlns:pat="http://www.wipo.int/standards/XMLSchema/ST96/Patent/1.1.2" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="urn:ru:rupto:patent/1.1.2" version="V4_Lgc" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:import schemaLocation="Common_V4_PM.xsd" namespace="http://www.wipo.int/standards/XMLSchema/ST96/Common/1.1.2"/>
+	<xsd:import schemaLocation="RUCommon_V4_PM.xsd" namespace="http://rupto.ru/standard/st96/common/1.1.2"/>
+	<xsd:import schemaLocation="patentPublication_V4_Lgc.xsd" namespace="http://www.wipo.int/standards/XMLSchema/ST96/Patent/1.1.2"/>
+	<xsd:element name="Legacy" type="rupat:LegacyType">
+		<xsd:annotation>
+			<xsd:documentation>Container for legacy data</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="LegacyType">
+		<xsd:sequence>
+			<xsd:any minOccurs="0" maxOccurs="unbounded" namespace="urn:ru:rupto:legacy" processContents="lax"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="PriorityClaimBag" type="rupat:PriorityClaimBagType">
+		<xsd:annotation>
+			<xsd:documentation>Applications in which priority is claimed. Refers to ST.9 INID Code 30.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="PriorityClaimBagType">
+		<xsd:sequence>
+			<xsd:element ref="rupat:PriorityClaim" maxOccurs="unbounded"/>
+			<xsd:element ref="pat:IncorporationByReferenceIndicator" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute ref="com:id"/>
+	</xsd:complexType>
+	<xsd:element name="PriorityClaim" type="rupat:PriorityClaimType">
+		<xsd:annotation>
+			<xsd:documentation>Priority claim information</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="PriorityClaimType">
+		<xsd:sequence>
+			<xsd:element ref="com:IPOfficeCode"/>
+			<xsd:element ref="com:ApplicationNumber" minOccurs="0"/>
+			<xsd:element ref="rupat:PriorityText" minOccurs="0"/>
+			<xsd:element ref="rupat:PriorityStatusCategory" minOccurs="0"/>
+			<xsd:choice>
+				<xsd:element ref="pat:FilingDate"/>
+				<xsd:element ref="rupat:FilingDate"/>
+			</xsd:choice>
+			<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				<xsd:element ref="pat:IndicatedIPOfficeCode"/>
+				<xsd:element ref="rupat:IndicatedIPOfficeCode"/>
+			</xsd:choice>
+			<xsd:choice minOccurs="0">
+				<xsd:element ref="pat:ApplicationFilingCategory"/>
+				<xsd:element ref="rupat:ApplicationFilingCategory"/>
+			</xsd:choice>
+			<xsd:choice minOccurs="0">
+				<xsd:element ref="pat:RequestedPriorityDocumentIndicator"/>
+				<xsd:element ref="pat:AttachedPriorityDocumentIndicator"/>
+				<xsd:element ref="pat:OnlineAvailablePriorityDocumentIndicator"/>
+				<xsd:element ref="com:DASAccessCode"/>
+			</xsd:choice>
+			<xsd:element ref="rupat:PriorityType" minOccurs="0"/>
+			<xsd:element ref="rupat:PriorityTermExtension" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute ref="com:id"/>
+		<xsd:attribute ref="com:sequenceNumber" use="required"/>
+	</xsd:complexType>
+	<xsd:element name="PriorityText" type="rupat:PriorityTextType">
+		<xsd:annotation>
+			<xsd:documentation>Тип приоритета в заявке</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:simpleType name="PriorityTextType">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="(30) подачи первой заявки в государстве - участнике Парижской конвенции по охране промышленной собственности (пункт 1 статьи 1382 Гражданского кодекса Российской Федерации (Собрание законодательства Российской Федерации, 2006, № 52, ст. 5496; 2014, № 11, ст. 1100) (далее – Кодекс)">
+				<xsd:annotation>
+					<xsd:documentation>конвенционный приоритет</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="(23) поступления дополнительных материалов к более ранней заявке (пункт 2 статьи 1381 Кодекса)">
+				<xsd:annotation>
+					<xsd:documentation>приоритет по дате поступления дополнительных материалов</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="(66) подачи более ранней заявки (пункт 3 статьи 1381 Кодекса)">
+				<xsd:annotation>
+					<xsd:documentation>приоритет по более ранней заявке</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="(62) подачи (приоритета) первоначальной заявки (пункт 4 статьи 1381 Кодекса), из которой выделена настоящая заявка">
+				<xsd:annotation>
+					<xsd:documentation>приоритет по первоначальной заявке</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="(62) подачи первоначальной заявки (пункт 4 статьи 1381 Кодекса), из которой выделена настоящая заявка">
+				<xsd:annotation>
+					<xsd:documentation>приоритет по дате подачи первоначальной заявки</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="(62) приоритета первоначальной заявки (пункт 4 статьи 1381 Кодекса), из которой выделена настоящая заявка">
+				<xsd:annotation>
+					<xsd:documentation>приоритет по дате приоритета первоначальной заявки</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="(22) Приоритет по дате подачи заявки">
+				<xsd:annotation>
+					<xsd:documentation>приоритет по дате подачи заявки</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="PriorityStatusCategory" type="rupat:PriorityStatusCategoryType">
+		<xsd:annotation>
+			<xsd:documentation>Статус приоритета</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:simpleType name="PriorityStatusCategoryType">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="Claimed">
+				<xsd:annotation>
+					<xsd:documentation>испрашиваемый заявителем приоритет</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Accepted">
+				<xsd:annotation>
+					<xsd:documentation>установленный экспертом приоритет</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Abandoned">
+				<xsd:annotation>
+					<xsd:documentation>отклоненный экспертом приоритет, который заявитель указал в заявке ранее</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="FilingDate" type="com:DateType">
+		<xsd:annotation>
+			<xsd:documentation>Дата испрашиваемого приоритета</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="IndicatedIPOfficeCode" type="com:ExtendedWIPOST3CodeType">
+		<xsd:annotation>
+			<xsd:documentation>Код страны подачи заявки (заполняется только для конвенционного приоритета)</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ApplicationFilingCategory" type="pat:ApplicationFilingCategoryType">
+		<xsd:annotation>
+			<xsd:documentation>Тип подачи первой заявки (PCT, Regional или National)</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="IncorporationState" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>ОПФ</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="InventorConfidentialIndicators" type="rupat:InventorConfidentialIndicatorsType">
+		<xsd:annotation>
+			<xsd:documentation>Конфиденциальность сведений об авторе</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="InventorConfidentialIndicatorsType">
+		<xsd:sequence>
+			<xsd:element ref="rupat:ApplicationDataConfInd" minOccurs="0"/>
+			<xsd:element ref="rupat:PatentDataConfInd" minOccurs="0"/>
+			<xsd:element ref="rupat:EFillingDataConfInd" minOccurs="0"/>
+			<xsd:element ref="rupat:IsAuthorRequestAttached" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="ApplicationDataConfInd" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Автор просит не упоминать его при публикации сведений о заявке</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="PatentDataConfInd" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Автор просит не упоминать его при публикации сведений о патенте</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="EFillingDataConfInd" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Автор просит не упоминать его при публикации при электронной подаче</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="IsAuthorRequestAttached" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Просьба автора не упоминать его при публикации прилагается</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="NationalityCode" type="com:NationalityCodeType">
+		<xsd:annotation>
+			<xsd:documentation>Код страны представителя</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="TermRepresenation" type="com:DateType">
+		<xsd:annotation>
+			<xsd:documentation>Срок представительства</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="TransferDateIntReg" type="com:DateType">
+		<xsd:annotation>
+			<xsd:documentation>Дата перевода международной заявки на национальную фазу</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="AddInfo" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Дополнительные сведения для Представителя</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="PatentRecordBag" type="rupat:PatentRecordBagType">
+		<xsd:annotation>
+			<xsd:documentation>Коллекция записей, связанных с патентом, таких, как возобновление, передача права, изменение имени или адреса правообладателя, лицензии и др.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="PatentRecordBagType">
+		<xsd:sequence>
+			<xsd:element ref="rupat:PatentRecord" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute ref="rucom:schemaVersion"/>
+		<xsd:attribute ref="rucom:docKind"/>
+	</xsd:complexType>
+	<xsd:element name="PatentRecord" type="rupat:PatentRecordType">
+		<xsd:annotation>
+			<xsd:documentation>Данные, относящиеся к патенту, такие, как возобновление, передача права, изменение имени или адреса правообладателя, лицензии и др.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:unique name="RComponentKey">
+			<xsd:selector xpath=".//*"/>
+			<xsd:field xpath="@com:id"/>
+		</xsd:unique>
+	</xsd:element>
+	<xsd:complexType name="PatentRecordType">
+		<xsd:choice>
+			<xsd:element ref="rupat:RecordPatentRegistration"/>
+			<xsd:element ref="rupat:RecordLegalStatus"/>
+			<xsd:element ref="rupat:RecordContinuation"/>
+			<xsd:element ref="rupat:RecordDiscontinuation"/>
+			<xsd:element ref="rupat:RecordLicence"/>
+			<xsd:element ref="rupat:RecordChange"/>
+			<xsd:element ref="rupat:RecordCorrection"/>
+			<xsd:element ref="rupat:RecordOther"/>
+		</xsd:choice>
+		<xsd:attribute ref="rucom:transactionCode" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="RecordPatentRegistration" type="rupat:RecordPatentRegistrationType">
+		<xsd:annotation>
+			<xsd:documentation>Данные о первичной регистрации патента</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="RecordPatentRegistrationType">
+		<xsd:all>
+			<xsd:element ref="com:RecordIdentifier"/>
+			<xsd:element ref="pat:PatentDocumentIdentification"/>
+			<xsd:element ref="rupat:RecordPatentRegistrationCategory"/>
+			<xsd:element ref="rupat:RecordPublicationBag" minOccurs="0"/>
+			<xsd:element ref="rupat:ReasonDocument" minOccurs="0"/>
+			<xsd:element ref="rupat:RecordEntryDate" minOccurs="0"/>
+		</xsd:all>
+		<xsd:attribute ref="com:id"/>
+	</xsd:complexType>
+	<xsd:element name="RecordPatentRegistrationCategory" type="rupat:RecordPatentRegistrationCategoryType">
+		<xsd:annotation>
+			<xsd:documentation>Категория регистрации</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:simpleType name="RecordPatentRegistrationCategoryType">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="Normal">
+				<xsd:annotation>
+					<xsd:documentation>Обычная</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Secret">
+				<xsd:annotation>
+					<xsd:documentation>Секретная</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Declassification">
+				<xsd:annotation>
+					<xsd:documentation>Рассекречивание секретного изобретения</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="USSR Declassification">
+				<xsd:annotation>
+					<xsd:documentation>Рассекречивание секретного изобретения, защищённого авторским свидетельством СССР</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="RecordPublicationBag" type="rupat:RecordPublicationBagType">
+		<xsd:annotation>
+			<xsd:documentation>Коллекция сведений о публикации</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="RecordPublicationBagType">
+		<xsd:sequence>
+			<xsd:element ref="rupat:RecordPublication" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="RecordPublication" type="rupat:RecordPublicationType">
+		<xsd:annotation>
+			<xsd:documentation>Сведения о публикации</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="RecordPublicationType">
+		<xsd:sequence>
+			<xsd:element ref="com:PublicationIdentifier" minOccurs="0"/>
+			<xsd:element ref="rupat:PublicationSectionCategory" minOccurs="0"/>
+			<xsd:element ref="com:PublicationSubsection" minOccurs="0"/>
+			<xsd:element ref="com:PublicationDate" minOccurs="0"/>
+			<xsd:element ref="com:PublicationPage" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="PublicationSectionCategory" type="rupat:PublicationSectionCategoryType">
+		<xsd:annotation>
+			<xsd:documentation>Категория раздела публикации / причина публикации</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:simpleType name="PublicationSectionCategoryType">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="Applications">
+				<xsd:annotation>
+					<xsd:documentation>Заявки</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Amendments to applications">
+				<xsd:annotation>
+					<xsd:documentation>Поправки к заявкам</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Correction of errors on applications">
+				<xsd:annotation>
+					<xsd:documentation>Коррекция ошибок в заявках</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Withdrawals">
+				<xsd:annotation>
+					<xsd:documentation>Отмены</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Limitations">
+				<xsd:annotation>
+					<xsd:documentation>Ограничения</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Total refusals">
+				<xsd:annotation>
+					<xsd:documentation>Полные отказы</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Partial refusals">
+				<xsd:annotation>
+					<xsd:documentation>Частичные отказы</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Registrations with no amendments">
+				<xsd:annotation>
+					<xsd:documentation>Регистрации без поправок</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Registrations with amendments">
+				<xsd:annotation>
+					<xsd:documentation>Регистрации с поправками</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Correction of errors on registrations">
+				<xsd:annotation>
+					<xsd:documentation>Коррекция ошибок в регистрациях</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Total transfers">
+				<xsd:annotation>
+					<xsd:documentation>Полные передачи права</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Partial transfers">
+				<xsd:annotation>
+					<xsd:documentation>Частичные передачи права</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Change of name and address of proprietor">
+				<xsd:annotation>
+					<xsd:documentation>Изменение имени и/или адреса правообладателя</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Change of name and professional address of representative">
+				<xsd:annotation>
+					<xsd:documentation>Изменение имени и/или рабочего адреса представителя</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Replacement of representative">
+				<xsd:annotation>
+					<xsd:documentation>Смена представителя</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Appointment of a new representative">
+				<xsd:annotation>
+					<xsd:documentation>Назначение нового представителя</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Deletion of the representative">
+				<xsd:annotation>
+					<xsd:documentation>Удаление представителя</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Total surrender of designs">
+				<xsd:annotation>
+					<xsd:documentation>Полный отказ от дизайна</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Partial surrender of designs">
+				<xsd:annotation>
+					<xsd:documentation>Частичный отказ от дизайна</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="ReasonDocument" type="rupat:ReasonDocumentType">
+		<xsd:annotation>
+			<xsd:documentation>Документ, на основании которого произведена запись</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ReasonDocumentType">
+		<xsd:sequence>
+			<xsd:choice>
+				<xsd:element ref="rupat:ReasonFreeFormatText" minOccurs="0"/>
+				<xsd:sequence>
+					<xsd:element ref="rupat:ReasonDocumentNumber" minOccurs="0"/>
+					<xsd:element ref="rupat:ReasonDocumentDate" minOccurs="0"/>
+					<xsd:element ref="rupat:ReasonDocumentSource" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:choice>
+			<xsd:element ref="rupat:ReasonDocumentCategory" minOccurs="0"/>
+			<xsd:element ref="rupat:ReasonDocumentBag" minOccurs="0"/>
+			<xsd:element ref="rupat:FactDecisionText" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="ReasonFreeFormatText" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Неструктурированное указание на документ, на основании которого произведена запись</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ReasonDocumentNumber" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Номер документа, на основании которого произведена запись</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ReasonDocumentDate" type="com:DateType">
+		<xsd:annotation>
+			<xsd:documentation>Дата документа, на основании которого произведена запись</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ReasonDocumentSource" type="xsd:token">
+		<xsd:annotation>
+			<xsd:documentation>Источник документа, на основании которого произведена запись</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ReasonDocumentCategory" type="rupat:ReasonDocumentCategoryType">
+		<xsd:annotation>
+			<xsd:documentation>Категория документа, на основании которого произведена запись</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:simpleType name="ReasonDocumentCategoryType">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="Decision of registration">
+				<xsd:annotation>
+					<xsd:documentation>Решение о регистрации</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Notification about registration">
+				<xsd:annotation>
+					<xsd:documentation>Уведомление о регистрации от компетентного органа</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Request of the holder">
+				<xsd:annotation>
+					<xsd:documentation>Запрос владельца</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Non-renewal">
+				<xsd:annotation>
+					<xsd:documentation>Истечение срока действия в связи с отсутствием продления</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Decision of correction">
+				<xsd:annotation>
+					<xsd:documentation>Решение о коррекции</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Decision of registration licensee">
+				<xsd:annotation>
+					<xsd:documentation>Решение лицензиата регистрации</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Decision of non-contracted transfer">
+				<xsd:annotation>
+					<xsd:documentation>Решение о передаче без договора</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Decision of transfer">
+				<xsd:annotation>
+					<xsd:documentation>Решение о передаче</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Decision of alienation">
+				<xsd:annotation>
+					<xsd:documentation>Решение об отчуждении</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Decision of partial transfer">
+				<xsd:annotation>
+					<xsd:documentation>Решение о частичной передаче</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Decision of pledge">
+				<xsd:annotation>
+					<xsd:documentation>Решение о залоге</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Decision of subsequent pledge">
+				<xsd:annotation>
+					<xsd:documentation>Решение о последующем залоге</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Decision of change in contract">
+				<xsd:annotation>
+					<xsd:documentation>Решение об изменении в договоре</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Decision of total discontinuation">
+				<xsd:annotation>
+					<xsd:documentation>Решение о полном прекращении</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Decision of partial discontinuation">
+				<xsd:annotation>
+					<xsd:documentation>Решение о частичном прекращении</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Decision of partial discontinuation by judicial action">
+				<xsd:annotation>
+					<xsd:documentation>Решение о частичном прекращении посредством судебного иска</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Expiration">
+				<xsd:annotation>
+					<xsd:documentation>Истечение срока действия</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Judicial action">
+				<xsd:annotation>
+					<xsd:documentation>Судебный иск</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Licence">
+				<xsd:annotation>
+					<xsd:documentation>Лицензия</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Sublicence">
+				<xsd:annotation>
+					<xsd:documentation>Сублицензия</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Concession">
+				<xsd:annotation>
+					<xsd:documentation>Концессия</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Subconcession">
+				<xsd:annotation>
+					<xsd:documentation>Субконцессия</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Compulsory license">
+				<xsd:annotation>
+					<xsd:documentation>Принудительная лицензия</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Pledge">
+				<xsd:annotation>
+					<xsd:documentation>Залог</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Subsequent pledge">
+				<xsd:annotation>
+					<xsd:documentation>Последующий залог</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Alienation of the exclusive right">
+				<xsd:annotation>
+					<xsd:documentation>Отчуждение исключительного права</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Declassification">
+				<xsd:annotation>
+					<xsd:documentation>Рассекречивание изобретения</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Approval of the exclusive right">
+				<xsd:annotation>
+					<xsd:documentation>Решение о предоставлении исключительного права</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="New legislation">
+				<xsd:annotation>
+					<xsd:documentation>Изменение законодательства</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="ReasonDocumentBag" type="com:RecordDocumentBagType">
+		<xsd:annotation>
+			<xsd:documentation>Коллекция документов, на основании которых произведена запись</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="FactDecisionText" type="com:LocalizedTextType">
+		<xsd:annotation>
+			<xsd:documentation>Текст фактического решения</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="RecordEntryDate" type="com:DateType">
+		<xsd:annotation>
+			<xsd:documentation>Дата внесения в реестр</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="RecordLegalStatus" type="rupat:RecordLegalStatusType">
+		<xsd:annotation>
+			<xsd:documentation>Данные об изменении статуса патента</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="RecordLegalStatusType">
+		<xsd:all>
+			<xsd:element ref="com:RecordIdentifier"/>
+			<xsd:element ref="pat:PatentDocumentIdentification"/>
+			<xsd:element ref="rupat:RecordLegalStatusCategory"/>
+			<xsd:element ref="rupat:RecordPublicationBag" minOccurs="0"/>
+			<xsd:element ref="pat:PartyBag"/>
+			<xsd:element ref="rupat:ReasonDocument" minOccurs="0"/>
+			<xsd:element ref="com:CommentText" minOccurs="0"/>
+			<xsd:element ref="rupat:RecordEntryDate" minOccurs="0"/>
+		</xsd:all>
+		<xsd:attribute ref="com:id"/>
+	</xsd:complexType>
+	<xsd:element name="RecordLegalStatusCategory" type="rupat:RecordLegalStatusCategoryType">
+		<xsd:annotation>
+			<xsd:documentation>Категория прекращения</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:simpleType name="RecordLegalStatusCategoryType">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="Alienation of the exclusive right">
+				<xsd:annotation>
+					<xsd:documentation>Отчуждение исключительного права</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Transfer of the exclusive right">
+				<xsd:annotation>
+					<xsd:documentation>Передача исключительного права</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="RecordContinuation" type="rupat:RecordContinuationType">
+		<xsd:annotation>
+			<xsd:documentation>Данные о возобновлении или продлении права собственности</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="RecordContinuationType">
+		<xsd:all>
+			<xsd:element ref="com:RecordIdentifier"/>
+			<xsd:element ref="pat:PatentDocumentIdentification"/>
+			<xsd:element ref="rupat:RecordContinuationCategory"/>
+			<xsd:element ref="rupat:RecordPublicationBag" minOccurs="0"/>
+			<xsd:element ref="pat:PatentPublicationIdentification" minOccurs="0"/>
+			<xsd:element ref="rupat:ProductFirstUsagePermissionRegistration" minOccurs="0"/>
+			<xsd:element ref="pat:RightsEffectiveDateBag" minOccurs="0"/>
+			<xsd:element ref="rupat:ReasonDocument" minOccurs="0"/>
+			<xsd:element ref="rupat:RecordEntryDate" minOccurs="0"/>
+		</xsd:all>
+		<xsd:attribute ref="com:id"/>
+	</xsd:complexType>
+	<xsd:element name="RecordContinuationCategory" type="rupat:RecordContinuationCategoryType">
+		<xsd:annotation>
+			<xsd:documentation>Категория возобновления</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:simpleType name="RecordContinuationCategoryType">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="Invention patent renewal">
+				<xsd:annotation>
+					<xsd:documentation>Возобновление патента</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Group of invention patent renewal">
+				<xsd:annotation>
+					<xsd:documentation>Возобновление группы патентов</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Invention patent renewal with extra patent issuance">
+				<xsd:annotation>
+					<xsd:documentation>Возобновление патента с выпуском дополнительного патента</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="ProductFirstUsagePermissionRegistration" type="rupat:ProductFirstUsagePermissionRegistrationType">
+		<xsd:annotation>
+			<xsd:documentation>Сведения о регистрации прав на первое использование продукта</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ProductFirstUsagePermissionRegistrationType">
+		<xsd:sequence>
+			<xsd:element ref="com:RegistrationNumber" minOccurs="0"/>
+			<xsd:element ref="com:RegistrationDate" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="RecordDiscontinuation" type="rupat:RecordDiscontinuationType">
+		<xsd:annotation>
+			<xsd:documentation>Данные о прекращении права собственности</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="RecordDiscontinuationType">
+		<xsd:all>
+			<xsd:element ref="com:RecordIdentifier"/>
+			<xsd:element ref="pat:PatentDocumentIdentification"/>
+			<xsd:element ref="rupat:RecordDiscontinuationCategory"/>
+			<xsd:element ref="rupat:RecordPublicationBag" minOccurs="0"/>
+			<xsd:element ref="pat:PatentPublicationIdentification" minOccurs="0"/>
+			<xsd:element ref="rupat:ReplacementPatentApplicationIdentification" minOccurs="0"/>
+			<xsd:element ref="pat:PartyBag" minOccurs="0"/>
+			<xsd:element ref="rupat:ReasonDocument" minOccurs="0"/>
+			<xsd:element ref="pat:RightsEffectiveDateBag" minOccurs="0"/>
+			<xsd:element ref="rupat:RecordEntryDate" minOccurs="0"/>
+		</xsd:all>
+		<xsd:attribute ref="com:id"/>
+	</xsd:complexType>
+	<xsd:element name="RecordDiscontinuationCategory" type="rupat:RecordDiscontinuationCategoryType">
+		<xsd:annotation>
+			<xsd:documentation>Категория прекращения</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:simpleType name="RecordDiscontinuationCategoryType">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="Invention patent termination">
+				<xsd:annotation>
+					<xsd:documentation>Прекращение действия патента</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Group of invention patent termination">
+				<xsd:annotation>
+					<xsd:documentation>Прекращение действия группы патентов</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Total patent termination">
+				<xsd:annotation>
+					<xsd:documentation>Полное прекращение действия патента</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Partial patent termination">
+				<xsd:annotation>
+					<xsd:documentation>Частичное прекращение действия патента</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Author's certificate termination">
+				<xsd:annotation>
+					<xsd:documentation>Прекращение действия авторского свидетельства</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Invention patent expiration">
+				<xsd:annotation>
+					<xsd:documentation>Истечение срока действия патента</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Issuance of new patent based on partial patent termination">
+				<xsd:annotation>
+					<xsd:documentation>Выпуск нового патента на основании частичного прекращения действия патента</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="ReplacementPatentApplicationIdentification" type="pat:ApplicationIdentificationType">
+		<xsd:annotation>
+			<xsd:documentation>Идентификационные данные заявки замещающего патента</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="RecordLicence" type="rupat:RecordLicenceType">
+		<xsd:annotation>
+			<xsd:documentation>Данные о лицензировании</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="RecordLicenceType">
+		<xsd:all>
+			<xsd:element ref="com:RecordIdentifier"/>
+			<xsd:element ref="pat:PatentDocumentIdentification"/>
+			<xsd:element ref="rupat:RecordLicenceDetails"/>
+			<xsd:element ref="rupat:RecordPublicationBag" minOccurs="0"/>
+			<xsd:element ref="pat:LicenseeBag" minOccurs="0"/>
+			<xsd:element ref="rupat:ParentAgreementNumber" minOccurs="0"/>
+			<xsd:element ref="rupat:ParentAgreementDate" minOccurs="0"/>
+			<xsd:element ref="rupat:ReasonDocument" minOccurs="0"/>
+			<xsd:element ref="rupat:RecordEntryDate" minOccurs="0"/>
+		</xsd:all>
+		<xsd:attribute ref="com:id"/>
+	</xsd:complexType>
+	<xsd:element name="RecordLicenceDetails" type="rupat:RecordLicenceDetailsType">
+		<xsd:annotation>
+			<xsd:documentation>Данные записи о лицензии</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:simpleType name="RecordLicenceDetailsType">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="Right to use">
+				<xsd:annotation>
+					<xsd:documentation>Право использования</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Pledge">
+				<xsd:annotation>
+					<xsd:documentation>Регистрация договора залога</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Changes in the registered contract">
+				<xsd:annotation>
+					<xsd:documentation>Изменения в зарегистрированном договоре</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Termination of the registered contract">
+				<xsd:annotation>
+					<xsd:documentation>Прекращение действия зарегистрированного договора</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Open license registration">
+				<xsd:annotation>
+					<xsd:documentation>Регистрация открытой лицензии</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Open license review">
+				<xsd:annotation>
+					<xsd:documentation>Пересмотр открытой лицензии</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Other">
+				<xsd:annotation>
+					<xsd:documentation>Прочее</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="ParentAgreementNumber" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Номер изменённого/отменённого соглашения</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ParentAgreementDate" type="com:DateType">
+		<xsd:annotation>
+			<xsd:documentation>Дата изменённого/отменённого соглашения</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="RecordChange" type="rupat:RecordChangeType">
+		<xsd:annotation>
+			<xsd:documentation>Данные об изменении имени и/или адреса</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="RecordChangeType">
+		<xsd:all>
+			<xsd:element ref="com:RecordIdentifier"/>
+			<xsd:element ref="pat:PatentDocumentIdentification"/>
+			<xsd:element ref="com:RecordChangeNameAddressCategory"/>
+			<xsd:element ref="rupat:RecordPublicationBag" minOccurs="0"/>
+			<xsd:element ref="pat:PartyBag"/>
+			<xsd:element ref="rupat:ReasonDocument" minOccurs="0"/>
+			<xsd:element ref="com:CommentText" minOccurs="0"/>
+			<xsd:element ref="rupat:RecordEntryDate" minOccurs="0"/>
+		</xsd:all>
+		<xsd:attribute ref="com:id"/>
+	</xsd:complexType>
+	<xsd:element name="RecordCorrection" type="rupat:RecordCorrectionType">
+		<xsd:annotation>
+			<xsd:documentation>Данные об исправлении ошибок</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="RecordCorrectionType">
+		<xsd:sequence>
+			<xsd:element ref="com:RecordIdentifier"/>
+			<xsd:element ref="pat:PatentDocumentIdentification"/>
+			<xsd:element ref="rupat:RecordCorrectionCategory"/>
+			<xsd:element ref="rupat:RecordPublicationBag" minOccurs="0"/>
+			<xsd:element ref="rupat:ReasonDocument" minOccurs="0"/>
+			<xsd:element ref="rupat:CorrectedBibliography" minOccurs="0"/>
+			<xsd:element ref="rupat:CorrectedPart" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="rupat:CorrectedRecord" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="rupat:CorrectedRecordPublication" minOccurs="0"/>
+			<xsd:element ref="rupat:RecordCorrectionResult" minOccurs="0"/>
+			<xsd:element ref="rupat:RecordSequenceCorrection" minOccurs="0"/>
+			<xsd:element ref="com:CommentText" minOccurs="0"/>
+			<xsd:element ref="rupat:FreeFormErrorDescription" minOccurs="0"/>
+			<xsd:element ref="rupat:RecordEntryDate" minOccurs="0"/>
+			<xsd:element ref="rupat:CorrectingRecordBag" minOccurs="0"/>
+			<xsd:element ref="rucom:CorrectionBag" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute ref="com:id"/>
+	</xsd:complexType>
+	<xsd:element name="RecordCorrectionCategory" type="rupat:RecordCorrectionCategoryType">
+		<xsd:annotation>
+			<xsd:documentation>Категория коррекции</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:simpleType name="RecordCorrectionCategoryType">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="Obvious and technical errors">
+				<xsd:annotation>
+					<xsd:documentation>Очевидные и технические ошибки</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Other">
+				<xsd:annotation>
+					<xsd:documentation>Прочее</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="CorrectedBibliography" type="rupat:CorrectedBibliographyType">
+		<xsd:annotation>
+			<xsd:documentation>Коды ST.9 INID или id элементов, где осуществляется коррекция</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="CorrectedBibliographyType">
+		<xsd:sequence>
+			<xsd:element ref="pat:PatentINIDCode" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="rupat:CorrectedElement" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute ref="com:id"/>
+	</xsd:complexType>
+	<xsd:element name="CorrectedElement" type="rupat:CorrectedElementType">
+		<xsd:annotation>
+			<xsd:documentation>Исправленный элемент</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="CorrectedElementType">
+		<xsd:sequence>
+			<xsd:element ref="rupat:CorrectedElementXPath" minOccurs="0"/>
+			<xsd:element name="Correction" type="xsd:anyType"/>
+		</xsd:sequence>
+		<xsd:attribute ref="com:id"/>
+		<xsd:attribute ref="rupat:operation"/>
+	</xsd:complexType>
+	<xsd:element name="CorrectedElementXPath" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>XPath исправленного элемента</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:attribute name="operation">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:anyURI">
+				<xsd:enumeration value="Update">
+					<xsd:annotation>
+						<xsd:documentation>Изменение</xsd:documentation>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="Insert">
+					<xsd:annotation>
+						<xsd:documentation>Вставка</xsd:documentation>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="Delete">
+					<xsd:annotation>
+						<xsd:documentation>Удаление</xsd:documentation>
+					</xsd:annotation>
+				</xsd:enumeration>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:attribute>
+	<xsd:element name="CorrectedPart" type="rupat:CorrectedPartType">
+		<xsd:annotation>
+			<xsd:documentation>Часть документа, к которой относится коррекция, кроме библиографии и записей</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="CorrectedPartType">
+		<xsd:sequence>
+			<xsd:element ref="rupat:CorrectedPartCategory"/>
+			<xsd:element ref="rupat:CorrectedElement" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute ref="com:id"/>
+	</xsd:complexType>
+	<xsd:element name="CorrectedPartCategory" type="rupat:CorrectedPartCategoryType">
+		<xsd:annotation>
+			<xsd:documentation>Используйте код INID, номер абзаца или иной текст, позволяющий определить, какая часть документа скорректирована</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:simpleType name="CorrectedPartCategoryType">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="Abstract">
+				<xsd:annotation>
+					<xsd:documentation>Реферат</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Description">
+				<xsd:annotation>
+					<xsd:documentation>Описание</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Claims">
+				<xsd:annotation>
+					<xsd:documentation>Формула</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Drawings">
+				<xsd:annotation>
+					<xsd:documentation>Чертежи</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Sequence listing">
+				<xsd:annotation>
+					<xsd:documentation>Список последовательностей</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="CorrectedRecord" type="rupat:CorrectedRecordType">
+		<xsd:annotation>
+			<xsd:documentation>Предыдущая запись, к которой относится коррекция</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="CorrectedRecordType">
+		<xsd:sequence>
+			<xsd:element ref="com:RecordIdentifier"/>
+			<xsd:element ref="rupat:CorrectedElement" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute ref="com:id"/>
+	</xsd:complexType>
+	<xsd:element name="CorrectedRecordPublication" type="rupat:CorrectedRecordPublicationType">
+		<xsd:annotation>
+			<xsd:documentation>Информация о публикации скорректированной записи</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="CorrectedRecordPublicationType">
+		<xsd:sequence>
+			<xsd:element ref="com:PublicationIdentifier" minOccurs="0"/>
+			<xsd:element ref="com:PublicationDate" minOccurs="0"/>
+			<xsd:element ref="rupat:PublicationPlace" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="PublicationPlace" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Раздел бюллетеня или вид скорректированной записи</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="RecordCorrectionResult" type="rupat:PatentRecordType">
+		<xsd:annotation>
+			<xsd:documentation>Результат коррекции записи</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="RecordSequenceCorrection" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Флаг, указывающий на коррекцию последовательности записей</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="FreeFormErrorDescription" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Описание ошибки в свободной форме</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CorrectingRecordBag" type="rupat:CorrectingRecordBagType">
+		<xsd:annotation>
+			<xsd:documentation>Библиография и прочие данные изменяемого ОИС</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="CorrectingRecordBagType">
+		<xsd:sequence>
+			<xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##any" processContents="skip"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="RecordOther" type="rupat:RecordOtherType">
+		<xsd:annotation>
+			<xsd:documentation>Данные о прочих связанных с патентом записях</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="RecordOtherType">
+		<xsd:all>
+			<xsd:element ref="com:RecordIdentifier"/>
+			<xsd:element ref="pat:PatentDocumentIdentification"/>
+			<xsd:element ref="rupat:RecordOtherCategory"/>
+			<xsd:element ref="pat:PatentGrantIdentification" minOccurs="0"/>
+			<xsd:element ref="rupat:RecordPublicationBag" minOccurs="0"/>
+			<xsd:element ref="pat:PartyBag" minOccurs="0"/>
+			<xsd:element ref="rupat:ReasonDocument" minOccurs="0"/>
+			<xsd:element ref="com:CommentText" minOccurs="0"/>
+			<xsd:element ref="rupat:RecordEntryDate" minOccurs="0"/>
+		</xsd:all>
+		<xsd:attribute ref="com:id"/>
+	</xsd:complexType>
+	<xsd:element name="RecordOtherCategory" type="rupat:RecordOtherCategoryType">
+		<xsd:annotation>
+			<xsd:documentation>Категория записи, не относящейся к другим категориям</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:simpleType name="RecordOtherCategoryType">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="Issuance of a duplicate of the patent">
+				<xsd:annotation>
+					<xsd:documentation>Выпуск дубликата патента</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Issuance of a duplicate of a author's certificate">
+				<xsd:annotation>
+					<xsd:documentation>Выпуск дубликата авторского свидетельства</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Review of alienation commitments">
+				<xsd:annotation>
+					<xsd:documentation>
+            Обзор обязательств, касающихся отчуждения патента в силу национального законодательства,
+			в соответствии с общепринятой практикой, по заявлению гражданина или компетентного органа, 
+			выразившего таковое желание и уведомившего об этом патентообладателя и IPO
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="Utility" type="rupat:UtilityType"/>
+	<xsd:complexType name="UtilityType">
+		<xsd:sequence>
+			<xsd:element ref="rucom:ApplicationType"/>
+			<xsd:element ref="rupat:BibliographicData"/>
+			<xsd:element ref="rucom:ContractBag" minOccurs="0"/>
+			<xsd:element name="PaymentAccommodations" type="rupat:PaymentAccommodationsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Условия оплаты (льготы)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="com:PaymentBag" minOccurs="0"/>
+			<xsd:element ref="com:DocumentIncludedBag" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PaymentAccommodationsType">
+		<xsd:sequence>
+			<xsd:element name="Benefit" type="rupat:BenefitType"/>
+			<xsd:element name="DutySubitems" type="rupat:DutySubitemsType" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Перечень патентных пошлин (подпунктов)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="DutySubitemsType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="1.2"/>
+			<xsd:enumeration value="1.4"/>
+			<xsd:enumeration value="1.10"/>
+			<xsd:enumeration value="1.18"/>
+			<xsd:enumeration value="1.21.2.1"/>
+			<xsd:enumeration value="1.21.2.2"/>
+			<xsd:enumeration value="1.21.2.3"/>
+			<xsd:enumeration value="1.21.2.4"/>
+			<xsd:enumeration value="1.21.2.5"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="BenefitType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Право на уплату пошлины в уменьшенном размере отсутствует"/>
+			<xsd:enumeration value="Инвалид, пенсионер, обучающийся, научный работник, научно-педагогический работник (коллектив указанных лиц)"/>
+			<xsd:enumeration value="Единственный автор"/>
+			<xsd:enumeration value="Субъект малого предпринимательства, образовательная организация, имеющая государственную аккредитацию, научная организация"/>
+			<xsd:enumeration value="Индивидуальный предприниматель"/>
+			<xsd:enumeration value="Заявитель, освобожденный от уплаты пошлин в соответствии со статьёй 1366 ГК РФ"/>
+			<xsd:enumeration value="Ветеран ВОВ, ветеран боевых действий, являющийся единственным автором изобретения или коллектив авторов, каждый из которых является ветераном ВОВ, ветераном боевых действий"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="UtilityRecordBag" type="rupat:UtilityRecordBagType">
+		<xsd:annotation>
+			<xsd:documentation>Ходатайство о внесении изменений в документы заявки или заявление</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="UtilityRecordBagType">
+		<xsd:sequence>
+			<xsd:element ref="rucom:ApplicationType"/>
+			<xsd:element ref="rucom:RequestType" minOccurs="0"/>
+			<xsd:element ref="pat:ApplicationIdentification" minOccurs="0"/>
+			<xsd:element ref="pat:InventionTitleBag" minOccurs="0"/>
+			<xsd:element ref="com:ReceivingOfficeDate"/>
+			<xsd:element ref="rupat:PartyChangeEventData" minOccurs="0"/>
+			<xsd:element ref="rupat:PatentRecordBag" minOccurs="0"/>
+			<xsd:element ref="rupat:PartyBag"/>
+			<xsd:element ref="com:DocumentIncludedBag" minOccurs="0"/>
+			<xsd:element ref="com:PaymentBag" minOccurs="0"/>
+			<xsd:element ref="rucom:CorrectionBag" minOccurs="0"/>
+			<xsd:element ref="com:RecordIdentifier" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="CorrectionRequest" type="rupat:CorrectionRequestType">
+		<xsd:annotation>
+			<xsd:documentation>исправление ошибок и опечаток</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="CorrectionRequestType">
+		<xsd:sequence>
+			<xsd:element ref="rucom:ApplicationType"/>
+			<xsd:element ref="rucom:RequestType" minOccurs="0"/>
+			<xsd:element ref="pat:ApplicationIdentification" minOccurs="0"/>
+			<xsd:element ref="pat:InventionTitleBag" minOccurs="0"/>
+			<xsd:element ref="com:ReceivingOfficeDate"/>
+			<xsd:element ref="rucom:CorrectionBag"/>
+			<xsd:element ref="rupat:PartyBag"/>
+			<xsd:element ref="com:DocumentIncludedBag" minOccurs="0"/>
+			<xsd:element ref="com:PaymentBag" minOccurs="0"/>
+			<xsd:element ref="com:RecordIdentifier" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="PriorityClaimRequest" type="rupat:PriorityClaimRequestType"/>
+	<xsd:complexType name="PriorityClaimRequestType">
+		<xsd:sequence>
+			<xsd:element ref="rucom:ApplicationType"/>
+			<xsd:element ref="rucom:RequestType" minOccurs="0"/>
+			<xsd:element ref="pat:ApplicationIdentification" minOccurs="0"/>
+			<xsd:element ref="pat:InventionTitleBag" minOccurs="0"/>
+			<xsd:element ref="com:ReceivingOfficeDate"/>
+			<xsd:element ref="rupat:PriorityClaimBag"/>
+			<xsd:element ref="rupat:PartyBag"/>
+			<xsd:element ref="com:DocumentIncludedBag" minOccurs="0"/>
+			<xsd:element ref="com:PaymentBag" minOccurs="0"/>
+			<xsd:element ref="com:RecordIdentifier" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="PriorityType">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Установить конвенционный приоритет"/>
+				<xsd:enumeration value="Продлить срок подачи заявки, по которой испрашивается конвенционный приоритет"/>
+				<xsd:enumeration value="Испросить признание права конвенционного приоритета"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PriorityTermExtension">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Один месяц"/>
+				<xsd:enumeration value="Два месяца"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TermRestorationRequest" type="rupat:TermRestorationRequestType"/>
+	<xsd:complexType name="TermRestorationRequestType">
+		<xsd:sequence>
+			<xsd:element ref="rucom:ApplicationType"/>
+			<xsd:element ref="rucom:RequestType" minOccurs="0"/>
+			<xsd:element ref="pat:ApplicationIdentification" minOccurs="0"/>
+			<xsd:element ref="pat:InventionTitleBag" minOccurs="0"/>
+			<xsd:element ref="com:ReceivingOfficeDate"/>
+			<xsd:element ref="rupat:TermRestoration"/>
+			<xsd:element ref="rupat:PartyBag"/>
+			<xsd:element ref="com:DocumentIncludedBag" minOccurs="0"/>
+			<xsd:element ref="com:PaymentBag" minOccurs="0"/>
+			<xsd:element ref="com:RecordIdentifier" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="TermRestoration" type="rupat:TermRestorationType">
+		<xsd:annotation>
+			<xsd:documentation>Восстановление срока</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="TermRestorationType">
+		<xsd:sequence>
+			<xsd:element ref="rupat:OverdueReason"/>
+			<xsd:element ref="rupat:ExtensionTerm" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="ExtensionTerm" type="xsd:integer">
+		<xsd:annotation>
+			<xsd:documentation>Срок продления в месяцах</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="OverdueReason" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Причина пропуска срока</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ConversionRequest" type="rupat:ConversionRequestType"/>
+	<xsd:complexType name="ConversionRequestType">
+		<xsd:sequence>
+			<xsd:element ref="rucom:ApplicationType"/>
+			<xsd:element ref="rucom:RequestType" minOccurs="0"/>
+			<xsd:element ref="pat:ApplicationIdentification" minOccurs="0"/>
+			<xsd:element ref="pat:InventionTitleBag" minOccurs="0"/>
+			<xsd:element ref="com:ReceivingOfficeDate"/>
+			<xsd:element ref="pat:Conversion"/>
+			<xsd:element ref="rupat:PartyBag"/>
+			<xsd:element ref="com:DocumentIncludedBag" minOccurs="0"/>
+			<xsd:element ref="com:PaymentBag" minOccurs="0"/>
+			<xsd:element ref="com:RecordIdentifier" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="CorrespondenceAddress" type="rupat:CorrespondenceAddressType">
+		<xsd:annotation>
+			<xsd:documentation>Correspondence address</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="CorrespondenceAddressType">
+		<xsd:sequence>
+			<xsd:element ref="com:CorrespondenceAddressPartyCategory" minOccurs="0"/>
+			<xsd:choice maxOccurs="unbounded">
+				<xsd:element ref="com:PartyIdentifier"/>
+				<xsd:element ref="com:Contact"/>
+			</xsd:choice>
+			<xsd:element ref="rupat:ChangeType" minOccurs="0"/>
+			<xsd:element ref="rupat:ChangeReason" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="ChangeType">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Изменения в связи с переходом права в порядке универсального правопреемства (реорганизация)"/>
+				<xsd:enumeration value="Изменения в связи с переходом права в порядке универсального правопреемства (наследование)"/>
+				<xsd:enumeration value="Изменения в связи с передачей права на получение патента другому лицу"/>
+				<xsd:enumeration value="Изменения в связи с изменением имени автора, имени или наименования заявителя, представителя, адреса"/>
+				<xsd:enumeration value="Изменения в состав авторов"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ChangeReason" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Причина изменений</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="PartyBag" type="rupat:PartyBagType">
+		<xsd:annotation>
+			<xsd:documentation>Collection of parties. Refers to ST.9 INID Code 70.National Type(RU)</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="PartyBagType">
+		<xsd:choice maxOccurs="unbounded">
+			<xsd:element ref="rupat:ApplicantBag"/>
+			<xsd:element ref="rupat:InventorBag"/>
+			<xsd:element ref="pat:OwnerBag"/>
+			<xsd:element ref="pat:AssigneeBag"/>
+			<xsd:element ref="rupat:RegisteredPractitionerBag"/>
+			<xsd:element ref="pat:ExaminerBag"/>
+			<xsd:choice maxOccurs="unbounded">
+				<xsd:element ref="com:CorrespondenceAddress"/>
+				<xsd:element ref="rupat:CorrespondenceAddress"/>
+			</xsd:choice>
+		</xsd:choice>
+		<xsd:attribute ref="com:id"/>
+	</xsd:complexType>
+    <xsd:element name="Applicant" type="rupat:ApplicantType">
+        <xsd:annotation>
+            <xsd:documentation>The individual or entity identified as the executors of the patent</xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:complexType name="ApplicantType">
+        <xsd:sequence>
+            <xsd:element ref="com:PartyIdentifierBag" minOccurs="0" />
+            <xsd:choice maxOccurs="2">
+                <xsd:element ref="com:Contact" />
+                <xsd:element ref="com:PublicationContact" />
+            </xsd:choice>
+            <xsd:element ref="com:IncorporationState" minOccurs="0" />
+            <xsd:element ref="pat:ApplicantCategory" minOccurs="0" />
+            <xsd:element ref="com:NationalityCode" minOccurs="0" />
+            <xsd:element ref="pat:DesignationCategory" minOccurs="0" />
+            <xsd:element ref="com:ResidenceCountryCode" minOccurs="0" />
+            <xsd:element ref="pat:SuccessorRights" minOccurs="0" />
+            <xsd:element ref="rupat:ChangeType" minOccurs="0" />
+            <xsd:element ref="rupat:ChangeReason" minOccurs="0" />
+        </xsd:sequence>
+        <xsd:attribute ref="com:sequenceNumber" />
+        <xsd:attribute ref="com:id" />
+    </xsd:complexType>
+    <xsd:complexType name="ApplicantBagType">
+        <xsd:sequence>
+            <xsd:element ref="rupat:Applicant" maxOccurs="unbounded" />
+        </xsd:sequence>
+        <xsd:attribute ref="com:id" />
+    </xsd:complexType>
+    <xsd:element name="ApplicantBag" type="rupat:ApplicantBagType">
+        <xsd:annotation>
+            <xsd:documentation>The collection of applicants. Refers to ST.9 INID Code 71, INID Code 75.</xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="InventorBag" type="rupat:InventorBagType">
+        <xsd:annotation>
+            <xsd:documentation>The collection of inventors. Refers to ST.9 INID Code 72.</xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:complexType name="InventorBagType">
+        <xsd:choice maxOccurs="unbounded">
+            <xsd:element ref="rupat:Inventor" />
+            <xsd:element ref="pat:DeceasedInventor" />
+        </xsd:choice>
+        <xsd:attribute ref="com:id" />
+    </xsd:complexType>
+    <xsd:complexType name="InventorType">
+        <xsd:sequence>
+            <xsd:element ref="com:PartyIdentifier" minOccurs="0" />
+            <xsd:choice maxOccurs="2">
+                <xsd:element ref="com:Contact" />
+                <xsd:element ref="com:PublicationContact" />
+            </xsd:choice>
+            <xsd:element ref="com:ConfidentialIndicator" minOccurs="0" />
+            <xsd:element ref="rupat:InventorConfidentialIndicators" minOccurs="0" />
+            <xsd:element ref="pat:StateDesignation" minOccurs="0" />
+            <xsd:element ref="com:NationalityCode" minOccurs="0" />
+            <xsd:element ref="rupat:ChangeType" minOccurs="0" />
+            <xsd:element ref="rupat:ChangeReason" minOccurs="0" />
+        </xsd:sequence>
+        <xsd:attribute ref="com:sequenceNumber" />
+        <xsd:attribute ref="com:id" />
+    </xsd:complexType>
+    <xsd:element name="Inventor" type="rupat:InventorType">
+        <xsd:annotation>
+            <xsd:documentation>The individual identified as the inventors of the patent</xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="BibliographicData" type="rupat:BibliographicDataType">
+        <xsd:annotation>
+            <xsd:documentation>Bibliographic information included on the first page of a patent document. Contains document identification, domestic filing data, foreign priority data, public availability dates or term of protection, technical information, related patent or application information.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:unique name="BibComponentKey">
+            <xsd:selector xpath=".//*" />
+            <xsd:field xpath="@com:id" />
+        </xsd:unique>
+    </xsd:element>
+    <xsd:complexType name="BibliographicDataType">
+        <xsd:sequence>
+            <xsd:element ref="pat:PatentPublicationIdentification" minOccurs="0" />
+            <xsd:element ref="pat:ApplicationIdentification" />
+            <xsd:element ref="pat:PatentGrantIdentification" minOccurs="0" />
+            <xsd:choice minOccurs="0">
+                <xsd:element ref="pat:PriorityClaimBag" />
+                <xsd:element ref="rupat:PriorityClaimBag" />
+            </xsd:choice>
+            <xsd:element ref="pat:GrantTerm" minOccurs="0" />
+            <xsd:element ref="pat:PreClassificationText" minOccurs="0" />
+            <xsd:element ref="pat:PatentClassificationBag" minOccurs="0" />
+            <xsd:element ref="pat:InventionTitleBag" />
+            <xsd:element ref="pat:PlantName" minOccurs="0" />
+            <xsd:element ref="pat:ReferenceCitationBag" minOccurs="0" />
+            <xsd:element ref="pat:ClaimTotalQuantity" minOccurs="0" />
+            <xsd:element ref="pat:SearchField" minOccurs="0" />
+            <xsd:element ref="pat:FigureBag" minOccurs="0" />
+            <xsd:element ref="pat:RelatedDocumentBag" minOccurs="0" />
+            <xsd:element ref="pat:ProvisionalGrantPublicationDate" minOccurs="0" />
+            <xsd:element ref="pat:GrantPublicationDate" minOccurs="0" />
+            <xsd:element ref="pat:ExemplaryClaimBag" minOccurs="0" />
+            <xsd:element ref="com:HagueAgreementData" minOccurs="0" />
+            <xsd:element ref="rupat:PartyBag" />
+            <xsd:element ref="pat:InternationalFilingData" minOccurs="0" />
+            <xsd:element ref="pat:RegionalFilingData" minOccurs="0" />
+            <xsd:element ref="pat:InternationalPublishingData" minOccurs="0" />
+            <xsd:element ref="pat:RegionalPublishingData" minOccurs="0" />
+            <xsd:element ref="pat:PatentFamily" minOccurs="0" />
+            <xsd:element ref="com:BioDeposit" minOccurs="0" />
+            <xsd:element ref="pat:PlainLanguageDesignationText" minOccurs="0" />
+            <xsd:element ref="com:FilingLanguageCode" minOccurs="0" />
+            <xsd:element ref="com:PublicationLanguageCode" minOccurs="0" />
+            <xsd:element ref="pat:StateDesignation" minOccurs="0" />
+            <xsd:element ref="pat:LicenceBag" minOccurs="0" />
+            <xsd:element ref="pat:ApplicantIntent" minOccurs="0" />
+            <xsd:element ref="pat:EarliestPriorityApplication" minOccurs="0" />
+            <xsd:element ref="com:ReceivingOfficeDate" minOccurs="0" />
+            <xsd:element ref="pat:CompleteSpecificationFilingDate" minOccurs="0" />
+            <xsd:element ref="pat:PublicAvailabilityDataBag" minOccurs="0" />
+            <xsd:element ref="pat:RightsEffectiveDateBag" minOccurs="0" />
+            <xsd:element ref="pat:PatentDocumentRepublication" minOccurs="0" />
+            <xsd:element ref="pat:ExhibitionFilingDate" minOccurs="0" />
+            <xsd:element ref="pat:RightsReestablishedDate" minOccurs="0" />
+            <xsd:element ref="pat:ApplicationWithdrawnDate" minOccurs="0" />
+            <xsd:element ref="pat:ApplicationDeemedWithdrawnDate" minOccurs="0" />
+            <xsd:element ref="pat:PatentRevocationDate" minOccurs="0" />
+            <xsd:element ref="pat:PCTNationalPhaseEntryDate" minOccurs="0" />
+            <xsd:element ref="pat:ApplicationPartiallyWithdrawnDate" minOccurs="0" />
+            <xsd:element ref="com:TranslationReceiveDate" minOccurs="0" />
+            <xsd:element ref="com:SecurityReleaseDate" minOccurs="0" />
+            <xsd:element ref="pat:LORData" minOccurs="0" />
+            <xsd:element ref="pat:OppositionData" minOccurs="0" />
+        </xsd:sequence>
+        <xsd:attribute ref="com:id" />
+        <xsd:attribute ref="com:officeCode" />
+        <xsd:attribute ref="com:st96Version" use="required" />
+        <xsd:attribute ref="com:ipoVersion" />
+    </xsd:complexType>
+    <xsd:element name="RegisteredPractitionerBag" type="rupat:RegisteredPractitionerBagType">
+        <xsd:annotation>
+            <xsd:documentation>Collection of registered practitioners. Refers to ST.9 INID Code 74.</xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:complexType name="RegisteredPractitionerBagType">
+        <xsd:choice>
+            <xsd:element ref="rupat:RegisteredPractitioner" maxOccurs="unbounded" />
+        </xsd:choice>
+        <xsd:attribute ref="com:id" />
+    </xsd:complexType>
+    <xsd:element name="RegisteredPractitioner" type="rupat:RegisteredPractitionerType">
+        <xsd:annotation>
+            <xsd:documentation>The individual who represents or prosecutes on behalf of the inventor</xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:complexType name="RegisteredPractitionerType">
+        <xsd:sequence>
+            <xsd:element ref="pat:RegisteredPractitionerRegistrationNumber" minOccurs="0" />
+            <xsd:element ref="pat:RegisteredPractitionerCategory" />
+            <xsd:element ref="rupat:NationalityCode" minOccurs="0" />
+            <xsd:choice maxOccurs="2">
+                <xsd:element ref="com:Contact" />
+                <xsd:element ref="com:PublicationContact" />
+            </xsd:choice>
+            <xsd:element ref="rupat:TermRepresenation" minOccurs="0" />
+            <xsd:element ref="rupat:AddInfo" minOccurs="0" />
+            <xsd:element ref="rupat:ChangeType" minOccurs="0" />
+            <xsd:element ref="rupat:ChangeReason" minOccurs="0" />
+        </xsd:sequence>
+        <xsd:attribute ref="com:sequenceNumber" use="required" />
+        <xsd:attribute ref="com:id" />
+    </xsd:complexType>
+    <xsd:element name="PartyChangeEventData" type="rupat:PartyChangeEventDataType">
+        <xsd:annotation>
+            <xsd:documentation>
+                This is supplementary data of the ST.27 Category R (Party data change). This category is a group of events related to the IPO recording changes in party data. It includes, for example, when the IPO records changes to a party concerned with the application or IP right, e.g. the applicant(s), owner(s), inventor(s) or representative(s). It also includes events related to the recording of changes in party contact information. The data change may relate to any type of application in Category A or any type of IP right in Category F. The events in this category may occur during any stage.
+            </xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:complexType name="PartyChangeEventDataType">
+        <xsd:choice maxOccurs="unbounded">
+            <xsd:element ref="com:EffectiveCountryBag" />
+            <xsd:element ref="pat:GazetteNumber" />
+            <xsd:element ref="com:CommentText" />
+            <xsd:element ref="rupat:PreviousPartyBag" />
+            <xsd:element ref="rupat:NewPartyBag" />
+            <xsd:element ref="com:DocumentNumber" />
+            <xsd:element ref="pat:OwnershipTransferData" />
+            <xsd:element ref="pat:PatentLegalProceedingText" />
+            <xsd:element ref="com:PriorEventDate" />
+        </xsd:choice>
+    </xsd:complexType>
+    <xsd:element name="PreviousPartyBag" type="rupat:PartyBagType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Previous party information
+            </xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="NewPartyBag" type="rupat:PartyBagType">
+        <xsd:annotation>
+            <xsd:documentation>
+                New party information
+            </xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+</xsd:schema>

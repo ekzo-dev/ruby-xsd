@@ -38,6 +38,7 @@ attribute = reader['NewReleaseMessage']['@MessageSchemaVersionId']
 # Get attribute information
 attribute.name # => 'MessageSchemaVersionId'
 attribute.type # => 'xs:string'
+attribute.data_type # => 'xs:string'
 attribute.required? # => true
 attribute.optional? # => false
 attribute.prohibited? # => true
@@ -48,7 +49,7 @@ element.min_occurs # => 0
 element.max_occurs # => :unbounded
 element.type # => 'ern:SoundRecording'
 element.complex_type # => XSD::ComplexType
-element.complex? # => true
+element.complex_content? # => true
 element.multiple_allowed? # => true
 element.required? # => false
 ```

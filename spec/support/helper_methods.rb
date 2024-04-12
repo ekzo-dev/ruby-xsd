@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'logger'
+require 'json'
 
 module HelperMethods
   def spec_logger
@@ -19,7 +20,7 @@ module HelperMethods
     Pathname.new(file)
   end
 
-  def read_json(name, path = nil)
-    JSON.parse(fixture_file(name, path))
+  def read_json(path)
+    JSON.parse(fixture_file(path))
   end
 end

@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--Created with Liquid Studio 2020 (https://www.liquid-technologies.com)-->
+<xs:schema xmlns:pat="http://www.wipo.int/standards/XMLSchema/ST96/Patent/1.1.2" xmlns:tns="http://ws.rupto.ru/smev3/gosuslugi/clients/EPGU_RUPMApp/1.0.0" xmlns:rupat="urn:ru:rupto:patent/1.1.2" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://ws.rupto.ru/smev3/gosuslugi/clients/EPGU_RUPMApp/1.0.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import schemaLocation="patentPublication_V4_Lgc.xsd" namespace="http://www.wipo.int/standards/XMLSchema/ST96/Patent/1.1.2" />
+    <xs:import schemaLocation="RUPatentPublication_V4_Lgc.xsd" namespace="urn:ru:rupto:patent/1.1.2" />
+    <xs:element name="RequestWrapper" type="tns:RequestWrapperType" />
+    <xs:element name="ResponseWrapper" type="tns:ResponseWrapperType" />
+    <xs:complexType name="RequestWrapperType">
+        <xs:sequence>
+            <xs:element name="OrderId" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор заявления</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ServiceCode" type="tns:string-20" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Код услуги</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TargetCode" type="tns:string-20" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Код цели</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="OrderTimestamp" type="xs:dateTime">
+                <xs:annotation>
+                    <xs:documentation>Дата и время формирования запроса на ЕПГУ</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="PersonProfile" type="tns:PersonProfileType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Данные из профиля заявителя</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:choice>
+                <xs:element name="CancelRequest" type="tns:CancelRequestType">
+                    <xs:annotation>
+                        <xs:documentation>Запрос отмены заявления</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="Application" type="tns:ApplicationType">
+                    <xs:annotation>
+                        <xs:documentation>Данные заявления</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="transactionKind">
+            <xs:annotation>
+                <xs:documentation>Тип записи о транзакции</xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="Registration">
+                        <xs:annotation>
+                            <xs:documentation>Первичная регистрация</xs:documentation>
+                        </xs:annotation>
+                    </xs:enumeration>
+                    <xs:enumeration value="Change">
+                        <xs:annotation>
+                            <xs:documentation>Изменение данных об авторе, правообладателе, адресе и др.</xs:documentation>
+                        </xs:annotation>
+                    </xs:enumeration>
+                    <xs:enumeration value="Continuation">
+                        <xs:annotation>
+                            <xs:documentation>Возобновление действия</xs:documentation>
+                        </xs:annotation>
+                    </xs:enumeration>
+                    <xs:enumeration value="Discontinuation">
+                        <xs:annotation>
+                            <xs:documentation>Прекращение действия</xs:documentation>
+                        </xs:annotation>
+                    </xs:enumeration>
+                    <xs:enumeration value="LegalStatus">
+                        <xs:annotation>
+                            <xs:documentation>Изменение статуса</xs:documentation>
+                        </xs:annotation>
+                    </xs:enumeration>
+                    <xs:enumeration value="Licence">
+                        <xs:annotation>
+                            <xs:documentation>Вопросы лицензирования</xs:documentation>
+                        </xs:annotation>
+                    </xs:enumeration>
+                    <xs:enumeration value="Correction">
+                        <xs:annotation>
+                            <xs:documentation>Коррекция технических ошибок</xs:documentation>
+                        </xs:annotation>
+                    </xs:enumeration>
+                    <xs:enumeration value="Other">
+                        <xs:annotation>
+                            <xs:documentation>Прочие изменения</xs:documentation>
+                        </xs:annotation>
+                    </xs:enumeration>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="baseRequestNumber" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>Номер первоначального заявления</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+    <xs:complexType name="DocumentsType">
+        <xs:sequence>
+            <xs:element name="DocCode" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Код документа (служебное наименование/код/мнемоника)</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DocName" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Наименование документа</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="FileName" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Имя файла документа</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="IsArchive" type="xs:boolean">
+                <xs:annotation>
+                    <xs:documentation>Передача в архиве</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="URI" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Путь к файлу в архиве</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="FileType" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>MIME-тип контента</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Description" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Описание</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="String-3000">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="3000" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="ResponseWrapperType">
+        <xs:annotation>
+            <xs:documentation xml:lang="ru">Корневой элемент ответа</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="OrderId" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation xml:lang="ru">Идентификатор заявления</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:choice>
+                <xs:element name="ChangeOrderInfo" type="tns:ChangeOrderInfoType">
+                    <xs:annotation>
+                        <xs:documentation xml:lang="ru">Изменение статуса</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="CancelResponse" type="tns:CancelResponseType">
+                    <xs:annotation>
+                        <xs:documentation>Ответ на запрос отмены заявления</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ChangeOrderInfoType">
+        <xs:annotation>
+            <xs:documentation>Информация для изменения статуса заявления для направления в ЛК ЕПГУ</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="StatusCode" type="tns:StatusCodeType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="ru">Код статуса</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Comment" type="tns:string-2000" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="ru">Комментарий ведомства к статусу</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CancelAllowed" type="xs:boolean" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Возможность отменить заявление</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="StatusCodeType">
+        <xs:annotation>
+            <xs:documentation>Статус заявления</xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element name="OrgCode" type="tns:string-50">
+                <xs:annotation>
+                    <xs:documentation>Код статуса в ведомстве</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TechCode" type="xs:byte">
+                <xs:annotation>
+                    <xs:documentation>Код статуса на ЕПГУ</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+    <xs:simpleType name="string-2000">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="2000" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="string-20">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="20" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="PersonProfileType">
+        <xs:annotation>
+            <xs:documentation>Профиль заявителя</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="NameCompany" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Наименование заявителя</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NamePerson" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="FirstName" type="xs:string" />
+                        <xs:element name="LastName" type="xs:string" />
+                        <xs:element name="MiddleName" type="xs:string" minOccurs="0" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="BirthDate" type="xs:date" minOccurs="0" />
+            <xs:element name="FactAddress" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Адрес фактического местонахождения, пребывания</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="OGRN" type="tns:OGRNType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>ОГРН заявителя юридического лица</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="KPP" type="tns:KPPType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>КПП заявителя юридического лица</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="INNPerson" type="tns:INNPersonType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>ИНН заявителя физического лица</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="INNcompany" type="tns:INNCompanyType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>ИНН заявителя юридического лица</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Snils" type="tns:SNILSType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>СНИЛС заявителя физического лица</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Passport" type="tns:PassportType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Сведения о паспорте заявителя физического лица</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Citizenship" type="tns:OKSMType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Код страны по ISO 3166-1 alpha-3</xs:documentation>
+                    <xs:documentation>Содержит только цифры</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Email" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>Адрес электронной почты</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Phone" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>Телефон</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PassportType">
+        <xs:sequence>
+            <xs:element name="PassportNumber" type="xs:string" />
+            <xs:element name="PassportDate" type="xs:date" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="SNILSType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="11" />
+            <xs:pattern value="\d{0,11}" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="OGRNType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="15" />
+            <xs:pattern value="\d{0,15}" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="KPPType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="9" />
+            <xs:pattern value="\d{0,9}" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="INNCompanyType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="10" />
+            <xs:pattern value="\d{0,10}" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="INNPersonType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="12" />
+            <xs:pattern value="\d{0,12}" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="OKSMType">
+        <xs:restriction base="xs:string">
+            <xs:length value="3" />
+            <xs:enumeration value="AUS" />
+            <xs:enumeration value="AUT" />
+            <xs:enumeration value="AZE" />
+            <xs:enumeration value="ALA" />
+            <xs:enumeration value="ALB" />
+            <xs:enumeration value="DZA" />
+            <xs:enumeration value="VIR" />
+            <xs:enumeration value="ASM" />
+            <xs:enumeration value="AIA" />
+            <xs:enumeration value="AGO" />
+            <xs:enumeration value="AND" />
+            <xs:enumeration value="ATA" />
+            <xs:enumeration value="ATG" />
+            <xs:enumeration value="ARG" />
+            <xs:enumeration value="ARM" />
+            <xs:enumeration value="ABW" />
+            <xs:enumeration value="AFG" />
+            <xs:enumeration value="BHS" />
+            <xs:enumeration value="BGD" />
+            <xs:enumeration value="BRB" />
+            <xs:enumeration value="BHR" />
+            <xs:enumeration value="BLZ" />
+            <xs:enumeration value="BLR" />
+            <xs:enumeration value="BEL" />
+            <xs:enumeration value="BEN" />
+            <xs:enumeration value="BMU" />
+            <xs:enumeration value="BGR" />
+            <xs:enumeration value="BOL" />
+            <xs:enumeration value="BES" />
+            <xs:enumeration value="BIH" />
+            <xs:enumeration value="BWA" />
+            <xs:enumeration value="BRA" />
+            <xs:enumeration value="IOT" />
+            <xs:enumeration value="VGB" />
+            <xs:enumeration value="BRN" />
+            <xs:enumeration value="BFA" />
+            <xs:enumeration value="BDI" />
+            <xs:enumeration value="BTN" />
+            <xs:enumeration value="VUT" />
+            <xs:enumeration value="VAT" />
+            <xs:enumeration value="GBR" />
+            <xs:enumeration value="HUN" />
+            <xs:enumeration value="VEN" />
+            <xs:enumeration value="UMI" />
+            <xs:enumeration value="TLS" />
+            <xs:enumeration value="VNM" />
+            <xs:enumeration value="GAB" />
+            <xs:enumeration value="HTI" />
+            <xs:enumeration value="GUY" />
+            <xs:enumeration value="GMB" />
+            <xs:enumeration value="GHA" />
+            <xs:enumeration value="GLP" />
+            <xs:enumeration value="GTM" />
+            <xs:enumeration value="GUF" />
+            <xs:enumeration value="GIN" />
+            <xs:enumeration value="GNB" />
+            <xs:enumeration value="DEU" />
+            <xs:enumeration value="GGY" />
+            <xs:enumeration value="GIB" />
+            <xs:enumeration value="HND" />
+            <xs:enumeration value="HKG" />
+            <xs:enumeration value="GRD" />
+            <xs:enumeration value="GRL" />
+            <xs:enumeration value="GRC" />
+            <xs:enumeration value="GEO" />
+            <xs:enumeration value="GUM" />
+            <xs:enumeration value="DNK" />
+            <xs:enumeration value="JEY" />
+            <xs:enumeration value="DJI" />
+            <xs:enumeration value="DMA" />
+            <xs:enumeration value="DOM" />
+            <xs:enumeration value="COD" />
+            <xs:enumeration value="EGY" />
+            <xs:enumeration value="ZMB" />
+            <xs:enumeration value="ESH" />
+            <xs:enumeration value="ZWE" />
+            <xs:enumeration value="ISR" />
+            <xs:enumeration value="IND" />
+            <xs:enumeration value="IDN" />
+            <xs:enumeration value="JOR" />
+            <xs:enumeration value="IRQ" />
+            <xs:enumeration value="IRN" />
+            <xs:enumeration value="IRL" />
+            <xs:enumeration value="ISL" />
+            <xs:enumeration value="ESP" />
+            <xs:enumeration value="ITA" />
+            <xs:enumeration value="YEM" />
+            <xs:enumeration value="CPV" />
+            <xs:enumeration value="KAZ" />
+            <xs:enumeration value="CYM" />
+            <xs:enumeration value="KHM" />
+            <xs:enumeration value="CMR" />
+            <xs:enumeration value="CAN" />
+            <xs:enumeration value="QAT" />
+            <xs:enumeration value="KEN" />
+            <xs:enumeration value="CYP" />
+            <xs:enumeration value="KGZ" />
+            <xs:enumeration value="KIR" />
+            <xs:enumeration value="TWN" />
+            <xs:enumeration value="PRK" />
+            <xs:enumeration value="CHN" />
+            <xs:enumeration value="CCK" />
+            <xs:enumeration value="COL" />
+            <xs:enumeration value="COM" />
+            <xs:enumeration value="CRI" />
+            <xs:enumeration value="CIV" />
+            <xs:enumeration value="CUB" />
+            <xs:enumeration value="KWT" />
+            <xs:enumeration value="CUW" />
+            <xs:enumeration value="LAO" />
+            <xs:enumeration value="LVA" />
+            <xs:enumeration value="LSO" />
+            <xs:enumeration value="LBR" />
+            <xs:enumeration value="LBN" />
+            <xs:enumeration value="LBY" />
+            <xs:enumeration value="LTU" />
+            <xs:enumeration value="LIE" />
+            <xs:enumeration value="LUX" />
+            <xs:enumeration value="MUS" />
+            <xs:enumeration value="MRT" />
+            <xs:enumeration value="MDG" />
+            <xs:enumeration value="MYT" />
+            <xs:enumeration value="MAC" />
+            <xs:enumeration value="MKD" />
+            <xs:enumeration value="MWI" />
+            <xs:enumeration value="MYS" />
+            <xs:enumeration value="MLI" />
+            <xs:enumeration value="MDV" />
+            <xs:enumeration value="MLT" />
+            <xs:enumeration value="MAR" />
+            <xs:enumeration value="MTQ" />
+            <xs:enumeration value="MHL" />
+            <xs:enumeration value="MEX" />
+            <xs:enumeration value="FSM" />
+            <xs:enumeration value="MOZ" />
+            <xs:enumeration value="MDA" />
+            <xs:enumeration value="MCO" />
+            <xs:enumeration value="MNG" />
+            <xs:enumeration value="MSR" />
+            <xs:enumeration value="MMR" />
+            <xs:enumeration value="NAM" />
+            <xs:enumeration value="NRU" />
+            <xs:enumeration value="NPL" />
+            <xs:enumeration value="NER" />
+            <xs:enumeration value="NGA" />
+            <xs:enumeration value="NLD" />
+            <xs:enumeration value="NIC" />
+            <xs:enumeration value="NIU" />
+            <xs:enumeration value="NZL" />
+            <xs:enumeration value="NCL" />
+            <xs:enumeration value="NOR" />
+            <xs:enumeration value="ARE" />
+            <xs:enumeration value="OMN" />
+            <xs:enumeration value="BVT" />
+            <xs:enumeration value="IMN" />
+            <xs:enumeration value="COK" />
+            <xs:enumeration value="NFK" />
+            <xs:enumeration value="CXR" />
+            <xs:enumeration value="PCN" />
+            <xs:enumeration value="SHN" />
+            <xs:enumeration value="PAK" />
+            <xs:enumeration value="PLW" />
+            <xs:enumeration value="PSE" />
+            <xs:enumeration value="PAN" />
+            <xs:enumeration value="PNG" />
+            <xs:enumeration value="PRY" />
+            <xs:enumeration value="PER" />
+            <xs:enumeration value="POL" />
+            <xs:enumeration value="PRT" />
+            <xs:enumeration value="PRI" />
+            <xs:enumeration value="COG" />
+            <xs:enumeration value="KOR" />
+            <xs:enumeration value="REU" />
+            <xs:enumeration value="RUS" />
+            <xs:enumeration value="RWA" />
+            <xs:enumeration value="ROU" />
+            <xs:enumeration value="SLV" />
+            <xs:enumeration value="WSM" />
+            <xs:enumeration value="SMR" />
+            <xs:enumeration value="STP" />
+            <xs:enumeration value="SAU" />
+            <xs:enumeration value="SWZ" />
+            <xs:enumeration value="MNP" />
+            <xs:enumeration value="SYC" />
+            <xs:enumeration value="BLM" />
+            <xs:enumeration value="MAF" />
+            <xs:enumeration value="SPM" />
+            <xs:enumeration value="SEN" />
+            <xs:enumeration value="VCT" />
+            <xs:enumeration value="KNA" />
+            <xs:enumeration value="LCA" />
+            <xs:enumeration value="SRB" />
+            <xs:enumeration value="SGP" />
+            <xs:enumeration value="SXM" />
+            <xs:enumeration value="SYR" />
+            <xs:enumeration value="SVK" />
+            <xs:enumeration value="SVN" />
+            <xs:enumeration value="SLB" />
+            <xs:enumeration value="SOM" />
+            <xs:enumeration value="SDN" />
+            <xs:enumeration value="SUR" />
+            <xs:enumeration value="USA" />
+            <xs:enumeration value="SLE" />
+            <xs:enumeration value="TJK" />
+            <xs:enumeration value="THA" />
+            <xs:enumeration value="TZA" />
+            <xs:enumeration value="TCA" />
+            <xs:enumeration value="TGO" />
+            <xs:enumeration value="TKL" />
+            <xs:enumeration value="TON" />
+            <xs:enumeration value="TTO" />
+            <xs:enumeration value="TUV" />
+            <xs:enumeration value="TUN" />
+            <xs:enumeration value="TKM" />
+            <xs:enumeration value="TUR" />
+            <xs:enumeration value="UGA" />
+            <xs:enumeration value="UZB" />
+            <xs:enumeration value="UKR" />
+            <xs:enumeration value="WLF" />
+            <xs:enumeration value="URY" />
+            <xs:enumeration value="FRO" />
+            <xs:enumeration value="FJI" />
+            <xs:enumeration value="PHL" />
+            <xs:enumeration value="FIN" />
+            <xs:enumeration value="FLK" />
+            <xs:enumeration value="FRA" />
+            <xs:enumeration value="PYF" />
+            <xs:enumeration value="ATF" />
+            <xs:enumeration value="HMD" />
+            <xs:enumeration value="HRV" />
+            <xs:enumeration value="CAF" />
+            <xs:enumeration value="TCD" />
+            <xs:enumeration value="MNE" />
+            <xs:enumeration value="CZE" />
+            <xs:enumeration value="CHL" />
+            <xs:enumeration value="CHE" />
+            <xs:enumeration value="SWE" />
+            <xs:enumeration value="SJM" />
+            <xs:enumeration value="LKA" />
+            <xs:enumeration value="ECU" />
+            <xs:enumeration value="GNQ" />
+            <xs:enumeration value="ERI" />
+            <xs:enumeration value="EST" />
+            <xs:enumeration value="ETH" />
+            <xs:enumeration value="ZAF" />
+            <xs:enumeration value="SGS" />
+            <xs:enumeration value="SSD" />
+            <xs:enumeration value="JAM" />
+            <xs:enumeration value="JPN" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="string-50">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="50" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="CancelRequestType">
+        <xs:annotation>
+            <xs:documentation>Запрос отмены заявления</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Reason" type="tns:string-2000" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Причина отмены</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CancelResponseType">
+        <xs:annotation>
+            <xs:documentation>Ответ на запрос отмены заявления</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Result">
+                <xs:annotation>
+                    <xs:documentation>Результат передачи запроса на отмену заявления</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="tns:string-20">
+                        <xs:enumeration value="CANCELLED" />
+                        <xs:enumeration value="IN_PROGRESS" />
+                        <xs:enumeration value="REJECTED" />
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Comment" type="tns:string-2000" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Комментарий ведомства</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ApplicationType">
+        <xs:choice>
+            <xs:element ref="rupat:Utility">
+                <xs:annotation>
+                    <xs:documentation>Заявление на регистрацию полезной модели</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="rupat:UtilityRecordBag" />
+            <xs:element ref="rupat:CorrectionRequest" />
+            <xs:element ref="rupat:PriorityClaimRequest" />
+            <xs:element ref="rupat:TermRestorationRequest" />
+            <xs:element ref="rupat:ConversionRequest" />
+        </xs:choice>
+    </xs:complexType>
+</xs:schema>

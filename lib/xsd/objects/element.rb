@@ -107,8 +107,32 @@ module XSD
 
     # Determine if element has complex content
     # @return Boolean
-    def complex?
-      complex_type && !complex_type.simple_content && collect_elements.any?
+    def complex_content?
+      # this is not an opposite to simple_content?, element may have neither
+      complex_type&.complex_content? || false
+    end
+
+    # Determine if element has simple content
+    # @return Boolean
+    def simple_content?
+      # this is not an opposite to complex_content?, element may have neither
+      if complex_type
+        complex_type.simple_content?
+      else
+        true
+      end
+    end
+
+    # Determine if element has attributes
+    # @return Boolean
+    def attributes?
+      complex_type && collect_attributes.any?
+    end
+
+    # Determine if element has mixed content
+    # @return Boolean
+    def mixed_content?
+      complex_type&.mixed_content? || false
     end
 
     # Get elements that can appear instead of this one
@@ -117,7 +141,7 @@ module XSD
       # TODO: for now we do not search in parent schemas (that imported current schema)
       # TODO: refactor for better namespace handling (use xpath with namespaces or correct comparison)
       schema.collect_elements.select do |element|
-        element.substitution_group&.split(':')&.last == name
+        strip_prefix(element.substitution_group) == name
       end
     end
 
@@ -125,6 +149,18 @@ module XSD
     # @return String
     def target_namespace
       schema.target_namespace
+    end
+
+    # Get base data type
+    # @return String, nil
+    def data_type
+      if complex_type
+        complex_type.data_type
+      elsif simple_type
+        simple_type.data_type
+      else
+        strip_prefix(type)
+      end
     end
   end
 end

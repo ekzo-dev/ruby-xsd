@@ -130,4 +130,16 @@ RSpec.describe XSD::Element do
       expect(reader['FormDataResponse']['changeOrderInfo'].complex_type).not_to be_nil
     end
   end
+
+  context 'with rupm example files' do
+    let(:file) { fixture_file(%w[rupm pmRegistration.xsd], read: false) }
+
+    it "checks for mixed content" do
+      result_true = reader['RequestWrapper', 'Application', 'Utility', 'BibliographicData', 'InventionTitleBag', 'InventionTitle'].mixed_content?
+      result_false = reader['RequestWrapper', 'Application', 'Utility', 'BibliographicData', 'InventionTitleBag'].mixed_content?
+
+      expect(result_true).to eq(true)
+      expect(result_false).to eq(false)
+    end
+  end
 end

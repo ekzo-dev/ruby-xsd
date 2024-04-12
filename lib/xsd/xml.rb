@@ -5,8 +5,6 @@ require 'net/http'
 
 module XSD
   class XML
-    include Generator
-
     attr_reader :options, :object_cache, :schemas
 
     DEFAULT_RESOURCE_RESOLVER = proc do |location, namespace|
