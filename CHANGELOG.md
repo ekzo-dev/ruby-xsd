@@ -1,3 +1,7 @@
+## [2.6.1] - 2024-04-12
+
+- Correctly detect namespace for referenced elements
+
 ## [2.6.0] - 2024-04-12
 
 - Fix XSD boolean attributes
