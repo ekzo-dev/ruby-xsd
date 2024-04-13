@@ -189,7 +189,16 @@ module XSD
     # Return element documentation
     # @return Array<String>
     def documentation
-      documentation_for(node)
+      @documentation ||= begin
+        docs = documentation_for(node)
+        if docs.any?
+          docs
+        elsif is_a?(Referenced) && referenced?
+          documentation_for(reference.node)
+        else
+          []
+        end
+      end
     end
 
     # Return documentation for specified node

@@ -157,7 +157,7 @@ RSpec.describe XSD::Element do
     end
 
     describe '#namespace' do
-      it 'calculates namespace (accounting referenced elements)' do
+      it 'retrieves namespace (accounting referenced elements)' do
         result1 = reader['importWorkingListRequest']['ApprovedWorkingListData'].namespace
         result2 = reader['importWorkingListRequest']['ApprovedWorkingListData']['TransportGUID'].namespace
 
@@ -167,10 +167,18 @@ RSpec.describe XSD::Element do
     end
 
     describe '#form' do
-      it 'calculates default form value' do
+      it 'retrieves default form value from schema' do
         result = reader['importWorkingListRequest'].form
 
         expect(result).to eq('qualified')
+      end
+    end
+
+    describe '#documentation' do
+      it 'retrieves documentation for referenced elements' do
+        result = reader['importWorkingListRequest']['ApprovedWorkingListData']['TransportGUID'].documentation
+
+        expect(result).to eq(['Транспортный идентификатор'])
       end
     end
   end
