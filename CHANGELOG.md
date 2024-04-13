@@ -1,3 +1,8 @@
+## [2.6.3] - 2024-04-13
+
+- Fix retrieving documentation for referenced elements
+- Cache "namespace" call result
+
 ## [2.6.2] - 2024-04-12
 
 - Get default value for element/attribute "form" property from schema
