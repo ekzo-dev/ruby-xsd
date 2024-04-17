@@ -1,3 +1,7 @@
+## [2.7.0] - 2024-04-17
+
+- Return <xs:any> and <xs:anyAttribute> from collect_elements/collect_attributes
+
 ## [2.6.3] - 2024-04-13
 
 - Fix retrieving documentation for referenced elements
