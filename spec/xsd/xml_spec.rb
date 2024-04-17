@@ -35,7 +35,10 @@ RSpec.describe XSD::XML do
     end
 
     it 'returns <xs:any> in collect_elements list' do
-      expect(reader['ManifestMessage']['FtpMessageHeader']['Signature']['KeyInfo']['X509Data'].collect_elements.last.name).to eq '#any'
+      element = reader['ManifestMessage']['FtpMessageHeader']['Signature']['KeyInfo']['X509Data'].collect_elements.last
+
+      expect(element.name).to eq '#any'
+      expect(element).to be_multiple_allowed
     end
   end
 end
