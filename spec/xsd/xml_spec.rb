@@ -33,5 +33,9 @@ RSpec.describe XSD::XML do
     it 'reads referenced schemas which bind the xmlschema namespace to the root namespace instead of xs' do
       expect(reader['DeclarationOfSoundRecordingRightsClaimMessage'].collect_elements.first.name).to eq 'MessageHeader'
     end
+
+    it 'returns <xs:any> in collect_elements list' do
+      expect(reader['ManifestMessage']['FtpMessageHeader']['Signature']['KeyInfo']['X509Data'].collect_elements.last.name).to eq '#any'
+    end
   end
 end

@@ -220,7 +220,7 @@ module XSD
           else
             # map children recursive
             map_children(:*).map do |obj|
-              if obj.is_a?(Element)
+              if obj.is_a?(Element) || obj.is_a?(Any)
                 obj
               else
                 # get elements considering references
@@ -244,7 +244,7 @@ module XSD
           else
             # map children recursive
             map_children(:*).map do |obj|
-              if obj.is_a?(Attribute)
+              if obj.is_a?(Attribute) || obj.is_a?(AnyAttribute)
                 obj
               else
                 # get attributes considering references

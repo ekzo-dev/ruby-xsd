@@ -26,5 +26,11 @@ module XSD
     # @!attribute process_contents
     # @return String, nil
     property :processContents, :string, default: 'strict'
+
+    # Get virtual attribute name
+    # @return String
+    def name
+      '#anyAttribute'
+    end
   end
 end

@@ -27,5 +27,11 @@ module XSD
     # @!attribute process_contents
     # @return String, nil
     property :processContents, :string, default: 'strict'
+
+    # Get virtual element name
+    # @return String
+    def name
+      '#any'
+    end
   end
 end
