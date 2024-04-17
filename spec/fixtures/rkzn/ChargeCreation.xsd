@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:com="http://roskazna.ru/gisgmp/xsd/Common/2.1.1"
+    xmlns:chg="http://roskazna.ru/gisgmp/xsd/Charge/2.1.1"
+    xmlns="urn://roskazna.ru/gisgmp/xsd/services/import-chargestemplate/2.1.1"
+    targetNamespace="urn://roskazna.ru/gisgmp/xsd/services/import-chargestemplate/2.1.1" elementFormDefault="qualified">
+    <xsd:import namespace="http://roskazna.ru/gisgmp/xsd/Common/2.1.1" schemaLocation="Common.xsd"/>
+    <xsd:import namespace="http://roskazna.ru/gisgmp/xsd/Charge/2.1.1" schemaLocation="Charge.xsd"/>
+    <xsd:element name="ChargeCreationRequest">
+        <xsd:annotation>
+            <xsd:documentation>Прием запроса на формирование необходимой для уплаты информации</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="com:RequestType">
+                    <xsd:sequence>
+                        <xsd:element name="ChargeTemplate" type="chg:ChargeTemplateType">
+                            <xsd:annotation>
+                                <xsd:documentation>Данные для формирования необходимой для уплаты информации</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                    </xsd:sequence>
+                    <xsd:attribute name="originatorId" type="com:URNType">
+                        <xsd:annotation>
+                            <xsd:documentation>УРН участника косвенного взаимодействия, сформировавшего
+                                запрос
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:attribute>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ChargeCreationResponse">
+        <xsd:annotation>
+            <xsd:documentation>Ответ на запрос формирования необходимой для уплаты информации</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="com:ResponseType">
+                    <xsd:sequence>
+                        <xsd:element name="Charge" type="chg:ChargeType">
+                            <xsd:annotation>
+                                <xsd:documentation>Предварительное начисление, сформированное ГИС ГМП по запросу участника.
+                                </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>
