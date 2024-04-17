@@ -1,7 +1,8 @@
-## [2.7.1] - 2024-04-17
+## [2.7.2] - 2024-04-17
 
 - Return <xs:any> and <xs:anyAttribute> from collect_elements/collect_attributes
 - Make multiple_allowed? available on all definitions with max occurs
+- Don't return duplicated attributes from complex restriction
 
 ## [2.6.3] - 2024-04-13
 
