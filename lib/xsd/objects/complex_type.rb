@@ -120,7 +120,13 @@ module XSD
       restriction = simple_content.restriction
       if restriction
         if restriction.base
-          restriction.base_simple_type&.data_type || strip_prefix(restriction.base)
+          if restriction.base_simple_type
+            restriction.base_simple_type.data_type
+          elsif restriction.base_complex_type
+            restriction.base_complex_type.data_type
+          else
+            strip_prefix(restriction.base)
+          end
         else
           restriction.simple_type&.data_type
         end
