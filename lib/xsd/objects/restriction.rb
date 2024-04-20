@@ -73,7 +73,7 @@ module XSD
     def collect_attributes(include_base = true)
       result = super(include_base)
       # Filter restricted attributes to avoid duplicates from restricting and restricted type
-      result.inject({}) { |hash, item| hash[item.name] = item; hash }.values if include_base
+      include_base ? result.inject({}) { |hash, item| hash[item.name] = item; hash }.values : result
     end
   end
 end
