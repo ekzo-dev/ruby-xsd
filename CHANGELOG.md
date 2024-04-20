@@ -1,4 +1,4 @@
-## [2.7.3] - 2024-04-21
+## [2.7.4] - 2024-04-21
 
 - Return <xs:any> and <xs:anyAttribute> from collect_elements/collect_attributes
 - Make multiple_allowed? available on all definitions with max occurs
