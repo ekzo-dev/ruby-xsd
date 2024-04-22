@@ -343,7 +343,7 @@ module XSD
         name = link[:property] ? send(link[:property]) : nil
         if name
           return @cache[method] = object_by_name(link[:type], name)
-        elsif is_a?(Restriction) && method == :base_simple_type
+        elsif is_a?(Restriction) && %i[base_simple_type base_complex_type].include?(method)
           # handle restriction without base
           return nil
         end
