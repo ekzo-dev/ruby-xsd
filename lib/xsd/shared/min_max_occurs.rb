@@ -45,6 +45,12 @@ module XSD
 
     # Determine if element may occur multiple times
     # @return Boolean
+    def multiple?
+      max_occurs == :unbounded || max_occurs > 1
+    end
+
+    # Determine if element may occur multiple times, accounting parents
+    # @return Boolean
     def multiple_allowed?
       computed_max_occurs == :unbounded || computed_max_occurs > 1
     end
