@@ -1,9 +1,10 @@
-## [2.7.5] - 2024-04-22
+## [2.7.6] - 2024-04-22
 
 - Return <xs:any> and <xs:anyAttribute> from collect_elements/collect_attributes
 - Make multiple_allowed? available on all definitions with max occurs
 - Don't return duplicated attributes from complex restriction
 - Fix base_complex_type on restriction without base
+- Improve substitutable elements detection
 
 ## [2.6.3] - 2024-04-13
 
