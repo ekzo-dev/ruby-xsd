@@ -130,14 +130,28 @@ module XSD
       complex_type&.mixed_content? || false
     end
 
-    # Get elements that can appear instead of this one
+    # Get substitutable elements
     # @return Array<Element>
-    def substitution_elements
-      # TODO: for now we do not search in parent schemas (that imported current schema)
-      # TODO: refactor for better namespace handling (use xpath with namespaces or correct comparison)
-      schema.collect_elements.select do |element|
-        strip_prefix(element.substitution_group) == name
-      end
+    def substitutable_elements
+      @substitutable_elements ||= begin
+                                    if ref
+                                      reference.substitutable_elements
+                                    elsif !global? || %w[#all substitution].include?(block)
+                                      []
+                                    else
+                                      # TODO: we search substituted element only in the same schema with head element, is this enough?
+                                      # TODO: maybe don't collect all elements but search with xpath first?
+                                      schema.collect_elements.select do |element|
+                                        strip_prefix(element.substitution_group) == name
+                                      end
+                                    end
+                                  end
+    end
+
+    # Check is this attribute is global (immediate child of schema element)
+    # @return Boolean
+    def global?
+      parent.is_a?(Schema)
     end
 
     # Get base data type

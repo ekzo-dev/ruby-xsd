@@ -182,4 +182,16 @@ RSpec.describe XSD::Element do
       end
     end
   end
+
+  context 'with rkzn example file' do
+    subject(:element) { reader['ChargeCreationRequest', 'ChargeTemplate', 'Discount'] }
+
+    let(:file) { fixture_file(%w[rkzn ChargeCreation.xsd], read: false) }
+
+    describe '#substitutable_elements' do
+      it 'gets all substitutable elements' do
+        expect(element.substitutable_elements.map(&:name)).to eq(%w[DiscountSize DiscountFixed MultiplierSize])
+      end
+    end
+  end
 end
