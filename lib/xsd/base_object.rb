@@ -77,7 +77,7 @@ module XSD
     # @return Array<Schema>
     def schemas_for_namespace(ns_or_prefix)
       # resolve namespace for current node if prefix was provided
-      prefix = node.namespaces["xmlns:#{ns_or_prefix}"]
+      prefix = node.namespaces[['xmlns', (ns_or_prefix == '' ? nil : ns_or_prefix)].compact.join(':')]
       ns = prefix || ns_or_prefix
 
       if schema.targets_namespace?(ns)

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2012 rel. 2 (x64) (http://www.altova.com) by Anton Gushanskiy (Federal'naya sluzhba po regulirovaniyu alkogol'nogo rynka) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns="urn://fsrar/smev/retail_license_notification/1.0.0" xmlns="urn://fsrar/smev/retail_license_notification/types/1.0.0" targetNamespace="urn://fsrar/smev/retail_license_notification/1.0.0" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="urn://fsrar/smev/retail_license_notification/types/1.0.0" schemaLocation="commons/Types.xsd"/>
+	<xs:element name="Request" type="ns:RequestType">
+		<xs:annotation>
+			<xs:documentation>Направление уведомления о необходимости устранения выявленных нарушений
+</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Response" type="ns:ResponseType">
+		<xs:annotation>
+			<xs:documentation>Направление уведомления об устранении выявленных нарушений
+</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="RequestType">
+		<xs:sequence>
+			<xs:element name="Application" type="DocumentType">
+				<xs:annotation>
+					<xs:documentation>Заявление</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NotificationRequest" type="s4000">
+				<xs:annotation>
+					<xs:documentation>Уведомление о необходимости устранения выявленных нарушений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AppliedDocuments">
+				<xs:annotation>
+					<xs:documentation>Приложенные документы</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="AppliedDocument" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Name" type="s500">
+										<xs:annotation>
+											<xs:documentation>Наименование файла</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="BusinessName" type="s500">
+										<xs:annotation>
+											<xs:documentation>Наименование документа</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="Type" type="s500">
+										<xs:annotation>
+											<xs:documentation>Тип содержимого файла</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ResponseType">
+		<xs:sequence>
+			<xs:element name="Application" type="DocumentType">
+				<xs:annotation>
+					<xs:documentation>Заявление</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NotificationResponse" type="s4000">
+				<xs:annotation>
+					<xs:documentation>Уведомление об устранении выявленных нарушений
+ </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AppliedDocuments">
+				<xs:annotation>
+					<xs:documentation>Приложенные документы</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="AppliedDocument" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Name" type="s500">
+										<xs:annotation>
+											<xs:documentation>Наименование файла</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="BusinessName" type="s500">
+										<xs:annotation>
+											<xs:documentation>Наименование документа</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="Type" type="s500">
+										<xs:annotation>
+											<xs:documentation>Тип содержимого файла</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

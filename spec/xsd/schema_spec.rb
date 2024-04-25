@@ -104,6 +104,18 @@ RSpec.describe XSD::Schema do
     end
   end
 
+  context 'with retail_license_notification example file' do
+    subject(:schema) { reader.schema }
+    let(:file) { fixture_file(%w[retail_license_notification scheme.xsd], read: false) }
+
+    describe '#schemas_for_namespace' do
+      it 'gets schema for unprefixed namespace' do
+        expect(schema.schemas_for_namespace('').first.target_namespace).to eq('urn://fsrar/smev/retail_license_notification/types/1.0.0')
+        expect(schema.object_by_name('complexType', 'DocumentType').name).to eq('DocumentType')
+      end
+    end
+  end
+
   # context 'with mvd example files' do
   #   subject(:schema) do
   #     wsdl = Wasabi.document(fixture_file(%w[mvd service.wsdl]))
