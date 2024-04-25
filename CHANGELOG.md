@@ -1,3 +1,7 @@
+## [2.7.9] - 2024-04-25
+
+- Fix resolving schemas with unprefixed namespace
+
 ## [2.7.8] - 2024-04-22
 
 - Return <xs:any> and <xs:anyAttribute> from collect_elements/collect_attributes
