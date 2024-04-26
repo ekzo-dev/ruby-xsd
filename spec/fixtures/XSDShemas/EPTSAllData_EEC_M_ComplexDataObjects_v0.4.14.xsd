@@ -1,0 +1,2216 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_ComplexDataObjects/0.4.14" xmlns:ccdo="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_ComplexDataObjects/0.4.14" xmlns:csdo="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_SimpleDataObjects/0.4.7" xmlns:trsdo="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_TR_SimpleDataObjects/1.0.12" version="0.4.14">
+	<xs:import namespace="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_SimpleDataObjects/0.4.7" schemaLocation="EPTSAllData_EEC_M_SimpleDataObjects_v0.4.7.xsd"/>
+	<xs:import namespace="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_TR_SimpleDataObjects/1.0.12" schemaLocation="EPTSAllData_EEC_M_TR_SimpleDataObjects_v1.0.12.xsd"/>
+	<!-- M.CDE.00030: Альтернативный адрес (Альтернативный адрес. Детали) -->
+	<xs:element name="AdditionalAddressDetails" type="ccdo:AddressDetailsType">
+		<xs:annotation>
+			<xs:documentation>Адрес, который отличается от основного адреса</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00035: Адрес (Адресные реквизиты_ Детали. Тип) -->
+	<xs:complexType name="AddressBaseDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию об адресе</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:CountryCode" minOccurs="0"/>
+			<xs:element ref="csdo:TerritoryCode" minOccurs="0"/>
+			<xs:element ref="csdo:PostCode" minOccurs="0"/>
+			<xs:element ref="csdo:RegionName" minOccurs="0"/>
+			<xs:element ref="csdo:DistrictName" minOccurs="0"/>
+			<xs:element ref="csdo:CityName" minOccurs="0"/>
+			<xs:element ref="csdo:SettlementName" minOccurs="0"/>
+			<xs:element ref="csdo:StreetName" minOccurs="0"/>
+			<xs:element ref="csdo:BuildingNumberId" minOccurs="0"/>
+			<xs:element ref="csdo:RoomNumberId" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00001: Адрес (Адрес. Детали) -->
+	<xs:element name="AddressDetails" type="ccdo:AddressDetailsType">
+		<xs:annotation>
+			<xs:documentation>Адрес регистрации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00001: Адрес (Адрес_ Детали. Тип) -->
+	<xs:complexType name="AddressDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию об адресе</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ccdo:AddressBaseDetailsType">
+				<xs:sequence>
+					<xs:element ref="csdo:AddressText" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- M.CDT.00079: Адрес (Адрес_ Детали: вариант 4. Тип) -->
+	<xs:complexType name="AddressDetailsV4Type">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию об адресе</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:AddressKindCode" minOccurs="0"/>
+			<xs:element ref="csdo:UnifiedCountryCode" minOccurs="0"/>
+			<xs:element ref="csdo:TerritoryCode" minOccurs="0"/>
+			<xs:element ref="csdo:RegionName" minOccurs="0"/>
+			<xs:element ref="csdo:DistrictName" minOccurs="0"/>
+			<xs:element ref="csdo:CityName" minOccurs="0"/>
+			<xs:element ref="csdo:SettlementName" minOccurs="0"/>
+			<xs:element ref="csdo:StreetName" minOccurs="0"/>
+			<xs:element ref="csdo:BuildingNumberId" minOccurs="0"/>
+			<xs:element ref="csdo:RoomNumberId" minOccurs="0"/>
+			<xs:element ref="csdo:PostCode" minOccurs="0"/>
+			<xs:element ref="csdo:PostOfficeBoxId" minOccurs="0"/>
+			<xs:element ref="csdo:AddressText" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00076: Адрес (Адрес: вариант 4. Детали) -->
+	<xs:element name="AddressV4Details" type="ccdo:AddressDetailsV4Type">
+		<xs:annotation>
+			<xs:documentation>Адрес объекта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDE.00055: Уполномоченный орган государства-члена (Уполномоченный орган государства-члена. Детали) -->
+	<xs:element name="AuthorityDetails" type="ccdo:AuthorityDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность сведений об органе государственной власти государства-члена либо об уполномоченной им организации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00025: Уполномоченный орган государства-члена (Уполномоченный орган государства-члена_ Детали. Тип) -->
+	<xs:complexType name="AuthorityDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию об органе государственной власти государства-члена либо об уполномоченной им организации</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:CountryCode" minOccurs="0"/>
+			<xs:element ref="csdo:AuthorityId" minOccurs="0"/>
+			<xs:element ref="csdo:AuthorityName" minOccurs="0"/>
+			<xs:element ref="csdo:AuthorityBriefName" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00060: Банковский счет (Банковский счет. Детали) -->
+	<xs:element name="BankAccountDetails" type="ccdo:BankAccountDetailsType">
+		<xs:annotation>
+			<xs:documentation>Сведения о банковском счете</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00066: Банковский счет (Банковский счет_ Детали. Тип) -->
+	<xs:complexType name="BankAccountDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию о банковском счете</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:BankAccountId" maxOccurs="unbounded"/>
+			<xs:element ref="ccdo:BankDetails"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00061: Банк (Банк. Детали) -->
+	<xs:element name="BankDetails" type="ccdo:BankDetailsType">
+		<xs:annotation>
+			<xs:documentation>Сведения о банке</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00067: Банк (Банк_ Детали. Тип) -->
+	<xs:complexType name="BankDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию о банке</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:BusinessEntityName">
+				<xs:annotation>
+					<xs:documentation>Полное наименование банка</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:UnifiedBankId"/>
+			<xs:element ref="csdo:BankCorrAccountId" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00011: Банковские реквизиты (Банковские реквизиты. Детали) -->
+	<xs:element name="BankingDetails" type="ccdo:BankingDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность банковских реквизитов юридического или физического лица</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00011: Банковские реквизиты (Банковские реквизиты_ Детали. Тип) -->
+	<xs:complexType name="BankingDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность банковских реквизитов юридического или физического лица</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:BankId"/>
+			<xs:element ref="csdo:BankName" minOccurs="0"/>
+			<xs:element ref="csdo:BankCorrAccountId" minOccurs="0"/>
+			<xs:element ref="csdo:PayeeAccountId"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDT.00061: Хозяйствующий субъект (Хозяйствующий субъект_ Детали. Тип) -->
+	<xs:complexType name="BusinessEntityDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию о хозяйствующем субъекте</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedCountryCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение страны регистрации хозяйствующего субъекта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:BusinessEntityName" minOccurs="0"/>
+			<xs:element ref="csdo:BusinessEntityBriefName" minOccurs="0"/>
+			<xs:element ref="csdo:BusinessEntityTypeCode" minOccurs="0"/>
+			<xs:element ref="csdo:BusinessEntityTypeName" minOccurs="0"/>
+			<xs:element ref="csdo:BusinessEntityId" minOccurs="0"/>
+			<xs:element ref="csdo:UniqueCustomsNumberId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Уникальный идентификационный номер хозяйствующего субъекта, предназначенный для целей таможенного контроля</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:TaxpayerId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор хозяйствующего субъекта в реестре налогоплательщиков страны регистрации налогоплательщика</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:TaxRegistrationReasonCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Код, идентифицирующий причину постановки хозяйствующего субъекта на налоговый учет в Российской Федерации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:SubjectAddressDetails" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Адрес хозяйствующего субъекта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:CommunicationDetails" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Контактный реквизит хозяйствующего субъекта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDT.00080: Хозяйствующий субъект (Хозяйствующий субъект_ Детали: вариант 2. Тип) -->
+	<xs:complexType name="BusinessEntityDetailsV2Type">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию о хозяйствующем субъекте</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedCountryCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение страны регистрации хозяйствующего субъекта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:BusinessEntityName" minOccurs="0"/>
+			<xs:element ref="csdo:BusinessEntityBriefName" minOccurs="0"/>
+			<xs:element ref="csdo:BusinessEntityTypeCode" minOccurs="0"/>
+			<xs:element ref="csdo:BusinessEntityTypeName" minOccurs="0"/>
+			<xs:element ref="csdo:BusinessEntityId" minOccurs="0"/>
+			<xs:element ref="csdo:UniqueCustomsNumberId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Уникальный идентификационный номер хозяйствующего субъекта, предназначенный для целей таможенного контроля</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:TaxpayerId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор хозяйствующего субъекта в реестре налогоплательщиков страны регистрации налогоплательщика</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:TaxRegistrationReasonCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Код, идентифицирующий причину постановки хозяйствующего субъекта на налоговый учет в Российской Федерации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDT.00039: Товар (Товар_ Детали. Тип) -->
+	<xs:complexType name="CommodityDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию о товаре</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:CommodityCode" minOccurs="0"/>
+			<xs:element ref="csdo:CommodityName" minOccurs="0"/>
+			<xs:element ref="csdo:UnifiedCommodityMeasure" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00003: Контактный реквизит (Контактный реквизит. Детали) -->
+	<xs:element name="CommunicationDetails" type="ccdo:CommunicationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Контактный реквизит с указанием способа и идентификатора средства (канала) связи</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00003: Контактный реквизит (Контактный реквизит_ Детали. Тип) -->
+	<xs:complexType name="CommunicationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Контактный реквизит с указанием способа и идентификатора средства (канала) связи</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:CommunicationChannelCode" minOccurs="0"/>
+			<xs:element ref="csdo:CommunicationChannelName" minOccurs="0"/>
+			<xs:element ref="csdo:CommunicationChannelId" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00034: Документ (Документ. Детали) -->
+	<xs:element name="DocDetails" type="ccdo:DocDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность сведений о документе</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00014: Документ (Документ_ Детали. Тип) -->
+	<xs:complexType name="DocDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию о документе</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:CountryCode" minOccurs="0"/>
+			<xs:element ref="csdo:DocKindCode" minOccurs="0"/>
+			<xs:element ref="csdo:DocKindName" minOccurs="0"/>
+			<xs:element ref="csdo:DocName" minOccurs="0"/>
+			<xs:element ref="csdo:DocId" minOccurs="0"/>
+			<xs:element ref="csdo:DocCreationDate" minOccurs="0"/>
+			<xs:element ref="csdo:DocValidityDate" minOccurs="0"/>
+			<xs:element ref="csdo:DocValidityDuration" minOccurs="0"/>
+			<xs:element ref="csdo:AuthorityId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Уникальный идентифицирующий признак уполномоченного органа государства-члена, выдавшего документ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:AuthorityName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Полное наименование уполномоченного органа государства-члена, выдавшего документ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:OrganizationId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор организации, выдавшей документ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:OrganizationName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование организации, выдавшей документ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DescriptionText" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:PageQuantity" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDT.00063: Документ (Документ_ Детали: вариант 3. Тип) -->
+	<xs:complexType name="DocDetailsV3Type">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию о документе</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedCountryCode" minOccurs="0"/>
+			<xs:element ref="csdo:DocKindCode" minOccurs="0"/>
+			<xs:element ref="csdo:DocKindName" minOccurs="0"/>
+			<xs:element ref="csdo:DocName" minOccurs="0"/>
+			<xs:element ref="csdo:DocSeriesId" minOccurs="0"/>
+			<xs:element ref="csdo:DocId" minOccurs="0"/>
+			<xs:element ref="csdo:DocCreationDate" minOccurs="0"/>
+			<xs:element ref="csdo:DocValidityDate" minOccurs="0"/>
+			<xs:element ref="csdo:DocValidityDuration" minOccurs="0"/>
+			<xs:element ref="csdo:AuthorityId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Строка, идентифицирующая орган государственной власти государства-члена либо уполномоченную им организацию, выдавшую или утвердившую документ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:AuthorityName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Полное наименование органа государственной власти государства-члена либо уполномоченной им организации, выдавшей документ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DescriptionText" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:PageQuantity" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDT.00081: Документ (Документ_ Детали: вариант 4. Тип) -->
+	<xs:complexType name="DocDetailsV4Type">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию о документе</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:DocKindCode" minOccurs="0"/>
+			<xs:element ref="csdo:DocName" minOccurs="0"/>
+			<xs:element ref="csdo:DocId" minOccurs="0"/>
+			<xs:element ref="csdo:DocCreationDate" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00057: Документ (Документ: вариант 3. Детали) -->
+	<xs:element name="DocV3Details" type="ccdo:DocDetailsV3Type">
+		<xs:annotation>
+			<xs:documentation>Совокупность сведений о документе</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDE.00077: Документ (Документ: вариант 4. Детали) -->
+	<xs:element name="DocV4Details" type="ccdo:DocDetailsV4Type">
+		<xs:annotation>
+			<xs:documentation>Совокупность сведений о документе</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDE.00072: Cведения об акте (Акт органа Союза. Детали) -->
+	<xs:element name="EAEUDocDetails" type="ccdo:EAEUDocDetailsType">
+		<xs:annotation>
+			<xs:documentation>Сведения об акте органа Союза</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00075: Акт Союза (Акт Союза_ Детали. Тип) -->
+	<xs:complexType name="EAEUDocDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию об акте органа Союза</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:EAEUDocKindCode" minOccurs="0"/>
+			<xs:element ref="csdo:EAEUDocName" minOccurs="0"/>
+			<xs:element ref="csdo:EAEUDocId" minOccurs="0"/>
+			<xs:element ref="csdo:EAEUDocCreationDate" minOccurs="0"/>
+			<xs:element ref="csdo:EAEUDocEffectiveDate" minOccurs="0"/>
+			<xs:element ref="csdo:EAEUDocValidityDate" minOccurs="0"/>
+			<xs:element ref="csdo:DescriptionText" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание акта органа Союза</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:EAEUDocIssuerId" minOccurs="0"/>
+			<xs:element ref="csdo:EAEUDocIssuerName" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDT.00077: Акт Союза (Акт Союза_ Детали: вариант 2. Тип) -->
+	<xs:complexType name="EAEUDocDetailsV2Type">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию об акте органа Союза</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedEAEUDocKindCode" minOccurs="0"/>
+			<xs:element ref="csdo:EAEUDocName" minOccurs="0"/>
+			<xs:element ref="csdo:EAEUDocId" minOccurs="0"/>
+			<xs:element ref="csdo:EAEUDocCreationDate" minOccurs="0"/>
+			<xs:element ref="csdo:EAEUDocEffectiveDate" minOccurs="0"/>
+			<xs:element ref="csdo:EAEUDocValidityDate" minOccurs="0"/>
+			<xs:element ref="csdo:DescriptionText" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание акта органа Союза</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:UnifiedEAEUDocIssuerId" minOccurs="0"/>
+			<xs:element ref="csdo:EAEUDocIssuerName" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00074: Cведения об акте (Акт органа Союза: вариант 2. Детали) -->
+	<xs:element name="EAEUDocV2Details" type="ccdo:EAEUDocDetailsV2Type">
+		<xs:annotation>
+			<xs:documentation>Сведения об акте органа Союза</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDE.00073: Статус (Статус, утвержденный актом Союза. Детали) -->
+	<xs:element name="EAEUStatusDetails" type="ccdo:EAEUStatusDetailsType">
+		<xs:annotation>
+			<xs:documentation>Статус какого-либо объекта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00076: Статус, утвержденный актом Союза (Статус, утвержденный актом Союза_ Детали. Тип) -->
+	<xs:complexType name="EAEUStatusDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию о статусе</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:EventDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата установки статуса</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:StatusCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение статуса</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:NoteText" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Примечание к статусу</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:EAEUDocDetails" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.90002: Ошибка контроля электронного документа (сведений) (Ошибка контроля электронного документа (сведений). Детали) -->
+	<xs:element name="EDocErrorDetails" type="ccdo:EDocErrorDetailsType">
+		<xs:annotation>
+			<xs:documentation>Детализированное описание ошибки, выявленной в результате входного контроля электронного документа (сведений)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.90002: Ошибка контроля электронного документа (сведений) (Ошибка контроля электронного документа (сведений)_ Детали. Тип) -->
+	<xs:complexType name="EDocErrorDetailsType">
+		<xs:annotation>
+			<xs:documentation>Детализированное описание ошибки, выявленной в результате входного контроля электронного документа (сведений)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:EDocErrorCode"/>
+			<xs:element ref="csdo:EDocErrorText"/>
+			<xs:element ref="csdo:EDocDetailedErrorText" minOccurs="0"/>
+			<xs:element ref="csdo:EDocElementText" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.90001: Заголовок электронного документа (сведений) (Заголовок электронного документа (сведений). Детали) -->
+	<xs:element name="EDocHeader" type="ccdo:EDocHeaderType">
+		<xs:annotation>
+			<xs:documentation>Совокупность технологических реквизитов электронного документа (сведений)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.90001: Структура заголовка электронного документа (сведений) (Заголовок электронного документа (сведений)_ Детали. Тип) -->
+	<xs:complexType name="EDocHeaderType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие технологические реквизиты электронного документа (сведений)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:InfEnvelopeCode"/>
+			<xs:element ref="csdo:EDocCode"/>
+			<xs:element ref="csdo:EDocId"/>
+			<xs:element ref="csdo:EDocRefId" minOccurs="0"/>
+			<xs:element ref="csdo:EDocDateTime"/>
+			<xs:element ref="csdo:LanguageCode" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDT.90003: Структура заголовка электронного документа (сведений) (Заголовок электронного документа (сведений)_ Детали: вариант 2. Тип) -->
+	<xs:complexType name="EDocHeaderV2Type">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие технологические реквизиты электронного документа (сведений)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:EDocCode"/>
+			<xs:element ref="csdo:EDocId"/>
+			<xs:element ref="csdo:EDocRefId" minOccurs="0"/>
+			<xs:element ref="csdo:EDocDateTime"/>
+			<xs:element ref="csdo:LanguageCode" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.90003: Заголовок электронного документа (сведений) (Заголовок электронного документа (сведений): вариант 2. Детали) -->
+	<xs:element name="EDocV2Header" type="ccdo:EDocHeaderV2Type">
+		<xs:annotation>
+			<xs:documentation>Совокупность технологических реквизитов электронного документа (сведений)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDE.00029: ФИО (ФИО. Детали) -->
+	<xs:element name="FullNameDetails" type="ccdo:FullNameDetailsType">
+		<xs:annotation>
+			<xs:documentation>Фамилия, имя, отчество</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00016: ФИО (ФИО_ Детали. Тип) -->
+	<xs:complexType name="FullNameDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию о фамилии, имени и отчестве человека</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:FirstName" minOccurs="0"/>
+			<xs:element ref="csdo:MiddleName" minOccurs="0"/>
+			<xs:element ref="csdo:LastName" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00035: Географические координаты (Географические координаты. Детали) -->
+	<xs:element name="GeoCoordinateDetails" type="ccdo:GeoCoordinateDetailsType">
+		<xs:annotation>
+			<xs:documentation>Сведения о географических координатах объекта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00037: Географические координаты (Географические координаты_ Детали. Тип) -->
+	<xs:complexType name="GeoCoordinateDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о географическом положении объекта</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:LongitudeMeasure"/>
+			<xs:element ref="csdo:LatitudeMeasure"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00017: Удостоверение личности (Удостоверение личности. Детали) -->
+	<xs:element name="IdentityDocDetails" type="ccdo:IdentityDocDetailsType">
+		<xs:annotation>
+			<xs:documentation>Сведения о документе, удостоверяющем личность физического лица</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00017: Удостоверение личности (Удостоверение личности_ Детали. Тип) -->
+	<xs:complexType name="IdentityDocDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию об удостоверении личности</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:CountryCode"/>
+			<xs:element ref="csdo:IdentityDocKindCode" minOccurs="0"/>
+			<xs:element ref="csdo:DocKindName" minOccurs="0"/>
+			<xs:element ref="csdo:IdentityDocSeriesId" minOccurs="0"/>
+			<xs:element ref="csdo:IdentityDocNumberId" minOccurs="0"/>
+			<xs:element ref="csdo:DocCreationDate" minOccurs="0"/>
+			<xs:element ref="csdo:DocValidityDate" minOccurs="0"/>
+			<xs:element ref="csdo:AuthorityId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Уникальный идентифицирующий признак структурного подразделения уполномоченного органа государства-члена, выдавшего документ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:AuthorityName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Полное наименование структурного подразделения уполномоченного органа государства-члена, выдавшего документ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDT.00062: Удостоверение личности (Удостоверение личности_ Детали: вариант 3. Тип) -->
+	<xs:complexType name="IdentityDocDetailsV3Type">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию об удостоверении личности</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedCountryCode"/>
+			<xs:element ref="csdo:IdentityDocKindCode" minOccurs="0"/>
+			<xs:element ref="csdo:DocKindName" minOccurs="0"/>
+			<xs:element ref="csdo:DocSeriesId" minOccurs="0"/>
+			<xs:element ref="csdo:DocId"/>
+			<xs:element ref="csdo:DocCreationDate" minOccurs="0"/>
+			<xs:element ref="csdo:AuthorityId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Строка, идентифицирующая орган государственной власти государства-члена либо уполномоченную им организацию, выдавшую документ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:AuthorityName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Полное наименование органа государственной власти государства-члена либо уполномоченной им организации, выдавшей документ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00056: Удостоверение личности (Удостоверение личности: вариант 3. Детали) -->
+	<xs:element name="IdentityDocV3Details" type="ccdo:IdentityDocDetailsV3Type">
+		<xs:annotation>
+			<xs:documentation>Сведения о документе, удостоверяющем личность физического лица</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDE.00078: Адрес (Адрес объекта. Детали) -->
+	<xs:element name="ObjectAddressDetails" type="ccdo:ObjectAddressDetailsType">
+		<xs:annotation>
+			<xs:documentation>Адрес объекта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00082: Адрес (Адрес объекта_ Детали. Тип) -->
+	<xs:complexType name="ObjectAddressDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию об адресе объекта</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedCountryCode" minOccurs="0"/>
+			<xs:element ref="csdo:TerritoryCode" minOccurs="0"/>
+			<xs:element ref="csdo:RegionName" minOccurs="0"/>
+			<xs:element ref="csdo:DistrictName" minOccurs="0"/>
+			<xs:element ref="csdo:CityName" minOccurs="0"/>
+			<xs:element ref="csdo:SettlementName" minOccurs="0"/>
+			<xs:element ref="csdo:StreetName" minOccurs="0"/>
+			<xs:element ref="csdo:BuildingNumberId" minOccurs="0"/>
+			<xs:element ref="csdo:RoomNumberId" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00041: Отчетный показатель (Отчетный показатель. Детали) -->
+	<xs:element name="ObsDetails" type="ccdo:ObsDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность сведений о значении, параметрах и атрибутах отчетного показателя</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00042: Отчетный показатель (Отчетный показатель_ Детали. Тип) -->
+	<xs:complexType name="ObsDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию об отчетном показателе</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:ObsValue"/>
+			<xs:element ref="csdo:ObsKeyText" maxOccurs="unbounded"/>
+			<xs:element ref="csdo:ObsAttributeText" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00043: Группа отчетных показателей (Группа отчетных показателей. Детали) -->
+	<xs:element name="ObsSeriesDetails" type="ccdo:ObsSeriesDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность значений отчетных показателей, которые сгруппированы по одному или нескольким параметрам</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00046: Группа отчетных показателей (Группа отчетных показателей_ Детали. Тип) -->
+	<xs:complexType name="ObsSeriesDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию о совокупности отчетных показателей, которые сгруппированы по одному или нескольким параметрам</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:ObsKeyText" maxOccurs="unbounded"/>
+			<xs:element ref="csdo:ObsAttributeText" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="ccdo:ObsDetails" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDT.00031: Должностное лицо (Должностное лицо_ Детали. Тип) -->
+	<xs:complexType name="OfficerDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию о должностном лице</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="ccdo:FullNameDetails"/>
+			<xs:element ref="csdo:PositionName" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDT.00005: Организация (Организация_ Детали. Тип) -->
+	<xs:complexType name="OrganizationBaseDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность основных, налоговых, адресных, банковских и контактных реквизитов юридического лица</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="ccdo:OrganizationDetails"/>
+			<xs:element ref="ccdo:TaxpayerDetails" minOccurs="0"/>
+			<xs:element ref="ccdo:AddressDetails" minOccurs="0"/>
+			<xs:element ref="ccdo:AdditionalAddressDetails" minOccurs="0"/>
+			<xs:element ref="ccdo:BankingDetails" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="ccdo:CommunicationDetails" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00015: Реквизиты организации (Реквизиты организации. Детали) -->
+	<xs:element name="OrganizationDetails" type="ccdo:OrganizationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность основных реквизитов юридического лица</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00015: Реквизиты организации (Реквизиты организации_ Детали. Тип) -->
+	<xs:complexType name="OrganizationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность основных реквизитов юридического лица</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:CountryCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение страны регистрации юридического лица</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:OrganizationName" minOccurs="0"/>
+			<xs:element ref="csdo:OrganizationBriefName" minOccurs="0"/>
+			<xs:element ref="csdo:BusinessEntityTypeName" minOccurs="0"/>
+			<xs:element ref="csdo:OrganizationId" minOccurs="0"/>
+			<xs:element ref="csdo:OrganizationCode" minOccurs="0"/>
+			<xs:element ref="csdo:LanguageCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Язык заполнения текстовых реквизитов юридического лица</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDT.00060: Организация (Организация_ Детали: вариант 3. Тип) -->
+	<xs:complexType name="OrganizationDetailsV3Type">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию об организации</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedCountryCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение страны регистрации организации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:OrganizationName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Полное наименование организации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:OrganizationBriefName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сокращенное наименование организации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:BusinessEntityTypeName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование организационно-правовой формы, в которой организация осуществляет деятельность</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:OrganizationId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Уникальный идентификатор организации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:OrganizationCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Классификационный код организации, предназначенный для целей статистического учета</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:UnifiedTaxpayerDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Совокупность реквизитов, присвоенных организации налоговой службой</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:UnifiedAddressDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Адрес организации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:CommunicationDetails" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Контактный реквизит организации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDT.00030: Габаритные размеры объекта (Габаритные размеры объекта_ Детали. Тип) -->
+	<xs:complexType name="OverallDimensionDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие линейные размеры предмета (длина, ширина и высота)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:LengthMeasure" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Линейный размер объекта в продольном направлении</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:WidthMeasure" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Линейный размер объекта в поперечном направлении</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:HeightMeasure" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Линейный размер объекта в вертикальном направлении</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:LoadingHeightMeasure" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Линейный размер объекта в вертикальном направлении</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:MaxHeightMeasure" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Линейный размер объекта в вертикальном направлении</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDT.00043: Упаковка (Упаковка_ Детали. Тип) -->
+	<xs:complexType name="PackageDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию об упаковке</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedPackageKindCode" minOccurs="0"/>
+			<xs:element ref="csdo:PackageQuantity" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00062: Получатель платежа (Получатель платежа. Детали) -->
+	<xs:element name="PayeeDetails" type="ccdo:PayeeDetailsType">
+		<xs:annotation>
+			<xs:documentation>Сведения о получателе платежа</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00068: Получатель платежа (Получатель платежа_ Детали. Тип) -->
+	<xs:complexType name="PayeeDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию о получателе платежа</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:BusinessEntityName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование получателя платежа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:BankAccountDetails" minOccurs="0"/>
+			<xs:element ref="ccdo:PaymentSystemAccountDetails" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00022: Платеж (Платеж. Детали) -->
+	<xs:element name="PaymentDetails" type="ccdo:PaymentDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность реквизитов для осуществления платежа, либо сведения о совершенном платеже</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00022: Платеж (Платеж_ Детали. Тип) -->
+	<xs:complexType name="PaymentDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность реквизитов для осуществления платежа либо сведения о совершенном платеже</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="ccdo:BankingDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Совокупность банковских реквизитов получателя платежа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:PaymentSystemName" minOccurs="0"/>
+			<xs:element ref="csdo:PaymentSystemAccountId" minOccurs="0"/>
+			<xs:element ref="csdo:PayeeName" minOccurs="0"/>
+			<xs:element ref="csdo:PaymentKindName" minOccurs="0"/>
+			<xs:element ref="csdo:PaymentBudgetCode" minOccurs="0"/>
+			<xs:element ref="csdo:PaymentPurposeText" minOccurs="0"/>
+			<xs:element ref="csdo:PaymentAmount" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Величина денежной суммы, перечисляемой получателю платежа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:PaymentId" minOccurs="0"/>
+			<xs:element ref="csdo:EventDateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата и время перечисления денежной суммы получателю платежа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDT.00069: Платеж (Платеж_ Детали: вариант 3. Тип) -->
+	<xs:complexType name="PaymentDetailsV3Type">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию о совершенном или планируемом платеже</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:EventDateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата и время перечисления денежной суммы плательщиком получателю платежа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:PaymentKindName" minOccurs="0"/>
+			<xs:element ref="csdo:PaymentBudgetCode" minOccurs="0"/>
+			<xs:element ref="csdo:PaymentPurposeText" minOccurs="0"/>
+			<xs:element ref="csdo:UnifiedPaymentAmount" minOccurs="0"/>
+			<xs:element ref="ccdo:PayeeDetails" minOccurs="0"/>
+			<xs:element ref="ccdo:ReasonDocDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сведения о документе, который является основанием для совершения платежа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:ProofDocDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сведения о документе, который подтверждает совершение платежа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00063: Счет в платежной системе (Счет в платежной системе. Детали) -->
+	<xs:element name="PaymentSystemAccountDetails" type="ccdo:PaymentSystemAccountDetailsType">
+		<xs:annotation>
+			<xs:documentation>Сведения о счете в платежной системе</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00070: Счет в платежной системе (Счет в платежной системе_ Детали. Тип) -->
+	<xs:complexType name="PaymentSystemAccountDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию о счете в платежной системе</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:PaymentSystemAccountId"/>
+			<xs:element ref="csdo:PaymentSystemName"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00067: Платеж (Платеж: вариант 3. Детали) -->
+	<xs:element name="PaymentV3Details" type="ccdo:PaymentDetailsV3Type">
+		<xs:annotation>
+			<xs:documentation>Совокупность реквизитов для осуществления платежа, либо сведения о совершенном платеже</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDE.00044: Период (Период. Детали) -->
+	<xs:element name="PeriodDetails" type="ccdo:PeriodDetailsType">
+		<xs:annotation>
+			<xs:documentation>Промежуток времени с указанием начальной и конечной дат и времени</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00026: Период (Период_ Детали. Тип) -->
+	<xs:complexType name="PeriodDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие промежуток времени с указанием начальной и конечной дат и времени</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:StartDateTime" minOccurs="0"/>
+			<xs:element ref="csdo:EndDateTime" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDT.00044: Продукт (Продукт_ Детали. Тип) -->
+	<!-- конфликтует с типом ProductDetailsType в M_TR_ComplexDataObjects_v1.0.3.xsd
+        <xs:complexType name="ProductDetailsType">
+            <xs:annotation>
+                <xs:documentation>Компоненты, представляющие детализированную информацию о продукте</xs:documentation>
+            </xs:annotation>
+            <xs:sequence>
+                <xs:element ref="csdo:ProductId" minOccurs="0"/>
+                <xs:element ref="csdo:ProductName" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    -->
+	<!-- M.CDE.00064: Документальное подтверждение (Документальное подтверждение. Детали) -->
+	<xs:element name="ProofDocDetails" type="ccdo:DocDetailsV3Type">
+		<xs:annotation>
+			<xs:documentation>Сведения о документе, который подтверждает совершение некоторого действия</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDE.00065: Документальное основание (Документальное основание. Детали) -->
+	<xs:element name="ReasonDocDetails" type="ccdo:DocDetailsV3Type">
+		<xs:annotation>
+			<xs:documentation>Сведения о документе, который является основанием для совершения некоторого действия</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDE.00025: Объект классификации (Объект классификации. Детали) -->
+	<xs:element name="ReferenceDataItemDetails" type="ccdo:ReferenceDataItemDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность сведений об объекте классификации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00027: Объект классификации (Объект классификации_ Детали. Тип) -->
+	<xs:complexType name="ReferenceDataItemDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию об объекте классификации</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:ReferenceDataItemCode" maxOccurs="unbounded"/>
+			<xs:element ref="csdo:ReferenceDataItemName" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="csdo:ReferenceDataItemText" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="csdo:ParentReferenceDataItemCode" minOccurs="0"/>
+			<xs:element ref="csdo:ParentReferenceDataSectionCode" minOccurs="0"/>
+			<xs:element ref="ccdo:StatusDetails" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Статус сведений об объекте классификации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:CountryCode" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение страны, в которой используется объект классификации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDT.00071: Объект классификации (Объект классификации_ Детали: вариант 2. Тип) -->
+	<xs:complexType name="ReferenceDataItemDetailsV2Type">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию об объекте классификации</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:ReferenceDataItemCode" maxOccurs="unbounded"/>
+			<xs:element ref="csdo:ReferenceDataItemName" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="csdo:ReferenceDataItemText" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="csdo:ParentReferenceDataItemCode" minOccurs="0"/>
+			<xs:element ref="csdo:ParentReferenceDataSectionCode" minOccurs="0"/>
+			<xs:element ref="ccdo:EAEUStatusDetails" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Статус сведений об объекте классификации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:UnifiedCountryCode" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение страны, в которой используется объект классификации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00068: Объект классификации (Объект классификации: вариант 2. Детали) -->
+	<xs:element name="ReferenceDataItemV2Details" type="ccdo:ReferenceDataItemDetailsV2Type">
+		<xs:annotation>
+			<xs:documentation>Совокупность сведений об объекте классификации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDE.00026: Группа объектов классификации (Группа объектов классификации. Детали) -->
+	<xs:element name="ReferenceDataSectionDetails" type="ccdo:ReferenceDataSectionDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность сведений о группе объектов классификации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00028: Группа объектов классификации (Группа объектов классификации_ Детали. Тип) -->
+	<xs:complexType name="ReferenceDataSectionDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию о группе объектов классификации</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:ReferenceDataSectionCode"/>
+			<xs:element ref="csdo:ReferenceDataSectionName"/>
+			<xs:element ref="csdo:ParentReferenceDataSectionCode" minOccurs="0"/>
+			<xs:element ref="ccdo:StatusDetails" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Статус сведений о группе объектов классификации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:CountryCode" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение страны, в которой используется группа объектов классификации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDT.00072: Группа объектов классификации (Группа объектов классификации_ Детали: вариант 2. Тип) -->
+	<xs:complexType name="ReferenceDataSectionDetailsV2Type">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию о группе объектов классификации</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:ReferenceDataSectionCode"/>
+			<xs:element ref="csdo:ReferenceDataSectionName"/>
+			<xs:element ref="csdo:ParentReferenceDataSectionCode" minOccurs="0"/>
+			<xs:element ref="ccdo:EAEUStatusDetails" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Статус сведений о группе объектов классификации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:UnifiedCountryCode" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение страны, в которой используется группа объектов классификации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00069: Группа объектов классификации (Группа объектов классификации: вариант 2. Детали) -->
+	<xs:element name="ReferenceDataSectionV2Details" type="ccdo:ReferenceDataSectionDetailsV2Type">
+		<xs:annotation>
+			<xs:documentation>Совокупность сведений о группе объектов классификации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- RegistrationTerritory - Данны о территории, на которой допускается регистрация транспортного средства -->
+	<xs:element name="RegistrationTerritory" type="ccdo:RegistrationTerritoryType">
+		<xs:annotation>
+			<xs:documentation> Данны о территории, на которой допускается регистрация транспортного средства</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="RegistrationTerritoryType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие данны о территории, на которой допускается регистрация транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:RegistrationTerritoryIndicator"/>
+			<xs:element ref="trsdo:PreferentialManufacturingCountryCode" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trsdo:PreferentialManufacturingRegionCode" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00042: Отчет (Отчет. Детали) -->
+	<xs:element name="ReportDetails" type="ccdo:ReportDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность отчетных показателей</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00045: Отчет (Отчет_ Детали. Тип) -->
+	<xs:complexType name="ReportDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию об отчете</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:ReportKindCode" minOccurs="0"/>
+			<xs:element ref="csdo:ReportName" minOccurs="0"/>
+			<xs:element ref="ccdo:UnifiedAuthorityDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сведения об уполномоченном органе государства-члена, предоставившем отчет</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:EventDateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата и время формирования отчета</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:ReportAttributeText" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Строка символов, которая содержит сведения об отчете</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:ObsDetails" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDT.00059: Отчет (Отчет_ Детали: вариант 2. Тип) -->
+	<xs:complexType name="ReportDetailsV2Type">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию об отчете с группировкой значений показателей</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:ReportKindCode" minOccurs="0"/>
+			<xs:element ref="csdo:ReportName" minOccurs="0"/>
+			<xs:element ref="ccdo:UnifiedAuthorityDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сведения об уполномоченном органе государства-члена, предоставившем отчет</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:EventDateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата и время формирования отчета</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:ReportAttributeText" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Строка символов, которая содержит сведения об отчете</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:ObsSeriesDetails" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00054: Отчет (Отчет: вариант 2. Детали) -->
+	<xs:element name="ReportV2Details" type="ccdo:ReportDetailsV2Type">
+		<xs:annotation>
+			<xs:documentation>Совокупность сгруппированных отчетных показателей</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDE.00032: Технологические характеристики записи общего ресурса (Технологические характеристики записи общего ресурса. Детали) -->
+	<xs:element name="ResourceItemStatusDetails" type="ccdo:ResourceItemStatusDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность технологических сведений о записи общего ресурса</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00033: Технологические характеристики записи общего ресурса (Технологические характеристики записи общего ресурса_ Детали. Тип) -->
+	<xs:complexType name="ResourceItemStatusDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию о технологических характеристиках записи общего ресурса</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="ccdo:ValidityPeriodDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Период действия записи общего ресурса (реестра, перечня, базы данных)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:UpdateDateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата и время обновления записи общего ресурса (реестра, перечня, базы данных)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00036: Пункт маршрута (Пункт маршрута. Детали) -->
+	<xs:element name="RoutePointDetails" type="ccdo:RoutePointDetailsType">
+		<xs:annotation>
+			<xs:documentation>Сведения о месте, через которое проходит маршрут движения</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00038: Пункт маршрута (Пункт маршрута_ Детали. Тип) -->
+	<xs:complexType name="RoutePointDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о пункте маршрута движения</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:ObjectOrdinal">
+				<xs:annotation>
+					<xs:documentation>Порядковый номер пункта маршрута движения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:RoutePointKindCode"/>
+			<xs:element ref="ccdo:AddressDetails">
+				<xs:annotation>
+					<xs:documentation>Адрес пункта маршрута движения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDT.00073: Пункт маршрута (Пункт маршрута_ Детали: вариант 2. Тип) -->
+	<xs:complexType name="RoutePointDetailsV2Type">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о пункте маршрута движения</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:ObjectOrdinal">
+				<xs:annotation>
+					<xs:documentation>Порядковый номер пункта маршрута движения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:RoutePointKindCode"/>
+			<xs:element ref="ccdo:ObjectAddressDetails">
+				<xs:annotation>
+					<xs:documentation>Адрес пункта маршрута движения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDT.00078: Пункт маршрута (Пункт маршрута_ Детали: вариант 3. Тип) -->
+	<xs:complexType name="RoutePointDetailsV3Type">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о пункте маршрута движения</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:ObjectOrdinal">
+				<xs:annotation>
+					<xs:documentation>Порядковый номер пункта маршрута движения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:UnifiedRoutePointKindCode"/>
+			<xs:element ref="ccdo:ObjectAddressDetails">
+				<xs:annotation>
+					<xs:documentation>Адрес пункта маршрута движения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00070: Пункт маршрута (Пункт маршрута: вариант 2. Детали) -->
+	<xs:element name="RoutePointV2Details" type="ccdo:RoutePointDetailsV2Type">
+		<xs:annotation>
+			<xs:documentation>Сведения о месте, через которое проходит маршрут движения</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDE.00075: Пункт маршрута (Пункт маршрута: вариант 3. Детали) -->
+	<xs:element name="RoutePointV3Details" type="ccdo:RoutePointDetailsV3Type">
+		<xs:annotation>
+			<xs:documentation>Сведения о месте, через которое проходит маршрут движения</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDE.00031: Статус (Статус. Детали) -->
+	<xs:element name="StatusDetails" type="ccdo:StatusDetailsType">
+		<xs:annotation>
+			<xs:documentation>Статусное состояние чего-либо (объекта, явления, документа, процесса и т.п.)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00034: Статус (Статус_ Детали. Тип) -->
+	<xs:complexType name="StatusDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию о статусном состоянии чего-либо (объекта, явления, документа, процесса и т.п.)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:DocId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Номер документа, устанавливающего статусное состояние</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocCreationDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата документа, устанавливающего статусное состояние</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:AuthorityId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор уполномоченного органа государства-члена, который утвердил документ, устанавливающий статусное состояние</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:AuthorityName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование уполномоченного органа государства-члена, который утвердил документ, устанавливающий статусное состояние</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:OrganizationId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор организации, которая утвердила документ, устанавливающий статусное состояние</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:OrganizationName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование организации, которая утвердила документ, устанавливающий статусное состояние</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:StatusCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение статусного состояния</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:EventDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата установки статусного состояния</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:NoteText" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Примечание к статусному состоянию</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDT.00074: Статус (Статус_ Детали: вариант 2. Тип) -->
+	<xs:complexType name="StatusDetailsV2Type">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию о статусном состоянии чего-либо (объекта, явления, документа, процесса и т.п.)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:EventDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата установки статусного состояния</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:StatusCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение статусного состояния</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:NoteText" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Примечание к статусному состоянию</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:ReasonDocDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Документ, устанавливающий статусное состояние</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00071: Статус (Статус: вариант 2. Детали) -->
+	<xs:element name="StatusV2Details" type="ccdo:StatusDetailsV2Type">
+		<xs:annotation>
+			<xs:documentation>Статусное состояние чего-либо (объекта, явления, документа, процесса и т.п.)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDE.00058: Адрес (Адрес субъекта. Детали) -->
+	<xs:element name="SubjectAddressDetails" type="ccdo:SubjectAddressDetailsType">
+		<xs:annotation>
+			<xs:documentation>Адрес субъекта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00064: Адрес (Адрес субъекта_ Детали. Тип) -->
+	<xs:complexType name="SubjectAddressDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию об адресе субъекта</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:AddressKindCode" minOccurs="0"/>
+			<xs:element ref="csdo:UnifiedCountryCode" minOccurs="0"/>
+			<xs:element ref="csdo:TerritoryCode" minOccurs="0"/>
+			<xs:element ref="csdo:RegionName" minOccurs="0"/>
+			<xs:element ref="csdo:DistrictName" minOccurs="0"/>
+			<xs:element ref="csdo:CityName" minOccurs="0"/>
+			<xs:element ref="csdo:SettlementName" minOccurs="0"/>
+			<xs:element ref="csdo:StreetName" minOccurs="0"/>
+			<xs:element ref="csdo:BuildingNumberId" minOccurs="0"/>
+			<xs:element ref="csdo:RoomNumberId" minOccurs="0"/>
+			<xs:element ref="csdo:PostCode" minOccurs="0"/>
+			<xs:element ref="csdo:PostOfficeBoxId" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDT.00018: Субъект (Субъект_ Детали. Тип) -->
+	<xs:complexType name="SubjectBaseDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность основных, налоговых, адресных, банковских и контактных реквизитов юридического или физического лица</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="ccdo:OrganizationDetails" minOccurs="0"/>
+			<xs:element ref="ccdo:FullNameDetails" minOccurs="0"/>
+			<xs:element ref="ccdo:IdentityDocDetails" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="ccdo:TaxpayerDetails" minOccurs="0"/>
+			<xs:element ref="ccdo:AddressDetails" minOccurs="0"/>
+			<xs:element ref="ccdo:AdditionalAddressDetails" minOccurs="0"/>
+			<xs:element ref="ccdo:BankingDetails" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="ccdo:CommunicationDetails" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00019: Налогоплательщик (Налогоплательщик. Детали) -->
+	<xs:element name="TaxpayerDetails" type="ccdo:TaxpayerDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность реквизитов, присвоенных налоговой службой юридическому или физическому лицу</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00019: Реквизиты налогоплательщика (Реквизиты налогоплательщика_ Детали. Тип) -->
+	<xs:complexType name="TaxpayerDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность реквизитов, присвоенных налоговой службой юридическому или физическому лицу</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:TaxpayerId"/>
+			<xs:element ref="csdo:TaxRegistrationReasonCode" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDT.00047: Транспортное средство (Транспортное средство_ Детали. Тип) -->
+	<xs:complexType name="TransportMeansDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию о транспортном средстве</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:TransportMeansRegId" minOccurs="0"/>
+			<xs:element ref="csdo:UnifiedTransportModeCode" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00045: Альтернативный адрес (Альтернативный адрес: вариант 2. Детали) -->
+	<xs:element name="UnifiedAdditionalAddressDetails" type="ccdo:UnifiedAddressDetailsType">
+		<xs:annotation>
+			<xs:documentation>Адрес, который отличается от основного адреса</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDE.00046: Адрес (Адрес: вариант 2. Детали) -->
+	<xs:element name="UnifiedAddressDetails" type="ccdo:UnifiedAddressDetailsType">
+		<xs:annotation>
+			<xs:documentation>Адрес регистрации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00048: Адрес объекта (Адрес объекта_ Детали: вариант 2. Тип) -->
+	<xs:complexType name="UnifiedAddressDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию об адресе</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedCountryCode" minOccurs="0"/>
+			<xs:element ref="csdo:TerritoryCode" minOccurs="0"/>
+			<xs:element ref="csdo:PostCode" minOccurs="0"/>
+			<xs:element ref="csdo:RegionName" minOccurs="0"/>
+			<xs:element ref="csdo:DistrictName" minOccurs="0"/>
+			<xs:element ref="csdo:CityName" minOccurs="0"/>
+			<xs:element ref="csdo:SettlementName" minOccurs="0"/>
+			<xs:element ref="csdo:StreetName" minOccurs="0"/>
+			<xs:element ref="csdo:BuildingNumberId" minOccurs="0"/>
+			<xs:element ref="csdo:RoomNumberId" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00053: Уполномоченный орган государства-члена (Уполномоченный орган государства-члена: вариант 2. Детали) -->
+	<xs:element name="UnifiedAuthorityDetails" type="ccdo:UnifiedAuthorityDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность сведений об органе государственной власти государства-члена либо об уполномоченной им организации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00054: Уполномоченный орган государства-члена (Уполномоченный орган государства-члена_ Детали: вариант 2. Тип) -->
+	<xs:complexType name="UnifiedAuthorityDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию об органе государственной власти государства-члена либо об уполномоченной им организации</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedCountryCode" minOccurs="0"/>
+			<xs:element ref="csdo:AuthorityId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Уникальный идентификатор уполномоченного органа государства-члена</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:AuthorityName" minOccurs="0"/>
+			<xs:element ref="csdo:AuthorityBriefName" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00051: Банковские реквизиты (Банковские реквизиты: вариант 2. Детали) -->
+	<xs:element name="UnifiedBankingDetails" type="ccdo:UnifiedBankingDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность банковских реквизитов юридического или физического лица</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00057: Банковские реквизиты (Банковские реквизиты_ Детали: вариант 2. Тип) -->
+	<xs:complexType name="UnifiedBankingDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность банковских реквизитов юридического или физического лица</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedBankId"/>
+			<xs:element ref="csdo:BankName" minOccurs="0"/>
+			<xs:element ref="csdo:BankCorrAccountId" minOccurs="0"/>
+			<xs:element ref="csdo:PayeeAccountId"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00059: Контактный реквизит (Контактный реквизит: вариант 2. Детали) -->
+	<xs:element name="UnifiedCommunicationDetails" type="ccdo:UnifiedCommunicationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Контактный реквизит с указанием способа и идентификатора средства (канала) связи</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00065: Контактный реквизит (Контактный реквизит_ Детали: вариант 2. Тип) -->
+	<xs:complexType name="UnifiedCommunicationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Контактный реквизит с указанием способа и идентификатора средства (канала) связи</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedCommunicationChannelCode" minOccurs="0"/>
+			<xs:element ref="csdo:CommunicationChannelName" minOccurs="0"/>
+			<xs:element ref="csdo:CommunicationChannelId" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00047: Документ (Документ: вариант 2. Детали) -->
+	<xs:element name="UnifiedDocDetails" type="ccdo:UnifiedDocDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность сведений о документе</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00049: Документ (Документ_ Детали: вариант 2. Тип) -->
+	<xs:complexType name="UnifiedDocDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию о документе</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedCountryCode" minOccurs="0"/>
+			<xs:element ref="csdo:DocKindCode" minOccurs="0"/>
+			<xs:element ref="csdo:DocKindName" minOccurs="0"/>
+			<xs:element ref="csdo:DocName" minOccurs="0"/>
+			<xs:element ref="csdo:DocSeriesId" minOccurs="0"/>
+			<xs:element ref="csdo:DocId" minOccurs="0"/>
+			<xs:element ref="csdo:DocCreationDate" minOccurs="0"/>
+			<xs:element ref="csdo:DocValidityDate" minOccurs="0"/>
+			<xs:element ref="csdo:DocValidityDuration" minOccurs="0"/>
+			<xs:element ref="csdo:AuthorityId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Уникальный идентифицирующий признак уполномоченного органа государства-члена, выдавшего документ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:AuthorityName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Полное наименование уполномоченного органа государства-члена, выдавшего документ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:UnifiedOrganizationId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор организации, выдавшей документ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:OrganizationName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование организации, выдавшей документ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DescriptionText" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:PageQuantity" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00048: Удостоверение личности (Удостоверение личности: вариант 2. Детали) -->
+	<xs:element name="UnifiedIdentityDocDetails" type="ccdo:UnifiedIdentityDocDetailsType">
+		<xs:annotation>
+			<xs:documentation>Сведения о документе, удостоверяющем личность физического лица</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00050: Удостоверение личности (Удостоверение личности_ Детали: вариант 2. Тип) -->
+	<xs:complexType name="UnifiedIdentityDocDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию об удостоверении личности</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedCountryCode"/>
+			<xs:element ref="csdo:UnifiedIdentityDocKindCode" minOccurs="0"/>
+			<xs:element ref="csdo:DocKindName" minOccurs="0"/>
+			<xs:element ref="csdo:DocSeriesId" minOccurs="0"/>
+			<xs:element ref="csdo:DocId"/>
+			<xs:element ref="csdo:DocCreationDate" minOccurs="0"/>
+			<xs:element ref="csdo:AuthorityId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Уникальный идентифицирующий признак структурного подразделения уполномоченного органа государства-члена, выдавшего документ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:AuthorityName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Полное наименование структурного подразделения уполномоченного органа государства-члена, выдавшего документ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDT.00051: Организация (Организация_ Детали: вариант 2. Тип) -->
+	<xs:complexType name="UnifiedOrganizationBaseDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию об налоговых, адресных, банковских и контактных реквизитах юридического лица</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="ccdo:UnifiedOrganizationDetails"/>
+			<xs:element ref="ccdo:UnifiedTaxpayerDetails" minOccurs="0"/>
+			<xs:element ref="ccdo:UnifiedAddressDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Юридический адрес</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:UnifiedAdditionalAddressDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Фактический адрес</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:UnifiedBankingDetails" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="ccdo:CommunicationDetails" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00049: Реквизиты организации (Реквизиты организации: вариант 2. Детали) -->
+	<xs:element name="UnifiedOrganizationDetails" type="ccdo:UnifiedOrganizationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность основных реквизитов юридического лица</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00052: Реквизиты организации (Реквизиты организации_ Детали: вариант 2. Тип) -->
+	<xs:complexType name="UnifiedOrganizationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию о юридическом лице</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedCountryCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение страны регистрации юридического лица</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:OrganizationName" minOccurs="0"/>
+			<xs:element ref="csdo:OrganizationBriefName" minOccurs="0"/>
+			<xs:element ref="csdo:BusinessEntityTypeName" minOccurs="0"/>
+			<xs:element ref="csdo:OrganizationId" minOccurs="0"/>
+			<xs:element ref="csdo:OrganizationCode" minOccurs="0"/>
+			<xs:element ref="csdo:LanguageCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Язык заполнения текстовых реквизитов юридического лица</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00066: Габаритные размеры объекта (Габаритные размеры объекта. Детали) -->
+	<xs:element name="UnifiedOverallDimensionDetails" type="ccdo:UnifiedOverallDimensionDetailsType">
+		<xs:annotation>
+			<xs:documentation>Линейные размеры объекта (длина, ширина и высота)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00055: Габаритные размеры объекта (Габаритные размеры объекта_ Детали: вариант 2. Тип) -->
+	<xs:complexType name="UnifiedOverallDimensionDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие линейные размеры предмета (длина, ширина и высота)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedLengthMeasure" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Линейный размер объекта в продольном направлении</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:UnifiedWidthMeasure" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Линейный размер объекта в поперечном направлении</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:UnifiedHeightMeasure" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Линейный размер объекта в вертикальном направлении</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00050: Платеж (Платеж: вариант 2. Детали) -->
+	<xs:element name="UnifiedPaymentDetails" type="ccdo:UnifiedPaymentDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность реквизитов для осуществления платежа, либо сведения о совершенном платеже</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00056: Платеж (Платеж_ Детали: вариант 2. Тип) -->
+	<xs:complexType name="UnifiedPaymentDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность реквизитов для осуществления платежа либо сведения о совершенном платеже</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="ccdo:UnifiedBankingDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Совокупность банковских реквизитов получателя платежа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:PaymentSystemName" minOccurs="0"/>
+			<xs:element ref="csdo:PaymentSystemAccountId" minOccurs="0"/>
+			<xs:element ref="csdo:PayeeName" minOccurs="0"/>
+			<xs:element ref="csdo:PaymentKindName" minOccurs="0"/>
+			<xs:element ref="csdo:UnifiedPaymentBudgetCode" minOccurs="0"/>
+			<xs:element ref="csdo:PaymentPurposeText" minOccurs="0"/>
+			<xs:element ref="csdo:UnifiedPaymentAmount" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Величина денежной суммы, перечисляемой получателю платежа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:PaymentId" minOccurs="0"/>
+			<xs:element ref="csdo:EventDateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата и время перечисления денежной суммы получателю платежа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDT.00053: Субъект (Субъект_ Детали: вариант 2. Тип) -->
+	<xs:complexType name="UnifiedSubjectBaseDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию о субъекте</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="ccdo:UnifiedOrganizationDetails" minOccurs="0"/>
+			<xs:element ref="ccdo:FullNameDetails" minOccurs="0"/>
+			<xs:element ref="ccdo:IdentityDocDetails" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="ccdo:UnifiedTaxpayerDetails" minOccurs="0"/>
+			<xs:element ref="ccdo:UnifiedAddressDetails" minOccurs="0"/>
+			<xs:element ref="ccdo:UnifiedAdditionalAddressDetails" minOccurs="0"/>
+			<xs:element ref="ccdo:UnifiedBankingDetails" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="ccdo:CommunicationDetails" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00052: Реквизиты налогоплательщика (Реквизиты налогоплательщика: вариант 2. Детали) -->
+	<xs:element name="UnifiedTaxpayerDetails" type="ccdo:UnifiedTaxpayerDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность реквизитов, присвоенных налоговой службой хозяйствующему субъекту</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDT.00058: Реквизиты налогоплательщика (Реквизиты налогоплательщика_ Детали: вариант 2. Тип) -->
+	<xs:complexType name="UnifiedTaxpayerDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность реквизитов, присвоенных налоговой службой юридическому или физическому лицу</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedTaxpayerId"/>
+			<xs:element ref="csdo:TaxRegistrationReasonCode" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.CDE.00033: Период действия (Период действия. Детали) -->
+	<xs:element name="ValidityPeriodDetails" type="ccdo:PeriodDetailsType">
+		<xs:annotation>
+			<xs:documentation>Период действия некоторого объекта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.CDE.00079: Идентификаторы транспортного средства (Идентификаторы транспортного средства. Детали) -->
+	<!-- не используется; конфликтует с элементом VehicleIdDetails в M_TR_ComplexDataObjects_v1.0.3.xsd
+        <xs:element name="VehicleIdDetails" type="ccdo:VehicleIdDetailsType">
+            <xs:annotation>
+                <xs:documentation>Совокупность идентификаторов транспортного средства</xs:documentation>
+            </xs:annotation>
+        </xs:element>
+    -->
+	<!-- M.CDT.00083: Идентификаторы транспортного средства (Идентификаторы транспортного средства_ Детали. Тип) -->
+	<xs:complexType name="VehicleIdDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность идентификаторов транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:VehicleId" minOccurs="0"/>
+			<xs:element ref="csdo:VehicleChassisId" minOccurs="0"/>
+			<xs:element ref="csdo:VehicleBodyId" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Документ-основание для внесения сведений в электронные паспорта -->
+	<xs:element name="BaseForChangeDocument" type="ccdo:BaseForChangeDocumentType">
+		<xs:annotation>
+			<xs:documentation>Совокупность сведений о документе-основании для внесения сведений в электронные паспорта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- Документ-основание для внесения сведений в электронные паспорта -->
+	<xs:complexType name="BaseForChangeDocumentType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию о документе-основании для внесения сведений в электронные паспорта</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="DocType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Тип документа</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="OwnershipConfirm">
+							<xs:annotation>
+								<xs:documentation>Документ, удостоверяющий право собственности</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="OwnershipChangeConfirm">
+							<xs:annotation>
+								<xs:documentation>Документ, удостоверяющий переход права собственности</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="DepositConfirm">
+							<xs:annotation>
+								<xs:documentation>Документ, содержащий сведений о залоге</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="DepositCessionConfirm">
+							<xs:annotation>
+								<xs:documentation>Документ, содержащий сведений о переуступке залога</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="LeasingConfirm">
+							<xs:annotation>
+								<xs:documentation>Документ, содержащий сведения о лизинге</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="SubleasingConfirm">
+							<xs:annotation>
+								<xs:documentation>Документ, содержащий сведения о сублизинге</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="CommissionConfirm">
+							<xs:annotation>
+								<xs:documentation>Документ, устанавливающий права комиссионера на реализацию</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="DealershipAgreement">
+							<xs:annotation>
+								<xs:documentation>Дилерский договор</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element ref="csdo:DocName" minOccurs="0"/>
+			<xs:element ref="csdo:DocId" minOccurs="0"/>
+			<xs:element ref="csdo:DocCreationDate" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!--Адрес -->
+	<xs:complexType name="AddressDetailsV2Type">
+		<xs:annotation>
+			<xs:documentation>Адрес</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ccdo:AddressBaseDetailsType">
+				<xs:attribute name="AddressKindCodeType" type="csdo:AddressKindCodeType" use="required">
+					<xs:annotation>
+						<xs:documentation>Кодовое обозначение вида адреса</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Контактный реквизит (Контактный реквизит. Детали) -->
+	<xs:element name="CommunicationDetailsV2" type="ccdo:CommunicationDetailsV2Type">
+		<xs:annotation>
+			<xs:documentation>Контактный реквизит с указанием способа и идентификатора средства (канала) связи</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- Контактный реквизит (Контактный реквизит_ Детали. Тип) -->
+	<xs:complexType name="CommunicationDetailsV2Type">
+		<xs:annotation>
+			<xs:documentation>Контактный реквизит с указанием способа и идентификатора средства (канала) связи</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="csdo:CommunicationChannelIdType">
+				<xs:attribute name="CommunicationChannelCode" type="csdo:CommunicationChannelCodeV2Type" use="required">
+					<xs:annotation>
+						<xs:documentation>Кодовое обозначение вида средства (канала) связи (телефон, факс, электронная почта и др.)</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- Совокупность реквизитов, присвоенных юридическому лицу в ЕАЭС -->
+	<xs:element name="EECOrganizationDetails" type="ccdo:EECOrganizationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность реквизитов, присвоенных юридическому лицу в ЕАЭС</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- Совокупность реквизитов, присвоенных юридическому лицу в ЕАЭС -->
+	<xs:complexType name="EECOrganizationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность реквизитов, присвоенных юридическому лицу в ЕАЭС</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="EECCountryCode" type="csdo:CountryCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение страны регистрации юридического лица</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:OrganizationName" minOccurs="0"/>
+			<xs:element ref="csdo:OrganizationBriefName" minOccurs="0"/>
+			<xs:element name="BusinessEntityType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение организационно-правовой формы, в которой зарегистрирован хозяйствующий субъект</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="csdo:Code20Type">
+							<xs:attribute name="BusinessEntityListCode" use="required">
+								<xs:annotation>
+									<xs:documentation>Обозначение справочника (классификатора), в соответствии с которым указан код организационно-правовой формы</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:token"/>
+								</xs:simpleType>
+							</xs:attribute>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="OrganizationId" type="csdo:BusinessEntityIdType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Уникальный идентификатор организации в реестре юридических лиц страны регистрации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OrganizationCode" type="csdo:BusinessEntityIdType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Классификационный код юридического лица, предназначенный для целей статистического учета</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OrganizationTaxpayerId" type="csdo:TaxpayerIdType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор юридического лица в реестре налогоплательщиков страны регистрации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TaxRegistrationReasonCode" type="csdo:TaxRegistrationReasonCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Код, идентифицирующий причину постановки организации на налоговый учет в Российской Федерации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:LanguageCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Язык заполнения текстовых реквизитов юридического лица</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Совокупность реквизитов, присвоенных юридическому лицу в ЕАЭС -->
+	<xs:element name="EECOrganizationBriefDetails" type="ccdo:EECOrganizationBriefDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность реквизитов, присвоенных юридическому лицу в ЕАЭС</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- Совокупность реквизитов, присвоенных юридическому лицу в ЕАЭС -->
+	<xs:complexType name="EECOrganizationBriefDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность реквизитов, присвоенных юридическому лицу в ЕАЭС</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="EECCountryCode" type="csdo:CountryCodeType">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение страны регистрации юридического лица</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:OrganizationBriefName" minOccurs="0"/>
+			<xs:element name="OrganizationId" type="csdo:BusinessEntityIdType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Уникальный идентификатор организации в реестре юридических лиц страны регистрации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OrganizationTaxpayerId" type="csdo:TaxpayerIdType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор юридического лица в реестре налогоплательщиков страны регистрации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TaxRegistrationReasonCode" type="csdo:TaxRegistrationReasonCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Код, идентифицирующий причину постановки организации на налоговый учет в Российской Федерации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="OwnerOrganizationDetails" type="ccdo:OwnerOrganizationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность реквизитов юридического лица, являющегося собственником электронного паспорта ТС</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="OwnerOrganizationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность реквизитов юридического лица, являющегося собственником электронного паспорта ТС</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="EECCountryCode" type="csdo:CountryCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение страны регистрации физического лица</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:OrganizationName" minOccurs="0"/>
+			<xs:element name="OrganizationId" type="csdo:BusinessEntityIdType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Уникальный идентификатор организации в реестре юридических лиц страны регистрации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OrganizationTaxpayerId" type="csdo:TaxpayerIdType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор юридического лица в реестре налогоплательщиков страны регистрации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:TaxRegistrationReasonCode" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="OwnerOrganizationBriefDetails" type="ccdo:OwnerOrganizationBriefDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность реквизитов юридического лица, являющегося собственником электронного паспорта ТС</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="OwnerOrganizationBriefDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность реквизитов юридического лица, являющегося собственником электронного паспорта ТС</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="EECCountryCode" type="csdo:CountryCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение страны регистрации юридического лица</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:OrganizationName" minOccurs="0"/>
+			<xs:element name="OrganizationId" type="csdo:BusinessEntityIdType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Уникальный идентификатор организации в реестре юридических лиц страны регистрации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OrganizationTaxpayerId" type="csdo:TaxpayerIdType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор юридического лица в реестре налогоплательщиков страны регистрации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TaxRegistrationReasonCode" type="csdo:TaxRegistrationReasonCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Код, идентифицирующий причину постановки организации на налоговый учет в Российской Федерации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--Совокупность реквизитов, присвоенных юридическому лицу в ЕАЭС -->
+	<xs:element name="EECIndividualDetails" type="ccdo:EECIndividualDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность реквизитов, присвоенных физическому лицу в ЕАЭС</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- Совокупность реквизитов, присвоенных физическому лицу в ЕАЭС -->
+	<xs:complexType name="EECIndividualDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность реквизитов, присвоенных физическому лицу в ЕАЭС</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="EECCountryCode" type="csdo:CountryCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение страны регистрации физического лица</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:FullNameDetails" minOccurs="0"/>
+			<xs:element name="SexCode" type="csdo:SexCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Пол физического лица</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BirthDate" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата рождения физического лица</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BirthPlace" type="csdo:Name120Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Место рождения физического лица</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IndividualId" type="csdo:BusinessEntityIdType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Уникальный идентификатор физического лица в реестре физических лиц страны регистрации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IndividualTaxpayerId" type="csdo:TaxpayerIdType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор физического лица в реестре налогоплательщиков страны регистрации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:IdentityDocDetails" minOccurs="0"/>
+			<xs:element ref="csdo:LanguageCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Язык заполнения текстовых реквизитов физического лица</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Совокупность реквизитов, присвоенных физическому лицу в ЕАЭС -->
+	<xs:element name="EECIndividualBriefDetails" type="ccdo:EECIndividualBriefDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность реквизитов, присвоенных физическому лицу в ЕАЭС</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- Совокупность реквизитов, присвоенных физическому лицу в ЕАЭС -->
+	<xs:complexType name="EECIndividualBriefDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность реквизитов, присвоенных физическому лицу в ЕАЭС</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="EECCountryCode" type="csdo:CountryCodeType">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение страны регистрации физического лица</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:FullNameDetails" minOccurs="0"/>
+			<xs:element name="IndividualId" type="csdo:BusinessEntityIdType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Уникальный идентификатор физического лица в реестре физических лиц страны регистрации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IndividualTaxpayerId" type="csdo:TaxpayerIdType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор физического лица в реестре налогоплательщиков страны регистрации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IdentityDocBriefDetailsType" type="ccdo:IdentityDocBriefDetailsType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Краткие сведения о документе, удостоверяющем личность физического лица</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="OwnerIndividualDetails" type="ccdo:OwnerIndividualDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность реквизитов физического лица, являющегося собственником электронного паспорта ТС (шасси ТС), СМ</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="OwnerIndividualDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность реквизитов физического лица, являющегося собственником электронного паспорта ТС (шасси ТС), СМ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="EECCountryCode" type="csdo:CountryCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение страны регистрации юридического лица</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:FirstName"/>
+			<xs:element ref="csdo:MiddleName" minOccurs="0"/>
+			<xs:element ref="csdo:LastName"/>
+			<xs:element name="SexCode" type="csdo:SexCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Пол физического лица</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BirthDate" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата рождения физического лица</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IndividualId" type="csdo:BusinessEntityIdType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Уникальный идентификатор физического лица в реестре физических лиц страны регистрации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:IdentityDocDetails" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="OwnerIndividualBriefDetails" type="ccdo:OwnerIndividualBriefDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность реквизитов физического лица, являющегося собственником электронного паспорта ТС (шасси ТС), СМ </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="OwnerIndividualBriefDetailsType">
+		<xs:annotation>
+			<xs:documentation>Совокупность реквизитов физического лица, являющегося собственником электронного паспорта ТС (шасси ТС), СМ </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="EECCountryCode" type="csdo:CountryCodeType">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение страны регистрации юридического лица</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:FirstName"/>
+			<xs:element ref="csdo:MiddleName" minOccurs="0"/>
+			<xs:element ref="csdo:LastName"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="AppInfo" type="ccdo:AppInfo">
+		<xs:annotation>
+			<xs:documentation>Совокупность сведений о заявлении</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="AppInfo">
+		<xs:annotation>
+			<xs:documentation>Совокупность сведений о заявлении</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CountryCode" type="csdo:CountryCodeType">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение страны</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AppTypeCode" type="csdo:UnifiedCode20Type">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение типа заявления</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AppTypeName" type="csdo:Name500Type">
+				<xs:annotation>
+					<xs:documentation>Наименование типа заявления</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AppNumber" type="trsdo:StatementNumberType">
+				<xs:annotation>
+					<xs:documentation>Регистрационный номер заявления в СЭП</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AppStatusCode" type="csdo:StatusCodeType">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение статуса заявления</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AppStatusName" type="csdo:Name40Type">
+				<xs:annotation>
+					<xs:documentation>Наименование статуса заявления</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AppApplicantInfo">
+				<xs:annotation>
+					<xs:documentation>Сведения о заявителе</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="ccdo:EECOrganizationBriefDetails" minOccurs="0"/>
+						<xs:element ref="ccdo:EECIndividualBriefDetails" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="AppCreationDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата и время создания заявления</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AppLastModifiedDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата и время последнего изменения заявления</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Совокупность реквизитов, присвоенных физическому лицу в ЕАЭС -->
+	<xs:complexType name="IdentityDocBriefDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие краткую информацию об удостоверении личности</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:IdentityDocKindCode" minOccurs="0"/>
+			<xs:element ref="csdo:IdentityDocSeriesId" minOccurs="0"/>
+			<xs:element ref="csdo:IdentityDocNumberId" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

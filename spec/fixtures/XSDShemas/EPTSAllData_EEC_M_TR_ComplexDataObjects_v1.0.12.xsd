@@ -1,0 +1,3473 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_TR_ComplexDataObjects/1.0.12" xmlns:trcdo="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_TR_ComplexDataObjects/1.0.12" xmlns:ccdo="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_ComplexDataObjects/0.4.14" xmlns:csdo="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_SimpleDataObjects/0.4.7" xmlns:trsdo="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_TR_SimpleDataObjects/1.0.12" version="1.0.12">
+	<xs:import namespace="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_ComplexDataObjects/0.4.14" schemaLocation="EPTSAllData_EEC_M_ComplexDataObjects_v0.4.14.xsd"/>
+	<xs:import namespace="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_SimpleDataObjects/0.4.7" schemaLocation="EPTSAllData_EEC_M_SimpleDataObjects_v0.4.7.xsd"/>
+	<xs:import namespace="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_TR_SimpleDataObjects/1.0.12" schemaLocation="EPTSAllData_EEC_M_TR_SimpleDataObjects_v1.0.12.xsd"/>
+	<!-- M.TR.CDE.00025: Область аккредитации (Область аккредитации. Детали) -->
+	<xs:element name="AccreditationAreaDetails" type="trcdo:AccreditationAreaDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация об области аккредитации органа по оценке соответствия</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00017: Область аккредитации (Область аккредитации_ Детали. Тип) -->
+	<xs:complexType name="AccreditationAreaDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию об области аккредитации</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:SingleListProductIndicator"/>
+			<xs:element ref="trsdo:TechnicalRegulationId" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Номер технического регламента Евразийского экономического союза (технического регламента Таможенного союза)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:CommodityCode" maxOccurs="unbounded"/>
+			<xs:element ref="csdo:ProductName" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Словесное обозначение продукции, включенной в область аккредитации органа по оценке соответствия</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:TestingMethodName" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trsdo:ControlledIndicatorName" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trcdo:ControlledIndicatorRegulatingDocDetails" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Информация о нормативном правовом акте и (или) техническом нормативном правовом акте, нормативном документе, регламентирующем контролируемые показатели и методы контроля</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:NoteText" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание изменений области аккредитации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:DocInformationDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Информация о документе об изменении области аккредитации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00015: Аттестат аккредитации (Аттестат аккредитации. Детали) -->
+	<xs:element name="AccreditationCertificateDetails" type="trcdo:AccreditationCertificateDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о документе, удостоверяющем официальное признание органом по аккредитации компетентности органа по оценке соответствия выполнять работы в определенной области оценки соответствия</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00004: Аттестат аккредитации (Аттестат аккредитации_ Детали. Тип) -->
+	<xs:complexType name="AccreditationCertificateDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию об аттестате аккредитации</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:DocId"/>
+			<xs:element ref="csdo:DocStartDate">
+				<xs:annotation>
+					<xs:documentation>Дата начала срока действия документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocValidityDate">
+				<xs:annotation>
+					<xs:documentation>Дата истечения срока действия документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:ReissuingReasonName" minOccurs="0"/>
+			<xs:element ref="trcdo:DocStatusDetails">
+				<xs:annotation>
+					<xs:documentation>Сведения о статусе действия аттестата аккредитации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00003: Заявитель (Заявитель. Детали) -->
+	<xs:element name="ApplicantDetails" type="trcdo:BusinessEntityV1DetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о заявителе оценки соответствия продукции</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDE.00048: Базовое транспортное средство (Базовое транспортное средство. Детали) -->
+	<xs:element name="BaseVehicleDetails" type="trcdo:BaseVehicleDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о транспортном средстве (шасси транспортного средства) другого изготовителя, использованном при изготовлении в качестве базового</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00034: Базовое транспортное средство (Базовое транспортное средство_ Детали. Тип) -->
+	<xs:complexType name="BaseVehicleDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о базовом транспортном средстве</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:VehicleMakeName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование марки транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VehicleMakeCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Код марки транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:VehicleCommercialName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Коммерческое наименование транспортного средства</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VehicleTypeId">
+				<xs:annotation>
+					<xs:documentation>Обозначение типа транспортного средства (шасси транспортного средства, самоходной машины и других видов техники), присвоенное организацией-изготовителем</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VehicleTypeVariantId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование модели(модификации) базового транспортного средства (шасси транспортного средства, самоходной машины и других видов техники), присвоенное организацией-изготовителем</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Номер паспорта (электронного паспорта) транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VehicleEPassportId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Номер электронного паспорта транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocCreationDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата оформления паспорта (электронного паспорта) транспортного средства</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDT.00022: Хозяйствующий субъект (Хозяйствующий субъект_ Детали: вариант 1. Тип) -->
+	<xs:complexType name="BusinessEntityV1DetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию о хозяйствующем субъекте</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedCountryCode">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение страны регистрации хозяйствующего субъекта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:BusinessEntityName">
+				<xs:annotation>
+					<xs:documentation>Полное наименование хозяйствующего субъекта или фамилия, имя и отчество физического лица, ведущего хозяйственную деятельность</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:BusinessEntityBriefName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сокращенное наименование хозяйствующего субъекта или фамилия, имя и отчество физического лица, ведущего хозяйственную деятельность</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:BusinessEntityTypeName" minOccurs="0"/>
+			<xs:element ref="csdo:BusinessEntityId" minOccurs="0"/>
+			<xs:element ref="ccdo:SubjectAddressDetails" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Адрес хозяйствующего субъекта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:UnifiedCommunicationDetails" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Контактный реквизит хозяйствующего субъекта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDT.00064: Хозяйствующий субъект (Хозяйствующий субъект_ Детали: вариант 2. Тип) -->
+	<xs:complexType name="BusinessEntityV2DetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию о хозяйствующем субъекте</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="trcdo:BusinessEntityV1DetailsType">
+				<xs:sequence>
+					<xs:element ref="ccdo:FullNameDetails">
+						<xs:annotation>
+							<xs:documentation>Фамилия, имя, отчество руководителя</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- M.TR.CDE.00023: Сведения о документе, подтверждающем соответствие (Сведения о документе, подтверждающем соответствие. Детали) -->
+	<xs:element name="ComplianceDocDetails" type="trcdo:ComplianceDocDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о документе, представленном заявителем в качестве доказательства соответствия обязательным требованиям</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00015: Сведения о документе подтверждающем соответствие (Сведения о документе подтверждающем соответствие_ Детали. Тип) -->
+	<xs:complexType name="ComplianceDocDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о документе подтверждающем соответствие</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:DocKindCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение вида документа, включающее в себя (при необходимости) вид документа, наименование принявшего органа (организации) и собственное наименование документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocName">
+				<xs:annotation>
+					<xs:documentation>Наименование документа, включающее в себя (при необходимости) вид документа, наименование принявшего органа (организации) и собственное наименование документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocCreationDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата выдачи документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocId" minOccurs="0"/>
+			<xs:element ref="csdo:BusinessEntityName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Полное наименование хозяйствующего субъекта, выдавшего документ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:BusinessEntityId" minOccurs="0"/>
+			<xs:element ref="csdo:AdditionalInfoText" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дополнительная информация о документе, подтверждающем соответствие</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00318: Документ подтверждающий полномочия (Документ подтверждающий полномочия. Детали) -->
+	<xs:element name="ConfirmingAuthorityDocDetails" type="trcdo:ConfirmingAuthorityDocDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о документе подтверждающем полномочия</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00318: Сведения о документе подтверждающем полномочия (Сведения о документе подтверждающем полномочия_ Детали. Тип) -->
+	<xs:complexType name="ConfirmingAuthorityDocDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о документе подтверждающем полномочия</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:DocName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование аттестата аккредитации или документа подтверждающего полномочия</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Регистрационный номер аттестата аккредитации или документа подтверждающего полномочия</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocCreationDate" minOccurs="0"/>
+			<xs:element ref="csdo:DocValidityDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Срок действия аттестата аккредитации или документа подтверждающего полномочия</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00008: Орган по оценке соответствия (Орган по оценке соответствия. Детали) -->
+	<xs:element name="ConformityAuthorityDetails" type="trcdo:ConformityAuthorityDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация об органе, уполномоченном на проведение оценки соответствия требованиям технических регламентов Таможенного союза</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00007: Орган по оценке соответствия (Орган по оценке соответствия_ Детали. Тип) -->
+	<xs:complexType name="ConformityAuthorityDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию об органе по оценке соответствия</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedCountryCode">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение страны регистрации хозяйствующего субъекта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:BusinessEntityName">
+				<xs:annotation>
+					<xs:documentation>Полное наименование хозяйствующего субъекта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:BusinessEntityBriefName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сокращенное наименование хозяйствующего субъекта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:BusinessEntityTypeName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование организационно-правовой формы, в которой зарегистрирована организация</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:BusinessEntityId"/>
+			<xs:element ref="ccdo:AddressV4Details" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Адрес хозяйствующего субъекта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:UnifiedCommunicationDetails" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Контактный реквизит хозяйствующего субъекта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:ConformityAuthorityKindCode" minOccurs="0"/>
+			<xs:element ref="trsdo:ConformityAuthorityKindName" minOccurs="0"/>
+			<xs:element ref="ccdo:FullNameDetails">
+				<xs:annotation>
+					<xs:documentation>Фамилия, имя, отчество руководителя органа по оценке соответствия</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:AccreditationCertificateDetails"/>
+			<xs:element ref="trcdo:AccreditationAreaDetails" maxOccurs="unbounded"/>
+			<xs:element ref="trcdo:DocInformationDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Информация о документе о включении органа по оценке соответствия в единый реестр органов по оценке соответствия Евразийского экономического союза (в том числе органов по сертификации, испытательных лабораторий (центров))</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:ResourceItemStatusDetails">
+				<xs:annotation>
+					<xs:documentation>Информация о записи единого реестра органов по оценке соответствия Евразийского экономического союза (в том числе органов по сертификации, испытательных лабораторий (центров))</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00099: Сведения об органе по оценке соответствия (Сведения об органе по оценке соответствия. Детали) -->
+	<xs:element name="ConformityAuthorityInformationDetails" type="trcdo:ConformityAuthorityInformationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация об органе по оценке соответствия, выдавшем документ</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00079: Сведения об органе по оценке соответствия (Сведения об органе по оценке соответствия_ Детали. Тип) -->
+	<xs:complexType name="ConformityAuthorityInformationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию об органе по оценке соответствия</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:BusinessEntityName">
+				<xs:annotation>
+					<xs:documentation>Полное наименование хозяйствующего субъекта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:BusinessEntityBriefName">
+				<xs:annotation>
+					<xs:documentation>Сокращенное наименование хозяйствующего субъекта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:BusinessEntityTypeName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование организационно-правовой формы, в которой зарегистрирован хозяйствующий субъект</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:SubjectAddressDetails" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Адрес хозяйствующего субъекта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:UnifiedCommunicationDetails" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Контактный реквизит хозяйствующего субъекта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:FullNameDetails">
+				<xs:annotation>
+					<xs:documentation>Фамилия, имя, отчество руководителя хозяйствующего субъекта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocId">
+				<xs:annotation>
+					<xs:documentation>Номер аттестата аккредитации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocStartDate">
+				<xs:annotation>
+					<xs:documentation>Дата начала срока действия аттестата аккредитации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocValidityDate">
+				<xs:annotation>
+					<xs:documentation>Дата истечения срока действия аттестата аккредитации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00098: Орган по оценке соответствия (Орган по оценке соответствия: вариант 2. Детали) -->
+	<xs:element name="ConformityAuthorityV2Details" type="trcdo:ConformityAuthorityV2DetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация об органе по оценке соответствия, выдавшем (зарегистрировавшем) документ</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00078: Орган по оценке соответствия (Орган по оценке соответствия_ Детали: вариант 2. Тип) -->
+	<xs:complexType name="ConformityAuthorityV2DetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию об органе по оценке соответствия</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:BusinessEntityId" minOccurs="0"/>
+			<xs:element ref="csdo:BusinessEntityName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Полное наименование хозяйствующего субъекта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:FullNameDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Фамилия, имя, отчество руководителя хозяйствующего субъекта, выдавшего документ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:SubjectAddressDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Адрес хозяйствующего субъекта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00002: Документ об оценке соответствия (Документ об оценке соответствия. Детали) -->
+	<xs:element name="ConformityDocDetails" type="trcdo:ConformityDocDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о документе об оценке соответствия</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00002: Документ об оценке соответствия (Документ об оценке соответствия_ Детали. Тип) -->
+	<xs:complexType name="ConformityDocDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о документе об оценке соответствия</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedCountryCode"/>
+			<xs:element ref="csdo:DocId"/>
+			<xs:element ref="csdo:DocCreationDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата выдачи или регистрации документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocStartDate"/>
+			<xs:element ref="csdo:DocValidityDate" minOccurs="0"/>
+			<xs:element ref="trcdo:ConformityAuthorityV2Details" minOccurs="0"/>
+			<xs:element ref="csdo:FormNumberId" minOccurs="0"/>
+			<xs:element ref="trcdo:DocAnnexDetails" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trcdo:ApplicantDetails"/>
+			<xs:element ref="trcdo:TechnicalRegulationObjectDetails"/>
+			<xs:element ref="trcdo:ComplianceDocDetails" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trsdo:SingleListProductIndicator"/>
+			<xs:element ref="trsdo:TechnicalRegulationId" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Номер технического регламента Союза (технического регламента Таможенного союза), на соответствие требованиям которого проводилась оценка соответствия</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:DocInformationDetails" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Информация о нормативном документе, на соответствие требованиям которого проводилась оценка соответствия</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:FullNameDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Фамилия, имя, отчество эксперта (эксперта-аудитора)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:ConformityDocKindCode" minOccurs="0"/>
+			<xs:element ref="trsdo:ConformityDocKindName" minOccurs="0"/>
+			<xs:element ref="trcdo:DocStatusDetails">
+				<xs:annotation>
+					<xs:documentation>Сведения об изменении статуса документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:ResourceItemStatusDetails">
+				<xs:annotation>
+					<xs:documentation>Информация о записи единого реестра выданных или принятых документов об оценке соответствия</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00011: Сведения о документе – основании для оформления электронного паспорта транспортного средства (Сведения о документе – основании для оформления электронного паспорта транспортного средства. Детали) -->
+	<xs:element name="ConformityDocInformationDetails" type="trcdo:ConformityDocInformationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о документе – основании для оформления электронного паспорта транспортного средства</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00006: Сведения о документе – основании для оформления электронного паспорта транспортного средства (Сведения о документе – основании для оформления электронного паспорта транспортного средства_ Детали. Тип) -->
+	<xs:complexType name="ConformityDocInformationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие сведения о документе – основании для оформления электронного паспорта транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:DocName">
+				<xs:annotation>
+					<xs:documentation>Наименование документа, включающее в себя (при необходимости) вид документа, наименование принявшего органа (организации) и собственное наименование документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocKindCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение вида документа, включающее в себя (при необходимости) вид документа, наименование принявшего органа (организации) и собственное наименование документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocCreationDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата выдачи документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocId" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00088: Статус действия документа об оценке соответствия (Статус действия документа об оценке соответствия. Детали) -->
+	<xs:element name="ConformityDocStatusDetails" type="trcdo:ConformityDocStatusDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о статусе действия документа об оценке соответствия</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00069: Статус действия документа об оценке соответствия (Статус действия документа об оценке соответствия_ Детали. Тип) -->
+	<xs:complexType name="ConformityDocStatusDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о статусе действия документа об оценке соответствия</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:DocStatusCode"/>
+			<xs:element ref="trcdo:DocStatusChangeDocDetails"/>
+			<xs:element ref="csdo:NoteText" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание причины изменения статуса действия документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:StartDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Начальная дата действия статуса</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:EndDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Конечная дата действия статуса</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00082: Документ об оценке соответствия (Документ об оценке соответствия: вариант 2. Детали) -->
+	<xs:element name="ConformityDocV2Details" type="trcdo:ConformityDocV2DetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о документе об оценке соответствия</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00063: Документ об оценке соответствия (Документ об оценке соответствия_ Детали: вариант 2. Тип) -->
+	<xs:complexType name="ConformityDocV2DetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о документе об оценке соответствия</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedCountryCode"/>
+			<xs:element ref="csdo:DocId"/>
+			<xs:element ref="csdo:DocStartDate"/>
+			<xs:element ref="csdo:DocValidityDate" minOccurs="0"/>
+			<xs:element ref="trsdo:ConformityDocKindCode"/>
+			<xs:element ref="trcdo:TechnicalRegulationObjectV2Details"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00094: Документ об оценке соответствия (Документ об оценке соответствия: вариант 3. Детали) -->
+	<xs:element name="ConformityDocV3Details" type="trcdo:ConformityDocV3DetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о документе об оценке соответствия</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00075: Документ об оценке соответствия (Документ об оценке соответствия_ Детали: вариант 3. Тип) -->
+	<xs:complexType name="ConformityDocV3DetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о документе об оценке соответствия</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedCountryCode" minOccurs="0"/>
+			<xs:element ref="csdo:DocId"/>
+			<xs:element ref="csdo:DocCreationDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата выдачи или регистрации документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocValidityDate" minOccurs="0"/>
+			<xs:element ref="csdo:BusinessEntityId" minOccurs="0"/>
+			<xs:element ref="csdo:BusinessEntityName" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00336: Место совершения договора (Место совершения договора. Детали) -->
+	<xs:element name="ContractPlaceDetails" type="trcdo:ContractPlaceDetailsType">
+		<xs:annotation>
+			<xs:documentation>Место совершения договора</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00336: Сведения о месте совершения договора (Место совершения договора_ Детали. Тип) -->
+	<xs:complexType name="ContractPlaceDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие сведения о месте совершения договора</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedCountryCode"/>
+			<xs:element ref="csdo:CityName"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00097: Сведения о документе, регламентирующем контролируемые показатели и методы контроля (Сведения о документе, регламентирующем контролируемые показатели и методы контроля. Детали) -->
+	<xs:element name="ControlledIndicatorRegulatingDocDetails" type="trcdo:DocInformationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о нормативном правовом акте и (или) техническом нормативном правовом акте, нормативном документе, регламентирующем контролируемые показатели и методы контроля</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDE.00041: Опасная продукция (Опасная продукция. Детали) -->
+	<xs:element name="DangerousProductDetails" type="trcdo:DangerousProductDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация об опасной продукции</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00031: Опасная продукция (Опасная продукция. Детали. Тип) -->
+	<xs:complexType name="DangerousProductDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию об опасной продукции</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:DangerousProductId"/>
+			<xs:element ref="csdo:CommodityCode"/>
+			<xs:element ref="trcdo:ProductDetails"/>
+			<xs:element ref="csdo:StartDateTime">
+				<xs:annotation>
+					<xs:documentation>Начальная дата и время признания продукта опасным</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:EndDateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Конечная дата и время признания продукта опасным</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:DangerousProductPicture" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00039: Мера в отношении опасного продукта (Мера в отношении опасного продукта. Детали) -->
+	<xs:element name="DangerousProductMeasureDetails" type="trcdo:DangerousProductMeasureDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о мере, принимаемой в отношении опасного продукта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00027: Мера в отношении опасного продукта (Мера в отношении опасного продукта_ Детали. Тип) -->
+	<xs:complexType name="DangerousProductMeasureDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о мере, принимаемой в отношении опасного продукта</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:DangerousProductMeasureCode"/>
+			<xs:element ref="trsdo:DangerousProductMeasureText" minOccurs="0"/>
+			<xs:element ref="trcdo:DocInformationDetails" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Информация о документе о принятии мер в отношении опасного продукта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00031: Уведомление об опасной продукции (Уведомление об опасной продукции. Детали) -->
+	<xs:element name="DangerousProductNotificationDetails" type="trcdo:DangerousProductNotificationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация об уведомлении об опасной продукции</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00023: Уведомление об опасной продукции (Уведомление об опасной продукции_ Детали. Тип) -->
+	<xs:complexType name="DangerousProductNotificationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию об уведомлении об опасной продукции</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedCountryCode">
+				<xs:annotation>
+					<xs:documentation>кодовое обозначение страны, извещающей об опасной продукции</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:DangerousProductEmergencyNotificationIndicator"/>
+			<xs:element ref="trcdo:DangerousProductDetails"/>
+			<xs:element ref="trcdo:RiskDetails"/>
+			<xs:element ref="trcdo:DangerousProductMeasureDetails" minOccurs="0"/>
+			<xs:element ref="trcdo:ConformityDocV3Details" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Информация о документе об оценке соответствия, выданном на опасную продукцию</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:SupplyChainPartyDetails" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Информация об участнике цепочки поставки опасной продукции</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:ResourceItemStatusDetails">
+				<xs:annotation>
+					<xs:documentation>Информация о записи системы информирования об опасной продукции</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00307: Разработчик (Разработчик. Детали) -->
+	<xs:element name="DeveloperDetails" type="trcdo:BusinessEntityV1DetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о разработчике продукции</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDE.00022: Приложение к документу (Приложение к документу. Детали) -->
+	<xs:element name="DocAnnexDetails" type="trcdo:DocAnnexDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о приложении к документу</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00013: Приложение к документу (Приложение к документу_ Детали. Тип) -->
+	<xs:complexType name="DocAnnexDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о приложении к документу</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:ObjectOrdinal">
+				<xs:annotation>
+					<xs:documentation>Порядковый номер приложения к документу</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:FormNumberId" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Номер, присвоенный бланку, на котором оформлено приложение к документу</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:PageQuantity">
+				<xs:annotation>
+					<xs:documentation>Общее количество листов в приложении к документу</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00026: Сведения о документе (Сведения о документе. Детали) -->
+	<xs:element name="DocInformationDetails" type="trcdo:DocInformationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о документе, необходимая для его идентификации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00018: Сведения о документе (Сведения о документе_ Детали. Тип) -->
+	<xs:complexType name="DocInformationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие сведения о документе</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:DocName">
+				<xs:annotation>
+					<xs:documentation>Наименование документа, включающее в себя (при необходимости) вид документа, наименование принявшего органа (организации) и собственное наименование документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocKindCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение вида документа, включающее в себя (при необходимости) вид документа, наименование принявшего органа (организации) и собственное наименование документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocCreationDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата выдачи документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocId" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00087: Документ об изменении статуса документа об оценке соответствия (Документ об изменении статуса документа об оценке соответствия. Детали) -->
+	<xs:element name="DocStatusChangeDocDetails" type="trcdo:DocStatusChangeDocDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о документе, на основании которого установлен статус действия документа об оценке соответствия</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00068: Документ об изменении статуса документа об оценке соответствия (Документ об изменении статуса документа об оценке соответствия_ Детали. Тип) -->
+	<xs:complexType name="DocStatusChangeDocDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о документе об изменении статуса документа об оценке соответствия</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:DocName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование документа, включающее в себя при необходимости вид документа, наименование принявшего органа (организации) и собственное наименование документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocKindCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование вида документа, включающее в себя при необходимости вид документа, наименование принявшего органа (организации) и собственное наименование документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocCreationDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата выдачи документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocId" minOccurs="0"/>
+			<xs:element ref="csdo:FormNumberId" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00040: Статус действия документа (Статус действия документа. Детали) -->
+	<xs:element name="DocStatusDetails" type="trcdo:DocStatusDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о статусе действия документа</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00030: Статус действия документа (Статус действия документа_ Детали. Тип) -->
+	<xs:complexType name="DocStatusDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о статусе действия документа</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:DocStatusCode" minOccurs="0"/>
+			<xs:element ref="trcdo:DocInformationDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Информация о документе, на основании которого установлен статус действия документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:StartDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Начальная дата действия статуса</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:EndDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Конечная дата действия статуса</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:NoteText" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание причины изменения статуса действия документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00194: Сведения о документе (Сведения о документе: вариант 2. Детали) -->
+	<xs:element name="DocumentDetails" type="trcdo:DocumentDetailsDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о документе</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00175: Сведения о документе (Сведения о документе_ Детали: вариант 2. Тип) -->
+	<xs:complexType name="DocumentDetailsDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о документе</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedCountryCode" minOccurs="0"/>
+			<xs:element ref="csdo:DocKindCode" minOccurs="0"/>
+			<xs:element ref="csdo:DocKindName" minOccurs="0"/>
+			<xs:element ref="csdo:DocName" minOccurs="0"/>
+			<xs:element ref="csdo:DocSeriesId" minOccurs="0"/>
+			<xs:element ref="csdo:DocId" minOccurs="0"/>
+			<xs:element ref="csdo:DocCreationDate" minOccurs="0"/>
+			<xs:element ref="csdo:StartDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>дата начала срока, в течение которого документ имеет силу</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocValidityDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>дата окончания срока, в течение которого документ имеет силу</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocValidityDuration" minOccurs="0"/>
+			<xs:element ref="csdo:AuthorityId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Строка, идентифицирующая орган государственной власти государства-члена либо уполномоченную им организацию, выдавшую или утвердившую документ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:AuthorityName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Полное наименование органа государственной власти государства-члена либо уполномоченной им организации, выдавшей документ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DescriptionText" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:PageQuantity" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00051: Двигатель внутреннего сгорания (Двигатель. Детали) -->
+	<xs:element name="EngineDetails" type="trcdo:EngineDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о двигателе внутреннего сгорания транспортного средства (шасси транспортного средства), приводном двигателе самоходной машины и других видов техники</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00037: Двигатель (Двигатель_ Детали. Тип) -->
+	<xs:complexType name="EngineDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о двигателе</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:VehicleComponentMakeName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование марки двигателя внутреннего сгорания</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VehicleComponentText" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание конструктивных особенностей (типа) двигателя внутреннего сгорания, характеризующее принцип его действия</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VehicleComponentModelCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение типа двигателя, присвоенное организацией-изготовителем</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:EngineCylinderQuantity" minOccurs="0"/>
+			<xs:element ref="trsdo:EngineCylinderArrangementText" minOccurs="0"/>
+			<xs:element ref="trsdo:EngineCapacityMeasure" minOccurs="0"/>
+			<xs:element name="EngineCompressionRate" type="trsdo:string-20" minOccurs="0"/>
+			<xs:element ref="trcdo:EngineMaxPowerDetails" minOccurs="0"/>
+			<xs:element ref="trcdo:EngineMaxTorqueDetails" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00005: Сведения о символе идентификационного номера двигателя (Сведения о символе идентификационного номера двигателя. Детали) -->
+	<xs:element name="EngineIdCharacterDetails" type="trcdo:IdCharacterDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о символе (сочетании символов) в составе идентификационного номера двигателя</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDE.00052: Максимальная мощность двигателя (Максимальная мощность двигателя. Детали) -->
+	<xs:element name="EngineMaxPowerDetails" type="trcdo:EngineMaxPowerDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о максимальной мощности двигателя внутреннего сгорания</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="VehicleShaftRotationFrequencyType">
+		<xs:sequence>
+			<xs:element name="VehicleShaftRotationFrequencyMinMeasure" type="csdo:PhysicalMeasureType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Минимальная скорость вращения коленчатого вала двигателя внутреннего сгорания</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="VehicleShaftRotationFrequencyMaxMeasure" type="csdo:PhysicalMeasureType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Максимальная скорость вращения коленчатого вала двигателя внутреннего сгорания</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDT.00038: Максимальная мощность двигателя (Максимальная мощность двигателя_ Детали. Тип) -->
+	<xs:complexType name="EngineMaxPowerDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о максимальной мощности двигателя</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:EngineMaxPowerMeasure"/>
+			<xs:element name="VehicleShaftRotationFrequency" type="trcdo:VehicleShaftRotationFrequencyType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Cкорость вращения коленчатого вала двигателя внутреннего сгорания, при которой достигается максимальная мощность двигателя</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00053: Максимальный крутящий момент двигателя (Максимальный крутящий момент двигателя. Детали) -->
+	<xs:element name="EngineMaxTorqueDetails" type="trcdo:EngineMaxTorqueDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о максимальном крутящем моменте двигателя внутреннего сгорания</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00039: Максимальный крутящий момент двигателя (Максимальный крутящий момент двигателя_ Детали. Тип) -->
+	<xs:complexType name="EngineMaxTorqueDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о максимальном крутящем моменте двигателя</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:EngineMaxTorqueMeasure"/>
+			<xs:element name="VehicleShaftRotationFrequency" type="trcdo:VehicleShaftRotationFrequencyType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Cкорость вращения коленчатого вала двигателя внутреннего сгорания транспортного средства, при которой достигается максимальный крутящий момент двигателя</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00074: Система выпуска и нейтрализации отработавших газов (Система выпуска и нейтрализации отработавших газов. Детали) -->
+	<xs:element name="ExhaustDetails" type="trcdo:VehicleComponentDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о системе выпуска и нейтрализации отработавших газов транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00070: Система выпуска и нейтрализации отработавших газов (Система выпуска и нейтрализации отработавших газов_ Детали. Тип) -->
+	<xs:complexType name="ExhaustDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о системе выпуска и нейтрализации отработавших газов транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:VehicleComponentText" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание системы выпуска и нейтрализации отработавших газов транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:ExhaustUnitDetails" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00090: Узел системы выпуска и нейтрализации отработавших газов (Узел системы выпуска и нейтрализации отработавших газов. Детали) -->
+	<xs:element name="ExhaustUnitDetails" type="trcdo:ExhaustUnitDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация об узле системы выпуска и нейтрализации отработавших газов транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00071: Узел системы выпуска и нейтрализации отработавших газов (Узел системы выпуска и нейтрализации отработавших газов _ Детали. Тип) -->
+	<xs:complexType name="ExhaustUnitDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию об узле системы выпуска и нейтрализации отработавших газов транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:VehicleComponentText" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание узла системы выпуска и нейтрализации отработавших газов транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VehicleComponentMakeName" minOccurs="0"/>
+			<xs:element ref="trsdo:ExhaustUnitKindCode"/>
+			<xs:element ref="trsdo:SilencerStageOrdinal" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00075: Система питания (Система питания. Детали) -->
+	<xs:element name="FuelFeedDetails" type="trcdo:VehicleComponentDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о системе питания транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00072: Система питания (Система питания_ Детали. Тип) -->
+	<xs:complexType name="FuelFeedDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о системе питания транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:VehicleComponentText">
+				<xs:annotation>
+					<xs:documentation>Описание системы питания транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VehicleComponentMakeName" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00091: Узел системы питания (Узел системы питания. Детали) -->
+	<xs:element name="FuelFeedUnitDetails" type="trcdo:FuelFeedUnitDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация об узле системы питания транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00073: Узел системы питания (Узел системы питания _ Детали. Тип) -->
+	<xs:complexType name="FuelFeedUnitDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию об узле системы питания транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:VehicleComponentText">
+				<xs:annotation>
+					<xs:documentation>Описание узла системы питания транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:FuelFeedUnitKindCode"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00228: Номер коробки передач (Номер коробки передач. Детали) -->
+	<xs:element name="GearboxIdDetails" type="trcdo:VehicleIdentityNumberDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация об идентификационном номере коробки передач самоходной машины и других видов техники, присвоенном и нанесенном организацией-изготовителем</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00049: Сведения о символе идентификационного номера транспортного средства (Сведения о символе идентификационного номера транспортного средства_ Детали. Тип) -->
+	<xs:complexType name="IdCharacterDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о символе идентификационного номера транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:IdCharacterStartingOrdinal"/>
+			<xs:element ref="trsdo:IdCharacterQuantity"/>
+			<xs:element ref="trsdo:IdCharacterText" minOccurs="0"/>
+			<xs:element ref="trcdo:IdCharacterValueDetails" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00066: Значение символа идентификационного номера транспортного средства (Значение символа идентификационного номера транспортного средства. Детали) -->
+	<xs:element name="IdCharacterValueDetails" type="trcdo:IdCharacterValueDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о значении символов (сочетания символов), составляющих идентификационный номер транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00051: Значение символа идентификационного номера транспортного средства (Значение символа идентификационного номера транспортного средства_ Детали. Тип) -->
+	<xs:complexType name="IdCharacterValueDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о значении символа идентификационного номера транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:IdCharacterValueCode"/>
+			<xs:element ref="trsdo:IdCharacterValueText" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00303: Испытательная лаборатория (центр) (Испытательная лаборатория (центр)) -->
+	<xs:element name="LaboratoryDetails" type="trcdo:LaboratoryDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация об испытательной лаборатории (центре)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00303: Испытательная лаборатория (центр) (Испытательная лаборатория (центр)_ Детали. Тип) -->
+	<xs:complexType name="LaboratoryDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию об испытательной лаборатории (центре)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedCountryCode"/>
+			<xs:element ref="csdo:BusinessEntityName"/>
+			<xs:element ref="trcdo:ConfirmingAuthorityDocDetails">
+				<xs:annotation>
+					<xs:documentation>Информация об аттестате аккредитации или документе подтверждающем полномочия</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:SubjectAddressDetails">
+				<xs:annotation>
+					<xs:documentation>Адрес испытательной лаборатории (центра) проводившей испытания</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:CommunicationDetails"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00233: Номер кузова (кабины, прицепа) самоходной машины и других видов техники (Номер кузова (кабины, прицепа) самоходной машины и других видов техники. Детали) -->
+	<xs:element name="MachineBodyIdDetails" type="trcdo:VehicleIdentityNumberDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о номере кузова (кабины, в том числе кабины оператора, прицепа, рамы) самоходной машины и других видов техники, присвоенном и нанесенном организацией-изготовителем</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDE.00010: Сведения о внесенных изменениях в конструкцию самоходной машины и других видов техники (Изменение конструкции самоходной машины и других видов техники. Детали) -->
+	<xs:element name="MachineModificationDetails" type="trcdo:MachineModificationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация об изменении, внесенном в конструкцию самоходной машины и других видов техники</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00005: Изменение конструкции самоходной машины и других видов техники (Изменение конструкции самоходной машины и других видов техники_ Детали. Тип) -->
+	<xs:complexType name="MachineModificationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию об изменении конструкции самоходной машины и других видов техники</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedCountryCode">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение страны в которой внесено изменение в конструкцию самоходной машины и других видов техники</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VehicleModificationText">
+				<xs:annotation>
+					<xs:documentation>Описание изменения в конструкции самоходной машины и других видов техники с указанием типа и марки установленных компонентов, способа монтажа, нового типа и нового назначения (специализации)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VehicleFeatureText">
+				<xs:annotation>
+					<xs:documentation>Описание новых характеристик и их новое значение самоходной машины и других видов техники, претерпевших изменения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:BusinessEntityName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Полное наименование хозяйствующего субъекта или фамилия, имя и отчество физического лица, ведущего хозяйственную деятельность, выдавшего заключение о возможности и порядке внесения изменений в конструкцию самоходной машины и других видов техники</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:MachineModificationOrganizationName" minOccurs="0"/>
+			<xs:element ref="trcdo:DocumentDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Информация о заключении о возможности и порядке внесения изменений в конструкцию самоходной машины и других видов техники</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00229: Номер основного ведущего моста (Номер основного ведущего моста. Детали) -->
+	<xs:element name="MainPoweredAxleIdDetails" type="trcdo:VehicleIdentityNumberDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация об идентификационном номере основного ведущего моста, присвоенном и нанесенном организацией-изготовителем</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDE.00004: Изготовитель (Изготовитель. Детали) -->
+	<xs:element name="ManufacturerDetails" type="trcdo:BusinessEntityV1DetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация об изготовителе продукции</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDE.00046: Представитель изготовителя (Представитель изготовителя. Детали) -->
+	<xs:element name="ManufacturerRepresentativeDetails" type="trcdo:BusinessEntityV2DetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о представителе иностранного изготовителя продукции в государстве-члене</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDE.00317: Свидетельство о метрологической аттестации методики (метода) измерений (свидетельство о метрологической аттестации методики (метода) измерений. Детали) -->
+	<xs:element name="MeasurementMethodCertificateDetails" type="trcdo:MeasurementsDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о свидетельстве о поверке средства измерений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDE.00311: Сведения об аттестации методики измерения (Аттестация методики измерения. Детали) -->
+	<xs:element name="MeasurementMethodCertificationDetails" type="trcdo:MeasurementMethodCertificationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация об аттестации методики измерения</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00307: Сведения об аттестации методики измерений (Аттестация методики измерений_ Детали. Тип) -->
+	<xs:complexType name="MeasurementMethodCertificationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию об аттестации методики измерений</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:DocId">
+				<xs:annotation>
+					<xs:documentation>Регистрационный номер свидетельства об аттестации методики (метода) измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocCreationDate">
+				<xs:annotation>
+					<xs:documentation>Дата выдачи свидетельства об аттестации методики (метода) измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:BusinessEntityName">
+				<xs:annotation>
+					<xs:documentation>Полное наименование организации, проводившей аттестацию методики измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:SubjectAddressDetails">
+				<xs:annotation>
+					<xs:documentation>Адрес организации, проводившей аттестацию методики измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:RecognitionDetails" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Сведения о признании аттестации методики измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:ConfirmingAuthorityDocDetails">
+				<xs:annotation>
+					<xs:documentation>Информация об аттестате аккредитации или документе подтверждающем полномочия организации на проведение аттестации методики измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:MeasurementsDocBinaryText" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Свидетельство об аттестации методики измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00316: Документ содержащий методику измерения (Документ содержащий методику измерения. Детали) -->
+	<xs:element name="MeasurementMethodDocDetails" type="trcdo:MeasurementMethodDocDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о нормативном документе содержащем методику измерения</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00317: Документ содержащий методику измерения (Документ содержащий методику измерения_ Детали. Тип) -->
+	<xs:complexType name="MeasurementMethodDocDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о нормативном документе содержащем методику измерения</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:DocCreationDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата регистрации (утверждения) нормативного документа, содержащего методику измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Регистрационный номер нормативного документа, содержащего методику измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:DocInformationDetails" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Информация о нормативном документе, в соответствии с требованиям которого аттестована методика измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocName">
+				<xs:annotation>
+					<xs:documentation>Наименование нормативного документа, содержащего методику измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00340: Диапазон измерений (Диапазон измерений. Детали) -->
+	<xs:element name="MeasurementRangeDetails" type="trcdo:MeasurementRangeDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о диапазоне измерений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00340: Диапазон измерений (Диапазон измерений_ Детали. Тип) -->
+	<xs:complexType name="MeasurementRangeDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о диапазоне измерений</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:MeasurementRangeMinValueText" minOccurs="0"/>
+			<xs:element ref="trsdo:MeasurementRangeMaxValueText" minOccurs="0"/>
+			<xs:element ref="trsdo:MeasurementRangeText" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00331: Международный договор в области обеспечения единства средств измерений (Международный договор в области обеспечения единства средств измерений. Детали) -->
+	<xs:element name="MeasurementsContractDetails" type="trcdo:MeasurementsContractDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о международном договоре государства-члена в области обеспечения единства средств измерений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00331: Сведения о международном договоре (Сведения о международном договоре_ Детали. Тип) -->
+	<xs:complexType name="MeasurementsContractDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие сведения о международном договоре</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedCountryCode" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение государства, подписавшего международный договор</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:EventDate">
+				<xs:annotation>
+					<xs:documentation>Дата совершения договора</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:ContractPlaceDetails"/>
+			<xs:element ref="csdo:DocStartDate">
+				<xs:annotation>
+					<xs:documentation>Дата вступления в силу договора</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:MeasurementsDocBinaryText" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Файл, содержащий текст официальной публикации договора</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00300: Сведения в области обеспечения единства измерений (Сведения в области обеспечения единства измерений. Детали) -->
+	<xs:element name="MeasurementsDetails" type="trcdo:MeasurementsDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация в области обеспечения единства измерений, содержащиеся в информационном фонде государства-члена</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00300: Сведения в области обеспечения единства измерений (Сведения в области обеспечения единства измерений_ Детали. Тип) -->
+	<xs:complexType name="MeasurementsDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие сведения в области обеспечения единства измерений</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:MeasurementsInformationKindCode"/>
+			<xs:element ref="csdo:UnifiedCountryCode">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение страны, представившей сведения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:MeasurementsNormativeDocDetails" minOccurs="0"/>
+			<xs:element ref="trcdo:MeasurementsInternationalNormativeDocDetails" minOccurs="0"/>
+			<xs:element ref="trcdo:MeasurementsContractDetails" minOccurs="0"/>
+			<xs:element ref="trcdo:MeasurementsStandardDetails" minOccurs="0"/>
+			<xs:element ref="trcdo:MeasurementsProductDetails" minOccurs="0"/>
+			<xs:element ref="trcdo:MeasurementsVerificationDetails" minOccurs="0"/>
+			<xs:element ref="trcdo:MeasurementsMethodDetails" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00330: Нормативный и международный документ в области обеспечения единства измерений (Нормативный и международный документ в области обеспечения единства измерений. Детали) -->
+	<xs:element name="MeasurementsInternationalNormativeDocDetails" type="trcdo:MeasurementsInternationalNormativeDocDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о нормативном и международном документе в области обеспечения единства измерений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00330: Сведения о нормативном и международном документе в области обеспечения единства измерений (Нормативный и международный документ_ Детали. Тип) -->
+	<xs:complexType name="MeasurementsInternationalNormativeDocDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие сведения о нормативном и международном документе в области обеспечения единства измерений</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:DocId">
+				<xs:annotation>
+					<xs:documentation>Обозначение международного документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocName">
+				<xs:annotation>
+					<xs:documentation>Наименование международного документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:AuthorityName">
+				<xs:annotation>
+					<xs:documentation>Наименование органа, принявшего международный документ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocStartDate">
+				<xs:annotation>
+					<xs:documentation>Дата введения в действие международного документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:MeasurementsDocBinaryText" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Файл, содержащий текст официальной публикации международного документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00337: Изготовитель в области обеспечения единства измерений (Изготовитель в области обеспечения единства измерений. Детали) -->
+	<xs:element name="MeasurementsManufacturerDetails" type="trcdo:MeasurementsManufacturerDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация об изготовителе в области обеспечения единства измерений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00337: Изготовитель или разработчик (владелец) в области обеспечения единства измерений (Изготовитель или разработчик (владелец) в области обеспечения единства измерений_ Детали. Тип) -->
+	<xs:complexType name="MeasurementsManufacturerDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию об изготовителе или разработчике (владельце) в области обеспечения единства измерений</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:BusinessEntityName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Полное наименование хозяйствующего субъекта или фамилия, имя, отчество физического лица, зарегистрированного в качестве индивидуального предпринимателя</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:SubjectAddressDetails">
+				<xs:annotation>
+					<xs:documentation>Адрес хозяйствующего субъекта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:UnifiedCommunicationDetails" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Контактный реквизит хозяйствующего субъекта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00335: Сведения об аттестованной методике (методе) измерений (Сведения об аттестованной методике (методе) измерений. Детали) -->
+	<xs:element name="MeasurementsMethodDetails" type="trcdo:MeasurementsMethodDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация об аттестованной методике (методе) измерений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00335: Сведения об аттестованной методике (методе) измерений (Сведения об аттестованной методике (методе) измерений_ Детали. Тип) -->
+	<xs:complexType name="MeasurementsMethodDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие сведения об аттестованных методиках (методах) измерений</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedCountryCode">
+				<xs:annotation>
+					<xs:documentation>Код страны госураства - исполнителя работ в области обеспечения единства измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:MethodName">
+				<xs:annotation>
+					<xs:documentation>Наименование методики (метода) измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocId">
+				<xs:annotation>
+					<xs:documentation>Обозначение документа на методику измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocName">
+				<xs:annotation>
+					<xs:documentation>Наименование документа на методику измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:MeasuredValueCode" minOccurs="0"/>
+			<xs:element ref="trsdo:MeasuredValueName" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trcdo:MeasurementRangeDetails" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trsdo:MeasurementAccuraciesText" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trcdo:MeasurementsManufacturerDetails">
+				<xs:annotation>
+					<xs:documentation>Информация о разработчике (владельце) методики измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:BusinessEntityName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование организации, утвердившей методику измерений в качестве референтной методики измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:MeasurementMethodCertificationDetails">
+				<xs:annotation>
+					<xs:documentation>Сведения об аттестации методики (метода) измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00329: Нормативный правовой акт в области обеспечения единства измерений (Нормативный правовой акт в области обеспечения единства измерений. Детали) -->
+	<xs:element name="MeasurementsNormativeDocDetails" type="trcdo:MeasurementsNormativeDocDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о нормативном правовом акте государства-члена в области обеспечения единства измерений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00329: Сведения о нормативном правовом акте в области обеспечения единства измерений (Нормативный правовой акт в области обеспечения единства измерений_ Детали. Тип) -->
+	<xs:complexType name="MeasurementsNormativeDocDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие сведения о нормативном правовом акте государства-члена в области обеспечения единства измерений</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:MeasurementsDocKindCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение вида нормативного правового акта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:MeasurementsDocKindName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование вида нормативного правового акта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocId">
+				<xs:annotation>
+					<xs:documentation>Номер нормативного правового акта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocName">
+				<xs:annotation>
+					<xs:documentation>Наименование нормативного правового акта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocCreationDate">
+				<xs:annotation>
+					<xs:documentation>Дата принятия нормативного правового акта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:AuthorityName">
+				<xs:annotation>
+					<xs:documentation>Наименование органа, принявшего нормативный правовой акт</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocStartDate">
+				<xs:annotation>
+					<xs:documentation>Дата введения в действие нормативного правового акта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:MeasurementsDocBinaryText" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Файл, содержащий текст официальной публикации нормативного правового акта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00333: Тип средств измерений или стандартный образец (Тип средств измерений или стандартный образец. Детали) -->
+	<xs:element name="MeasurementsProductDetails" type="trcdo:MeasurementsProductDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о типе средств измерений или типе стандартного образца</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00333: Сведения о типе средств измерений или стандартном образце (Сведения о типе средств измерений или стандартном образце_ Детали. Тип) -->
+	<xs:complexType name="MeasurementsProductDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие сведения о типе средств измерений или типе стандартного образца</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedCountryCode">
+				<xs:annotation>
+					<xs:documentation>Код страны госураства - исполнителя работ в области обеспечения единства измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocId">
+				<xs:annotation>
+					<xs:documentation>Регистрационный номер сертификата об утверждении типа средств измерений или стандартного образца</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocCreationDate">
+				<xs:annotation>
+					<xs:documentation>Дата выдачи сертификата об утверждении типа средств измерений или стандартного образца</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocValidityDuration">
+				<xs:annotation>
+					<xs:documentation>Срок действия сертификата об утверждении типа средств измерений или стандартного образца</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:ProductName">
+				<xs:annotation>
+					<xs:documentation>Наименование типа средств измерений или стандартного образца</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:MeasurementsManufacturerDetails">
+				<xs:annotation>
+					<xs:documentation>Информация об изготовителе типа средств измерений или типа стандартного образца</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VerificationIntervalDuration" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Периодичность поверки метрологических характеристик (параметров) типа средств измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:MethodId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Обозначение методики (метода) поверки средств измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:RecognitionDetails" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Сведения о признании утверждения типа средств измерений или стандартного образца</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:MeasurementsDocBinaryText" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Сертификат об утверждении типа средств измерений (стандартного образца) или описание типа средств измерений (стандартного образца)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00339: Информация о запросе сведений в области обеспечения единства измерений (Информация о запросе сведений в области обеспечения единства измерений. Детали) -->
+	<xs:element name="MeasurementsRequestInformationDetails" type="trcdo:MeasurementsRequestInformationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о запросе сведений в области обеспечения единства измерений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00339: Информация о запросе сведений в области обеспечения единства измерений (Информация о запросе сведений в области обеспечения единства измерений_ Детали. Тип) -->
+	<xs:complexType name="MeasurementsRequestInformationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о запросе сведений в области обеспечения единства измерений</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:MeasurementsInformationKindCode"/>
+			<xs:element ref="ccdo:CommunicationDetails">
+				<xs:annotation>
+					<xs:documentation>Почтовый адрес или адрес электронной почты, по которому представляются сведения в области обеспечения единства измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:NoteText">
+				<xs:annotation>
+					<xs:documentation>Сведения о цели запроса сведений в области обеспечения единства измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Номер нормативного правового акта или обозначение международного документа в области обеспечения единства измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:ProductId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Регистрационный номер эталона или обозначение средства измерений в области обеспечения единства измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:ProductName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование эталона, типа средств измерений или типа стандартного образца в области обеспечения единства измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:MethodName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование методики измерений в области обеспечения единства измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:BusinessEntityName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование заявителя (фамилия, имя, отчество) запроса сведений в области обеспечения единства измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:EventDate">
+				<xs:annotation>
+					<xs:documentation>Дата запроса сведений в области обеспечения единства измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00332: Эталон единицы величины (шкалы величины) (Эталон единицы величины (шкалы величины). Детали) -->
+	<xs:element name="MeasurementsStandardDetails" type="trcdo:MeasurementsStandardDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация об эталоне единицы величины (шкалы величины)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00332: Сведения об эталоне единицы величины (шкалы величины) (Эталон единицы величины (шкалы величины)_ Детали. Тип) -->
+	<xs:complexType name="MeasurementsStandardDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие сведения об эталоне единицы величины (шкалы величины)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:ProductName">
+				<xs:annotation>
+					<xs:documentation>Наименование эталона</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:ProductId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Регистрационный номер эталона</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:MeasurementsStandardApprovalYear" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Год утверждения эталона</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:ProductHolderDetails">
+				<xs:annotation>
+					<xs:documentation>Место хранения и применения эталона</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:ProductStatusCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение статуса эталона</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:ProductStatusName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование статуса эталона</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:ProductRankOrdinal" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Разряд эталона по поверочной (иерархической) схеме</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:MetrologicalCharacteristicDetails" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Метрологическая характеристика эталона</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:MetrologicalTraceabilityText">
+				<xs:annotation>
+					<xs:documentation>Описание метрологической прослеживаемости эталона</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00301: Уполномоченный орган государства-члена, выдавший документ (Уполномоченный орган государства-члена, выдавший документ. Детали) -->
+	<xs:element name="MeasurementsUniformityDocIssuerDetails" type="trcdo:MeasurementsUniformityDocIssuerDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация об уполномоченном органе государства-члена, выдавшем документ</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00301: Сведения об уполномоченном органе государства-члена, выдавшем документ (Сведения об уполномоченном органе государства-члена, выдавшем документ_ Детали. Тип) -->
+	<xs:complexType name="MeasurementsUniformityDocIssuerDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию об уполномоченном органе государства-члена, выдавшем документ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:BusinessEntityName">
+				<xs:annotation>
+					<xs:documentation>Полное наименование уполномоченного органа государства-члена</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:SubjectAddressDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Адрес хозяйствующего субъекта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:CommunicationDetails" minOccurs="0"/>
+			<xs:element ref="ccdo:FullNameDetails">
+				<xs:annotation>
+					<xs:documentation>Фамилия, имя, отчество руководителя (уполномоченного лица)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:PositionName">
+				<xs:annotation>
+					<xs:documentation>Наименование должности руководителя (уполномоченного лица)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:DocInformationDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сведения о документе, подтверждающем полномочия</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00315: Свидетельство о поверке средства измерений (Свидетельство о поверке средства измерений. Детали) -->
+	<xs:element name="MeasurementsVerificationCertificateDetails" type="trcdo:MeasurementsVerificationCertificateDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о свидетельстве о поверке средства измерений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00343: Свидетельство о поверке средства измерений (Свидетельство о поверке средства измерений_ Детали. Тип) -->
+	<xs:complexType name="MeasurementsVerificationCertificateDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию об аттестате аккредитации</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:DocId">
+				<xs:annotation>
+					<xs:documentation>Номер свидетельства о поверке средства измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocValidityDuration">
+				<xs:annotation>
+					<xs:documentation>Срок действия свидетельства о поверке средства измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00334: Сведения о результатах поверки средств измерений (Сведения о результатах поверки средств измерений. Детали) -->
+	<xs:element name="MeasurementsVerificationDetails" type="trcdo:MeasurementsVerificationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о результате поверки средств измерений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00334: Сведения о результате поверки средств измерений (Сведения о результате поверки средств измерений_ Детали. Тип) -->
+	<xs:complexType name="MeasurementsVerificationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие сведения о результате поверки средств измерений</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:ProductName">
+				<xs:annotation>
+					<xs:documentation>Наименование типа средств измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:ProductId">
+				<xs:annotation>
+					<xs:documentation>Обозначение типа средств измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:ProductInstanceId">
+				<xs:annotation>
+					<xs:documentation>Заводской номер средства измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:MeasurementsVerificationExecutorDetails">
+				<xs:annotation>
+					<xs:documentation>Полное наименование организации, выполнившей поверку средства измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VerificationPictureBinaryText" minOccurs="0"/>
+			<xs:element ref="trcdo:MeasurementsVerificationCertificateDetails"/>
+			<xs:element ref="trsdo:MethodName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование методики (метода) поверки средств измерений или название нормативного документа, в соответствии с которым выполнена поверка средства измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:MethodId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Обозначение методики (метода) поверки средств измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:RecognitionDetails" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Сведения о признании результатов работ в области обеспечения единства измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:MeasurementsDocBinaryText" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Методика поверки или свидетельство о поверке средства измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00342: Организация-исполнитель поверки средства измерений (Организация-исполнитель поверки средства измерений. Детали) -->
+	<xs:element name="MeasurementsVerificationExecutorDetails" type="trcdo:MeasurementsVerificationExecutorDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация об организации, выполнившей поверку средства измерений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00342: Организация-исполнитель поверки средства измерений (Организация-исполнитель поверки средства измерений_ Детали. Тип) -->
+	<xs:complexType name="MeasurementsVerificationExecutorDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие сведения об организации, выполнившей поверку средства измерений</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:BusinessEntityName">
+				<xs:annotation>
+					<xs:documentation>Полное наименование организации, выполнившей поверку средства измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:ConfirmingAuthorityDocDetails">
+				<xs:annotation>
+					<xs:documentation>Информация об аттестате аккредитации или документе подтверждающем полномочия организации на выполнение поверки средства измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00305: Тип средств измерений (Тип средств измерений. Детали) -->
+	<xs:element name="MeasuringInstrumentTypeDetails" type="trcdo:MeasuringInstrumentTypeDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о типе средств измерений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00305: Тип средства измерений (Тип средства измерений_ Детали. Тип) -->
+	<xs:complexType name="MeasuringInstrumentTypeDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о типе средства измерений</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:ProductName">
+				<xs:annotation>
+					<xs:documentation>Наименование типа средств измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:ProductId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Регистрационный номер типа средств измерений в информационном фонде по обеспечению единства измерений государства-члена</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:ProductInstanceId" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Заводской номер средства измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Номер акта (приказа, решения) об утверждении типа средств измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:ProductPurposeText" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Назначение типа средств измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:ProductText" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание типа средств измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:MeasuringInstrumentTypeModificationDetails" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trsdo:ProductReleaseFormKindCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение форма выпуска типа средств измерений (единичное, серийное, непрерывное или повторяющимися партиями)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:ProductPackageDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Информация об упаковке средства измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:NoteText" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание места и способа нанесения знака утверждения типа (на сопроводительные документы)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:MethodName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование методики измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:MethodId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Регистрационный номер методики измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:VerificationDetails"/>
+			<xs:element ref="trcdo:DocInformationDetails" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Информация о нормативном документе устанавливающем требования</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:ManufacturerDetails">
+				<xs:annotation>
+					<xs:documentation>Информация об изготовителе или владельце средств измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:LaboratoryDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>информация об испытательной лаборатории (центре) проводившей испытания</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:MeasurementsDetails"/>
+			<xs:element ref="ccdo:ResourceItemStatusDetails"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00304: Модификация типа средства измерений (Модификация типа средства измерений. Детали) -->
+	<xs:element name="MeasuringInstrumentTypeModificationDetails" type="trcdo:MeasuringInstrumentTypeModificationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о модификации типа средства измерений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00309: Модификация типа средства измерений (Модификация типа средства измерений_ Детали. Тип) -->
+	<xs:complexType name="MeasuringInstrumentTypeModificationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о модификации типа средства измерений</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:MeasuringInstrumentTypeModificationAbbreviationName">
+				<xs:annotation>
+					<xs:documentation>Наименование модификации типа средств измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:MeasuringInstrumentTypeModificationFeatureText" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trcdo:SoftwareDetails" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>информация о программном обеспечении типа средств измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:MetrologicalCharacteristicDetails" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>информация о метрологической характеристике (параметре) типа средств измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00308: Метрологическая характеристика (Метрологическая характеристика. Детали) -->
+	<xs:element name="MetrologicalCharacteristicDetails" type="trcdo:MetrologicalCharacteristicDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о метрологической характеристике (параметре)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00308: Метрологическая характеристика (Метрологическая характеристика_ Детали. Тип) -->
+	<xs:complexType name="MetrologicalCharacteristicDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о метрологической характеристике</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:MetrologicalCharacteristicName"/>
+			<xs:element ref="trsdo:MetrologicalCharacteristicText"/>
+			<xs:element ref="trsdo:MeasuredValueCode" minOccurs="0"/>
+			<xs:element ref="trsdo:MeasuredValueName" minOccurs="0"/>
+			<xs:element ref="trcdo:MeasurementRangeDetails" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trsdo:IntervalAllowedValuesText" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trsdo:BorderAllowedValuesErrorText" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trsdo:ExpandedUncertaintyText" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00195: Сведения о документе, подтверждающем принадлежность собственника к льготной категории (Сведения о документе, подтверждающем принадлежность собственника к льготной категории. Детали) -->
+	<xs:element name="OwnerDocDetails" type="trcdo:DocumentDetailsDetailsType">
+		<xs:annotation>
+			<xs:documentation>совокупность реквизитов ссылки на документ, подтверждающий принадлежность собственника к льготной категории</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDE.00070: Устройство накопления энергии (Устройство накопления энергии. Детали) -->
+	<xs:element name="PowerStorageDeviceDetails" type="trcdo:PowerStorageDeviceDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация об устройстве накопления энергии транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00054: Устройство накопления энергии (Устройство накопления энергии_ Детали. Тип) -->
+	<xs:complexType name="PowerStorageDeviceDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию об устройстве накопления энергии транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:VehicleComponentText" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание устройства накопления энергии транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VehicleComponentLocationText" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleRangeMeasure" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Запас хода транспортного средства (шасси транспортного средства, самоходной машины и других видов техники), приводимого в движение только электроприводом</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:PowerStorageDeviceVoltageMeasure" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00092: Узел устройства накопления энергии (Узел устройства накопления энергии. Детали) -->
+	<xs:element name="PowerStorageDeviceUnitDetails" type="trcdo:PowerStorageDeviceUnitDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация об узле устройства накопления энергии транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00074: Узел устройства накопления энергии (Узел устройства накопления энергии_ Детали. Тип) -->
+	<xs:complexType name="PowerStorageDeviceUnitDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию об узле устройства накопления энергии транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:VehicleComponentText">
+				<xs:annotation>
+					<xs:documentation>Описание узла устройства накопления энергии транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VehicleComponentMakeName" minOccurs="0"/>
+			<xs:element ref="trsdo:PowerStorageDeviceUnitKindCode"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00006: Продукт (Продукт. Детали) -->
+	<xs:element name="ProductDetails" type="trcdo:ProductDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о материальном объекте или услуге, произведенных человеческой или механической силой или естественным путем</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00001: Продукт (Продукт_ Детали. Тип) -->
+	<xs:complexType name="ProductDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о продукте</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:ProductId" minOccurs="0"/>
+			<xs:element ref="csdo:ProductName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование продукции, присвоенное производителем</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:ProductText" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание продукции</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:ProductInstanceDetails" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trsdo:EANCommodityId" minOccurs="0"/>
+			<xs:element ref="trcdo:DocInformationDetails" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Информация о нормативном документе, в соответствии с которым изготовлена продукция</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00341: Держатель продукта (Держатель продукта. Детали) -->
+	<xs:element name="ProductHolderDetails" type="trcdo:ProductHolderDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о юридическом лице или индивидуальном предпринимателе-держателе продукта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00341: Сведения о держателе продукта (Держатель продукта_ Детали. Тип) -->
+	<xs:complexType name="ProductHolderDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие сведения о держателе продукта</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:BusinessEntityName">
+				<xs:annotation>
+					<xs:documentation>Наименование юридического лица или индивидуального предпринимателя-держателя эталона еденицы величины</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:UnifiedCommunicationDetails" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Контактный реквизит юридического лица или индивидуального предпринимателя – держателя эталона еденицы величины</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00032: Единица продукта (Единица продукта. Детали) -->
+	<xs:element name="ProductInstanceDetails" type="trcdo:ProductInstanceDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о единице продукта или партии одинаковых единиц продукта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00024: Единица продукта (Единица продукта_ Детали. Тип) -->
+	<xs:complexType name="ProductInstanceDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о единице продукта</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedCommodityMeasure" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Количество единиц продукта в партии</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:ProductInstanceId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Уникальный идентификатор продукта или совокупности однородных продуктов, присвоенный производителем (заводской номер или номер партии)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:ProductInstanceManufacturedDate" minOccurs="0"/>
+			<xs:element ref="trsdo:ProductInstanceExpiryDate" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00302: Сведения об упаковке (Сведения об упаковке. Детали) -->
+	<xs:element name="ProductPackageDetails" type="trcdo:ProductPackageDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация об упаковке</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00302: Сведения об упаковке (Сведения об упаковке_ Детали. Тип) -->
+	<xs:complexType name="ProductPackageDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию об упаковке</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:ProductPackageText" minOccurs="0"/>
+			<xs:element ref="trsdo:ProductInstanceQuantity"/>
+			<xs:element ref="csdo:NoteText" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Описание содержимого упаковки</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00338: Сведения о признании (Сведения о признании. Детали) -->
+	<xs:element name="RecognitionDetails" type="trcdo:RecognitionDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о признании</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00338: Сведения о признании результатов работ в области обеспечения единства измерений (Сведения о признании результатов работ в области обеспечения единства измерений_ Детали. Тип) -->
+	<xs:complexType name="RecognitionDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие сведения о признании результатов работ в области обеспечения единства измерений</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedCountryCode">
+				<xs:annotation>
+					<xs:documentation>Страна признания результатов работ в области обеспечения единства измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:RecognitionIndicator">
+				<xs:annotation>
+					<xs:documentation>Признак, определяющий факт признания результатов работ в области обеспечения единства измерений: 1 – результат работ признан; 0 – результат работ не признан</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:EventDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата признания результатов работ в области обеспечения единства измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:AdditionalInfoText" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сведения о признании (непризнании) результатов работ в области обеспечения единства измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00095: Сведения об утилизационном сборе (Сведения об утилизационном сборе. Детали) -->
+	<xs:element name="RecyclingDutyPaidDetails" type="trcdo:RecyclingDutyPaidDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация об утилизационном сборе</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00076: Сведения об утилизационном сборе (Утилизационный сбор_ Детали: вариант 1. Тип) -->
+	<xs:complexType name="RecyclingDutyPaidDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию об утилизационном сборе</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedCountryCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>кодовое обозначение государства – члена Евразийского экономического союза (далее соответственно – государство-член, Союз), на территории которого осуществлена уплата утилизационного или иного аналогичного сбора</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:RecyclingDutyNotPayIndicator"/>
+			<xs:element ref="trsdo:RecyclingDutyPaydIndicator" minOccurs="0"/>
+			<xs:element ref="trsdo:RecyclingDutyNotPaidReason" minOccurs="0"/>
+			<xs:element name="TPONumber" type="trsdo:CustomsDocumentIdType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Номер таможенного приходного ордера, по которому была осуществлена уплата
+						утилизационного сбора
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00043: Риск (Риск. Детали) -->
+	<xs:element name="RiskDetails" type="trcdo:RiskDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о риске</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00032: Риск (Риск_ Детали. Тип) -->
+	<xs:complexType name="RiskDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о риске</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:RiskKindCode" maxOccurs="unbounded"/>
+			<xs:element ref="trsdo:RiskText" minOccurs="0"/>
+			<xs:element ref="trcdo:DocInformationDetails" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Информация о нормативном документе, на соответствие которому исследовалась продукция и которому она не соответствует</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00313: Программное обеспечение (Программное обеспечение. Детали) -->
+	<xs:element name="SoftwareDetails" type="trcdo:SoftwareDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о программном обеспечении</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00310: Программное обеспечение (Программное обеспечение_ Детали. Тип) -->
+	<xs:complexType name="SoftwareDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о программном обеспечении</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:ProductName">
+				<xs:annotation>
+					<xs:documentation>Наименование программного обеспечения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:ProductText" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание программного обеспечения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:SoftwareProtectionMethodText" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание способа защиты программного обеспечения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00314: Сертификат об утверждении типа стандартного образца (Сертификат об утверждении типа стандартного образца. Детали) -->
+	<xs:element name="StandardSampleTypeCertificateDetails" type="trcdo:MeasurementsDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о сертификате об утверждении типа стандартного образца</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDE.00310: Тип стандартного образца (Тип стандартного образца. Детали) -->
+	<xs:element name="StandardSampleTypeDetails" type="trcdo:StandardSampleTypeDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о типе стандартного образца</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00313: Тип стандартного образца (Тип стандартного образца_ Детали. Тип) -->
+	<xs:complexType name="StandardSampleTypeDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о типе стандартного образца</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:ProductName">
+				<xs:annotation>
+					<xs:documentation>Наименование типа стандартного образца</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:ProductId">
+				<xs:annotation>
+					<xs:documentation>Регистрационный номер типа стандартного образца в информационном фонде по обеспечению единства измерений государства-члена</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:ApplicationAreaText">
+				<xs:annotation>
+					<xs:documentation>описание области применения типа стандартного образца</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:ProductInstanceId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Заводской номер стандартного образца</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Номер акта (приказа, решения) об утверждении типа стандартного образца</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:ProductPurposeText" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Назначение типа стандартного образца</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:ProductText">
+				<xs:annotation>
+					<xs:documentation>Описание типа стандартного образца</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:ProductReleaseFormKindCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Форма выпуска стандартного образца</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:MetrologicalCharacteristicDetails">
+				<xs:annotation>
+					<xs:documentation>Информация о метрологической характеристике (параметре) типа стандартного образца</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:ProductInstanceExpiryDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата истечения срок годности экземпляра стандартного образца</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VerificationIntervalDuration">
+				<xs:annotation>
+					<xs:documentation>Периодичность поверки метрологических характеристик (параметров) стандартного образца</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:NoteText" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание места и способа нанесения знака утверждения типа стандартного образца (на сопроводительные документы)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:ProductInstanceDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Экземпляр (партия) стандартного образца, представленный на испытания (для целей утверждения типа, аттестацию, сертификацию)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:ProductPackageDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Информация о комплектности стандартного образца</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:DeveloperDetails">
+				<xs:annotation>
+					<xs:documentation>Информация о разработчике стандартного образца</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:ManufacturerDetails">
+				<xs:annotation>
+					<xs:documentation>Информация об изготовителе стандартного образца</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:SupplierDetails" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Информация о поставщике стандартного образца</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:LaboratoryDetails"/>
+			<xs:element ref="trcdo:DocInformationDetails" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Информация о нормативном документе устанавливающем требования</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:StandardSampleTypeCertificateDetails"/>
+			<xs:element ref="ccdo:ResourceItemStatusDetails"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00309: Поставщик (Поставщик. Детали) -->
+	<xs:element name="SupplierDetails" type="trcdo:BusinessEntityV1DetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о поставщике</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDE.00038: Участник цепочки поставки (Участник цепочки поставки. Детали) -->
+	<xs:element name="SupplyChainPartyDetails" type="trcdo:SupplyChainPartyDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация об участнике цепочки поставки</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00029: Участник цепочки поставки (Участник цепочки поставки_ Детали. Тип) -->
+	<xs:complexType name="SupplyChainPartyDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию об участнике цепочки поставки</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="trcdo:BusinessEntityV1DetailsType">
+				<xs:sequence>
+					<xs:element ref="trsdo:SupplyChainPartyKindCode"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- M.TR.CDE.00033: Объект технического регулирования (Объект технического регулирования. Детали) -->
+	<xs:element name="TechnicalRegulationObjectDetails" type="trcdo:TechnicalRegulationObjectDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о продукции и связанных с требованиями к продукции процессах проектирования (включая изыскания), производства, строительства, монтажа, наладки, эксплуатации, хранения, перевозки, реализации и утилизации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00025: Объект технического регулирования (Объект технического регулирования_ Детали. Тип) -->
+	<xs:complexType name="TechnicalRegulationObjectDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию об объекте технического регулирования</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trcdo:ProductDetails" maxOccurs="unbounded"/>
+			<xs:element ref="csdo:CommodityCode" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение группы (класса) товаров в соответствии с ТН ВЭД ЕАЭС</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:TechnicalRegulationObjectKindCode" minOccurs="0"/>
+			<xs:element ref="trsdo:TechnicalRegulationObjectKindName" minOccurs="0"/>
+			<xs:element ref="trcdo:ManufacturerDetails"/>
+			<xs:element ref="trcdo:DocInformationDetails" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Информация о документе, направляемом грузоотправителем с отгруженным товаром и удостоверяющем перевозку</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00084: Объект технического регулирования (Объект технического регулирования: вариант 2. Детали) -->
+	<xs:element name="TechnicalRegulationObjectV2Details" type="trcdo:TechnicalRegulationObjectV2DetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о продукции и связанных с требованиями к продукции процессах проектирования (включая изыскания), производства, строительства, монтажа, наладки, эксплуатации, хранения, перевозки, реализации и утилизации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00065: Объект технического регулирования (Объект технического регулирования_ Детали: вариант 2. Тип) -->
+	<xs:complexType name="TechnicalRegulationObjectV2DetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию об объекте технического регулирования</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:TechnicalRegulationObjectKindCode"/>
+			<xs:element ref="csdo:UnifiedCommodityMeasure" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00068: Узел трансмиссии (Узел трансмиссии. Детали) -->
+	<xs:element name="TransmissionUnitDetails" type="trcdo:TransmissionUnitDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация об узле трансмиссии транспортного средства (шасси транспортного средства)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00053: Узел трансмиссии (Узел трансмиссии_ Детали. Тип) -->
+	<xs:complexType name="TransmissionUnitDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию об узле трансмиссии</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:VehicleUnitKindCode"/>
+			<xs:element ref="trsdo:AxisDistribution" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleComponentMakeName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование марки узла трансмиссии</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VehicleComponentModelCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение вида узла трансмиссии транспортного средства (шасси транспортного средства, самоходной машины и других видов техники), присвоенное организацией-изготовителем</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VehicleComponentText" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание конструктивных особенностей (типа) узла трансмиссии транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:TransmissionUnitGearQuantity" minOccurs="0"/>
+			<xs:element ref="trcdo:TransmissionUnitGearDetails" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trcdo:VehiclePowerTakeOffDetails" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00076: Передача узла трансмиссии (Передача. Детали) -->
+	<xs:element name="TransmissionUnitGearDetails" type="trcdo:TransmissionUnitGearDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о передаче узла трансмиссии транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00059: Передача узла трансмиссии (Передача_ Детали. Тип) -->
+	<xs:complexType name="TransmissionUnitGearDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию об узле трансмиссии</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:TransmissionUnitGearName" minOccurs="0"/>
+			<xs:element ref="trsdo:TransmissionUnitGearType" minOccurs="0"/>
+			<xs:element ref="trsdo:TransmissionUnitGearRate" minOccurs="0"/>
+			<xs:element ref="trsdo:TransmissionUnitGearRateMax" minOccurs="0"/>
+			<xs:element ref="trsdo:TransmissionUnitReverseGearIndicator"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00067: Ось транспортного средства (Ось транспортного средства. Детали) -->
+	<xs:element name="VehicleAxleDetails" type="trcdo:VehicleAxleDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация об оси транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00052: Ось транспортного средства (Ось транспортного средства_ Детали. Тип) -->
+	<xs:complexType name="VehicleAxleDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию об оси транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:VehicleAxleOrdinal"/>
+			<xs:element ref="trsdo:VehicleTechnicallyPermissibleMaxWeightOnAxleMeasure" minOccurs="0"/>
+			<xs:element ref="trsdo:DualTireAxleIndicator" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Признак сдвоенных шин на оси (только для самоходок)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:SteeringAxleIndicator" minOccurs="0"/>
+			<xs:element ref="trsdo:DrivingAxleIndicator" minOccurs="0"/>
+			<xs:element ref="trsdo:BrakingAxleIndicator" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleAxleSweptPathMeasure" minOccurs="0"/>
+			<!-- DEPRECATED: тег устарел и больше не используется (теперь вместо него: ./VehicleTyre/VehicleTyreKindCode) -->
+			<xs:element ref="trsdo:VehicleTyreKindCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>DEPRECATED: тег устарел и больше не используется (теперь вместо него: ./VehicleTyre/VehicleTyreKindCode)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<!-- DEPRECATED: END -->
+			<xs:element ref="trcdo:VehicleTyre" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00227: Номер кузова (кабины, прицепа) (Номер кузова (кабины, прицепа). Детали) -->
+	<xs:element name="VehicleBodyIdDetails" type="trcdo:VehicleIdentityNumberDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о номере кузова (кабины, прицепа), присвоенном и нанесенном организацией-изготовителем</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDE.00071: Кузов (кабина) транспортного средства (Кузов (кабина) транспортного средства. Детали) -->
+	<xs:element name="VehicleBodyworkDetails" type="trcdo:VehicleBodyworkDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о кузове (кабине) транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- Кузов транспортного средства (Кузов транспортного средства_ Детали. Тип Входящие сервисы) -->
+	<xs:complexType name="VehicleBodyworkDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о кузове транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:VehicleDoorQuantity" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleCarriageSpaceImplementationText" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleComponentText" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание конструктивных особенностей (типа) кузова (кабины) транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VehiclePassengerQuantity" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleTrunkVolumeMeasure" minOccurs="0"/>
+			<xs:element ref="trcdo:VehicleSeatDetails" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00072: Тормозная система транспортного средства (Тормозная система транспортного средства. Детали) -->
+	<xs:element name="VehicleBrakingSystemDetails" type="trcdo:VehicleBrakingSystemDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о тормозной системе транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00056: Тормозная система транспортного средства (Тормозная система транспортного средства_ Детали. Тип) -->
+	<xs:complexType name="VehicleBrakingSystemDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о тормозной системе транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:VehicleBrakingSystemKindCode"/>
+			<xs:element ref="trsdo:VehicleComponentText">
+				<xs:annotation>
+					<xs:documentation>Описание конструкции тормозной системы транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00073: Сцепление транспортного средства (Сцепление транспортного средства. Детали) -->
+	<xs:element name="VehicleClutchDetails" type="trcdo:VehicleComponentDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о сцеплении транспортного средства</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDE.00024: Сведения о документе подтверждающем соответствие обязательным требованиям ТР ТС 018/2011 (Сведения о документе подтверждающем соответствие обязательным требованиям ТР ТС 018/2011. Детали) -->
+	<xs:element name="VehicleComplianceDocDetails" type="trcdo:VehicleComplianceDocDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о документе, представленном заявителем в качестве доказательства соответствия обязательным требованиям ТР ТС 018/2011</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00016: Сведения о документе подтверждающем соответствие обязательным требованиям ТР ТС 018/2011 (Сведения о документе подтверждающем соответствие обязательным требованиям ТР ТС 018/2011. Тип) -->
+	<xs:complexType name="VehicleComplianceDocDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о документе подтверждающем соответствие обязательным требованиям ТР ТС 018/2011</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:DocName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование документа, включающее в себя при необходимости вид документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocId" minOccurs="0"/>
+			<xs:element ref="csdo:DocCreationDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата оформления (выдачи) документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:EventDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата внесения записи о документе в единый реестр</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:BusinessEntityName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Полное наименование хозяйствующего субъекта, выдавшего документ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:BusinessEntityId" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDT.00057: Компонент транспортного средства (Компонент транспортного средства_ Детали. Тип) -->
+	<xs:complexType name="VehicleComponentDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о компоненте транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:VehicleComponentMakeName" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleComponentText" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00262: Документ об оценке соответствия колесных транспортных средств (Документ об оценке соответствия колесных транспортных средств. Детали) -->
+	<xs:element name="VehicleConformityDocDetails" type="trcdo:VehicleConformityDocDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о документе об оценке соответствия колесных транспортных средств</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00262: Документ об оценке соответствия колесных транспортных средств (Документ об оценке соответствия колесных транспортных средств_ Детали. Тип) -->
+	<xs:complexType name="VehicleConformityDocDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о документе об оценке соответствия колесных транспортных средств</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedCountryCode"/>
+			<xs:element ref="csdo:DocId"/>
+			<xs:element ref="csdo:DocCreationDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата выдачи или регистрации документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocStartDate"/>
+			<xs:element ref="csdo:DocValidityDate" minOccurs="0"/>
+			<xs:element ref="csdo:BusinessEntityId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Уникальный идентификатор хозяйствующего субъекта, выдавшего документ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:ConformityAuthorityInformationDetails" minOccurs="0"/>
+			<xs:element ref="csdo:FormNumberId" minOccurs="0"/>
+			<xs:element ref="trcdo:DocAnnexDetails" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="csdo:AdditionalInfoText" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дополнительная информация</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:ApplicantDetails"/>
+			<xs:element ref="trcdo:VehicleTypeDetails" minOccurs="0"/>
+			<xs:element ref="trcdo:VehicleVariantDetails" maxOccurs="unbounded"/>
+			<xs:element ref="trcdo:VehicleV2Details" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trcdo:VehicleManufacturerDetails" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trcdo:VehicleComplianceDocDetails" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>информация о документе, представленном заявителем в качестве доказательства соответствия обязательным требованиям ТР ТС 018/2011</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:FullNameDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Фамилия, имя, отчество руководителя уполномоченного органа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:ConformityDocKindCode" minOccurs="0"/>
+			<xs:element ref="trsdo:ConformityDocKindName" minOccurs="0"/>
+			<xs:element ref="trcdo:ConformityDocStatusDetails">
+				<xs:annotation>
+					<xs:documentation>Сведения об изменении статуса документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:TechnicalRegulationObjectKindCode"/>
+			<xs:element ref="ccdo:ResourceItemStatusDetails">
+				<xs:annotation>
+					<xs:documentation>Информация о записи единого реестра выданных или принятых документов об оценке соответствия</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00049: Транспортное средство (Транспортное средство. Детали) -->
+	<xs:element name="VehicleDetails" type="trcdo:VehicleDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о транспортном средстве (шасси транспортного средства, самоходной машине и другом виде техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00035: Транспортное средство (Транспортное средство_ Детали. Тип) -->
+	<xs:complexType name="VehicleDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о транспортном средстве</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trcdo:VehicleIdInfoDetails" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleCategoryCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение категории транспортного средства в соответствии с Конвенцией о дорожном движении от 8 ноября 1968 года</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:MachineCategoryCode" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleCharacteristicsName" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleCharacteristicsNameOther" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleBodyColourCode" minOccurs="0" maxOccurs="3"/>
+			<xs:element ref="trsdo:BodyMultiColourIndicator" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleBodyColourName" minOccurs="0"/>
+			<xs:element ref="csdo:ManufactureYear" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>год изготовления транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:ManufactureMonth" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>месяц изготовления транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VehicleImportCountryCode" minOccurs="0"/>
+			<xs:element ref="trsdo:NotCustomsDocumentIndicator" minOccurs="0"/>
+			<xs:element ref="trsdo:CustomsDocumentId" minOccurs="0"/>
+			<xs:element ref="trcdo:RecyclingDutyPaidDetails" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trsdo:NotVehicleCustomsRestrictionIndicator" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleCustomsRestrictionText" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="csdo:NoteText" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сведения о базовом оборудовании транспортного средства (шасси транспортного средства, самоходной машины и других видов техники), а также иная дополнительная информация, указанная организацией-изготовителем</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00050: Электромашина транспортного средства (Электромашина транспортного средства. Детали) -->
+	<xs:element name="VehicleElectricalMachineDetails" type="trcdo:VehicleElectricalMachineDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация об электродвигателе электромобиля или электромашине в составе трансмиссии гибридного транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00036: Электромашина транспортного средства (Электромашина транспортного средства_ Детали. Тип) -->
+	<xs:complexType name="VehicleElectricalMachineDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию об электромашине транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:ElectricalMachineKindCode" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleComponentModelCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение электромашины транспортного средства (шасси транспортного средства, самоходной машины и других видов техники), присвоенное организацией-изготовителем</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VehicleComponentMakeName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование марки электромашины транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VehicleComponentText" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание типа и характеристики (постоянного или переменного тока, для переменного тока – синхронный или асинхронный, количество фаз) электромашины транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:ElectricMotorPowerMeasure" minOccurs="0"/>
+			<xs:element ref="trsdo:ElectricalMachineVoltageMeasure"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00230: Номер устройства вызова экстренных служб (Номер устройства вызова экстренных служб. Детали) -->
+	<xs:element name="VehicleEmergencyCallDeviceIdDetails" type="trcdo:VehicleIdentityNumberDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация об идентификационном номере устройства вызова экстренных оперативных служб</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDE.00225: Номер двигателя (Номер двигателя. Детали) -->
+	<xs:element name="VehicleEngineIdDetails" type="trcdo:VehicleIdentityNumberDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о номере двигателя, присвоенном организацией-изготовителем</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDE.00226: Номер шасси (рамы) (Номер шасси (рамы). Детали) -->
+	<xs:element name="VehicleFrameIdDetails" type="trcdo:VehicleIdentityNumberDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о номере шасси (рамы) транспортного средства, присвоенном и нанесенном организацией-изготовителем</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDE.00064: Сведения о символе идентификационного номера транспортного средства (Сведения о символе идентификационного номера транспортного средства. Детали) -->
+	<xs:element name="VehicleIdCharacterDetails" type="trcdo:IdCharacterDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о символе (сочетании символов) в составе идентификационного номера транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDE.00232: Идентификационный номер транспортного средства (Идентификационный номер транспортного средства. Детали) -->
+	<xs:element name="VehicleIdDetails" type="trcdo:VehicleIdentityNumberDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация об идентификационном номере транспортного средства (шасси транспортного средства, самоходной машины и других видов техники), присвоенном организацией-изготовителем</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDE.00030: Сведения об идентификационных номерах (Идентификационный номер. Детали) -->
+	<xs:element name="VehicleIdInfoDetails" type="trcdo:VehicleIdInfoDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация об идентификационных номерах транспортного средства (шасси транспортного средства, самоходной машины и других видов техники) или его компонента, присвоенных организацией-изготовителем</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00040: Идентификационный номер (Идентификационный номер_ Детали. Тип) -->
+	<xs:complexType name="VehicleIdInfoDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию об идентификационных номерах</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trcdo:VehicleIdDetails" minOccurs="0"/>
+			<xs:element ref="trcdo:VehicleEngineIdDetails" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trcdo:VehicleFrameIdDetails" minOccurs="0"/>
+			<xs:element ref="trcdo:VehicleBodyIdDetails" minOccurs="0"/>
+			<xs:element ref="trcdo:MachineBodyIdDetails" minOccurs="0"/>
+			<xs:element ref="trcdo:GearboxIdDetails" minOccurs="0"/>
+			<xs:element ref="trcdo:MainPoweredAxleIdDetails" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trcdo:VehicleEmergencyCallDeviceIdDetails" minOccurs="0"/>
+			<xs:element ref="trcdo:VehicleSatelliteNavigationIdDetails" minOccurs="0"/>
+			<xs:element ref="trcdo:VehicleTachographIdDetails" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDT.00225: Сведения об идентификационном номере (Сведения об идентификационном номере_ Детали. Тип) -->
+	<xs:complexType name="VehicleIdentityNumberDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию об идентификационном номере</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:VehicleIdentityNumberId" minOccurs="0"/>
+			<xs:element ref="trsdo:NotVehicleIdentityNumberIndicator"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00077: Система зажигания транспортного средства (Система зажигания транспортного средства. Детали) -->
+	<xs:element name="VehicleIgnitionDetails" type="trcdo:VehicleComponentDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о системе зажигания транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDE.00055: Маркировка транспортного средства (Маркировка транспортного средства. Детали) -->
+	<xs:element name="VehicleLabelingDetails" type="trcdo:VehicleLabelingDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о маркировке транспортного средства</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00041: Маркировка транспортного средства (Маркировка транспортного средства_ Детали. Тип) -->
+	<xs:complexType name="VehicleLabelingDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о маркировке транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:VehicleComponentLocationText" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Описание места расположения таблички организации-изготовителя на транспортном средстве (шасси транспортного средства, самоходной машине и другом виде техники), достаточное для его обнаружения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:NotManufacturerPlateIndicator" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleIdentificationNumberLocationText" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trsdo:EngineIdentificationNumberLocationText" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trcdo:VehicleIdCharacterDetails" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trcdo:EngineIdCharacterDetails" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00045: Изготовитель транспортного средства (Изготовитель транспортного средства. Детали) -->
+	<xs:element name="VehicleManufacturerDetails" type="trcdo:VehicleManufacturerDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация об изготовителе транспортного средства, шасси транспортного средства или самоходной машины</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00264: Изготовитель транспортного средства (Изготовитель транспортного средства_ Детали. Тип) -->
+	<xs:complexType name="VehicleManufacturerDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие детализированную информацию об изготовителе транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="trcdo:BusinessEntityV1DetailsType">
+				<xs:sequence>
+					<xs:element ref="trsdo:VehicleManufacturerKindCode" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Кодовое обозначение вида изготовителя транспортного средства</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- M.TR.CDE.00057: Сведения о внесенных изменениях в конструкцию транспортного средства (Изменение конструкции транспортного средства. Детали) -->
+	<xs:element name="VehicleModificationDetails" type="trcdo:VehicleModificationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация об изменении, внесенном в конструкцию транспортного средства (самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00043: Изменение конструкции транспортного средства (Изменение конструкции транспортного средства_ Детали. Тип) -->
+	<xs:complexType name="VehicleModificationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию об изменении конструкции транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedCountryCode"/>
+			<xs:element ref="trsdo:VehicleModificationText">
+				<xs:annotation>
+					<xs:documentation>Описание нового типа и нового назначения транспортного средства</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VehicleFeatureText">
+				<xs:annotation>
+					<xs:documentation>Описание и новое значение характеристики транспортного средства, претерпевшей изменения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:DocumentDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Информация о свидетельстве о соответствии транспортного средства с внесенными в его конструкцию изменениями требованиям безопасности</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00058: Габаритные размеры транспортного средства (Габаритные размеры транспортного средства. Детали) -->
+	<xs:element name="VehicleOverallDimensionDetails" type="ccdo:OverallDimensionDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о габаритных размерах транспортного средства</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDE.00086: Организация, осуществляющая оформление паспортов транспортных средств (Организация, осуществляющая оформление паспортов транспортных средств. Детали) -->
+	<xs:element name="VehiclePassportIssuerDetails" type="trcdo:VehiclePassportIssuerDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация об уполномоченном органе (организации) или организации-изготовителе, осуществляющем (осуществляющей) оформление паспортов транспортных средств (паспортов шасси транспортных средств) и паспортов самоходных машин и других видов техники</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00067: Организация, осуществляющая оформление паспортов транспортных средств (Организация, осуществляющая оформление паспортов транспортных средств_ Детали. Тип) -->
+	<xs:complexType name="VehiclePassportIssuerDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию об организации, осуществляющей оформление паспортов транспортных средств</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedCountryCode">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение страны регистрации хозяйствующего субъекта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:BusinessEntityName">
+				<xs:annotation>
+					<xs:documentation>Полное наименование хозяйствующего субъекта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:BusinessEntityBriefName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сокращенное наименование хозяйствующего субъекта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:BusinessEntityTypeCode" minOccurs="0"/>
+			<xs:element ref="csdo:BusinessEntityTypeName" minOccurs="0"/>
+			<xs:element ref="csdo:BusinessEntityId"/>
+			<xs:element ref="ccdo:SubjectAddressDetails" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Адрес хозяйствующего субъекта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:CommunicationDetails" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Контактный реквизит хозяйствующего субъекта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:FullNameDetails">
+				<xs:annotation>
+					<xs:documentation>Фамилия, имя, отчество руководителя</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VehiclePassportIssuerKindCode"/>
+			<xs:element ref="trcdo:ManufacturerRepresentativeDetails" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Информация об организации, уполномоченной организацией-изготовителем на реализацию изготовленной ею продукции</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:DocInformationDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Информация о документе, подтверждающем присвоение международного идентификационного кода изготовителя транспортного средства (WMI)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VehicleManufacturerId" minOccurs="0"/>
+			<xs:element ref="trsdo:VehiclePassportKindCode" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение вида электронного паспорта транспортного средства (шасси транспортного средства, самоходной машины и других видов техники) на оформление которого уполномочен орган (организация)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:ConformityDocV2Details" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trcdo:VehiclePreferentialTreatmentAssemblyAgreementDetails" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Совокупность реквизитов ссылки на документ, выданный в соответствии с законодательством государства-члена об уполномачивании органа (организации) или организации-изготовителя</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:ResourceItemStatusDetails">
+				<xs:annotation>
+					<xs:documentation>Совокупность технологических сведений о записи реестра органов (организаций), осуществляющих оформление паспортов транспортных средств</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00096: Вал отбора мощности (Вал отбора мощности. Детали) -->
+	<xs:element name="VehiclePowerTakeOffDetails" type="trcdo:VehiclePowerTakeOffDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о вале отбора мощности</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00077: Вал отбора мощности (Вал отбора мощности_ Детали. Тип) -->
+	<xs:complexType name="VehiclePowerTakeOffDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о вале отбора мощности</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:VehicleComponentText">
+				<xs:annotation>
+					<xs:documentation>Описание конструктивных особенностей (типа) вала отбора мощности</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VehicleComponentLocationText"/>
+			<xs:element ref="trsdo:VehicleShaftRotationFrequencyMeasure" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Скорость вращения вала транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:TransmissionUnitGearRate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Отношение частоты вращения вала отбора мощности к коленчатому валу двигателя</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00085: Соглашение о льготном режиме сборки транспортных средств (Соглашение о льготном режиме сборки транспортных средств. Детали) -->
+	<xs:element name="VehiclePreferentialTreatmentAssemblyAgreementDetails" type="trcdo:VehiclePreferentialTreatmentAssemblyAgreementDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о соглашении о льготном режиме сборки транспортных средств</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00066: Соглашение о льготном режиме сборки транспортных средств (Соглашение о льготном режиме сборки транспортных средств_ Детали. Тип) -->
+	<xs:complexType name="VehiclePreferentialTreatmentAssemblyAgreementDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о соглашении о льготном режиме сборки транспортных средств</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:DocName"/>
+			<xs:element ref="csdo:DocId" minOccurs="0"/>
+			<xs:element ref="csdo:DocCreationDate"/>
+			<xs:element ref="csdo:DocValidityDate"/>
+			<xs:element ref="csdo:AuthorityName">
+				<xs:annotation>
+					<xs:documentation>Полное наименование уполномоченного органа государства-члена, с которым заключено соглашение</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:QuotaQuantity"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00060: Сведения о государственной регистрации транспортного средства или самоходной машины (Сведения о регистрации транспортного средства или самоходной машины. Детали) -->
+	<xs:element name="VehicleRegistrationDetails" type="trcdo:VehicleRegistrationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о государственной регистрации транспортного средства или самоходной машины</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00045: Сведения о регистрации транспортного средства (Сведения о регистрации транспортного средства_ Детали. Тип) -->
+	<xs:complexType name="VehicleRegistrationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о регистрации транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:UnifiedCountryCode">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение государства-члена, в котором осуществлены регистрационные действия</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:LegalPersonKindCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение вида собственника (владельца) транспортного средства или самоходной машины</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:RegistrationEventKindCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование регистрационного действия, совершенного в отношении транспортного средства или самоходной машины</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:EventName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование регистрационного действия, совершенного в отношении транспортного средства или самоходной машины</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:EventDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата совершения регистрационного действия в отношении транспортного средства или самоходной машины</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:TerritoryCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение региона, на территории которого зарегистрирован собственник (владелец) транспортного средства</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00079: Ходовая часть транспортного средства (Ходовая часть транспортного средства. Детали) -->
+	<xs:element name="VehicleRunningGearDetails" type="trcdo:VehicleRunningGearDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о ходовой части транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00060: Ходовая часть транспортного средства (Ходовая часть транспортного средства_ Детали. Тип) -->
+	<xs:complexType name="VehicleRunningGearDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о ходовой части транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:VehicleWheelQuantity" minOccurs="0"/>
+			<xs:element ref="trsdo:PoweredWheelQuantity" minOccurs="0"/>
+			<xs:element ref="trsdo:PoweredWheelLocation" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trcdo:VehicleWheelLocationQuantity" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleFrameText" minOccurs="0"/>
+			<xs:element ref="trsdo:MachineFrameText" minOccurs="0"/>
+			<xs:element ref="trcdo:VehicleAxleDetails" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trsdo:VehicleWheelbaseMeasure" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trsdo:VehicleGroundClearanceMeasure" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleTransmissionText" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trsdo:MachineTransmissionText" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trcdo:TransmissionUnitDetails" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trcdo:VehicleClutchDetails" minOccurs="0"/>
+			<xs:element ref="trcdo:VehicleSuspensionDetails" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trcdo:VehicleSteeringDetails" minOccurs="0"/>
+			<!-- DEPRECATED: тег устарел и больше не используется (теперь вместо него: ./VehicleTyreKindInfo/VehicleTyreKindCode) -->
+			<xs:element ref="trsdo:VehicleTyreKindCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>DEPRECATED: тег устарел и больше не используется (теперь вместо него: ./VehicleTyreKindInfo/VehicleTyreKindCode)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<!-- DEPRECATED: END -->
+			<xs:element ref="trcdo:VehicleTyreKindInfo" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00231: Идентификационный номер аппаратуры спутниковой навигации (Идентификационный номер аппаратуры спутниковой навигации. Детали) -->
+	<xs:element name="VehicleSatelliteNavigationIdDetails" type="trcdo:VehicleIdentityNumberDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация об идентификационном номере аппаратуры спутниковой навигации ГЛОНАСС или ГЛОНАСС совместно с иными глобальными навигационными спутниковыми системами</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDE.00009: Место для сидения транспортного средства (Место для сидения транспортного средства - входящие сервисы. Детали) -->
+	<xs:element name="VehicleSeatDetails" type="trcdo:VehicleSeatDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о местах для сидения транспортного средства</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00003: Места для сидения транспортного средства (Места для сидения транспортного средства_ Детали - входящие сервисы. Тип) -->
+	<xs:complexType name="VehicleSeatDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о местах для сидения транспортного средства с возможностью указания описания для категорий М2,М3</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:SeatQuantity" minOccurs="0"/>
+			<xs:element ref="trsdo:SeatDescription" minOccurs="0"/>
+			<xs:element ref="trcdo:VehicleSeatRawDetails" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00061: Ряд мест для сидения транспортного средства (Ряд мест для сидения транспортного средства. Детали) -->
+	<xs:element name="VehicleSeatRawDetails" type="trcdo:VehicleSeatRawDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о ряде мест для сидения транспортного средства</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00046: Ряд мест для сидения транспортного средства (Ряд мест для сидения транспортного средства_ Детали. Тип) -->
+	<xs:complexType name="VehicleSeatRawDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о ряде мест для сидения транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:SeatRawOrdinal"/>
+			<xs:element ref="trsdo:SeatQuantity">
+				<xs:annotation>
+					<xs:documentation>Количество мест для сидения в ряде мест для сидения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00080: Рулевое управление транспортного средства (Рулевое управление транспортного средства. Детали) -->
+	<xs:element name="VehicleSteeringDetails" type="trcdo:VehicleSteeringDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о рулевом управлении транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00061: Рулевое управление транспортного средства (Рулевое управление транспортного средства_ Детали. Тип) -->
+	<xs:complexType name="VehicleSteeringDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о рулевом управлении транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:VehicleComponentText" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание конструктивных особенностей (типа) рулевого управления транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VehicleComponentMakeName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование марки рулевого управления транспортного средства (шасси транспортного средства)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:SteeringWheelPositionCode" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleComponentLocationText" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание места расположения рулевого управления транспортного средства (шасси транспортного средства, самоходной машины и других видов техники), достаточное для его обнаружения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00081: Подвеска транспортного средства (Подвеска транспортного средства. Детали) -->
+	<xs:element name="VehicleSuspensionDetails" type="trcdo:VehicleSuspensionDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о подвеске транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00062: Подвеска транспортного средства (Подвеска транспортного средства_ Детали. Тип) -->
+	<xs:complexType name="VehicleSuspensionDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о подвеске транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:VehicleSuspensionKindCode"/>
+			<xs:element ref="trsdo:VehicleComponentText">
+				<xs:annotation>
+					<xs:documentation>Описание типа подвески транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00007: Идентификационный номер тахографа (Идентификационный номер тахографа. Детали) -->
+	<xs:element name="VehicleTachographIdDetails" type="trcdo:VehicleIdentityNumberDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация об идентификационном номере технического средства контроля за соблюдением водителем транспортного средства режимов движения, труда и отдыха</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDE.00063: Тип транспортного средства (Тип транспортного средства. Детали) -->
+	<xs:element name="VehicleTypeDetails" type="trcdo:VehicleTypeDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о типе транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00048: Тип транспортного средства (Тип транспортного средства_ Детали. Тип) -->
+	<xs:complexType name="VehicleTypeDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о типе транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:NotVehicleMakeNameIndicator" minOccurs="0"/>
+			<xs:element ref="csdo:VehicleMakeName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование марки транспортного средства (шасси транспортного средства, самоходной машины и других видов техники), присвоенное организацией-изготовителем</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VehicleMakeCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Краткое условное обозначение марки транспортного средства (шасси транспортного средства, самоходной машины и других видов техники), присвоенное организацией-изготовителем</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:NotVehicleCommercialNameIndicator" minOccurs="0"/>
+			<xs:element ref="csdo:VehicleCommercialName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Коммерческое наименование транспортного средства (шасси транспортного средства, самоходной машины и других видов техники), присвоенное организацией-изготовителем</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VehicleTypeId" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleTechCategoryCode" minOccurs="0"/>
+			<xs:element ref="trsdo:MachineTechCategoryCode" minOccurs="0"/>
+			<xs:element ref="trsdo:PropulsionKindCode" minOccurs="0"/>
+			<xs:element ref="trsdo:PropulsionKindName" minOccurs="0"/>
+			<xs:element ref="trsdo:ReversibleControlIndicator" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleLayoutPatternText" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleEquipmentText" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trsdo:VehiclePicture" minOccurs="0" maxOccurs="6"/>
+			<!-- DEPRECATED: Тег VehicleUseRestrictionIndicator устарел и больше не используется -->
+			<xs:element ref="trsdo:VehicleUseRestrictionIndicator" minOccurs="0"/>
+			<xs:element ref="trsdo:ShassisMovePermitionText" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleUseRestrictionText" minOccurs="0"/>
+			<!-- DEPRECATED: Тег VehicleRoutingIndicator устарел и больше не используется -->
+			<xs:element ref="trsdo:VehicleRoutingIndicator" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleRoutingText" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleMovementPermitIndicator" minOccurs="0"/>
+			<xs:element ref="trsdo:PreferentialManufacturingModeText" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleHybridDesignText" minOccurs="0"/>
+			<xs:element ref="trcdo:VehicleLabelingDetails" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00264: Транспортное средство (Транспортное средство: вариант 2. Детали) -->
+	<xs:element name="VehicleV2Details" type="trcdo:VehicleV2DetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о транспортном средстве (шасси транспортного средства, самоходной машине)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00265: Транспортное средство (Транспортное средство_ Детали: вариант 2. Тип) -->
+	<xs:complexType name="VehicleV2DetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о транспортном средстве</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:VehicleIdentificationNumberId" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleManufacturingYear" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00062: Модификация транспортного средства (Модификация транспортного средства. Детали) -->
+	<xs:element name="VehicleVariantDetails" type="trcdo:VehicleVariantDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о модификации транспортного средства (шасси транспортного средства)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00047: Модификация транспортного средства (Модификация транспортного средства_ Детали. Тип Входящие вервисы) -->
+	<xs:complexType name="VehicleVariantDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о модификации транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:VehicleTypeVariantId" minOccurs="0"/>
+			<xs:element ref="trsdo:NotVehicleEcoClassCodeIndicator" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleEcoClassCode" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleChassisDesignCode" minOccurs="0"/>
+			<xs:element ref="trcdo:VehicleBodyworkDetails" minOccurs="0"/>
+			<xs:element ref="trcdo:VehicleRunningGearDetails" minOccurs="0"/>
+			<xs:element ref="trcdo:BaseVehicleDetails" minOccurs="0"/>
+			<xs:element ref="trcdo:VehicleOverallDimensionDetails" minOccurs="0"/>
+			<xs:element ref="trsdo:NotVehicleTrailerIndicator" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleMaxUnbrakedTrailerWeightMeasure" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleMaxBrakedTrailerWeightMeasure" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleHitchLoadMeasure" minOccurs="0" maxOccurs="2"/>
+			<xs:element ref="trsdo:PermissibleTowableWeightMeasure" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleFuelKindCode" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trsdo:VehicleFuelKindName" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trcdo:FuelFeedDetails" minOccurs="0"/>
+			<xs:element ref="trcdo:VehicleIgnitionDetails" minOccurs="0"/>
+			<xs:element ref="trcdo:ExhaustDetails" minOccurs="0"/>
+			<xs:element ref="trcdo:PowerStorageDeviceDetails" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trsdo:VehicleVoltageMeasure" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleMaxSpeedMeasure" minOccurs="0"/>
+			<xs:element ref="trcdo:VehicleBrakingSystemDetails" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trsdo:EngineQuantity" minOccurs="0"/>
+			<xs:element ref="trcdo:EngineDetails" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trsdo:VehicleComponentLocationText" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание расположения двигателя транспортного средства</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VehicleMassMeasure" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trcdo:VehicleElectricalMachineDetails" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trsdo:ECUModelCode" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Сведения о количестве и расположении колес  -->
+	<xs:element name="VehicleWheelLocationQuantity" type="csdo:Text1000Type">
+		<xs:annotation>
+			<xs:documentation>Количество и расположение колес </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDE.00306: Сведения о поверке средства измерений (Поверка средства измерений. Детали) -->
+	<xs:element name="VerificationDetails" type="trcdo:VerificationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о поверке средства измерения</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.CDT.00306: Сведения о поверке средства измерений (Сведения о поверке средства измерений_ Детали. Тип) -->
+	<xs:complexType name="VerificationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Компоненты, представляющие информацию о поверке средства измерений</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:MethodName">
+				<xs:annotation>
+					<xs:documentation>Наименование методики поверки</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:MethodId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Регистрационный номер методики поверки</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:ProductName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование средства измерений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VerificationIntervalDuration"/>
+			<xs:element ref="ccdo:FullNameDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Фамилия, имя, отчество лица, проводившего поверку</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:DocInformationDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование и идентификационные данные документа на поверку</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:NoteText" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Сведения об эталоне (средстве поверки или поверочном оборудовании)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VerificationPictureBinaryText" minOccurs="0"/>
+			<xs:element ref="trcdo:MeasurementsVerificationCertificateDetails" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- M.TR.CDE.00312: Методика измерения (Методика поверки. Детали) -->
+	<xs:element name="VerificationMethodInformationDetails" type="trcdo:MeasurementMethodCertificationDetailsType">
+		<xs:annotation>
+			<xs:documentation>Информация о методике измерения</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- Информация о шинах, допустимых к установке на ось транспортного средства -->
+	<xs:element name="VehicleTyre" type="trcdo:VehicleTyreType">
+		<xs:annotation>
+			<xs:documentation>Информация о шинах, допустимых к установке на ось транспортного средства</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- Информация о шинах, допустимых к установке на ось транспортного средства -->
+	<xs:complexType name="VehicleTyreType">
+		<xs:annotation>
+			<xs:documentation>Информация о шинах, допустимых к установке на ось транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<!-- DEPRECATED: тег устарел и больше не используется (теперь вместо него: VehicleTyreKindSize, VehicleTyreKindIndex, VehicleTyreKindSpeed) -->
+			<xs:element ref="trsdo:VehicleTyreKindCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>DEPRECATED: тег устарел и больше не используется (теперь вместо него: VehicleTyreKindSize, VehicleTyreKindIndex, VehicleTyreKindSpeed)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<!-- DEPRECATED: тег устарел и больше не используется -->
+			<xs:element ref="trsdo:DualTireAxleIndicator" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>DEPRECATED: тег устарел и больше не используется</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<!-- DEPRECATED: END -->
+			<xs:element ref="trsdo:VehicleTyreKindSize">
+				<xs:annotation>
+					<xs:documentation>Размерность шины транспортного средства</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VehicleTyreKindIndex" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Индекс несущей способности шины транспортного средства</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VehicleTyreKindSpeed" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Скоростная категория шины транспортного средства</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Информация о шинах временного использования и шин без привязки к осям -->
+	<xs:element name="VehicleTyreKindInfo" type="trcdo:VehicleTyreKindInfoType">
+		<xs:annotation>
+			<xs:documentation>Информация о шинах временного использования и шин без привязки к осям</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- Информация о шинах временного использования и шин без привязки к осям -->
+	<xs:complexType name="VehicleTyreKindInfoType">
+		<xs:annotation>
+			<xs:documentation>Информация о шинах временного использования и шин без привязки к осям</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<!-- DEPRECATED: тег устарел и больше не используется (теперь вместо него: VehicleTyreKindSize, VehicleTyreKindIndex, VehicleTyreKindSpeed) -->
+			<xs:element ref="trsdo:VehicleTyreKindCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>DEPRECATED: тег устарел и больше не используется (теперь вместо него: VehicleTyreKindSize, VehicleTyreKindIndex, VehicleTyreKindSpeed)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<!-- DEPRECATED: END -->
+			<xs:element ref="trsdo:VehicleTyreKindSize">
+				<xs:annotation>
+					<xs:documentation>Размерность шины транспортного средства</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VehicleTyreKindIndex" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Индекс несущей способности шины транспортного средства</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VehicleTyreKindSpeed" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Скоростная категория шины транспортного средства</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:IsSupplementVehicleTyre" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="TNVEDNumber" type="csdo:TNVEDNumberType">
+        <xs:annotation>
+            <xs:documentation>Код ТН ВЭД</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+</xs:schema>

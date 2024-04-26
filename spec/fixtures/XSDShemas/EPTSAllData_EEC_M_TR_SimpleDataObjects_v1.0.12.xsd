@@ -1,0 +1,2146 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_TR_SimpleDataObjects/1.0.12" xmlns:trsdo="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_TR_SimpleDataObjects/1.0.12" xmlns:bdt="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_BaseDataTypes/0.4.5" xmlns:csdo="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_SimpleDataObjects/0.4.7" version="1.0.12">
+	<xs:import namespace="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_BaseDataTypes/0.4.5" schemaLocation="EPTSAllData_EEC_M_BaseDataTypes_v0.4.5.xsd"/>
+	<xs:import namespace="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_SimpleDataObjects/0.4.7" schemaLocation="EPTSAllData_EEC_M_SimpleDataObjects_v0.4.7.xsd"/>
+	<!-- M.TR.SDE.00322: Описание области применения (Область применения. Текст) -->
+	<xs:element name="ApplicationAreaText" type="csdo:Text1000Type">
+		<xs:annotation>
+			<xs:documentation>Описание области применения</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00019: Признак комбинированного цвета кузова (кабины, прицепа) (Признак комбинированного цвета кузова (кабины, прицепа). Индикатор) -->
+	<xs:element name="BodyMultiColourIndicator" type="bdt:IndicatorType">
+		<xs:annotation>
+			<xs:documentation>Признак, определяющий наличие комбинированного цвета кузова (кабины, прицепа): 1 – цвет кузова комбинированный (многоцветный); 0 – цвет кузова одноцветный</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00311: Описание границы допускаемых значений погрешности (Граница допускаемых значений погрешности. Текст) -->
+	<xs:element name="BorderAllowedValuesErrorText" type="csdo:Text1000Type">
+		<xs:annotation>
+			<xs:documentation>Описание границы допускаемых значений погрешности метрологической характеристики (параметра)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00189: Признак тормозной оси (Тормозная ось. Индикатор) -->
+	<xs:element name="BrakingAxleIndicator" type="bdt:IndicatorType">
+		<xs:annotation>
+			<xs:documentation>Признак тормозной оси: 1 – ось тормозная; 0 – ось не тормозная</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00034: Код (Код. До 20 символов. Тип) -->
+	<xs:simpleType name="Code20Type">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение свойства объекта, содержащая не более 20 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- Код (Код. До 50 символов. Тип) -->
+	<xs:simpleType name="Code50Type">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение свойства объекта, содержащая не более 50 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- Временный тип для тега "маркировка блока управления" (EPTS-4721) !-->
+	<xs:simpleType name="Code100Type">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение свойства объекта, содержащая не более 100 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Code3Type">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение свойства объекта, содержащая не более 3 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00004: Код вида органа по оценке соответствия (Вид органа по оценке соответствия. Код) -->
+	<xs:element name="ConformityAuthorityKindCode" type="trsdo:ConformityAuthorityKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение вида органа по оценке соответствия объектов технического регулирования требованиям технических регламентов Евразийского экономического союза (технических регламентов Таможенного союза)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00002: Код вида органа по оценке соответствия (Вид органа по оценке соответствия_ Код. Тип) -->
+	<xs:simpleType name="ConformityAuthorityKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение вида органа по оценке соответствия</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00266: Наименование вида органа по оценке соответствия (Вид органа по оценке соответствия. Имя) -->
+	<xs:element name="ConformityAuthorityKindName" type="csdo:Name120Type">
+		<xs:annotation>
+			<xs:documentation>Наименование вида органа по оценке соответствия</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00001: Код вида документа об оценке соответствия (Вид документа об оценке соответствия. Код) -->
+	<xs:element name="ConformityDocKindCode" type="trsdo:ConformityDocKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение вида документа об оценке соответствия</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00001: Код вида документа об оценке соответствия (Вид документа_ Код. Тип) -->
+	<xs:simpleType name="ConformityDocKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение вида документа об оценке соответствия</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00260: Наименование вида документа об оценке соответствия (Вид документа об оценке соответствия. Имя) -->
+	<xs:element name="ConformityDocKindName" type="csdo:Name120Type">
+		<xs:annotation>
+			<xs:documentation>Наименование вида документа об оценке соответствия</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00049: Наименование контролируемого показателя (Контролируемый показатель. Имя) -->
+	<xs:element name="ControlledIndicatorName" type="csdo:Name120Type">
+		<xs:annotation>
+			<xs:documentation>Наименование характеристики, контролируемой при проведении испытаний</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00255: Номер таможенного документа (Таможенный приходный ордер или таможенная декларация. Идентификатор) -->
+	<xs:element name="CustomsDocumentId" type="trsdo:CustomsDocumentIdType">
+		<xs:annotation>
+			<xs:documentation>Серия, номер таможенного приходного ордера или номер таможенной декларации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00055: Номер таможенного документа (Таможенный приходный ордер или таможенная декларация_ Идентификатор. Тип) -->
+	<xs:simpleType name="CustomsDocumentIdType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, идентифицирующая номер таможенного приходного ордера</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:IdentifierType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="26"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00052: Признак экстренного уведомления об опасной продукции (Признак экстренного уведомления об опасной продукции. Индикатор) -->
+	<xs:element name="DangerousProductEmergencyNotificationIndicator" type="bdt:IndicatorType">
+		<xs:annotation>
+			<xs:documentation>Признак, определяющий требования к реакции на уведомление об опасной продукции: 1 – экстренное; 0 – обычное</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00055: Идентификационный номер опасной продукции (Идентификационный номер опасной продукции. Идентификатор) -->
+	<xs:element name="DangerousProductId" type="csdo:Id50Type">
+		<xs:annotation>
+			<xs:documentation>Уникальный номер опасной продукции, присвоенный уполномоченным органом государства-члена</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00043: Код меры в отношении опасной продукции (Мера в отношении опасной продукции. Код) -->
+	<xs:element name="DangerousProductMeasureCode" type="trsdo:DangerousProductMeasureCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение меры, принимаемой в отношении опасной продукции</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00008: Код меры в отношении опасной продукции (Мера в отношении опасной продукции_ Код. Тип) -->
+	<xs:complexType name="DangerousProductMeasureCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение меры в отношении опасной продукции</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="csdo:QualifiedCodeType">
+				<xs:pattern value="\d{2}"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.TR.SDE.00057: Описание меры в отношении опасной продукции (Описание меры в отношении опасной продукции. Текст) -->
+	<xs:element name="DangerousProductMeasureText" type="csdo:Text1000Type">
+		<xs:annotation>
+			<xs:documentation>Описание меры, принятой в отношении опасной продукции</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00051: Фотография опасной продукции (Опасный продукт. Рисунок) -->
+	<xs:element name="DangerousProductPicture" type="csdo:PictureType">
+		<xs:annotation>
+			<xs:documentation>Изображение опасного продукта, его упаковки, маркировки</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00053: Код статуса действия документа (Статус действия документа. Код) -->
+	<xs:element name="DocStatusCode" type="trsdo:DocStatusCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение статуса действия документа</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00015: Код статуса действия документа (Вид изменения статуса действия документа_ Код. Тип) -->
+	<xs:simpleType name="DocStatusCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение статуса действия документа</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="\d"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00265: Наименование статуса действия документа (Статус действия документа. Имя) -->
+	<xs:element name="DocStatusName" type="csdo:Name120Type">
+		<xs:annotation>
+			<xs:documentation>Наименование статуса действия документа</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00190: Признак ведущей оси (Ведущая ось. Индикатор) -->
+	<xs:element name="DrivingAxleIndicator" type="bdt:IndicatorType">
+		<xs:annotation>
+			<xs:documentation>Признак ведущей оси: 1 – ось ведущая; 0 – ось не ведущая</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00191: Признак оси колес со сдвоенными шинами (Ось колес со сдвоенными шинами. Индикатор) -->
+	<xs:element name="DualTireAxleIndicator" type="bdt:IndicatorType">
+		<xs:annotation>
+			<xs:documentation>Признак, определяющий наличие на оси колес со сдвоенными шинами: 1 – ось колес со сдвоенными шинами; 0 – ось колес с обычными шинами</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00054: Европейский номер товара (Европейский номер товара. Идентификатор) -->
+	<xs:element name="EANCommodityId" type="trsdo:EANCommodityIdType">
+		<xs:annotation>
+			<xs:documentation>Европейский номер товара, предназначенный для передачи штрихкода товара и производителя</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00016: Европейский номер товара (Европейский номер товара_ Идентификатор. Тип) -->
+	<xs:simpleType name="EANCommodityIdType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, идентифицирующая штрихкод европейского номера товара</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:IdentifierType">
+			<xs:pattern value="\d{8}|\d{13}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00173: Модель блока управления двигателем (Модель блока управления двигателем. Код) -->
+	<xs:element name="ECUModelCode" type="trsdo:Code100Type">
+		<xs:annotation>
+			<xs:documentation>условное обозначение блока управления двигателем внутреннего сгорания, присвоенное организацией-изготовителем</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00091: Максимальная мощность электродвигателя (Максимальная мощность электродвигателя. Измерение) -->
+	<xs:element name="ElectricMotorPowerMeasure" type="csdo:PhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Максимальная полезная мощность системы электротяги при постоянном токе, которую система тяги может обеспечивать в среднем в течение 30-минутного периода</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00087: Код вида электромашины (Вид электромашины. Код) -->
+	<xs:element name="ElectricalMachineKindCode" type="trsdo:VehicleElectricalMachineKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение вида электромашины транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00090: Рабочее напряжение электромашины (Рабочее напряжение электромашины. Измерение) -->
+	<xs:element name="ElectricalMachineVoltageMeasure" type="csdo:PhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Рабочее напряжение электромашины транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00094: Рабочий объем цилиндров двигателя (Рабочий объем цилиндров двигателя. Измерение) -->
+	<xs:element name="EngineCapacityMeasure" type="csdo:PhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Рабочий объем цилиндров двигателя внутреннего сгорания</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00103: Степень сжатия двигателя (Степень сжатия двигателя. Коэффициент) -->
+	<xs:element name="EngineCompressionRate" type="trsdo:EngineCompressionRateType">
+		<xs:annotation>
+			<xs:documentation>Степень сжатия двигателя внутреннего сгорания</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00028: Степень сжатия двигателя (Степень сжатия двигателя_ Коэффициент. Тип) -->
+	<xs:simpleType name="EngineCompressionRateType">
+		<xs:annotation>
+			<xs:documentation>Число, выражающее степень сжатия двигателя</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:RateType">
+			<xs:totalDigits value="3"/>
+			<xs:fractionDigits value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00095: Описание расположения цилиндров двигателя (Описание расположения цилиндров двигателя. Текст) -->
+	<xs:element name="EngineCylinderArrangementText" type="csdo:Text1000Type">
+		<xs:annotation>
+			<xs:documentation>Описание расположения цилиндров двигателя внутреннего сгорания</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00096: Количество цилиндров двигателя (Цилиндр двигателя. Количество) -->
+	<xs:element name="EngineCylinderQuantity" type="csdo:Quantity4Type">
+		<xs:annotation>
+			<xs:documentation>Количество цилиндров двигателя внутреннего сгорания</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00098: Номер двигателя (Идентификационный номер двигателя транспортного средства. Идентификатор) -->
+	<!-- дубликат элемента EngineId в M_SimpleDataObjects_v0.4.4.xsd
+    <xs:element name="EngineId" type="csdo:Id20Type">
+        <xs:annotation>
+            <xs:documentation>Номер двигателя, присвоенный организацией-изготовителем</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+-->
+	<!-- M.TR.SDE.00008: Описание места расположения идентификационного номера двигателя (Место расположения идентификационного номера двигателя. Текст) -->
+	<xs:element name="EngineIdentificationNumberLocationText" type="csdo:Text1000Type">
+		<xs:annotation>
+			<xs:documentation>Описание места расположения идентификационного номера двигателя, достаточное для его обнаружения</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00099: Максимальная мощность двигателя (Максимальная мощность двигателя. Измерение) -->
+	<!-- дубликат элемента EngineMaxPowerMeasure в M_SimpleDataObjects_v0.4.4.xsd; к тому же, нигде не используется
+    <xs:element name="EngineMaxPowerMeasure" type="csdo:PhysicalMeasureType">
+        <xs:annotation>
+            <xs:documentation>Максимальная мощность двигателя внутреннего сгорания, заявленная изготовителем</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+-->
+	<!-- M.TR.SDE.00100: Максимальный крутящий момент двигателя транспортного средства (Максимальный крутящий момент двигателя. Измерение) -->
+	<xs:element name="EngineMaxTorqueMeasure" type="csdo:PhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Максимальный крутящий момент, развиваемый двигателем внутреннего сгорания</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00024: Код модели двигателя (Модель двигателя. Код) -->
+	<xs:element name="EngineModelCode" type="trsdo:Code20Type">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение модели двигателя, присвоенное организацией-изготовителем</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00223: Количество двигателей (Количество двигателей. Количество) -->
+	<xs:element name="EngineQuantity" type="csdo:Quantity4Type">
+		<xs:annotation>
+			<xs:documentation>Количество двигателей внутреннего сгорания</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00306: Признак теоретического способа установления показателя точности результата измерений (Признак теоретического способа установления показателя точности результата измерений. Индикатор) -->
+	<xs:element name="EstablishingIndicatorMethodIndicator" type="bdt:IndicatorType">
+		<xs:annotation>
+			<xs:documentation>Признак, определяющий теоретический способ установления показателя точности результата измерений при аттестации: 1 – теоретический; 0 – экспериментальный</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00203: Наименование события (Событие. Имя) -->
+	<xs:element name="EventName" type="csdo:Name120Type">
+		<xs:annotation>
+			<xs:documentation>Наименование события</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00212: Код вида узла системы выпуска и нейтрализации отработавших газов (Вид узла системы выпуска и нейтрализации отработавших газов. Код) -->
+	<xs:element name="ExhaustUnitKindCode" type="trsdo:ExhaustUnitKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение вида узла системы выпуска и нейтрализации отработавших газов транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00049: Вид узла системы выпуска и нейтрализации отработавших газов (Вид узла системы выпуска и нейтрализации отработавших газов_ Код. Тип) -->
+	<xs:complexType name="ExhaustUnitKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение узла системы выпуска и нейтрализации отработавших газов транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="csdo:QualifiedCodeType">
+				<xs:pattern value="\d"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.TR.SDE.00329: Описание расширенной неопределенности (Расширенная неопределенность. Текст) -->
+	<xs:element name="ExpandedUncertaintyText" type="csdo:Text1000Type">
+		<xs:annotation>
+			<xs:documentation>Описание расширенной неопределенности метрологической характеристики (параметра)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00213: Код вида узла системы питания (Вид узла системы питания. Код) -->
+	<xs:element name="FuelFeedUnitKindCode" type="trsdo:FuelFeedUnitKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение вида узла системы питания транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00050: Вид узла системы питания (Вид узла системы питания_ Код. Тип) -->
+	<xs:complexType name="FuelFeedUnitKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение узла системы питания транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="csdo:QualifiedCodeType">
+				<xs:pattern value="\d"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.TR.SDE.00204: Номер коробки передач (Идентификационный номер коробки передач транспортного средства. Идентификатор) -->
+	<xs:element name="GearboxId" type="csdo:Id20Type">
+		<xs:annotation>
+			<xs:documentation>Идентификационный номер коробки передач, присвоенный и нанесенный организацией-изготовителем</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00165: Количество символов в сочетании символов идентификационного номера (Количество символов в сочетании символов идентификационного номера. Количество) -->
+	<xs:element name="IdCharacterQuantity" type="trsdo:IdCharacterQuantity">
+		<xs:annotation>
+			<xs:documentation>количество символов в сочетании символов идентификационного номера</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00032: Количество символов в последовательности символов идентификатора транспортного средства (Количество символов в последовательности символов идентификатора транспортного средства_ Количество. Тип) -->
+	<xs:simpleType name="IdCharacterQuantity">
+		<xs:annotation>
+			<xs:documentation>Целочисленное значение, полученное в результате подсчета символов в сочетании символов идентификатора транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:QuantityType">
+			<xs:minInclusive value="1"/>
+			<xs:maxInclusive value="17"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00166: Порядковый номер символа идентификационного номера (Cимвол идентификационного номера. Порядковый номер) -->
+	<xs:element name="IdCharacterStartingOrdinal" type="trsdo:IdCharacterStartingOrdinal">
+		<xs:annotation>
+			<xs:documentation>Порядковый номер символа (первого символа в сочетании символов) идентификационного номера</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00033: Порядковый номер символа идентификатора транспортного средства (Символ идентификатора транспортного средства_ Порядковый номер. Тип) -->
+	<xs:simpleType name="IdCharacterStartingOrdinal">
+		<xs:annotation>
+			<xs:documentation>Число, представляющее, порядковый номер символа идентификатора транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:OrdinalType">
+			<xs:minInclusive value="1"/>
+			<xs:maxInclusive value="17"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00164: Описание символа идентификационного номера (Cимвол идентификационного номера. Текст) -->
+	<xs:element name="IdCharacterText" type="csdo:Text1000Type">
+		<xs:annotation>
+			<xs:documentation>Описание символа (сочетания символов) идентификационного номера</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00163: Код значения символа идентификационного номера (Значение символа идентификационного номера. Код) -->
+	<xs:element name="IdCharacterValueCode" type="csdo:Id50Type">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение значения символа (сочетания символов) идентификационного номера</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00031: Код символа идентификатора транспортного средства (Код символа идентификатора транспортного средства_ Код. Тип) -->
+	<xs:simpleType name="IdCharacterValueCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение символа (последовательности символов) идентификатора транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00167: Описание значения символа идентификационного номера (Значение символа идентификационного номера. Текст) -->
+	<xs:element name="IdCharacterValueText" type="csdo:Text1000Type">
+		<xs:annotation>
+			<xs:documentation>Описание значения символа (сочетания символов) идентификационного номера</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00312: Описание интервала допускаемых значений (Интервал допускаемых значений. Текст) -->
+	<xs:element name="IntervalAllowedValuesText" type="csdo:Text1000Type">
+		<xs:annotation>
+			<xs:documentation>Описание интервала допускаемых значений метрологической характеристики (параметра)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00014: Изображение JPEG 512 Кб (Рисунок. JPEG 512 Кб. Тип) -->
+	<xs:simpleType name="JPEG512KbImageType">
+		<xs:annotation>
+			<xs:documentation>Изображение в формате .jpeg объемом файла не превышающем 0,5 Mb</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:PictureType"/>
+	</xs:simpleType>
+	<xs:complexType name="JPEG512KbImageTypeWithFilename">
+		<xs:annotation>
+			<xs:documentation>Изображение в формате .jpeg объемом файла не превышающем 0,5 Mb с указанием имени файла</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="trsdo:JPEG512KbImageType">
+				<xs:attribute name="fileName" type="xs:token" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.TR.SDE.00062: Код вида субъекта права (Вид субъекта права. Код) -->
+	<xs:element name="LegalPersonKindCode" type="trsdo:LegalPersonKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение вида субъекта права</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00018: Код вида субъекта права (Вид субъекта права_ Код. Тип) -->
+	<xs:simpleType name="LegalPersonKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение вида субъекта права</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00010: Код категории самоходной машины и других видов техники (Категория самоходной машины и других видов техники. Код) -->
+	<xs:element name="MachineCategoryCode" type="trsdo:MachineCategoryCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение категории в соответствии с приложением № 7 к Порядку функционирования систем электронных паспортов транспортных средств (электронных паспортов шасси транспортных средств) и электронных паспортов самоходных машин и других видов техники, утвержденному Решением Коллегии Евразийской экономической комиссии от 22 сентября 2015 г. № 122</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00003: Код категории самоходной машины и других видов техники (Категория самоходной машины и других видов техники_ Код. Тип) -->
+	<xs:simpleType name="MachineCategoryCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение категории самоходной машины и других видов техники</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="A(IV|I{1,3})?|[B-F]|R"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00029: Описание рамы самоходной машины и других видов техники (Описание рамы самоходной машины и других видов техники. Текст) -->
+	<xs:element name="MachineFrameText" type="csdo:Text1000Type">
+		<xs:annotation>
+			<xs:documentation>Описание конструктивных особенностей (типа) рамы самоходной машины и других видов техники</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00127: Наименование организации (Наименование организации, вносившей изменение в транспортное средство. Имя) -->
+	<xs:element name="MachineModificationOrganizationName" type="csdo:Name300Type">
+		<xs:annotation>
+			<xs:documentation>Наименование юридического лица, вносившего изменение в конструкцию самоходной машины и других видов техники</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00005: Код технической категории самоходной машины и других видов техники (Техническая категории самоходной машины и других видов техники. Код) -->
+	<xs:element name="MachineTechCategoryCode" type="trsdo:MachineTechCategoryCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение категории самоходной машины и других видов техники в соответствии с техническим регламентом Таможенного союза «О безопасности машин и оборудования» (ТР ТС 010/2011), принятым Решением Комиссии Таможенного союза от 18 октября 2011 г. № 823, техническим регламентом Таможенного союза «О безопасности колесных транспортных средств» (ТР ТС 018/2011), принятым Решением Комиссии Таможенного союза от 9 декабря 2011 г. № 877, техническим регламентом Таможенного союза «О безопасности сельскохозяйственных и лесохозяйственных тракторов и прицепов к ним» (ТР ТС 031/2012), принятым Решением Совета Евразийской экономической комиссии от 20 июля 2012 г. № 60</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00026: Код технической категории самоходной машины и других видов техники (Техническая категория самоходной машины и других видов техники_ Код. Тип) -->
+	<xs:simpleType name="MachineTechCategoryCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение технической категории самоходной машины и других видов техники</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="(T|C|R|RX|X|Y)([ab]?[1-9])?(\.[1-3])?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00023: Описание схемы трансмиссии самоходной машины (Описание схемы трансмиссии самоходной машины. Текст) -->
+	<xs:element name="MachineTransmissionText" type="csdo:Text1000Type">
+		<xs:annotation>
+			<xs:documentation>Описание схемы трансмиссии самоходной машины и других видов техники</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00198: Номер основного ведущего моста (Основной ведущий мост. Идентификатор) -->
+	<xs:element name="MainPoweredAxleId" type="csdo:Id20Type">
+		<xs:annotation>
+			<xs:documentation>Идентификационный номер основного ведущего моста, присвоенный и нанесенный организацией-изготовителем</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00308: Наименование объекта измерений (Объект измерений. Имя) -->
+	<xs:element name="MeasuredObjectName" type="csdo:Name120Type">
+		<xs:annotation>
+			<xs:documentation>Наименование объекта измерений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00332: Код измеряемой величины (Измеряемая величина. Код) -->
+	<xs:element name="MeasuredValueCode" type="trsdo:MeasuredValueCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение измеряемой величины</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00306: Код измеряемой величины (Код измеряемой величины_ Код. Тип) -->
+	<xs:simpleType name="MeasuredValueCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение кода измеряемой величины</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00309: Наименование измеряемой величины (Измеряемая величина. Имя) -->
+	<xs:element name="MeasuredValueName" type="csdo:Name120Type">
+		<xs:annotation>
+			<xs:documentation>Наименование измеряемой величины</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00307: Описание характеристики точности измерения (Показатель точности измерения. Текст) -->
+	<xs:element name="MeasurementAccuraciesText" type="csdo:Text100Type">
+		<xs:annotation>
+			<xs:documentation>Описание показателя точности измерения</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00331: Максимальное значение диапазона измерений (Максимальное значение диапазона измерений. Текст) -->
+	<xs:element name="MeasurementRangeMaxValueText" type="csdo:Text100Type">
+		<xs:annotation>
+			<xs:documentation>Числовая величина, определяющая максимальное значение диапазона измерений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00330: Минимальное значение диапазона измерений (Минимальное значение диапазона измерений. Текст) -->
+	<xs:element name="MeasurementRangeMinValueText" type="csdo:Text100Type">
+		<xs:annotation>
+			<xs:documentation>Числовая величина, определяющая минимальное значение диапазона измерений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00321: Описание диапазона измерений (Описание диапазона измерений. Текст) -->
+	<xs:element name="MeasurementRangeText" type="csdo:Text1000Type">
+		<xs:annotation>
+			<xs:documentation>Описание диапазона измерений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00310: Наименование шкалы величины (Шкала величины. Имя) -->
+	<xs:element name="MeasurementScaleName" type="csdo:Name120Type">
+		<xs:annotation>
+			<xs:documentation>Наименование шкалы величины (шкалы измерений или единицы измерений)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00328: Документ в области обеспечения единства измерений в бинарном формате (Документ в области обеспечения единства измерений в бинарном формате. Бинарный текст) -->
+	<xs:element name="MeasurementsDocBinaryText" type="trsdo:MeasurementsDocBinaryTextType">
+		<xs:annotation>
+			<xs:documentation>Текст официальной публикации документа в области обеспечения единства измерений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00305: Бинарный текст с кодом формата данных (Текст с кодом формата данных_ Бинарный текст. Тип) -->
+	<xs:complexType name="MeasurementsDocBinaryTextType">
+		<xs:annotation>
+			<xs:documentation>Текстовая информация, представленная в двоичной форме, с указанием формата данных</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="bdt:BinaryTextType">
+				<xs:attribute name="mediaTypeCode" type="csdo:MediaTypeCodeType" use="required">
+					<xs:annotation>
+						<xs:documentation>Кодовое обозначение формата данных</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="measurementsDocKindCode" type="trsdo:MeasurementsDocKindCodeType" use="required">
+					<xs:annotation>
+						<xs:documentation>Кодовое обозначение вида документа в области обеспечения единства измерения</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.TR.SDE.00337: Код вида документа в области обеспечения единства измерения (Вид документа в области обеспечения единства измерения. Код) -->
+	<xs:element name="MeasurementsDocKindCode" type="trsdo:MeasurementsDocKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение вида документа в области обеспечения единства измерений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00300: Код вида документа в области обеспечения единства измерения (Вид документа в области обеспечения единства измерения_ Код. Тип) -->
+	<xs:simpleType name="MeasurementsDocKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение вида документа в области обеспечения единства измерения</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00338: Наименование вида документа в области обеспечения единства измерения (Вид документа в области обеспечения единства измерения. Имя) -->
+	<xs:element name="MeasurementsDocKindName" type="csdo:Name500Type">
+		<xs:annotation>
+			<xs:documentation>Наименование вида документа в области обеспечения единства измерений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00317: Код типа сведений в области обеспечения единства измерений (Тип сведений в области обеспечения единства измерений. Код) -->
+	<xs:element name="MeasurementsInformationKindCode" type="trsdo:MeasurementsInformationKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение типа сведений в области обеспечения единства измерений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00056: Код вида органа по оценке соответствия (Тип сведений в области обеспечения единства измерений_ Код. Тип) -->
+	<xs:simpleType name="MeasurementsInformationKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение типа сведений в области обеспечения единства измерений</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType"/>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00326: Год утверждения продукта (Год утверждения продукта. Год) -->
+	<xs:element name="MeasurementsStandardApprovalYear" type="bdt:YearType">
+		<xs:annotation>
+			<xs:documentation>Год утверждения продукта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00319: Наименование модификации типа средств измерений (Обозначение модификации типа средств измерений. Текст) -->
+	<xs:element name="MeasuringInstrumentTypeModificationAbbreviationName" type="csdo:Name300Type">
+		<xs:annotation>
+			<xs:documentation>Наименование модификации типа средств измерений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00318: Описание особенности модификации типа средства измерений (Особенность модификации типа средства измерений. Текст) -->
+	<xs:element name="MeasuringInstrumentTypeModificationFeatureText" type="csdo:Text1000Type">
+		<xs:annotation>
+			<xs:documentation>Описание особенности модификации типа средства измерений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00314: Регистрационный номер методики (Регистрационный номер методики. Идентификатор) -->
+	<xs:element name="MethodId" type="csdo:Id50Type">
+		<xs:annotation>
+			<xs:documentation>Регистрационный номер методики</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00315: Наименование методики (Методика. Имя) -->
+	<xs:element name="MethodName" type="csdo:Name500Type">
+		<xs:annotation>
+			<xs:documentation>Наименование методики</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00302: Назначение методики (Назначение методики. Текст) -->
+	<xs:element name="MethodPurposeText" type="csdo:Text1000Type">
+		<xs:annotation>
+			<xs:documentation>Описание назначения методики</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00313: Наименование метрологической характеристики (Метрологическая характеристика. Имя) -->
+	<xs:element name="MetrologicalCharacteristicName" type="csdo:Name120Type">
+		<xs:annotation>
+			<xs:documentation>Наименование метрологической характеристики (параметра)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00335: Значение метрологической характеристики (Значение метрологической характеристики. Текст) -->
+	<xs:element name="MetrologicalCharacteristicText" type="csdo:Text250Type">
+		<xs:annotation>
+			<xs:documentation>Значение метрологической характеристики (параметра)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00327: Описание метрологической прослеживаемости (Метрологическая прослеживаемость. Текст) -->
+	<xs:element name="MetrologicalTraceabilityText" type="csdo:Text4000Type">
+		<xs:annotation>
+			<xs:documentation>Описание метрологической прослеживаемости</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00027: Признак отсутствия документа, подтверждающего соответствие (Признак отсутствия документа, подтверждающего соответствие. Индикатор) -->
+	<xs:element name="NotComplianceDocIndicator" type="bdt:IndicatorType">
+		<xs:annotation>
+			<xs:documentation>Признак, определяющий отсутствие документа, подтверждающего соответствие обязательным требованиям безопасности: 1 – документ отсутствует; 0 – документ присутствует</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00058: Признак отсутствия номера таможенного приходного ордера, номера таможенной декларации (Признак отсутствия номера таможенного приходного ордера, номера таможенной декларации. Индикатор) -->
+	<xs:element name="NotCustomsDocumentIndicator" type="bdt:IndicatorType">
+		<xs:annotation>
+			<xs:documentation>Признак, определяющий отсутствие серии, номера таможенного приходного ордера, номера таможенной декларации: 1 – серия, номер таможенного приходного ордера, номер таможенной декларации отсутствуют; 0 – серия, номер таможенного приходного ордера, номер таможенной декларации присутствуют</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00011: Признак отсутствия номера двигателя (Признак отсутствия номера двигателя. Индикатор) -->
+	<xs:element name="NotEngineIdIndicator" type="bdt:IndicatorType">
+		<xs:annotation>
+			<xs:documentation>Признак, определяющий отсутствие номера двигателя: 1 – номер отсутствует; 0 – номер присутствует</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00009: Признак отсутствия таблички изготовителя (Признак отсутствия таблички изготовителя. Индикатор) -->
+	<xs:element name="NotManufacturerPlateIndicator" type="bdt:IndicatorType">
+		<xs:annotation>
+			<xs:documentation>Признак, определяющий отсутствие таблички изготовителя: 1 – табличка отсутствует; 0 – табличка присутствует</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00003: Признак отсутствия коммерческого наименования транспортного средства (Признак отсутствия коммерческого наименования транспортного средства. Индикатор) -->
+	<xs:element name="NotVehicleCommercialNameIndicator" type="bdt:IndicatorType">
+		<xs:annotation>
+			<xs:documentation>признак, определяющий отсутствие коммерческого наименования транспортного средства (шасси транспортного средства, самоходной машины и других видов техники): 1 – коммерческое наименование отсутствует; 0 – коммерческое наименование присутствует</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00038: Признак отсутствия таможенных ограничений (Признак отсутствия таможенных ограничений. Индикатор) -->
+	<xs:element name="NotVehicleCustomsRestrictionIndicator" type="bdt:IndicatorType">
+		<xs:annotation>
+			<xs:documentation>Признак, определяющий отсутствие таможенных ограничений: 0 – отсутствуют; 1 – присутствуют</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00006: Признак отсутствия экологического класса (Признак отсутствия экологического класса. Индикатор) -->
+	<xs:element name="NotVehicleEcoClassCodeIndicator" type="bdt:IndicatorType">
+		<xs:annotation>
+			<xs:documentation>Признак, определяющий отсутствие экологического класса</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00018: Признак отсутствия номера устройства вызова экстренных служб (Признак отсутствия номера устройства вызова экстренных служб. Индикатор) -->
+	<xs:element name="NotVehicleEmergencyCallDeviceIdIndicator" type="bdt:IndicatorType">
+		<xs:annotation>
+			<xs:documentation>Признак, определяющий отсутствие устройства вызова экстренных оперативных служб: 1 – номер отсутствует; 0 – номер присутствует</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00012: Признак отсутствия номера шасси (рамы) (Признак отсутствия номера шасси (рамы). Индикатор) -->
+	<xs:element name="NotVehicleFrameIdIndicator" type="bdt:IndicatorType">
+		<xs:annotation>
+			<xs:documentation>Признак, определяющий отсутствие номера шасси (рамы): 1 – номер отсутствует; 0 – номер присутствует</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00002: Признак отсутствия идентификационного номера транспортного средства (Признак отсутствия идентификационного номера транспортного средства. Индикатор) -->
+	<xs:element name="NotVehicleIdIndicator" type="bdt:IndicatorType">
+		<xs:annotation>
+			<xs:documentation>Признак, определяющий отсутствие идентификационного номера транспортного средства (шасси транспортного средства, самоходной машины и других видов техники): 1 – номер отсутствует; 0 – номер присутствует</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00226: Признак отсутствия идентификационного номера (Признак отсутствия идентификационного номера. Индикатор) -->
+	<xs:element name="NotVehicleIdentityNumberIndicator" type="bdt:IndicatorType">
+		<xs:annotation>
+			<xs:documentation>Признак, определяющий отсутствие идентификационного номера: 1 – номер отсутствует; 0 – номер присутствует</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00021: Признак отсутствия марки транспортного средства (Признак отсутствия марки транспортного средства. Индикатор) -->
+	<xs:element name="NotVehicleMakeNameIndicator" type="bdt:IndicatorType">
+		<xs:annotation>
+			<xs:documentation>признак, определяющий отсутствие марки транспортного средства (шасси транспортного средства, самоходной машины и других видов техники): 1 – марка отсутствует; 0 – марка присутствует</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00047: Признак отсутствия возможности буксировки (Признак отсутствия возможности буксировки. Индикатор) -->
+	<xs:element name="NotVehicleTrailerIndicator" type="bdt:IndicatorType">
+		<xs:annotation>
+			<xs:documentation>Признак, определяющий отсутствие возможности буксировки: 0 – буксировка не предусмотрена; 1 – буксировка предусмотрена</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00199: Технически допустимая буксируемая масса (Технически допустимая буксируемая масса. Измерение) -->
+	<xs:element name="PermissibleTowableWeightMeasure" type="csdo:PhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Технически допустимая буксируемая масса самоходной машины, определенная изготовителем</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00214: Емкость устройства накопления энергии (Емкость устройства накопления энергии. Измерение) -->
+	<xs:element name="PowerStorageDeviceCapacityMeasure" type="csdo:PhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Емкость устройства накопления энергии транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00215: Количество элементов устройства накопления энергии (Количество элементов устройства накопления энергии. Количество) -->
+	<xs:element name="PowerStorageDeviceCellQuantity" type="csdo:Quantity4Type">
+		<xs:annotation>
+			<xs:documentation>Количество элементов устройства накопления энергии транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00216: Описание электрохимической пары устройства накопления энергии (Описание электрохимической пары устройства накопления энергии. Текст) -->
+	<xs:element name="PowerStorageDeviceElectrochemicalCoupleText" type="csdo:Text250Type">
+		<xs:annotation>
+			<xs:documentation>Описание электрохимической пары устройства накопления энергии транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00217: Энергоемкость устройства накопления энергии (Энергоемкость устройства накопления энергии. Измерение) -->
+	<xs:element name="PowerStorageDeviceEnergyCapacityMeasure" type="csdo:PhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Энергоемкость устройства накопления энергии транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00218: Масса устройства накопления энергии (Масса устройства накопления энергии. Измерение) -->
+	<xs:element name="PowerStorageDeviceMassMeasure" type="csdo:PhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Масса устройства накопления энергии транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00219: Код вида узла устройства накопления энергии (Вид узла устройства накопления энергии. Код) -->
+	<xs:element name="PowerStorageDeviceUnitKindCode" type="trsdo:PowerStorageDeviceUnitKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение вида узла устройства накопления энергии транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00051: Вид узла устройства накопления энергии (Вид узла устройства накопления энергии_ Код. Тип) -->
+	<xs:complexType name="PowerStorageDeviceUnitKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение узла устройства накопления энергии транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="csdo:QualifiedCodeType">
+				<xs:pattern value="\d"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.TR.SDE.00220: Рабочее напряжение устройства накопления энергии (Рабочее напряжение устройства накопления энергии. Измерение) -->
+	<xs:element name="PowerStorageDeviceVoltageMeasure" type="csdo:PhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Рабочее напряжение устройства накопления энергии транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00135: Количество ведущих колес (Количество ведущих колес. Количество) -->
+	<xs:element name="PoweredWheelQuantity" type="csdo:Quantity4Type">
+		<xs:annotation>
+			<xs:documentation>Количество ведущих колес транспортного средства (шасси транспортного средства)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--  Код Государства-члена ЕЭС, на территории которого допускается совершение регистрационных действий ) -->
+	<xs:element name="PreferentialManufacturingCountryCode" type="csdo:UnifiedCountryCodeType">
+		<xs:annotation>
+			<xs:documentation>Код Государства-члена ЕЭС, на территории которого допускается совершение регистрационных действий </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--  Регион, на территории которого допускается совершение регистрационных действий ) -->
+	<xs:element name="PreferentialManufacturingRegionCode" type="csdo:Name20Type">
+		<xs:annotation>
+			<xs:documentation>Код региона, на территории которого допускается совершение регистрационных действий </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00123: Признак производства с применением льготного режима (Признак производства с применением льготного режима. Индикатор) -->
+	<xs:element name="PreferentialManufacturingModeIndicator" type="bdt:IndicatorType">
+		<xs:annotation>
+			<xs:documentation>Признак, определяющий производство транспортного средства с применением льготного режима: 1 – производство с применением льготного режима; 0 – производство без применения льготного режима</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00195: Сведения о производстве с применением льготного режима производства (Сведения о производстве с применением льготного режима производства. Текст) -->
+	<xs:element name="PreferentialManufacturingModeText" type="csdo:Text1000Type">
+		<xs:annotation>
+			<xs:documentation>Сведения о производстве с применением льготного режима производства транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00046: Дата истечения срока годности единицы продукта (Дата истечения срока годности единицы продукта. Дата) -->
+	<xs:element name="ProductInstanceExpiryDate" type="bdt:DateType">
+		<xs:annotation>
+			<xs:documentation>Дата истечения срока годности единицы продукта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00048: Дата изготовления единицы продукта (Дата изготовления единицы продукта. Дата) -->
+	<xs:element name="ProductInstanceManufacturedDate" type="bdt:DateType">
+		<xs:annotation>
+			<xs:documentation>Дата изготовления единицы продукта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00305: Количество экземпляров продукта (Экземпляр. Количество) -->
+	<xs:element name="ProductInstanceQuantity" type="csdo:Quantity4Type">
+		<xs:annotation>
+			<xs:documentation>Количество экземпляров продукта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00316: Описание вида упаковки (Вид упаковки. Текст) -->
+	<xs:element name="ProductPackageText" type="csdo:Text250Type">
+		<xs:annotation>
+			<xs:documentation>Описание вида упаковки с этикеткой, в которой продукт поставляется потребителю</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00303: Назначение продукта (Назначение. Текст) -->
+	<xs:element name="ProductPurposeText" type="csdo:Text1000Type">
+		<xs:annotation>
+			<xs:documentation>Описание назначения продукта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00325: Разряд продукта (Разряд продукта. Порядковый номер) -->
+	<xs:element name="ProductRankOrdinal" type="csdo:Ordinal3Type">
+		<xs:annotation>
+			<xs:documentation>Порядковый номер разряда продукта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00304: Код формы выпуска (Форма выпуска. Код) -->
+	<xs:element name="ProductReleaseFormKindCode" type="trsdo:ProductReleaseFormKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение формы выпуска продукта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00304: Код формы выпуска (Форма выпуск_ Код. Тип) -->
+	<xs:simpleType name="ProductReleaseFormKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение формы выпуска</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00334: Кодовое обозначение статуса продукта (Кодовое обозначение статуса продукта. Код) -->
+	<xs:element name="ProductStatusCode" type="trsdo:ProductStatusCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение статусного состояния продукта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00303: Код статуса продукта (Статус продукта_ Код. Тип) -->
+	<xs:simpleType name="ProductStatusCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение статуса продукта</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00324: Наименование статуса продукта (Наименование статуса. Имя) -->
+	<xs:element name="ProductStatusName" type="csdo:Name120Type">
+		<xs:annotation>
+			<xs:documentation>Наименование статусного состояния продукта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00015: Описание продукта (Описание продукта. Текст) -->
+	<xs:element name="ProductText" type="csdo:Text4000Type">
+		<xs:annotation>
+			<xs:documentation>Описание отличительных особенностей и свойств продукта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00022: Код типа движителя (Тип движителя. Код) -->
+	<xs:element name="PropulsionKindCode" type="trsdo:PropulsionKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение типа движителя самоходной машины</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00007: Код типа движителя (Тип движителя_ Код. Тип) -->
+	<xs:simpleType name="PropulsionKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение типа движителя</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00200: Наименование типа движителя (Тип движителя. Имя) -->
+	<xs:element name="PropulsionKindName" type="csdo:Name120Type">
+		<xs:annotation>
+			<xs:documentation>Наименование типа движителя самоходной машины и других видов техники</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00207: Размер квоты (Квота. Количество) -->
+	<xs:element name="QuotaQuantity" type="csdo:Quantity6Type">
+		<xs:annotation>
+			<xs:documentation>Количество единиц товара, установленное мерой количественного ограничения внешней торговли или обращения товаров</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00323: Признак, определяющий факт признания результатов работ в области обеспечения единства измерений (Результат работ признан. Индикатор) -->
+	<xs:element name="RecognitionIndicator" type="bdt:IndicatorType">
+		<xs:annotation>
+			<xs:documentation>Признак, определяющий факт признания результатов работ в области обеспечения единства измерений: 1 – результат работ признан; 0 – результат работ не признан</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00140: Признак необходимости уплаты утилизационного сбора (Признак необходимости уплаты утилизационного сбора. Индикатор) -->
+	<xs:element name="RecyclingDutyNotPayIndicator" type="bdt:IndicatorType">
+		<xs:annotation>
+			<xs:documentation>Признак, определяющий необходимость уплаты утилизационного сбора с транспортного средства (шасси транспортного средства, самоходной машины и других видов техники): 1 – утилизационный сбор уплачивается; 0 – утилизационный сбор не уплачивается</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00254: Признак уплаты утилизационного сбора (Признак уплаты утилизационного сбора. Индикатор) -->
+	<xs:element name="RecyclingDutyPaydIndicator" type="bdt:IndicatorType">
+		<xs:annotation>
+			<xs:documentation>Признак уплаты утилизационного сбора с транспортного средства (шасси транспортного средства, самоходной машины и других видов техники): 1 – утилизационный сбор уплачен; 0 – утилизационный сбор не уплачен</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RecyclingDutyNotPaidReason" type="trsdo:RecyclingDutyNotPaidReasonType">
+		<xs:annotation>
+			<xs:documentation>Основание уплаты утилизационного сбора</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:simpleType name="RecyclingDutyNotPaidReasonType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1">
+				<xs:annotation>
+					<xs:documentation>абзац 2 пункта 6 статьи 24.1. Федерального закона от 24.06.1998 № 89-ФЗ
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="2">
+				<xs:annotation>
+					<xs:documentation>абзац 3 пункта 6 статьи 24.1. Федерального закона от 24.06.1998 № 89-ФЗ
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="3">
+				<xs:annotation>
+					<xs:documentation>абзац 4 пункта 6 статьи 24.1. Федерального закона от 24.06.1998 № 89-ФЗ
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="4">
+				<xs:annotation>
+					<xs:documentation>решение Коллегии Евразийской экономической комиссии от 22.09.2015 г. № 122
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="5">
+				<xs:annotation>
+					<xs:documentation>утилизационный сбор не уплачивается в отношении транспортных средств, указанных в п.6 ст.24.1
+						Федерального закона от 24.06.1998 N89-ФЗ (ред. От 28.12.2016) «Об отходах производства и потребления»
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00142: Описание ограничения регистрационного органа (Описание ограничения регистрационного органа. Текст) -->
+	<xs:element name="RegistrationBodyRestrictionText" type="csdo:Text250Type">
+		<xs:annotation>
+			<xs:documentation>Описание ограничения, установленного органом, осуществляющим государственную регистрацию самоходной машины</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00025: Код регистрационного действия, совершенного в отношении транспортного средства (Регистрационное действие, совершенное в отношении транспортного средства. Код) -->
+	<xs:element name="RegistrationEventKindCode" type="trsdo:RegistrationEventKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение регистрационного действия, совершенного в отношении транспортного средства или самоходной машины</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00009: Код регистрационного действия, совершенного в отношении транспортного средства (Регистрационное действие, совершенное в отношении транспортного средства_ Код. Тип) -->
+	<xs:simpleType name="RegistrationEventKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение регистрационного действия, совершенного в отношении транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00149: Признак, определяющий территорию, на которой допускается регистрация транспортного средства (Признак, определяющий территорию, на которой допускается регистрация транспортного средства. Индикатор) -->
+	<xs:element name="RegistrationTerritoryIndicator" type="bdt:IndicatorType">
+		<xs:annotation>
+			<xs:documentation>Признак, определяющий территорию, на которой допускается регистрация транспортного средства: 1 – Союз; 0 – ограниченная территория</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00017: Причина переоформления аттестата аккредитации (Причина переоформления аттестата аккредитации. Имя) -->
+	<xs:element name="ReissuingReasonName" type="csdo:Name120Type">
+		<xs:annotation>
+			<xs:documentation>Наименование причины переоформления органом по аккредитации действующего аттестата аккредитации органа по оценке соответствия</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00192: Признак наличия реверсивного управления (Реверсивное управление. Индикатор) -->
+	<xs:element name="ReversibleControlIndicator" type="bdt:IndicatorType">
+		<xs:annotation>
+			<xs:documentation>Признак наличия реверсивного места оператора в зависимости от наличия (отсутствия) в конструкции машины реверсивного места оператора: 1 – имеется реверсивное управление; 0 – реверсивное управление отсутствует</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00059: Код вида риска (Вид риска. Код) -->
+	<xs:element name="RiskKindCode" type="trsdo:RiskKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение вида риска</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00017: Код вида риска (Вид риска_ Код. Тип) -->
+	<xs:complexType name="RiskKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение вида риска</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="csdo:QualifiedCodeType">
+				<xs:pattern value="\d{2}"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.TR.SDE.00060: Наименование риска (Риск. Имя) -->
+	<xs:element name="RiskName" type="csdo:Name300Type">
+		<xs:annotation>
+			<xs:documentation>Наименование риска</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00061: Описание риска (Описание риска. Текст) -->
+	<xs:element name="RiskText" type="csdo:Text1000Type">
+		<xs:annotation>
+			<xs:documentation>Описание риска, в том числе условий возникновения опасности и возможных последствий</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00145: Количество мест для сидения (Количество мест для сидения. Количество) -->
+	<xs:element name="SeatQuantity" type="csdo:Quantity4Type">
+		<xs:annotation>
+			<xs:documentation>Количество мест для сидения</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00144: Порядковый номер ряда мест для сидения (Порядковый номер ряда мест для сидения. Порядковый номер) -->
+	<xs:element name="SeatRawOrdinal" type="csdo:Ordinal3Type">
+		<xs:annotation>
+			<xs:documentation>Порядковый номер ряда мест для сидения</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00211: Порядковый номер ступени глушителя/нейтрализатора (Ступень глушителя/нейтрализатора. Порядковый номер) -->
+	<xs:element name="SilencerStageOrdinal" type="csdo:Ordinal3Type">
+		<xs:annotation>
+			<xs:documentation>Порядковый номер ступени глушителя/нейтрализатора</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00222: Признак включения продукции в единый перечень (Включение продукции в единый перечень. Индикатор) -->
+	<xs:element name="SingleListProductIndicator" type="bdt:IndicatorType">
+		<xs:annotation>
+			<xs:documentation>признак включения продукции в единый перечень продукции, подлежащей обязательному подтверждению соответствия, с выдачей сертификатов соответствия и деклараций о соответствии по единой форме: 1 – продукция включена в единый перечень; 0 – продукция исключена из единого перечня</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00320: Описание способа защиты программного обеспечения (Способ защиты программного обеспечения. Текст) -->
+	<xs:element name="SoftwareProtectionMethodText" type="csdo:Text100Type">
+		<xs:annotation>
+			<xs:documentation>Описание способа защиты программного обеспечения</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00193: Признак управляемой оси (Управляемая ось. Индикатор) -->
+	<xs:element name="SteeringAxleIndicator" type="bdt:IndicatorType">
+		<xs:annotation>
+			<xs:documentation>Признак управляемой оси: 1 – ось управляемая; 0 – ось неуправляемая</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00194: Код положения рулевого колеса (Положение рулевого колеса. Код) -->
+	<xs:element name="SteeringWheelPositionCode" type="trsdo:SteeringWheelPositionCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение положения рулевого колеса (органов рулевого управления) относительно продольной оси самоходной машины</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00041: Код положения рулевого колеса транспортного средства (Положение рулевого колеса_ Код. Тип) -->
+	<xs:simpleType name="SteeringWheelPositionCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение положения рулевого колеса</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00221: Код вида участника цепочки поставки (Вид участника цепочки поставки. Код) -->
+	<xs:element name="SupplyChainPartyKindCode" type="trsdo:SupplyChainPartyKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение вида участника цепочки поставки</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00052: Код вида участника цепочки поставки (Вид участника цепочки поставки_ Код. Тип) -->
+	<xs:complexType name="SupplyChainPartyKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение вида участника цепочки поставки</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="csdo:QualifiedCodeType">
+				<xs:pattern value="\d"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.TR.SDE.00037: Номер технического регламента (Технический регламент. Идентификатор) -->
+	<xs:element name="TechnicalRegulationId" type="trsdo:TechnicalRegulationIdType">
+		<xs:annotation>
+			<xs:documentation>Номер технического регламента Евразийского экономического союза (технического регламента Таможенного союза)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00012: Номер технического регламента (Технический регламент_ Идентификатор. Тип) -->
+	<xs:simpleType name="TechnicalRegulationIdType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, идентифицирующая технический регламент</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:IdentifierType">
+			<xs:pattern value="ТР (ТС|ЕАЭС) \d{3}/\d{4}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00026: Код вида объекта технического регулирования (Вид объекта технического регулирования. Код) -->
+	<xs:element name="TechnicalRegulationObjectKindCode" type="trsdo:TechnicalRegulationObjectKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение вида объекта технического регулирования</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00005: Код вида объекта технического регулирования (Вид объекта технического регулирования_ Код. Тип) -->
+	<xs:simpleType name="TechnicalRegulationObjectKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение вида объекта технического регулирования</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="\d"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00264: Наименование вида объекта технического регулирования (Вид объекта технического регулирования. Имя) -->
+	<xs:element name="TechnicalRegulationObjectKindName" type="csdo:Name120Type">
+		<xs:annotation>
+			<xs:documentation>Наименование вида объекта технического регулирования</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00013: Наименование метода испытания (Метод испытания. Имя) -->
+	<xs:element name="TestingMethodName" type="csdo:Name300Type">
+		<xs:annotation>
+			<xs:documentation>Наименование метода испытания объекта технического регулирования</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00177: Наименование передачи узла трансмиссии (Передача узла трансмиссии. Имя) -->
+	<xs:element name="TransmissionUnitGearName" type="csdo:Name120Type">
+		<xs:annotation>
+			<xs:documentation>Наименование передачи узла трансмиссии</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- Тип передаточного числа (Передача узла трансмиссии. Тип передаточного числа) -->
+	<xs:element name="TransmissionUnitGearType" type="csdo:Code20Type">
+		<xs:annotation>
+			<xs:documentation>Тип передаточного числа передачи узла трансмиссии</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00179: Количество передач узла трансмиссии (Передача узла трансмиссии. Количество) -->
+	<xs:element name="TransmissionUnitGearQuantity" type="csdo:Quantity4Type">
+		<xs:annotation>
+			<xs:documentation>Количество передач узла трансмиссии транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00178: Передаточное число узла трансмиссии (Передаточное число узла трансмиссии. Коэффициент) -->
+	<xs:element name="TransmissionUnitGearRate" type="trsdo:TransmissionUnitGearRateType">
+		<xs:annotation>
+			<xs:documentation>Передаточное число передачи узла трансмиссии (для бесступенчатой коробки передач – нижняя граница диапазона)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TransmissionUnitGearRateMax" type="trsdo:TransmissionUnitGearRateType">
+		<xs:annotation>
+			<xs:documentation>Передаточное число передачи узла трансмиссии (для бесступенчатой коробки передач – верхняя граница диапазона)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00036: Передаточное число узла трансмиссии (Передаточное число узла трансмиссии_ Коэффициент. Тип) -->
+	<xs:simpleType name="TransmissionUnitGearRateType">
+		<xs:annotation>
+			<xs:documentation>Число, выражающее значение передаточного числа</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:RateType">
+			<xs:totalDigits value="5"/>
+			<xs:fractionDigits value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00077: Признак передачи заднего хода (Признак передачи заднего хода. Индикатор) -->
+	<xs:element name="TransmissionUnitReverseGearIndicator" type="bdt:IndicatorType">
+		<xs:annotation>
+			<xs:documentation>Признак, определяющий передачу заднего хода: 1 – передача заднего хода; 0 – передача переднего хода</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00176: Порядковый номер оси транспортного средства (Ось транспортного средства. Порядковый номер) -->
+	<xs:element name="VehicleAxleOrdinal" type="csdo:Ordinal3Type">
+		<xs:annotation>
+			<xs:documentation>Порядковый номер оси по ходу движения транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00067: Количество осей транспортного средства (Ось транспортного средства. Количество) -->
+	<xs:element name="VehicleAxleQuantity" type="csdo:Quantity4Type">
+		<xs:annotation>
+			<xs:documentation>Количество осей транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00112: Величина колеи оси транспортного средства (Величина колеи оси транспортного средства. Измерение) -->
+	<xs:element name="VehicleAxleSweptPathMeasure" type="csdo:PhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Величина колеи оси транспортного средства (шасси транспортного средства)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00068: Код цвета кузова (кабины, прицепа) (Цвет кузова транспортного средства. Код) -->
+	<xs:element name="VehicleBodyColourCode" type="trsdo:VehicleBodyColourCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение основного цвета, нанесенного на наружные поверхности кузова (кабины, прицепа) транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00019: Код цвета кузова транспортного средства (Цвет кузова транспортного средства_ Код. Тип) -->
+	<xs:simpleType name="VehicleBodyColourCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение цвета кузова транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="\d{4}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00069: Наименование оттенка цвета кузова (кабины, прицепа) (Оттенок цвета кузова транспортного средства. Имя) -->
+	<xs:element name="VehicleBodyColourName" type="csdo:Name40Type">
+		<xs:annotation>
+			<xs:documentation>Наименование оттенка цвета или цвета в соответствии со спецификацией организации-изготовителя транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00070: Номер кузова (кабины, прицепа) (Номер кузова (кабины, прицепа). Идентификатор) -->
+	<!-- дубликат элемента VehicleBodyId в M_SimpleDataObjects_v0.4.4.xsd
+    <xs:element name="VehicleBodyId" type="csdo:Id20Type">
+        <xs:annotation>
+            <xs:documentation>Номер кузова (кабины, прицепа), присвоенный и нанесенный организацией-изготовителем</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+-->
+	<!-- M.TR.SDE.00071: Описание кузова транспортного средства (Описание кузова транспортного средства. Текст) -->
+	<xs:element name="VehicleBodyworkTypeText" type="csdo:Text250Type">
+		<xs:annotation>
+			<xs:documentation>Описание конструктивных особенностей (типа) кузова (кабины) транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00147: Код вида тормозной системы транспортного средства (Вид тормозной системы транспортного средства. Код) -->
+	<xs:element name="VehicleBrakingSystemKindCode" type="trsdo:VehicleBrakingSystemKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение вида тормозной системы транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00042: Код вида тормозной системы транспортного средства (Вид тормозной системы транспортного средства_ Код. Тип) -->
+	<xs:simpleType name="VehicleBrakingSystemKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение вида тормозной системы транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00074: Описание исполнения загрузочного пространства транспортного средства (Описание исполнения загрузочного пространства транспортного средства. Текст) -->
+	<xs:element name="VehicleCarriageSpaceImplementationText" type="csdo:Text1000Type">
+		<xs:annotation>
+			<xs:documentation>Описание исполнения загрузочного пространства транспортного средства (самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00075: Код категории транспортного средства (Категория транспортного средства. Код) -->
+	<xs:element name="VehicleCategoryCode" type="trsdo:VehicleCategoryCodeType">
+		<xs:annotation>
+			<xs:documentation>Значение кода в соответствии с классификатором категорий транспортных средств</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00004: Код категории транспортного средства (Категория транспортного средства_ Код. Тип) -->
+	<xs:simpleType name="VehicleCategoryCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение категории транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="([A-D]1?)|E"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00020: Обозначение транспортного средства, определяемое его конструкторскими особенностями и назначением (Обозначение транспортного средства, определяемое назначением. Код) -->
+	<xs:element name="VehicleCharacteristicsCode" type="trsdo:VehicleCharacteristicsCodeType">
+		<xs:annotation>
+			<xs:documentation>Краткое условное обозначение, соответствующее наименованию транспортного средства (шасси транспортного средства, самоходной машины и других видов техники), определяемому его конструкторскими особенностями и назначением</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00010: Обозначение транспортного средства, определяемое его конструкторскими особенностями и назначением (Обозначение транспортного средства, определяемое его конструкторскими особенностями и назначением_ Код. Тип) -->
+	<xs:simpleType name="VehicleCharacteristicsCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение варианта изготовления шасси транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00030: Наименование, определяемое его конструкторскими особенностями и назначением (Наименование, определяемое назначением. Имя) -->
+	<xs:element name="VehicleCharacteristicsName" type="csdo:Name500Type">
+		<xs:annotation>
+			<xs:documentation>Наименование транспортного средства (шасси транспортного средства, самоходной машины и других видов техники), определяемое его конструкторскими особенностями и назначением</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- Иное наименование, определяемое его конструкторскими особенностями и назначением (Наименование, определяемое назначением. Имя) -->
+	<xs:element name="VehicleCharacteristicsNameOther" type="csdo:Name500Type">
+		<xs:annotation>
+			<xs:documentation>Иное наименование транспортного средства (шасси транспортного средства, самоходной машины и других видов техники), определяемое его конструкторскими особенностями и назначением</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00188: Код варианта изготовления шасси транспортного средства (Вариант изготовления шасси транспортного средства. Код) -->
+	<xs:element name="VehicleChassisDesignCode" type="trsdo:VehicleChassisDesignCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение варианта изготовления шасси транспортного средства</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00040: Код варианта изготовления шасси транспортного средства (Вариант изготовления шасси транспортного средства_ Код. Тип) -->
+	<xs:simpleType name="VehicleChassisDesignCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение варианта изготовления шасси транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00082: Коммерческое наименование транспортного средства (Коммерческое наименование транспортного средства. Имя) -->
+	<!-- дубликат элемента VehicleCommercialName в M_SimpleDataObjects_v0.4.4.xsd
+    <xs:element name="VehicleCommercialName" type="csdo:Name120Type">
+        <xs:annotation>
+            <xs:documentation>Коммерческое наименование транспортного средства (шасси транспортного средства, самоходной машины и других видов техники), присвоенное организацией-изготовителем</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+-->
+	<!-- M.TR.SDE.00184: Описание расположения компонента транспортного средства (Описание расположения компонента транспортного средства. Текст) -->
+	<xs:element name="VehicleComponentLocationText" type="csdo:Text1000Type">
+		<xs:annotation>
+			<xs:documentation>Описание места расположения компонента транспортного средства (шасси транспортного средства, самоходной машины и других видов техники), достаточное для его обнаружения</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00114: Наименование марки компонента (Марка компонента. Имя) -->
+	<xs:element name="VehicleComponentMakeName" type="csdo:Name200Type">
+		<xs:annotation>
+			<xs:documentation>Наименование марки компонента</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00174: Код модели компонента транспортного средства (Модель компонента транспортного средства. Код) -->
+	<xs:element name="VehicleComponentModelCode" type="trsdo:Code100Type">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение компонента транспортного средства (шасси транспортного средства, самоходной машины и других видов техники), присвоенное организацией-изготовителем</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00146: Описание компонента (Описание компонента. Текст) -->
+	<xs:element name="VehicleComponentText" type="csdo:Text1000Type">
+		<xs:annotation>
+			<xs:documentation>Описание типа компонента</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00083: Описание таможенного ограничения транспортного средства (Описание таможенного ограничения транспортного средства. Текст) -->
+	<xs:element name="VehicleCustomsRestrictionText" type="csdo:Text1000Type">
+		<xs:annotation>
+			<xs:documentation>Описание таможенного ограничения по использованию и (или) распоряжению транспортным средством (шасси транспортного средства, самоходной машины и других видов техники) в соответствии с условиями заявленной таможенной процедуры или в соответствии с условиями, установленными для отдельных категорий товаров, не подлежащих в соответствии с международными договорами и актами, составляющими право Союза, помещению под таможенные процедуры</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00084: Количество дверей транспортного средства (Количество дверей транспортного средства. Количество) -->
+	<xs:element name="VehicleDoorQuantity" type="csdo:Quantity4Type">
+		<xs:annotation>
+			<xs:documentation>Количество дверей транспортного средства (шасси транспортного средства)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00066: Код основания оформления электронного паспорта (Код основания оформления электронного паспорта. Код) -->
+	<xs:element name="VehicleEPassportBaseCode" type="trsdo:VehicleEPassportBaseCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение основания оформления электронного паспорта транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00023: Код основания оформления электронного паспорта (Основание оформления электронного паспорта_ Код. Тип) -->
+	<xs:simpleType name="VehicleEPassportBaseCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение основания оформления электронного паспорта транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00196: Описание основания оформления электронного паспорта (Основание оформления электронного паспорта. Текст) -->
+	<xs:element name="VehicleEPassportBaseText" type="csdo:Text1000Type">
+		<xs:annotation>
+			<xs:documentation>Описание основания оформления электронного паспорта транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00104: Номер электронного паспорта транспортного средства (Номер электронного паспорта транспортного средства. Идентификатор) -->
+	<xs:element name="VehicleEPassportId" type="trsdo:VehicleEPassportIdType">
+		<xs:annotation>
+			<xs:documentation>Уникальный номер, присваиваемый электронному паспорту транспортного средства (шасси транспортного средства, самоходной машины и других видов техники) в системах электронных паспортов</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00029: Уникальный номер электронного паспорта транспортного средства (Электронный паспорт транспортного средства_ Идентификатор. Тип) -->
+	<xs:simpleType name="VehicleEPassportIdType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, идентифицирующая электронный паспорт транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:IdentifierType">
+			<xs:pattern value="[0-9]{15}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00105: Код вида электронного паспорта транспортного средства (Вид электронного паспорта транспортного средства. Код) -->
+	<xs:element name="VehicleEPassportKindCode" type="trsdo:VehicleEPassportKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение вида электронного паспорта транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00058: Код вида электронного паспорта транспортного средства (Вид электронного паспорта транспортного средства_ Код. Тип) -->
+	<xs:simpleType name="VehicleEPassportKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение вида паспорта транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="\d"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00014: Код причины оформления электронного паспорта при отсутствии документа, подтверждающего соответствие (Причина оформления электронного паспорта при отсутствии документа, подтверждающего соответствие. Код) -->
+	<xs:element name="VehicleEPassportRegistrationReasonCode" type="trsdo:VehicleEPassportRegistrationReasonCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение причины оформления электронного паспорта транспортного средства (шасси транспортного средства, самоходной машины и других видов техники) в отсутствии документа, подтверждающего соответствие</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00006: Код причины оформления электронного паспорта (Причина оформления электронного паспорта_ Код. Тип) -->
+	<xs:simpleType name="VehicleEPassportRegistrationReasonCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение причины оформления электронного паспорта</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00106: Код статуса электронного паспорта транспортного средства (Статус электронного паспорта транспортного средства. Код) -->
+	<xs:element name="VehicleEPassportStatusCode" type="trsdo:VehicleEPassportStatusCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение статуса электронного паспорта транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00024: Код вида паспорта транспортного средства (Статус электронного паспорта транспортного средства_ Код. Тип) -->
+	<xs:simpleType name="VehicleEPassportStatusCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение статуса электронного паспорта транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00085: Код экологического класса (Экологический класс транспортного средства. Код) -->
+	<xs:element name="VehicleEcoClassCode" type="trsdo:VehicleEcoClassCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение экологического класса транспортного средства (шасси транспортного средства), присвоенное организацией-изготовителем</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00021: Код экологического класса транспортного средства (Экологический класс транспортного средства_ Код. Тип) -->
+	<xs:simpleType name="VehicleEcoClassCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение технической категории транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDT.00022: Код вида электромашины транспортного средства (Вид электромашины транспортного средства_ Код. Тип) -->
+	<xs:simpleType name="VehicleElectricalMachineKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение вида электромашины</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00092: Номер устройства вызова экстренных служб (Номер устройства вызова экстренных служб. Идентификатор) -->
+	<xs:element name="VehicleEmergencyCallDeviceId" type="csdo:Id20Type">
+		<xs:annotation>
+			<xs:documentation>Идентификационный номер устройства вызова экстренных оперативных служб</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00148: Описание оборудования транспортного средства (Оборудование транспортного средства. Имя) -->
+	<xs:element name="VehicleEquipmentText" type="csdo:Text5000Type">
+		<xs:annotation>
+			<xs:documentation>Описание оборудования (в том числе дополнительного) транспортного средства (шасси транспортного средства)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00108: Описание характеристики транспортного средства (Описание характеристики транспортного средства. Текст) -->
+	<xs:element name="VehicleFeatureText" type="csdo:Text4000Type">
+		<xs:annotation>
+			<xs:documentation>Описание новых характеристик и их новое значение транспортного средства или самоходной машины и других видов техники, претерпевших изменения</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00076: Номер шасси (рамы) (Номер шасси (рамы). Идентификатор) -->
+	<xs:element name="VehicleFrameId" type="csdo:Id20Type">
+		<xs:annotation>
+			<xs:documentation>Номер шасси (рамы) транспортного средства (шасси транспортного средства, самоходной машины и других видов техники), присвоенный и нанесенный организацией-изготовителем</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00109: Описание рамы транспортного средства (Описание рамы транспортного средства. Текст) -->
+	<xs:element name="VehicleFrameText" type="csdo:Text1000Type">
+		<xs:annotation>
+			<xs:documentation>Описание конструктивных особенностей (типа) рамы транспортного средства (шасси транспортного средства)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00028: Код вида топлива транспортного средства (Вид топлива транспортного средства. Код) -->
+	<xs:element name="VehicleFuelKindCode" type="trsdo:VehicleFuelKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение вида топлива транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00013: Код вида топлива (Вид топлива_ Код. Тип) -->
+	<xs:simpleType name="VehicleFuelKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение вида топлива транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00097: Наименование вида топлива транспортного средства (Наименование вида топлива транспортного средства. Имя) -->
+	<xs:element name="VehicleFuelKindName" type="csdo:Name120Type">
+		<xs:annotation>
+			<xs:documentation>Наименование вида топлива транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00197: Дорожный просвет самоходной машины и других видов техники (Дорожный просвет самоходной машины и других видов техники. Измерение) -->
+	<xs:element name="VehicleGroundClearanceMeasure" type="csdo:PhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Дорожный просвет самоходной машины и других видов техники</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00175: Нагрузка на сцепное устройство транспортного средства (Нагрузка на сцепное устройство транспортного средства. Измерение) -->
+	<xs:element name="VehicleHitchLoadMeasure" type="csdo:PhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Технически допустимая статическая вертикальная нагрузка в точке сцепки тягово-сцепного устройства самоходной машины и других видов техники</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00117: Описание конструкции гибридного транспортного средства (Описание конструкции гибридного транспортного средства. Текст) -->
+	<xs:element name="VehicleHybridDesignText" type="csdo:Text1000Type">
+		<xs:annotation>
+			<xs:documentation>Описание конструкции гибридного транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00118: Идентификационный номер транспортного средства (Идентификационный номер транспортного средства. Идентификатор) -->
+	<xs:element name="VehicleIdentificationNumberId" type="trsdo:VehicleIdentificationNumberIdType">
+		<xs:annotation>
+			<xs:documentation>Уникальный номер транспортного средства (шасси транспортного средства, самоходной машины и других видов техники), содержащий сведения о его изготовителе, характеристиках и годе выпуска</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00030: Идентификационный номер транспортного средства (Транспортное средство_ Идентификатор. Тип) -->
+	<xs:simpleType name="VehicleIdentificationNumberIdType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, идентифицирующая транспортное средство</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:IdentifierType">
+			<xs:pattern value="[A-HJ-NPR-Z0-9]{13}[0-9]{4}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00119: Описание места расположения идентификационного номера транспортного средства (Место расположения идентификационного номера транспортного средства. Текст) -->
+	<xs:element name="VehicleIdentificationNumberLocationText" type="csdo:Text1000Type">
+		<xs:annotation>
+			<xs:documentation>Описание места расположения идентификационного номера на транспортном средстве (шасси транспортного средства), достаточное для его обнаружения</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00225: Идентификационный номер (Идентификационный номер. Идентификатор) -->
+	<xs:element name="VehicleIdentityNumberId" type="csdo:Id50Type">
+		<xs:annotation>
+			<xs:documentation>Идентификационный номер</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00122: Код страны вывоза транспортного средства (Страна вывоза транспортного средства. Код) -->
+	<xs:element name="VehicleImportCountryCode" type="csdo:UnifiedCountryCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение страны вывоза транспортного средства (шасси транспортного средства) в соответствии с классификатором стран мира</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00124: Описание схемы компоновки транспортного средства (Описание схемы компоновки транспортного средства. Текст) -->
+	<xs:element name="VehicleLayoutPatternText" type="csdo:Name250Type">
+		<xs:annotation>
+			<xs:documentation>Описание схемы компоновки транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00007: Признак базового шасси транспортного средства (Признак базового шасси транспортного средства. Индикатор) -->
+	<xs:element name="VehicleMadeOnChassisIndicator" type="bdt:IndicatorType">
+		<xs:annotation>
+			<xs:documentation>Признак, определяющий изготовление транспортного средства на базе шасси транспортного средства: 1 – транспортное средство изготовлено на базе шасси транспортного средства; 0 – транспортное средство изготовлено на базе другого транспортного средства</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00336: Код марки транспортного средства (Марка транспортного средства. Код) -->
+	<xs:element name="VehicleMakeCode" type="trsdo:VehicleMakeCodeType">
+		<xs:annotation>
+			<xs:documentation>Краткое условное обозначение марки транспортного средства (шасси транспортного средства, самоходной машины и других видов техники), присвоенное организацией-изготовителем</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00060: Код марки транспортного средства (Марка транспортного средства_ Код. Тип) -->
+	<xs:simpleType name="VehicleMakeCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение вида массы транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00500: Наименование марки транспортного средства (Марка транспортного средства. Имя) -->
+	<!-- дубликат элемента VehicleMakeName в M_SimpleDataObjects_v0.4.4.xsd
+    <xs:element name="VehicleMakeName" type="csdo:Name120Type">
+        <xs:annotation>
+            <xs:documentation>Наименование марки транспортного средства (шасси транспортного средства, самоходной машины и других видов техники), присвоенное организацией-изготовителем</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+-->
+	<!-- M.TR.SDE.00208: Идентификационный номер изготовителя транспортного средства (Изготовитель транспортного средства. Идентификатор) -->
+	<xs:element name="VehicleManufacturerId" type="trsdo:VehicleManufacturerIdType">
+		<xs:annotation>
+			<xs:documentation>Уникальный номер изготовителя транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00047: Идентификационный номер изготовителя транспортного средства (Изготовитель транспортного средства_ Идентификатор. Тип) -->
+	<xs:simpleType name="VehicleManufacturerIdType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, идентифицирующая изготовителя транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:IdentifierType">
+			<xs:pattern value="[A-HJ-NPR-Z0-9]{3}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00253: Код вида изготовителя транспортного средства (Вид изготовителя транспортного средства. Код) -->
+	<xs:element name="VehicleManufacturerKindCode" type="trsdo:VehicleManufacturerKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение вида изготовителя транспортного средства</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00053: Код вида изготовителя транспортного средства (Вид изготовителя транспортного средства_ Код. Тип) -->
+	<xs:simpleType name="VehicleManufacturerKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение вида изготовителя транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00064: Год изготовления транспортного средства (Год изготовления транспортного средства. Год) -->
+	<xs:element name="VehicleManufacturingYear" type="bdt:YearType">
+		<xs:annotation>
+			<xs:documentation>Год изготовления транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00043: Код вида массы транспортного средства (Вид массы транспортного средства_ Код. Тип) -->
+	<xs:simpleType name="VehicleMassCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение вида массы транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00153: Масса транспортного средства (Масса транспортного средства. Измерение) -->
+	<xs:element name="VehicleMassMeasure" type="trsdo:VehicleMassMeasureType">
+		<xs:annotation>
+			<xs:documentation>Масса транспортного средства (шасси транспортного средства), определенная изготовителем</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00045: Масса транспортного средства (Масса транспортного средства_ Измерение. Тип) -->
+	<xs:complexType name="VehicleMassMeasureType">
+		<xs:annotation>
+			<xs:documentation>Числовая величина, определенная в результате измерения физических параметров в каких-либо единицах измерения</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="csdo:PhysicalMeasureType">
+				<xs:attribute name="vehicleMassCode" type="trsdo:VehicleMassCodeType" use="required">
+					<xs:annotation>
+						<xs:documentation>Кодовое обозначение вида массы транспортного средства</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.TR.SDE.00172: Масса прицепа с тормозной системой (Масса прицепа с тормозной системой. Измерение) -->
+	<xs:element name="VehicleMaxBrakedTrailerWeightMeasure" type="csdo:PhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Максимальная технически допустимая масса буксируемого прицепа с тормозной системой, установленная производителем транспортного средства (шасси транспортного средства)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00206: Максимальная скорость транспортного средства (Максимальная скорость транспортного средства. Измерение) -->
+	<xs:element name="VehicleMaxSpeedMeasure" type="csdo:PhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Максимально разрешенная скорость самоходной машины и других видов техники</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00171: Масса прицепа без тормозной системы (Масса прицепа без тормозной системы. Измерение) -->
+	<xs:element name="VehicleMaxUnbrakedTrailerWeightMeasure" type="csdo:PhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Максимальная технически допустимая масса буксируемого прицепа без тормозной системы, установленная производителем транспортного средства, или максимальная технически допустимая буксируемая масса самоходной машины</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00128: Описание изменения в конструкции (Описание изменения в конструкции. Текст) -->
+	<xs:element name="VehicleModificationText" type="csdo:Text4000Type">
+		<xs:annotation>
+			<xs:documentation>Описание изменения в конструкции транспортного средства или самоходной машины и других видов техники с указанием типа и марки установленных компонентов, способа монтажа, нового типа и нового назначения (специализации) транспортного средства или самоходной машины и других видов техники</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00129: Признак обязательности оформления специального разрешения (Признак обязательности оформления специального разрешения. Индикатор) -->
+	<xs:element name="VehicleMovementPermitIndicator" type="bdt:IndicatorType">
+		<xs:annotation>
+			<xs:documentation>Признак, определяющий обязательность оформления специального разрешения для передвижения транспортного средства (шасси транспортного средства) по территории государств-членов: 1 – оформление обязательно; 0 – оформление необязательно</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00063: Заводской номер транспортного средства (Заводской номер транспортного средства. Идентификатор) -->
+	<xs:element name="VehicleNonVINId" type="csdo:Id20Type">
+		<xs:annotation>
+			<xs:documentation>Идентификационный номер присваиваемый изготовителем транспортного средства (шасси транспортного средства, самоходной машины и других видов техники), не соответствующий ISO 3779-1983</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00134: Пассажировместимость транспортного средства (Пассажировместимость транспортного средства. Количество) -->
+	<xs:element name="VehiclePassengerQuantity" type="csdo:Quantity4Type">
+		<xs:annotation>
+			<xs:documentation>Пассажировместимость транспортного средства (самоходной машины и других видов техники) при максимальной разрешенной массе</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00209: Код вида организации, осуществляющей оформление паспортов транспортных средств (Вид организации, осуществляющей оформление паспортов транспортных средств. Код) -->
+	<xs:element name="VehiclePassportIssuerKindCode" type="trsdo:VehiclePassportIssuerKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение вида организации, осуществляющей оформление паспортов транспортных средств (паспортов шасси транспортных средств) и паспортов самоходных машин и других видов техники</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00046: Код вида организации, осуществляющей оформление паспортов транспортных средств (Вид организации, осуществляющей оформление паспортов транспортных средств_ Код. Тип) -->
+	<xs:simpleType name="VehiclePassportIssuerKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение вида организации, осуществляющей оформление паспортов транспортных средств</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="\d"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00210: Код вида паспорта транспортного средства (Вид паспорта транспортного средства. Код) -->
+	<xs:element name="VehiclePassportKindCode" type="trsdo:VehiclePassportKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение вида паспорта транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00048: Код вида паспорта транспортного средства (Вид паспорта транспортного средства. Тип) -->
+	<xs:complexType name="VehiclePassportKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение вида паспорта транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="trsdo:VehicleEPassportKindCodeType">
+				<xs:attribute name="electronicMediaIndicator" type="bdt:IndicatorType" use="required">
+					<xs:annotation>
+						<xs:documentation>Признак, определяющий вид носителя информации: 1 – электронный; 0 – бумажный</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.TR.SDE.00121: Изображение транспортного средства (Транспортное средство. Рисунок) -->
+	<xs:element name="VehiclePicture" type="trsdo:JPEG512KbImageTypeWithFilename">
+		<xs:annotation>
+			<xs:documentation>Изображение общего вида (чертеж) транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00020: Вид проекции изображения (Вид проекции изображения_ Код. Тип) -->
+	<xs:simpleType name="VehiclePictureProjectionKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение вида проекции транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="\d"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00183: Запас хода транспортного средства (Запас хода транспортного средства. Измерение) -->
+	<xs:element name="VehicleRangeMeasure" type="csdo:PhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Запас хода транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00141: Регистрационный номер транспортного средства (Регистрационный номер транспортного средства. Идентификатор) -->
+	<xs:element name="VehicleRegId" type="csdo:TransportMeansRegIdType">
+		<xs:annotation>
+			<xs:documentation>Индивидуальное буквенно-цифровое обозначение, присваиваемое транспортному средству (шасси транспортного средства, самоходной машине) регистрирующим органом</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00143: Признак маршрутного транспортного средства (Признак, определяющий возможность использования транспортного средства в качестве маршрутного. Индикатор) -->
+	<xs:element name="VehicleRoutingIndicator" type="bdt:IndicatorType">
+		<xs:annotation>
+			<xs:documentation>Признак, определяющий возможность использования транспортного средства в качестве маршрутного: 1 – использование возможно; 0 – использование невозможно</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- Описание возможности использования в качестве маршрутного ТС  -->
+	<xs:element name="VehicleRoutingText" type="csdo:Text1000Type">
+		<xs:annotation>
+			<xs:documentation>Описание возможности использования в качестве маршрутного ТС</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00116: Идентификационный номер аппаратуры спутниковой навигации (Идентификационный номер аппаратуры спутниковой навигации. Идентификатор) -->
+	<xs:element name="VehicleSatelliteNavigationId" type="csdo:Id20Type">
+		<xs:annotation>
+			<xs:documentation>Идентификационный номер аппаратуры спутниковой навигации ГЛОНАСС или ГЛОНАСС совместно с GPS, присвоенный изготовителем</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00102: Скорость вращения вала транспортного средства (Скорость вращения вала транспортного средства. Измерение) -->
+	<xs:element name="VehicleShaftRotationFrequencyMeasure" type="csdo:PhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Скорость вращения вала транспортного средства (шасси транспортного средства, самоходной машины и других видов техники), единичное значение</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00201: Код вида подвески транспортного средства (Вид подвески транспортного средства. Код) -->
+	<xs:element name="VehicleSuspensionKindCode" type="trsdo:VehicleSuspensionKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение вида подвески транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00044: Код вида подвески транспортного средства (Вид подвески транспортного средства_ Код. Тип) -->
+	<xs:simpleType name="VehicleSuspensionKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение вида подвески транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00151: Идентификационный номер тахографа (Идентификационный номер тахографа. Идентификатор) -->
+	<xs:element name="VehicleTachographId" type="csdo:Id20Type">
+		<xs:annotation>
+			<xs:documentation>Идентификационный номер технического средства контроля за соблюдением водителем транспортного средства режимов движения, труда и отдыха</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00152: Код технической категории транспортного средства (Техническая категория транспортного средства. Код) -->
+	<xs:element name="VehicleTechCategoryCode" type="trsdo:VehicleTechCategoryCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение категории транспортного средства (шасси транспортного средства) в соответствии с техническим регламентом Таможенного союза «О безопасности колесных транспортных средств» (ТР ТС 018/2011), принятым Решением Комиссии Таможенного союза от 9 декабря 2011 г. № 877, присвоенное организацией-изготовителем</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00025: Код технической категории транспортного средства (Техническая категория транспортного средства_ Код. Тип) -->
+	<xs:simpleType name="VehicleTechCategoryCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение технической категории транспортного средства (шасси транспортного средства)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="(L|M|N|O)[1-7]?G?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00181: Технически допустимая максимальная масса на ось (Технически допустимая максимальная масса на ось. Измерение) -->
+	<xs:element name="VehicleTechnicallyPermissibleMaxWeightOnAxleMeasure" type="csdo:PhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Технически допустимая максимальная масса, приходящаяся на ось транспортного средства (шасси транспортного средства, самоходной машины и других видов техники), определенная изготовителем</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00154: Описание трансмиссии транспортного средства (Описание трансмиссии транспортного средства. Текст) -->
+	<xs:element name="VehicleTransmissionText" type="csdo:Text1000Type">
+		<xs:annotation>
+			<xs:documentation>Описание типа трансмиссии транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00155: Общий объем багажных отделений транспортного средства (Общий объем багажных отделений транспортного средства. Измерение) -->
+	<xs:element name="VehicleTrunkVolumeMeasure" type="csdo:PhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Общий объем багажных отделений транспортного средства</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00156: Идентификатор типа транспортного средства, присвоенный изготовителем (Идентификатор транспортного средства. Код) -->
+	<xs:element name="VehicleTypeId" type="csdo:Id50Type">
+		<xs:annotation>
+			<xs:documentation>Идентификационный номер типа транспортного средства (шасси транспортного средства, самоходной машины и других видов техники), присвоенный организацией-изготовителем</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00157: Идентификатор модификации транспортного средства (Модификация транспортного средства. Код) -->
+	<xs:element name="VehicleTypeVariantId" type="csdo:Id50Type">
+		<xs:annotation>
+			<xs:documentation>Обозначение модификации транспортного средства (шасси транспортного средства, самоходной машины и других видов техники), присвоенной организацией-изготовителем</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00158: Код вида шины транспортного средства (Вид шины транспортного средства. Код) -->
+	<xs:element name="VehicleTyreKindCode" type="trsdo:Code20Type">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение вида применяемой пневматической шины транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00037: Код вида шины транспортного средства (Вид шины транспортного средства_ Код. Тип) -->
+	<xs:simpleType name="VehicleTyreKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение вида пневматической шины транспортного средства</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="(([0-9]{3}/[0-9]{2,3})|([0-9]{1,2}\.[0-9]{2}[/ ]?))[B|D|R][0-9]{1,2}(,[0-9])? [0-9]{2,3}[A-Z0-9]{1,2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- Размерность шины транспортного средства -->
+	<xs:element name="VehicleTyreKindSize" type="trsdo:Code20Type">
+		<xs:annotation>
+			<xs:documentation>Размерность шины транспортного средства</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- Индекс несущей способности шины транспортного средства -->
+	<xs:element name="VehicleTyreKindIndex" type="trsdo:Code50Type">
+		<xs:annotation>
+			<xs:documentation>Индекс несущей способности шины транспортного средства</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- Скоростная категория шины транспортного средства -->
+	<xs:element name="VehicleTyreKindSpeed" type="trsdo:Code50Type">
+		<xs:annotation>
+			<xs:documentation>Скоростная категория шины транспортного средства</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- Запасная шина для временного пользования -->
+	<xs:element name="IsSupplementVehicleTyre" type="bdt:IndicatorType">
+		<xs:annotation>
+			<xs:documentation>Запасная шина для временного пользования</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00185: Код узла (Код узла. Код) -->
+	<xs:element name="VehicleUnitKindCode" type="trsdo:VehicleUnitKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение узла транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00035: Код узла (Код_узла_ Код. Тип) -->
+	<xs:simpleType name="VehicleUnitKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение вида узла трансмиссии</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00016: Признак наличия ограничений использования транспортного средства (Признак, определяющий возможность использования транспортного средства (шасси транспортного средства, самоходной машины и других видов техники) на дорогах общего пользования без ограничений или с ограничениями из-за превышения нормативов по габаритам и осевым массам. Индикатор) -->
+	<xs:element name="VehicleUseRestrictionIndicator" type="bdt:IndicatorType">
+		<xs:annotation>
+			<xs:documentation>Признак, определяющий наличие ограничений использования транспортного средства: 1 – ограничения присутствуют; 0 – ограничения отсутствуют</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- Описание возможности передвижения шасси своим ходом по дорогам общего пользования -->
+	<xs:element name="ShassisMovePermitionText" type="csdo:Text1000Type">
+		<xs:annotation>
+			<xs:documentation>Описание возможности передвижения шасси своим ходом по дорогам общего пользования</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00159: Описание ограничений использования транспортного средства (Ограничения использования транспортного средства. Текст) -->
+	<xs:element name="VehicleUseRestrictionText" type="csdo:Text1000Type">
+		<xs:annotation>
+			<xs:documentation>Описание возможности использования транспортного средства (шасси транспортного средства, самоходной машины и других видов техники) на дорогах общего пользования без ограничений или с ограничениями из-за превышения нормативов по габаритам и осевым массам</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00202: Номинальное напряжение транспортного средства (Напряжение транспортного средства. Измерение) -->
+	<xs:element name="VehicleVoltageMeasure" type="csdo:PhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Номинальное напряжение электрической системы самоходной машины и других видов техники</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00162: Количество колес транспортного средства (Колесо транспортного средства. Количество) -->
+	<xs:element name="VehicleWheelQuantity" type="csdo:Quantity4Type">
+		<xs:annotation>
+			<xs:documentation>Количество колес транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--  Ведущие колеса транспортного средства  -->
+	<xs:element name="PoweredWheelLocation" type="csdo:Number2Type">
+		<xs:annotation>
+			<xs:documentation>Ведущие колеса</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00161: Колесная база транспортного средства (Колесная база транспортного средства. Измерение) -->
+	<xs:element name="VehicleWheelbaseMeasure" type="csdo:PhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Колесная база транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00300: Интервал времени между поверками (Интервал времени между поверками. Продолжительность) -->
+	<xs:element name="VerificationIntervalDuration" type="bdt:DurationType">
+		<xs:annotation>
+			<xs:documentation>Периодичность поверки метрологических характеристик (параметров)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDE.00301: Изображение знака поверки (Знак поверки. Текст) -->
+	<xs:element name="VerificationPictureBinaryText" type="csdo:BinaryTextType">
+		<xs:annotation>
+			<xs:documentation>Изображение знака поверки в бинарном формате</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.TR.SDT.00301: Код знака поверки (Знак поверки_ Код. Тип) -->
+	<xs:simpleType name="VerificationPictureKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение знака поверки</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.TR.SDE.00160: Описание гарантийного ремонта транспортного средства (Описание гарантийного ремонта транспортного средства. Текст) -->
+	<xs:element name="WarrantyWorkText" type="bdt:TextType">
+		<xs:annotation>
+			<xs:documentation>Описание гарантийного ремонта транспортного средства (шасси транспортного средства, самоходной машины и других видов техники), выполненного представителем изготовителя с указанием сведений о замененных номерных агрегатах</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SeatDescription" type="csdo:Text250Type">
+		<xs:annotation>
+			<xs:documentation>Описание мест для сидения. Для категорий М2 и М3</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="AxisDistribution" type="csdo:Id50Type">
+		<xs:annotation>
+			<xs:documentation>Распределение по осям для множественной Главной передачи</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="RevocationReasonCodeType">
+		<xs:annotation>
+			<xs:documentation>Код причины аннулирования электронного паспорта</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="trsdo:Code3Type">
+				<xs:attribute name="activated" type="xs:boolean" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:element name="RevocationReason" type="trsdo:RevocationReasonCodeType">
+		<xs:annotation>
+			<xs:documentation>Код причины аннулирования электронного паспорта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--==========================================  Структурированные типы  ==========================================-->
+	<xs:simpleType name="VINNumberType">
+		<xs:restriction base="xs:token">
+			<xs:maxLength value="50"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ELPTSNumberType">
+		<xs:restriction base="xs:string">
+			<xs:length value="15"/>
+			<xs:pattern value="[0-9]{15}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StatementNumberType">
+		<xs:annotation>
+			<xs:documentation>Регистрационный номер заявления в СЭП</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="17"/>
+			<xs:pattern value="[A-Z,0-9]{17}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StatementStatusType">
+		<xs:annotation>
+			<xs:documentation>Статус рассмотрения заявления в СЭП</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:enumeration value="4">
+				<xs:annotation>
+					<xs:documentation>Исполнено</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="9">
+				<xs:annotation>
+					<xs:documentation>Отказано</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UUIDType">
+		<xs:restriction base="xs:string">
+			<xs:length value="36"/>
+			<xs:pattern value="[A-Z,0-9]{36}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string-50">
+		<xs:restriction base="xs:token">
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string-20">
+		<xs:restriction base="xs:token">
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string-10">
+		<xs:restriction base="xs:token">
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string-100">
+		<xs:restriction base="xs:token">
+			<xs:maxLength value="100"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

@@ -1,0 +1,775 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ccdo="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_ComplexDataObjects/0.4.14" xmlns:trcdo="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_TR_ComplexDataObjects/1.0.12" xmlns:trsdo="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_TR_SimpleDataObjects/1.0.12" xmlns:csdo="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_SimpleDataObjects/0.4.7" xmlns:tns="urn://x-artefacts-epts-ru/EPTSAllData/1.0.0" xmlns:bdt="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_BaseDataTypes/0.4.5" targetNamespace="urn://x-artefacts-epts-ru/EPTSAllData/1.0.0" elementFormDefault="qualified" version="1.0.0">
+	<xs:import namespace="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_BaseDataTypes/0.4.5" schemaLocation="EPTSAllData_EEC_M_BaseDataTypes_v0.4.5.xsd"/>
+	<xs:import namespace="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_SimpleDataObjects/0.4.7" schemaLocation="EPTSAllData_EEC_M_SimpleDataObjects_v0.4.7.xsd"/>
+	<xs:import namespace="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_TR_ComplexDataObjects/1.0.12" schemaLocation="EPTSAllData_EEC_M_TR_ComplexDataObjects_v1.0.12.xsd"/>
+	<xs:import namespace="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_ComplexDataObjects/0.4.14" schemaLocation="EPTSAllData_EEC_M_ComplexDataObjects_v0.4.14.xsd"/>
+	<xs:import namespace="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_TR_SimpleDataObjects/1.0.12" schemaLocation="EPTSAllData_EEC_M_TR_SimpleDataObjects_v1.0.12.xsd"/>
+	<xs:element name="EPTSAllDataRequest" type="tns:EPTSAllDataRequest">
+		<xs:annotation>
+			<xs:documentation>Запрос сведений из электронного паспорта транспортного средства (шасси транспортного средства) и электронного паспорта самоходной машины в полном составе сведений, утвержденных Решением Коллегии Евразийской экономической комиссии от 22.09.2015 №122</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="EPTSAllDataResponse" type="tns:EPTSAllDataResponse">
+		<xs:annotation>
+			<xs:documentation>Результат запроса сведений из электронного паспорта транспортного средства (шасси транспортного средства) и электронного паспорта самоходной машины в полном составе сведений, утвержденных Решением Коллегии Евразийской экономической комиссии от 22.09.2015 №122</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="EPTSAllDataRequest">
+		<xs:annotation>
+			<xs:documentation>Данные запроса сведений из электронного паспорта транспортного средства (шасси транспортного средства)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="trsdo:VehicleEPassportKindCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Код вида электронного паспорта транспортного средства</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VehicleEPassportId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Номер электронного паспорта транспортного средства</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:VehicleIdInfoDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сведения об идентификационных номерах</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EPTSAllDataResponse">
+		<xs:annotation>
+			<xs:documentation>Электронный паспорт транспортного средства (шасси транспортного средства, самоходной машины)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="csdo:EDocCode" minOccurs="0"/>
+			<xs:element ref="csdo:EDocId" minOccurs="0"/>
+			<xs:element ref="csdo:EDocRefId" minOccurs="0"/>
+			<xs:element ref="csdo:EDocDateTime" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleEPassportKindCode" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleEPassportId" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleEPassportStatusCode" minOccurs="0"/>
+			<xs:element ref="csdo:EventDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата присвоения статуса электронного паспорта транспортного средства (шасси транспортного средства, самоходной машины и других видов техники)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VehicleEPassportBaseCode" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleEPassportBaseText" minOccurs="0"/>
+			<xs:element ref="trcdo:VehicleDetails" minOccurs="0"/>
+			<xs:element ref="trcdo:DocumentDetails" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trcdo:TNVEDNumber" minOccurs="0"/>
+			<xs:element ref="trsdo:VehicleEPassportRegistrationReasonCode" minOccurs="0"/>
+			<xs:element ref="trcdo:OwnerDocDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Совокупность реквизитов ссылки на документ, подтверждающий принадлежность собственника к льготной категории</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ccdo:RegistrationTerritory" minOccurs="0"/>
+			<xs:element ref="trcdo:VehicleTypeDetails" minOccurs="0"/>
+			<xs:element ref="trcdo:VehicleVariantDetails" minOccurs="0"/>
+			<xs:element ref="trcdo:VehicleManufacturerDetails" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trsdo:WarrantyWorkText" minOccurs="0"/>
+			<xs:element ref="csdo:NoteText" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Дополнительная информация организации-изготовителя транспортного средства</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:UnifiedCountryCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение страны происхождения транспортного средства (шасси транспортного средства)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:BusinessEntityName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Полное наименование хозяйствующего субъекта, оформившего электронный паспорт</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:BusinessEntityId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Уникальный идентификатор хозяйствующего субъекта, оформившего электронный паспорт</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="csdo:DocCreationDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата оформления электронного паспорта (присвоения в системах электронных паспортов статуса «Действующий»)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trcdo:VehicleRegistrationDetails" minOccurs="0"/>
+			<xs:element ref="trcdo:VehicleModificationDetails" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="trcdo:MachineModificationDetails" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="StatementNumber" type="trsdo:StatementNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Номер заявления, созданного в СЭП</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="StatementStatus" type="trsdo:StatementStatusType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Статус заявления, созданного в СЭП</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="InsuranceInfo" type="tns:InsuranceInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Сведения о страховании</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="InsuranceCaseInfo" type="tns:InsuranceCaseInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Сведения о страховых случаях</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AccidentInfo" type="tns:AccidentInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Сведения о дорожно-транспортных происшествиях</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EncumbranceInfo" type="tns:EncumbranceInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Сведения о наложении / снятии ограничений (обременений)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RepairInfo" type="tns:RepairInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Сведения о проведении ремонтных работ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OwnerInfo" type="tns:OwnerInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сведения собственника</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MaintenanceInfo" type="tns:MaintenanceInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Сведения о техническом обслуживании</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TechnicalInspectionInfo" type="tns:TechnicalInspectionInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Сведения о техническом осмотре</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RecyclingDutyPaidDetails" type="trcdo:RecyclingDutyPaidDetailsType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Информация об утилизационном сборе</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AboutOwnersInfo" type="tns:AboutOwnersInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сведения о собственниках</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="trsdo:VehicleCharacteristicsName" minOccurs="0"/>
+			<xs:element name="ErrorData" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Ошибки возникшие при обработке заявления</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ErrorCode" type="trsdo:string-50">
+							<xs:annotation>
+								<xs:documentation>Код результата обработки заявления</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="ErrorText" type="csdo:Text4000Type">
+							<xs:annotation>
+								<xs:documentation>Текст результата обработки заявления</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="ErrorDetails" type="csdo:Text4000Type" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Детальное описание результата обработки заявления</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="InsuranceInfoType">
+		<xs:annotation>
+			<xs:documentation>Сведения о страховании</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="InsurancePolicyTypeCode" type="csdo:UnifiedCode20Type">
+				<xs:annotation>
+					<xs:documentation>Кодовое обозначение типа страхового полиса </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="InsurancePolicyTypeName" type="csdo:Name300Type">
+				<xs:annotation>
+					<xs:documentation>Наименование типа страхового полиса </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="InsurancePolicySeries">
+				<xs:annotation>
+					<xs:documentation>Серия страхового полиса </xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="bdt:IdentifierType">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="4"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="InsurancePolicyNumber">
+				<xs:annotation>
+					<xs:documentation>Номер страхового полиса </xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="bdt:IdentifierType">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="10"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="InsurancePeriodFrom" type="bdt:DateType">
+				<xs:annotation>
+					<xs:documentation>Срок страхования «с…» </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="InsurancePeriodTo" type="bdt:DateType">
+				<xs:annotation>
+					<xs:documentation>Срок страхования «по…» </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PersonsAdmittedDriving" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Лица, допущенные к управлению</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Unrestricted" type="bdt:IndicatorType">
+							<xs:annotation>
+								<xs:documentation>Без ограничений </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="PersonsAdmittedDrivingInfo" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Сведения о лицах, допущенных к управлению </xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element ref="ccdo:FullNameDetails"/>
+									<xs:element name="DriverLicenseSeries" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Серия водительского удостоверения </xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="bdt:IdentifierType">
+												<xs:length value="4"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element name="DriverLicenseNumber" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Номер водительского удостоверения </xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="bdt:IdentifierType">
+												<xs:length value="6"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="InsuranceCoverageArea" type="csdo:CountryCodeType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Зона действия страхового полиса </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ContractDate" type="bdt:DateType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата заключения договора </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AdditionalInfo" type="csdo:Text4000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дополнительные сведения </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="InsuranceCaseInfoType">
+		<xs:annotation>
+			<xs:documentation>Сведения о страховых случаях</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="InsuranceCaseDateTime" type="bdt:DateTimeType">
+				<xs:annotation>
+					<xs:documentation>Дата и время страхового случая </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="InsuranceCaseAddressInfo" type="ccdo:AddressDetailsType">
+				<xs:annotation>
+					<xs:documentation>Адресные данные</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DamageDetails" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Сведения о повреждениях </xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="DamageTypeCode" type="csdo:UnifiedCode20Type">
+							<xs:annotation>
+								<xs:documentation>Код типа повреждения </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="DamageTypeName" type="csdo:Name300Type">
+							<xs:annotation>
+								<xs:documentation>Наименование типа повреждения </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="AccidentInvolvedAnotherVehicles" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Сведения об иных ТС, СМ, участвовавших ДТП</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="VehicleRegistrationPlate" type="csdo:Id20Type">
+							<xs:annotation>
+								<xs:documentation>Регистрационный знак </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="VehicleMakeCode" type="trsdo:VehicleMakeCodeType">
+							<xs:annotation>
+								<xs:documentation>Код марки транспортного средства</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="VehicleCommercialName" type="csdo:Name120Type">
+							<xs:annotation>
+								<xs:documentation>Коммерческое наименование транспортного средства </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="VehicleBodyColourCode" type="trsdo:VehicleBodyColourCodeType">
+							<xs:annotation>
+								<xs:documentation>Код цвета кузова (кабины, прицепа)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="AdditionalInfo" type="csdo:Text4000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дополнительные сведения </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AccidentInfoType">
+		<xs:annotation>
+			<xs:documentation>Сведения о дорожно-транспортных происшествиях </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="AccidentDate" type="bdt:DateType">
+				<xs:annotation>
+					<xs:documentation>Дата дорожно-транспортного происшествия </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AccidentAddress" type="ccdo:AddressDetailsType">
+				<xs:annotation>
+					<xs:documentation>Адрес дорожно-транспортного происшествия </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AccidentType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Вид дорожно-транспортного происшествия </xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="AccidentTypeCode" type="csdo:UnifiedCode20Type">
+							<xs:annotation>
+								<xs:documentation>Код вида дорожно-транспортного происшествия </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="AccidentTypeName" type="csdo:Name300Type">
+							<xs:annotation>
+								<xs:documentation>Наименование вида дорожно-транспортного происшествия </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="DamageDetails" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Сведения о повреждениях </xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="DamageTypeCode" type="csdo:UnifiedCode20Type">
+							<xs:annotation>
+								<xs:documentation>Код типа повреждения </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="DamageTypeName" type="csdo:Name300Type">
+							<xs:annotation>
+								<xs:documentation>Наименование типа повреждения </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="AdditionalInfo" type="csdo:Text4000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дополнительные сведения </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EncumbranceInfoType">
+		<xs:annotation>
+			<xs:documentation>Сведения о наложении/ снятии ограничений (обременений) </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="EncumbranceTypeCode" type="csdo:UnifiedCode20Type">
+				<xs:annotation>
+					<xs:documentation>Код вида ограничения (обременения) </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EncumbranceTypeName" type="csdo:Name300Type">
+				<xs:annotation>
+					<xs:documentation>Наименование вида ограничения (обременения) </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EncumbranceImpositionDate" type="bdt:DateType">
+				<xs:annotation>
+					<xs:documentation>Дата наложения ограничения (обременения) </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EncumbrancePeriod" type="bdt:DateType">
+				<xs:annotation>
+					<xs:documentation>Срок ограничения (обременения)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="EncumbranceImpositionOrganizationName" type="csdo:Name300Type">
+					<xs:annotation>
+						<xs:documentation>Наименование организации, наложившей ограничение (обременение) </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="EncumbranceImpositionIndividualFullName" type="ccdo:FullNameDetailsType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>ФИО лица, наложившего ограничение (обременение)</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+			<xs:element name="EncumbranceImpositionDocumentName" type="csdo:Value100Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименования документа, подтверждающего ограничение (обременение) </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EncumbranceImpositionDocumentNumber" type="csdo:Id50Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Номер документа, подтверждающего ограничение (обременение) </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EncumbranceImpositionDocumentDate" type="bdt:DateType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата документа, подтверждающего ограничение (обременение) </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EncumbranceRemovReason" type="csdo:Name500Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Основание снятия ограничения (обременения) </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EncumbranceRemovDate" type="bdt:DateType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата снятия ограничения (обременения) </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="EncumbranceRemovOrganizationName" type="csdo:Name300Type" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Наименование организации, снявшей ограничение (обременение)</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="EncumbranceRemovFullName" type="ccdo:FullNameDetailsType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>ФИО лица, снявшего ограничение (обременение)</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+			<xs:element name="AdditionalInfo" type="csdo:Text4000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дополнительные сведения </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RepairInfoType">
+		<xs:annotation>
+			<xs:documentation>Сведения о проведении ремонтных работ </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="RepairTypeCode" type="csdo:UnifiedCode20Type">
+				<xs:annotation>
+					<xs:documentation>Код вида проведенных работ по ремонту </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RepairTypeName" type="csdo:Name300Type">
+				<xs:annotation>
+					<xs:documentation>Наименование вида проведенных работ по ремонту</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RepairDate" type="bdt:DateType">
+				<xs:annotation>
+					<xs:documentation>Дата проведения работ по ремонту</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RepairOperationDetails" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Сведения о проведенных работах по ремонту </xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="OperationCode" type="csdo:UnifiedCode20Type">
+							<xs:annotation>
+								<xs:documentation>Код работы по ремонту </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="OperationName" type="csdo:Name300Type">
+							<xs:annotation>
+								<xs:documentation>Наименование работы по ремонту </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="RepairReasonDetails" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Сведения о причинах ремонта </xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="RepairReasonCode" type="csdo:UnifiedCode20Type">
+							<xs:annotation>
+								<xs:documentation>Код причины ремонта </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="RepairReasonName" type="csdo:Name300Type">
+							<xs:annotation>
+								<xs:documentation>Наименование причины ремонта </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="AdditionalInfo" type="csdo:Text4000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дополнительные сведения </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OwnerInfoType">
+		<xs:annotation>
+			<xs:documentation>Сведения собственника </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="OwnerInfoText" type="csdo:Text4000Type">
+				<xs:annotation>
+					<xs:documentation>Сведения, внесенные собственником </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MaintenanceInfoType">
+		<xs:annotation>
+			<xs:documentation>Сведения о техническом обслуживании </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="MaintenanceDate" type="bdt:DateType">
+				<xs:annotation>
+					<xs:documentation>Дата проведения работ  </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MaintenanceOperationDetails" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Сведения о проведенных работах по техническому обслуживанию </xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="OperationCode" type="csdo:UnifiedCode20Type">
+							<xs:annotation>
+								<xs:documentation>Код работы по техническому обслуживанию </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="OperationName" type="csdo:Name300Type">
+							<xs:annotation>
+								<xs:documentation>Наименование работы по техническому обслуживанию </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="AdditionalInfo" type="csdo:Text4000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дополнительные сведения </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TechnicalInspectionInfoType">
+		<xs:annotation>
+			<xs:documentation>Сведения о техническом осмотре</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="TechnicalInspectionAddress" type="ccdo:AddressDetailsType">
+				<xs:annotation>
+					<xs:documentation>Адрес пункта технического осмотра</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DiagnosticCardNumber" type="csdo:Id50Type">
+				<xs:annotation>
+					<xs:documentation>Номер диагностической карты </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TechnicalInspectionDate" type="bdt:DateType">
+				<xs:annotation>
+					<xs:documentation>Дата проведения технического осмотра </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MalfunctionInfo" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Неисправности</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="MalfunctionCode" type="csdo:UnifiedCode20Type">
+							<xs:annotation>
+								<xs:documentation>Код неисправности</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="MalfunctionName" type="csdo:Name300Type">
+							<xs:annotation>
+								<xs:documentation>Описание неисправности</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="TechnicalInspectionResultCode" type="bdt:IndicatorType">
+				<xs:annotation>
+					<xs:documentation>Код результата технического осмотра </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NextTechnicalInspectionDate" type="bdt:DateType">
+				<xs:annotation>
+					<xs:documentation>Дата прохождения следующего технического осмотра </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AdditionalInfo" type="csdo:Text4000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дополнительные сведения </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AboutOwnersInfoType">
+		<xs:annotation>
+			<xs:documentation>Сведения о собственниках</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="LegalPersonKindCode" type="trsdo:LegalPersonKindCodeType">
+				<xs:annotation>
+					<xs:documentation>Код вида субъекта права</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="EECOrganizationBriefDetails" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Совокупность реквизитов, присвоенных юридическому лицу в ЕАЭС</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="EECCountryCode" type="csdo:CountryCodeType">
+								<xs:annotation>
+									<xs:documentation>Кодовое обозначение страны регистрации юридического лица</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element ref="csdo:OrganizationName"/>
+							<xs:element name="OrganizationId" type="csdo:BusinessEntityIdType">
+								<xs:annotation>
+									<xs:documentation>Уникальный идентификатор организации в реестре юридических лиц страны регистрации</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="OrganizationTaxpayerId" type="csdo:TaxpayerIdType" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Идентификатор юридического лица в реестре налогоплательщиков страны регистрации</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="TaxRegistrationReasonCode" type="csdo:TaxRegistrationReasonCodeType" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Код, идентифицирующий причину постановки организации на налоговый учет в Российской Федерации</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="EECIndividualBriefDetails" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Совокупность реквизитов, присвоенных физическому</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="EECCountryCode" type="csdo:CountryCodeType">
+								<xs:annotation>
+									<xs:documentation>Кодовое обозначение страны регистрации физического лица</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element ref="ccdo:FullNameDetails" minOccurs="0"/>
+							<xs:element name="BirthDate" type="xs:date" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Дата рождения физического лица</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="IndividualId" type="csdo:BusinessEntityIdType" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Уникальный идентификатор физического лица в реестре физических лиц страны регистрации</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="IndividualTaxpayerId" type="csdo:TaxpayerIdType" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Идентификатор физического лица в реестре налогоплательщиков страны регистрации</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="IdentityDocBriefDetailsType" type="ccdo:IdentityDocBriefDetailsType" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Краткие сведения о документе, удостоверяющем личность физического лица</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+			<xs:element name="CommunicationDetails" type="ccdo:CommunicationDetailsV2Type" minOccurs="0" maxOccurs="2">
+				<xs:annotation>
+					<xs:documentation>Контактный реквизит (указание номера телефона, факса, адреса электронной почты и др.) </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BaseForChangeDocument" type="ccdo:BaseForChangeDocumentType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Совокупность сведений о документе-основании для внесения сведений в электронные паспорта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="VehicleCost" type="csdo:AmountWithCurrencyV3Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сведения о стоимости ТС (шасси ТС), СМ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="VehicleMileage" type="csdo:DimensionalMeasureType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сведения о пробеге</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

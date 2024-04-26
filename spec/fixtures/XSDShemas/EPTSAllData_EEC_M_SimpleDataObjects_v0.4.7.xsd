@@ -1,0 +1,2604 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_SimpleDataObjects/0.4.7" xmlns:csdo="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_SimpleDataObjects/0.4.7" xmlns:bdt="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_BaseDataTypes/0.4.5" version="0.4.7">
+	<xs:import namespace="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_BaseDataTypes/0.4.5" schemaLocation="EPTSAllData_EEC_M_BaseDataTypes_v0.4.5.xsd"/>
+	<!-- M.SDT.00094: Денежная сумма (Бухгалтерский учет_ Денежная сумма. Тип) -->
+	<xs:complexType name="AccountingAmountType">
+		<xs:annotation>
+			<xs:documentation>Числовое значение с заданной точностью, представляющее количество денежных единиц, дополненное буквенным кодом валюты и показателем степени масштабного множителя</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="csdo:AmountWithCurrencyType">
+				<xs:totalDigits value="19"/>
+				<xs:fractionDigits value="4"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDT.00166: Денежная сумма (Бухгалтерский учет_ Денежная сумма. До 24 цифр: вариант 3. Тип) -->
+	<xs:complexType name="AccountingAmountV3Type">
+		<xs:annotation>
+			<xs:documentation>Числовое значение с заданной точностью, представляющее количество денежных единиц, дополненное буквенным кодом валюты и указанием на классификатор валют</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="csdo:AmountWithCurrencyV3Type">
+				<xs:totalDigits value="24"/>
+				<xs:fractionDigits value="4"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDE.00046: Иные сведения (Сведения. Текст) -->
+	<xs:element name="AdditionalInfoText" type="csdo:Text4000Type">
+		<xs:annotation>
+			<xs:documentation>Дополнительная информация, относящаяся к описываемому объекту</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00192: Код вида адреса (Вид адреса. Код) -->
+	<xs:element name="AddressKindCode" type="csdo:AddressKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение вида адреса</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00162: Код вида адреса (Вид адреса_ Код. Тип) -->
+	<xs:simpleType name="AddressKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение вида адреса</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00005: Адрес в текстовой форме (Адрес. Текст) -->
+	<xs:element name="AddressText" type="csdo:Text1000Type">
+		<xs:annotation>
+			<xs:documentation>Набор элементов адреса, представленных в свободной форме в виде текста</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00069: Возраст (Возраст. Продолжительность) -->
+	<xs:element name="AgeDuration" type="bdt:DurationType">
+		<xs:annotation>
+			<xs:documentation>Период от рождения до момента исчисления</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00061: Денежная сумма с буквенным кодом валюты (Денежная сумма с буквенным кодом валюты_ Денежная сумма. Тип) -->
+	<xs:complexType name="AmountWithCurrencyType">
+		<xs:annotation>
+			<xs:documentation>Числовое значение, представляющее количество денежных единиц, дополненное буквенным кодом валюты и показателем степени масштабного множителя</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="bdt:AmountType">
+				<xs:attribute name="currencyCode" type="csdo:CurrencyCodeType" use="required">
+					<xs:annotation>
+						<xs:documentation>Кодовое обозначение валюты</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="scaleNumber" type="csdo:Number2Type" use="optional" default="0">
+					<xs:annotation>
+						<xs:documentation>Масштаб денежной суммы в десятичной системе счисления, представленный в виде показателя степени числа 10</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDT.00164: Денежная сумма с буквенным кодом валюты (Денежная сумма с буквенным кодом валюты_ Денежная сумма: вариант 3. Тип) -->
+	<xs:complexType name="AmountWithCurrencyV3Type">
+		<xs:annotation>
+			<xs:documentation>Числовое значение, представляющее количество денежных единиц, дополненное буквенным кодом валюты и указанием на классификатор валют</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="bdt:AmountType">
+				<xs:attribute name="currencyCode" type="csdo:CurrencyCodeV3Type" use="required">
+					<xs:annotation>
+						<xs:documentation>Кодовое обозначение валюты</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="currencyCodeListId" type="csdo:ReferenceDataIdType" use="required">
+					<xs:annotation>
+						<xs:documentation>Идентификатор классификатора валют</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDT.00099: Денежная сумма с цифровым кодом валюты (Денежная сумма с цифровым кодом валюты_ Денежная сумма. Тип) -->
+	<xs:complexType name="AmountWithNumericCurrencyType">
+		<xs:annotation>
+			<xs:documentation>Числовое значение, представляющее количество денежных единиц, дополненное цифровым кодом валюты и показателем степени масштабного множителя</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="bdt:AmountType">
+				<xs:attribute name="currencyCode" type="csdo:CurrencyN3CodeType" use="required">
+					<xs:annotation>
+						<xs:documentation>Кодовое обозначение валюты</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="scaleNumber" type="csdo:Number2Type" use="optional" default="0">
+					<xs:annotation>
+						<xs:documentation>Масштаб денежной суммы в десятичной системе счисления, представленный в виде показателя степени числа 10</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDT.00165: Денежная сумма с цифровым кодом валюты (Денежная сумма с цифровым кодом валюты_ Денежная сумма: вариант 3. Тип) -->
+	<xs:complexType name="AmountWithNumericCurrencyV3Type">
+		<xs:annotation>
+			<xs:documentation>Числовое значение, представляющее количество денежных единиц, дополненное цифровым кодом валюты и указанием на классификатор валют</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="bdt:AmountType">
+				<xs:attribute name="currencyCode" type="csdo:CurrencyN3CodeV3Type" use="required">
+					<xs:annotation>
+						<xs:documentation>Кодовое обозначение валюты</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="currencyCodeListId" type="csdo:ReferenceDataIdType" use="required">
+					<xs:annotation>
+						<xs:documentation>Идентификатор классификатора валют</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDE.00126: Краткое наименование уполномоченного органа государства-члена (Краткое наименование уполномоченного органа государства-члена. Имя) -->
+	<xs:element name="AuthorityBriefName" type="csdo:Name120Type">
+		<xs:annotation>
+			<xs:documentation>Сокращенное наименование уполномоченного органа государства-члена</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00068: Идентификатор уполномоченного органа государства-члена (Уполномоченный орган государства-члена. Идентификатор) -->
+	<xs:element name="AuthorityId" type="csdo:Id20Type">
+		<xs:annotation>
+			<xs:documentation>Строка, идентифицирующая орган государственной власти государства-члена либо уполномоченную им организацию</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00066: Наименование уполномоченного органа государства-члена (Уполномоченный орган государства-члена. Имя) -->
+	<xs:element name="AuthorityName" type="csdo:Name300Type">
+		<xs:annotation>
+			<xs:documentation>Полное наименование органа государственной власти государства-члена либо уполномоченной им организации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00197: Идентификатор уполномоченного органа (Уполномоченный орган. Идентификатор) -->
+	<xs:element name="AuthorityV2Id" type="csdo:UnifiedId20Type">
+		<xs:annotation>
+			<xs:documentation>Строка, идентифицирующая орган государственной власти государства-члена либо уполномоченную им организацию</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00198: Наименование уполномоченного органа (Уполномоченный орган. Имя) -->
+	<xs:element name="AuthorityV2Name" type="csdo:Name300Type">
+		<xs:annotation>
+			<xs:documentation>Полное наименование органа государственной власти государства-члена либо уполномоченной им организации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00194: Номер банковского счета (Номер банковского счета. Идентификатор) -->
+	<xs:element name="BankAccountId" type="csdo:BankAccountIdV2Type">
+		<xs:annotation>
+			<xs:documentation>Номер счета, на который производится зачисление денежной суммы</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00027: Банковский счет (Банковский счет_ Идентификатор. Тип) -->
+	<xs:simpleType name="BankAccountIdType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, сформированная по правилам идентификации счета, открываемого банком юридическому или физическому лицу</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:IdentifierType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="34"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDT.00141: Банковский счет (Банковский счет_ Идентификатор: вариант 2. Тип) -->
+	<xs:complexType name="BankAccountIdV2Type">
+		<xs:annotation>
+			<xs:documentation>Строка символов, сформированная по правилам идентификации счета, открываемого банком юридическому или физическому лицу</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="csdo:BankAccountIdType">
+				<xs:attribute name="kindCode" type="csdo:BankAccountKindCodeType" use="required">
+					<xs:annotation>
+						<xs:documentation>Кодовое обозначение вида банковского счета</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDT.00142: Код вида банковского счета (Вид банковского счета_ Код. Тип) -->
+	<xs:simpleType name="BankAccountKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение вида банковского счета</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00027: Корреспондентский счет (Корреспондентский счет. Идентификатор) -->
+	<xs:element name="BankCorrAccountId" type="csdo:BankAccountIdType">
+		<xs:annotation>
+			<xs:documentation>Счет, открываемый кредитной организации (банку) в подразделении центрального банка или в иной кредитной организации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00026: Идентификатор банка (Банк. Идентификатор) -->
+	<xs:element name="BankId" type="csdo:BankIdType">
+		<xs:annotation>
+			<xs:documentation>Уникальный идентификатор банка, используемый в платежных документах (платежное поручение, аккредитив)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00026: Идентификатор банка (Банк_ Идентификатор. Тип) -->
+	<xs:simpleType name="BankIdType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, сформированная по правилам идентификации участников финансовых расчетов в национальной или международной платежной системе</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:IdentifierType">
+			<xs:pattern value="[0-9]{9}|[A-Z]{6}[A-Z0-9]{2}|[A-Z]{6}[A-Z0-9]{5}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00055: Наименование банка (Банк. Имя) -->
+	<xs:element name="BankName" type="csdo:Name300Type">
+		<xs:annotation>
+			<xs:documentation>Полное наименование банка согласно учредительному документу</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00143: Бинарный текст с кодом формата данных (Текст с кодом формата данных_ Бинарный текст. Тип) -->
+	<xs:complexType name="BinaryTextType">
+		<xs:annotation>
+			<xs:documentation>Текстовая информация, представленная в двоичной форме, с указанием формата данных</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="bdt:BinaryTextType">
+				<xs:attribute name="mediaTypeCode" type="csdo:MediaTypeCodeType" use="optional">
+					<xs:annotation>
+						<xs:documentation>Кодовое обозначение формата данных</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDE.00070: Дата рождения (Дата рождения. Дата) -->
+	<xs:element name="BirthDate" type="bdt:DateType">
+		<xs:annotation>
+			<xs:documentation>Дата, в которую родился человек или животное</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00138: Код пункта пропуска (Пункт пропуска. Код) -->
+	<xs:element name="BorderCheckpointCode" type="csdo:BorderCheckpointCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение пункта пропуска через таможенную границу Союза</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00100: Код пункта пропуска (Пункт пропуска_ Код. Тип) -->
+	<xs:simpleType name="BorderCheckpointCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение пункта пропуска через таможенную границу государств – членов Евразийского экономического союза</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="18"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00139: Наименование пункта пропуска (Пункт пропуска. Имя) -->
+	<xs:element name="BorderCheckpointName" type="csdo:Name250Type">
+		<xs:annotation>
+			<xs:documentation>Наименование пункта пропуска через таможенную границу Союза</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00011: Номер дома (Номер дома. Идентификатор) -->
+	<xs:element name="BuildingNumberId" type="csdo:Id50Type">
+		<xs:annotation>
+			<xs:documentation>Обозначение дома, корпуса, строения</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00188: Краткое наименование хозяйствующего субъекта (Краткое наименование хозяйствующего субъекта. Имя) -->
+	<xs:element name="BusinessEntityBriefName" type="csdo:Name120Type">
+		<xs:annotation>
+			<xs:documentation>Сокращенное наименование хозяйствующего субъекта или фамилия, имя и отчество физического лица, ведущего хозяйственную деятельность</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00189: Идентификатор хозяйствующего субъекта (Хозяйствующий субъект. Идентификатор) -->
+	<xs:element name="BusinessEntityId" type="csdo:BusinessEntityIdType">
+		<xs:annotation>
+			<xs:documentation>Номер (код) записи по реестру (регистру), присвоенный при государственной регистрации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00158: Метод идентификации хозяйствующих субъектов (Метод идентификации хозяйствующих субъектов_ Идентификатор. Тип) -->
+	<xs:simpleType name="BusinessEntityIdKindIdType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, идентифицирующая метод идентификации хозяйствующих субъектов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="csdo:Id20Type"/>
+	</xs:simpleType>
+	<!-- M.SDT.00157: Идентификатор хозяйствующего субъекта (Хозяйствующий субъект_ Идентификатор. Тип) -->
+	<xs:complexType name="BusinessEntityIdType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, идентифицирующая хозяйствующего субъекта</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="csdo:Id20Type">
+				<xs:attribute name="kindId" type="csdo:BusinessEntityIdKindIdType" use="required">
+					<xs:annotation>
+						<xs:documentation>Метод идентификации хозяйствующих субъектов</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDE.00187: Наименование хозяйствующего субъекта (Хозяйствующий субъект. Имя) -->
+	<xs:element name="BusinessEntityName" type="csdo:Name300Type">
+		<xs:annotation>
+			<xs:documentation>Полное наименование хозяйствующего субъекта или фамилия, имя и отчество физического лица, ведущего хозяйственную деятельность</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00023: Код организационно-правовой формы (Организационно-правовая форма. Код) -->
+	<xs:element name="BusinessEntityTypeCode" type="csdo:UnifiedCode20Type">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение организационно-правовой формы, в которой зарегистрирован хозяйствующий субъект</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00090: Наименование организационно-правовой формы (Организационно-правовая форма. Имя) -->
+	<xs:element name="BusinessEntityTypeName" type="csdo:Name300Type">
+		<xs:annotation>
+			<xs:documentation>Наименование организационно-правовой формы, в которой зарегистрирован хозяйствующий субъект</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00009: Город (Город. Имя) -->
+	<xs:element name="CityName" type="csdo:Name120Type">
+		<xs:annotation>
+			<xs:documentation>Наименование города</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00079: Код объекта классификации (Код объекта классификации_ Код. Тип) -->
+	<xs:complexType name="ClassifiedReferenceDataItemCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение объекта классификации с указанием вида кодового обозначения объекта</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="csdo:ReferenceDataItemCodeType">
+				<xs:attribute name="kindCode" type="csdo:ReferenceDataKindCodeType" use="required">
+					<xs:annotation>
+						<xs:documentation>Кодовое обозначение вида блока сведений</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDT.00080: Наименование объекта классификации (Наименование объекта классификации_ Имя. Тип) -->
+	<xs:complexType name="ClassifiedReferenceDataItemNameType">
+		<xs:annotation>
+			<xs:documentation>Наименование объекта классификации с указанием вида наименования объекта</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="csdo:Name500Type">
+				<xs:attribute name="kindCode" type="csdo:ReferenceDataKindCodeType" use="required">
+					<xs:annotation>
+						<xs:documentation>Кодовое обозначение вида блока сведений</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDT.00081: Описание объекта классификации (Описание объекта классификации_ Текст. Тип) -->
+	<xs:complexType name="ClassifiedReferenceDataItemTextType">
+		<xs:annotation>
+			<xs:documentation>Текстовое описание объекта классификации</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="csdo:Text4000Type">
+				<xs:attribute name="kindCode" type="csdo:ReferenceDataKindCodeType" use="required">
+					<xs:annotation>
+						<xs:documentation>Кодовое обозначение вида блока сведений</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDT.00160: Код (Код. До 20 символов. Тип) -->
+	<xs:simpleType name="Code20Type">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение объекта в соответствии с некоторым справочником (классификатором), содержащая не более 20 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00091: Код товара по ТН ВЭД ЕАЭС (Товар по ТН ВЭД ЕАЭС. Код) -->
+	<xs:element name="CommodityCode" type="csdo:CommodityCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение группы (класса) товаров в соответствии с единой Товарной номенклатурой внешнеэкономической деятельности Евразийского экономического союза</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00065: Код товара по ТН ВЭД ЕАЭС (ТН ВЭД ЕАЭС_ Код. Тип) -->
+	<xs:simpleType name="CommodityCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение группы (класса) товаров в соответствии с единой Товарной номенклатурой внешнеэкономической деятельности Евразийского экономического союза</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="\d{2}|\d{4}|\d{6}|\d{8,10}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00141: Количество товара (Количество товара. Измерение) -->
+	<xs:element name="CommodityMeasure" type="csdo:PhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Объем товара, выраженный в штуках, единицах массы, объемных или других единицах</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00092: Наименование класса товаров (Класс товаров. Имя) -->
+	<xs:element name="CommodityName" type="csdo:Name300Type">
+		<xs:annotation>
+			<xs:documentation>Словесное обозначение товара в соответствии с классификатором, применяемым таможенными органами и участниками внешнеэкономической деятельности в целях проведения таможенных операций</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00014: Код вида связи (Вид связи. Код) -->
+	<xs:element name="CommunicationChannelCode" type="csdo:CommunicationChannelCodeV2Type">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение вида средства (канала) связи (телефон, факс, электронная почта и др.)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00014: Код типа коммуникационной среды (Тип коммуникационной среды_ Код. Тип) -->
+	<xs:simpleType name="CommunicationChannelCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение типа коммуникационной среды (телефон, факс, электронная почта и др.)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:enumeration value="AO">
+				<xs:annotation>
+					<xs:documentation>адрес сайта в сети Интернет</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EM">
+				<xs:annotation>
+					<xs:documentation>электронная почта</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FX">
+				<xs:annotation>
+					<xs:documentation>телефакс</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TE">
+				<xs:annotation>
+					<xs:documentation>телефон</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TG">
+				<xs:annotation>
+					<xs:documentation>телеграф</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TL">
+				<xs:annotation>
+					<xs:documentation>телекс</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDT.00163: Код типа коммуникационной среды (Тип коммуникационной среды_ Код: вариант 2. Тип) -->
+	<xs:simpleType name="CommunicationChannelCodeV2Type">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение типа коммуникационной среды (телефон, факс, электронная почта и др.)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00015: Идентификатор канала связи (Канал связи. Идентификатор) -->
+	<xs:element name="CommunicationChannelId" type="csdo:CommunicationChannelIdType">
+		<xs:annotation>
+			<xs:documentation>Последовательность символов, идентифицирующая канал связи (указание номера телефона, факса, адреса электронной почты и др.)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00015: Идентификатор канала связи (Канал связи_ Идентификатор. Тип) -->
+	<xs:simpleType name="CommunicationChannelIdType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, идентифицирующая канал связи (указание номера телефона, факса, адреса электронной почты и др.)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:IdentifierType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="1000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00093: Наименование вида связи (Вид связи. Имя) -->
+	<xs:element name="CommunicationChannelName" type="csdo:Name120Type">
+		<xs:annotation>
+			<xs:documentation>Наименование вида средства (канала) связи (телефон, факс, электронная почта и др.)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00001: Код страны (Страна. Код) -->
+	<xs:element name="CountryCode" type="csdo:CountryCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение страны</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00001: Двухбуквенный код страны (Страна_ Код. Двухбуквенный. Тип) -->
+	<xs:simpleType name="CountryCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая двухбуквенное условное обозначение страны</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="[A-Z]{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00082: Буквенный код валюты (Буквенный код валюты. Код) -->
+	<xs:element name="CurrencyCode" type="csdo:CurrencyCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое буквенное обозначение валюты (3-символьное)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00060: Буквенный код валюты (Валюта_ Код. Буквенный. Тип) -->
+	<xs:simpleType name="CurrencyCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая буквенное обозначение валюты</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="[A-Z]{3}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDT.00144: Буквенный код валюты (Валюта_ Код. Буквенный: вариант 3. Тип) -->
+	<xs:simpleType name="CurrencyCodeV3Type">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая буквенное обозначение валюты</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="[A-Z]{3}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDT.00073: Цифровой код валюты (Валюта_ Код. Цифровой. Тип) -->
+	<xs:simpleType name="CurrencyN3CodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая цифровое обозначение валюты</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="[0-9]{3}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDT.00145: Цифровой код валюты (Валюта_ Код. Цифровой: вариант 3. Тип) -->
+	<xs:simpleType name="CurrencyN3CodeV3Type">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая цифровое обозначение валюты с указанием классификатора валют</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="[0-9]{3}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00078: Дата и время текущей версии (Дата и время текущей версии. Дата и время) -->
+	<xs:element name="CurrentVersionDateTime" type="bdt:DateTimeType">
+		<xs:annotation>
+			<xs:documentation>Дата и время текущей версии какого-либо объекта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00002: Описание (Описание. Текст) -->
+	<xs:element name="DescriptionText" type="csdo:Text4000Type">
+		<xs:annotation>
+			<xs:documentation>Текстовое представление объекта, явления или процесса в свободной форме</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00084: Величина с единицей измерения (Величина с единицей измерения_ Измерение. Тип) -->
+	<xs:complexType name="DimensionalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Числовая величина, определенная в результате измерения физических параметров в каких-либо единицах измерения</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="bdt:MeasureType">
+				<xs:attribute name="measurementUnitCode" type="csdo:MeasurementUnitCodeType" use="required">
+					<xs:annotation>
+						<xs:documentation>Кодовое обозначение единицы измерения</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDE.00008: Район (Район. Имя) -->
+	<xs:element name="DistrictName" type="csdo:Name120Type">
+		<xs:annotation>
+			<xs:documentation>Наименование единицы административно-территориального деления второго уровня</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00186: Орган, принявший документ (Орган, принявший документ. Идентификатор) -->
+	<xs:element name="DocAuthorityId" type="csdo:Id20Type">
+		<xs:annotation>
+			<xs:documentation>Орган, принявший нормативный правовой документ</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00106: Документ в бинарном формате (Документ. Бинарный текст) -->
+	<xs:element name="DocBinaryText" type="bdt:BinaryTextType">
+		<xs:annotation>
+			<xs:documentation>Документ в бинарном текстовом формате</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00045: Дата документа (Дата документа. Дата) -->
+	<xs:element name="DocCreationDate" type="bdt:DateType">
+		<xs:annotation>
+			<xs:documentation>Дата выдачи, подписания, утверждения или регистрации документа</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00044: Номер документа (Номер документа. Идентификатор) -->
+	<xs:element name="DocId" type="csdo:Id50Type">
+		<xs:annotation>
+			<xs:documentation>Цифровое или буквенно-цифровое обозначение, присваиваемое документу при его регистрации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00190: Идентификатор уполномоченного органа, выдавшего документ (Уполномоченный орган, выдавший документ. Идентификатор) -->
+	<xs:element name="DocIssuingAuthorityId" type="csdo:Id50Type">
+		<xs:annotation>
+			<xs:documentation>Строка символов, идентифицирующая уполномоченный орган, выдавший документ</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00191: Наименование уполномоченного органа, выдавшего документ (Уполномоченный орган, выдавший документ. Имя) -->
+	<xs:element name="DocIssuingAuthorityName" type="csdo:Name300Type">
+		<xs:annotation>
+			<xs:documentation>Полное наименование уполномоченного органа, выдавшего документ</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00054: Код вида документа (Вид документа. Код) -->
+	<xs:element name="DocKindCode" type="csdo:UnifiedCode20Type">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение вида документа</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00054: Код вида документа (Вид документа_ Код. Тип) -->
+	<xs:complexType name="DocKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение вида документа</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="csdo:QualifiedCodeType">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="20"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDE.00095: Наименование вида документа (Вид документа. Имя) -->
+	<xs:element name="DocKindName" type="csdo:Name500Type">
+		<xs:annotation>
+			<xs:documentation>Наименование вида документа</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00108: Наименование документа (Документ. Имя) -->
+	<xs:element name="DocName" type="csdo:Name500Type">
+		<xs:annotation>
+			<xs:documentation>Наименование документа</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00157: Серия документа (Серия документа. Идентификатор) -->
+	<xs:element name="DocSeriesId" type="csdo:Id20Type">
+		<xs:annotation>
+			<xs:documentation>Цифровое или буквенно-цифровое обозначение серии документа</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00137: Дата начала срока действия документа (Дата начала срока действия документа. Дата) -->
+	<xs:element name="DocStartDate" type="bdt:DateType">
+		<xs:annotation>
+			<xs:documentation>Дата начала срока, в течение которого документ имеет силу</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00052: Дата истечения срока действия документа (Дата истечения срока действия документа. Дата) -->
+	<xs:element name="DocValidityDate" type="bdt:DateType">
+		<xs:annotation>
+			<xs:documentation>Дата окончания срока, в течение которого документ имеет силу</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00056: Срок действия документа (Продолжительность срока действия документа. Продолжительность) -->
+	<xs:element name="DocValidityDuration" type="bdt:DurationType">
+		<xs:annotation>
+			<xs:documentation>Продолжительность срока, в течение которого документ имеет силу</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00201: Дата акта (Дата акта органа Союза. Дата) -->
+	<xs:element name="EAEUDocCreationDate" type="bdt:DateType">
+		<xs:annotation>
+			<xs:documentation>Дата принятия акта органа Союза</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00208: Дата вступления в силу акта (Дата вступления в силу акта органа Союза. Дата) -->
+	<xs:element name="EAEUDocEffectiveDate" type="bdt:DateType">
+		<xs:annotation>
+			<xs:documentation>Дата вступления в силу акта органа Союза</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00202: Номер акта (Номер акта органа Союза. Идентификатор) -->
+	<xs:element name="EAEUDocId" type="csdo:Id50Type">
+		<xs:annotation>
+			<xs:documentation>Цифровое или буквенно-цифровое обозначение, присвоенное акту органа Союза при принятии</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00199: Идентификатор органа Союза, принявшего акт (Орган Союза, принявший акт. Идентификатор) -->
+	<xs:element name="EAEUDocIssuerId" type="csdo:EAEUDocIssuerIdType">
+		<xs:annotation>
+			<xs:documentation>Идентификатор органа Союза, принявшего акт</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00153: Идентификатор органа Союза, принявшего акт (Орган Союза, принявший акт_ Идентификатор. Тип) -->
+	<xs:simpleType name="EAEUDocIssuerIdType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, идентифицирующая орган Союза, принявший акт</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:IdentifierType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00200: Наименование органа Союза, принявшего акт (Орган Союза, принявший акт. Имя) -->
+	<xs:element name="EAEUDocIssuerName" type="csdo:Name300Type">
+		<xs:annotation>
+			<xs:documentation>Полное наименование органа Союза, принявшего акт</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00203: Код вида акта (Вид акта органа Союза. Код) -->
+	<xs:element name="EAEUDocKindCode" type="csdo:EAEUDocKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение вида акта органа Союза</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00154: Код вида акта (Вид акта органа Союза_ Код. Тип) -->
+	<xs:simpleType name="EAEUDocKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая кодовое обозначение вида акта органа Союза</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00204: Наименование акта (Акт органа Союза. Имя) -->
+	<xs:element name="EAEUDocName" type="csdo:Name500Type">
+		<xs:annotation>
+			<xs:documentation>Наименование акта органа Союза</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00205: Дата истечения срока действия акта (Дата истечения срока действия акта органа Союза. Дата) -->
+	<xs:element name="EAEUDocValidityDate" type="bdt:DateType">
+		<xs:annotation>
+			<xs:documentation>Дата истечения срока действия акта органа Союза</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.90001: Код электронного документа (сведений) (Электронный документ (сведения). Код) -->
+	<xs:element name="EDocCode" type="csdo:EDocCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение электронного документа (сведений) в соответствии с реестром структур электронных документов и сведений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.90001: Код электронного документа (сведений) (Электронный документ (сведения)_ Код. Тип) -->
+	<xs:simpleType name="EDocCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение электронного документа (сведений) в соответствии с реестром структур электронных документов и сведений</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="R(\.[A-Z]{2}\.[A-Z]{2}\.[0-9]{2})?\.[0-9]{3}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.90002: Дата и время электронного документа (сведений) (Дата и время электронного документа (сведений). Дата и время) -->
+	<xs:element name="EDocDateTime" type="bdt:DateTimeType">
+		<xs:annotation>
+			<xs:documentation>Дата и время создания электронного документа (сведений)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.90003: Подробная информация об ошибке (Подробная информация об ошибке. Текст) -->
+	<xs:element name="EDocDetailedErrorText" type="csdo:Text4000Type">
+		<xs:annotation>
+			<xs:documentation>Сведения об ошибке контроля электронного документа (сведений), сформированные программным средством контроля</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.90004: Элемент электронного документа (сведений) (Элемент электронного документа (сведений). Текст) -->
+	<xs:element name="EDocElementText" type="csdo:Text1000Type">
+		<xs:annotation>
+			<xs:documentation>Строка символов, позволяющая однозначно локализовать элемент в электронном документе (сведениях)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.90005: Код ошибки контроля электронного документа (сведений) (Ошибка контроля электронного документа (сведений). Код) -->
+	<xs:element name="EDocErrorCode" type="csdo:EDocErrorCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение ошибки контроля электронного документа (сведений)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.90002: Код ошибки контроля электронного документа (сведений) (Ошибка контроля электронного документа (сведений)_ Код. Тип) -->
+	<xs:simpleType name="EDocErrorCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение ошибки контроля электронного документа (сведений)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.90006: Описание ошибки контроля электронного документа (сведений) (Ошибка контроля электронного документа (сведений). Текст) -->
+	<xs:element name="EDocErrorText" type="csdo:Text1000Type">
+		<xs:annotation>
+			<xs:documentation>Обозначение ошибки контроля электронного документа (сведений) в текстовой форме в терминах естественного языка</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.90007: Идентификатор электронного документа (сведений) (Электронный документ (сведения). Идентификатор) -->
+	<xs:element name="EDocId" type="csdo:UniversallyUniqueIdType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, однозначно идентифицирующая электронный документ (сведения)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.90007: Идентификатор электронного документа (сведений) (Электронный документ (сведения). Идентификатор) -->
+	<xs:element name="MessageID" type="csdo:UniversallyUniqueIdType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, однозначно идентифицирующая заявление</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.90007: Идентификатор электронного документа (сведений) (Электронный документ (сведения). Идентификатор) -->
+	<xs:element name="BaseMessageID" type="csdo:UniversallyUniqueIdType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, однозначно идентифицирующая базовое заявление</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.90008: Идентификатор исходного электронного документа (сведений) (Исходный электронный документ (сведения). Идентификатор) -->
+	<xs:element name="EDocRefId" type="csdo:UniversallyUniqueIdType">
+		<xs:annotation>
+			<xs:documentation>Идентификатор электронного документа (сведений), в ответ на который был сформирован данный электронный документ (сведения)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00074: Конечная дата (Конечная дата. Дата) -->
+	<xs:element name="EndDate" type="bdt:DateType">
+		<xs:annotation>
+			<xs:documentation>Конечная дата периода времени с указанием дня, месяца и года</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00134: Конечная дата и время (Конечная дата и время. Дата и время) -->
+	<xs:element name="EndDateTime" type="bdt:DateTimeType">
+		<xs:annotation>
+			<xs:documentation>Конечная дата и время</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00211: Идентификационный номер двигателя (Идентификационный номер двигателя. Идентификатор) -->
+	<xs:element name="EngineId" type="csdo:Id20Type">
+		<xs:annotation>
+			<xs:documentation>Идентификационный номер двигателя, присвоенный изготовителем</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00218: Максимальная мощность двигателя (Максимальная мощность двигателя. Измерение) -->
+	<xs:element name="EngineMaxPowerMeasure" type="csdo:UnifiedPhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Максимальная мощность двигателя</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00131: Дата (Дата события. Дата) -->
+	<xs:element name="EventDate" type="bdt:DateType">
+		<xs:annotation>
+			<xs:documentation>Дата некоторого события</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00132: Дата и время (Дата и время события. Дата и время) -->
+	<xs:element name="EventDateTime" type="bdt:DateTimeType">
+		<xs:annotation>
+			<xs:documentation>Дата и время некоторого события</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00109: Имя (Личное имя. Имя) -->
+	<xs:element name="FirstName" type="csdo:Name120Type">
+		<xs:annotation>
+			<xs:documentation>Имя физического лица</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00142: Номер бланка документа (Номер бланка документа. Идентификатор) -->
+	<xs:element name="FormNumberId" type="csdo:Id50Type">
+		<xs:annotation>
+			<xs:documentation>Номер, присвоенный бланку документа при изготовлении</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00143: Серия бланка документа (Серия бланка документа. Идентификатор) -->
+	<xs:element name="FormSeriesId" type="csdo:Id20Type">
+		<xs:annotation>
+			<xs:documentation>Обозначение серии бланков документов, присвоенное при изготовлении</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00107: Географическая координата (Географическая координата_ Измерение. Тип) -->
+	<xs:simpleType name="GeoCoordinateMeasureType">
+		<xs:annotation>
+			<xs:documentation>Числовая величина с заданной точностью, определенная в результате измерения географической координаты объекта</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:MeasureType">
+			<xs:totalDigits value="11"/>
+			<xs:fractionDigits value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDT.00146: График с кодом формата данных (График с кодом формата данных_ График. Тип) -->
+	<xs:complexType name="GraphicType">
+		<xs:annotation>
+			<xs:documentation>Информация, представленная в форме диаграмм, графов, математических кривых, с указанием кода формата данных</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="bdt:GraphicType">
+				<xs:attribute name="mediaTypeCode" type="csdo:MediaTypeCodeType" use="optional">
+					<xs:annotation>
+						<xs:documentation>Кодовое обозначение формата данных</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDE.00144: Масса брутто (Масса брутто. Измерение) -->
+	<xs:element name="GrossMassMeasure" type="csdo:PhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Масса объекта с упаковкой (тарой)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00114: Высота (Высота. Измерение) -->
+	<xs:element name="HeightMeasure" type="csdo:PhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Линейный размер предмета или его местоположение, измеренные в вертикальном направлении</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00114: Высота погрузочная (Высота. Измерение) -->
+	<xs:element name="LoadingHeightMeasure" type="csdo:PhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Линейный размер предмета или его местоположение, измеренные в вертикальном направлении (для погрузки)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00114: Высота максимально допустимая (Высота. Измерение) -->
+	<xs:element name="MaxHeightMeasure" type="csdo:PhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Линейный размер предмета или его местоположение, измеренные в вертикальном направлении (максимально допустимый)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00092: Идентификатор (Идентификатор. До 20 символов. Тип) -->
+	<xs:simpleType name="Id20Type">
+		<xs:annotation>
+			<xs:documentation>Строка символов, идентифицирующая объект, содержащая не более 20 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:IdentifierType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDT.00108: Идентификатор (Идентификатор. До 40 символов. Тип) -->
+	<xs:simpleType name="Id40Type">
+		<xs:annotation>
+			<xs:documentation>Строка символов, идентифицирующая объект, содержащая не более 40 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:IdentifierType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDT.00093: Идентификатор (Идентификатор. До 50 символов. Тип) -->
+	<xs:simpleType name="Id50Type">
+		<xs:annotation>
+			<xs:documentation>Строка символов, идентифицирующая объект, содержащая не более 50 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:IdentifierType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00136: Код вида документа, удостоверяющего личность (Вид документа, удостоверяющего личность. Код) -->
+	<xs:element name="IdentityDocKindCode" type="csdo:IdentityDocKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение вида документа, удостоверяющего личность</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00098: Код вида документа, удостоверяющего личность (Вид документа, удостоверяющего личность_ Код. Тип) -->
+	<xs:complexType name="IdentityDocKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение вида документа, удостоверяющего личность</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="csdo:Code20Type">
+				<xs:attribute name="codeListId" type="csdo:ReferenceDataIdType" use="optional">
+					<xs:annotation>
+						<xs:documentation>Обозначение справочника (классификатора), в соответствии с которым указан код</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDE.00125: Номер удостоверения личности (Номер удостоверения личности. Идентификатор) -->
+	<xs:element name="IdentityDocNumberId" type="csdo:Id50Type">
+		<xs:annotation>
+			<xs:documentation>Номер документа, удостоверяющего личность физического лица</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00103: Серия удостоверения личности (Серия удостоверения личности. Идентификатор) -->
+	<xs:element name="IdentityDocSeriesId" type="csdo:Id50Type">
+		<xs:annotation>
+			<xs:documentation>Серия документа, удостоверяющего личность физического лица</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.90010: Код сообщения общего процесса (Сообщение общего процесса. Код) -->
+	<xs:element name="InfEnvelopeCode" type="csdo:InfEnvelopeCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение сообщения общего процесса</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.90004: Код сообщения общего процесса (Сообщение общего процесса_ Код. Тип) -->
+	<xs:simpleType name="InfEnvelopeCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение сообщения, передаваемого в рамках транзакции общего процесса</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="P\.[A-Z]{2}\.[0-9]{2}\.MSG\.[0-9]{3}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00051: Код языка (Язык. Код) -->
+	<xs:element name="LanguageCode" type="csdo:LanguageCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение языка</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00051: Код языка (Язык_ Код. Тип) -->
+	<xs:simpleType name="LanguageCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение языка для одного текстового элемента или их группы</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="[a-z]{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00110: Фамилия (Фамилия. Имя) -->
+	<xs:element name="LastName" type="csdo:Name120Type">
+		<xs:annotation>
+			<xs:documentation>Фамилия физического лица</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00146: Географическая широта (Географическая широта. Измерение) -->
+	<xs:element name="LatitudeMeasure" type="csdo:GeoCoordinateMeasureType">
+		<xs:annotation>
+			<xs:documentation>Географическая широта местоположения объекта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00112: Длина (Длина. Измерение) -->
+	<xs:element name="LengthMeasure" type="csdo:PhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Протяженность линии или линейный размер предмета в продольном направлении</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00147: Географическая долгота (Географическая долгота. Измерение) -->
+	<xs:element name="LongitudeMeasure" type="csdo:GeoCoordinateMeasureType">
+		<xs:annotation>
+			<xs:documentation>Географическая долгота местоположения объекта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00215: Дата производства (Дата производства. Дата) -->
+	<xs:element name="ManufactureDate" type="bdt:DateType">
+		<xs:annotation>
+			<xs:documentation>Дата производства товара</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00217: Месяц производства (Месяц производства. Месяц) -->
+	<xs:element name="ManufactureMonth" type="bdt:MonthType">
+		<xs:annotation>
+			<xs:documentation>Месяц производства товара</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00216: Год производства (Год производства. Год) -->
+	<xs:element name="ManufactureYear" type="bdt:YearType">
+		<xs:annotation>
+			<xs:documentation>Год производства товара</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00072: Масса (Масса. Измерение) -->
+	<xs:element name="MassMeasure" type="csdo:PhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Масса объекта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00074: Код единицы измерения (Единица измерения_ Код. Тип) -->
+	<xs:simpleType name="MeasurementUnitCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение единицы измерения</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="[0-9A-Z]{2,3}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDT.00147: Код формата данных (Формат данных_ Код. Тип) -->
+	<xs:simpleType name="MediaTypeCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение формата данных</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="255"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00111: Отчество (Отчество. Имя) -->
+	<xs:element name="MiddleName" type="csdo:Name120Type">
+		<xs:annotation>
+			<xs:documentation>Отчество (второе или среднее имя) физического лица</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00055: Имя (Имя. До 120 символов. Тип) -->
+	<xs:simpleType name="Name120Type">
+		<xs:annotation>
+			<xs:documentation>Слово или фраза, обозначающая отличительную особенность объекта, явления или процесса, содержащая не более 120 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:NameType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="120"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDT.00067: Имя (Имя. До 20 символов. Тип) -->
+	<xs:simpleType name="Name20Type">
+		<xs:annotation>
+			<xs:documentation>Слово или фраза, обозначающая отличительную особенность объекта, явления или процесса, содержащая не более 20 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:NameType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- Имя (Имя. До 200 символов. Тип) -->
+	<xs:simpleType name="Name200Type">
+		<xs:annotation>
+			<xs:documentation>Слово или фраза, обозначающая отличительную особенность объекта, явления или процесса, содержащая не более 200 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:NameType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="200"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDT.00068: Имя (Имя. До 250 символов. Тип) -->
+	<xs:simpleType name="Name250Type">
+		<xs:annotation>
+			<xs:documentation>Слово или фраза, обозначающая отличительную особенность объекта, явления или процесса, содержащая не более 250 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:NameType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="250"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDT.00056: Имя (Имя. До 300 символов. Тип) -->
+	<xs:simpleType name="Name300Type">
+		<xs:annotation>
+			<xs:documentation>Слово или фраза, обозначающая отличительную особенность объекта, явления или процесса, содержащая не более 300 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:NameType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="300"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDT.00069: Имя (Имя. До 40 символов. Тип) -->
+	<xs:simpleType name="Name40Type">
+		<xs:annotation>
+			<xs:documentation>Слово или фраза, обозначающая отличительную особенность объекта, явления или процесса, содержащая не более 40 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:NameType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDT.00134: Имя (Имя. До 500 символов. Тип) -->
+	<xs:simpleType name="Name500Type">
+		<xs:annotation>
+			<xs:documentation>Слово или фраза, обозначающая отличительную особенность объекта, явления или процесса, содержащая не более 500 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:NameType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="500"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDT.00136: Код (Код с указанием страны_ Код. Тип) -->
+	<xs:complexType name="NationalCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая кодовое обозначение объекта, с указанием кода страны</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="bdt:CodeType">
+				<xs:attribute name="countryCode" type="csdo:UnqualifiedCountryCodeType" use="required">
+					<xs:annotation>
+						<xs:documentation>Кодовое обозначение страны, по правилам которой сформирован указанный код</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="countryCodeListId" type="csdo:ReferenceDataIdType" use="required">
+					<xs:annotation>
+						<xs:documentation>Идентификатор классификатора стран мира</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDT.00137: Идентификатор (Идентификатор с указанием страны_ Идентификатор. Тип) -->
+	<xs:complexType name="NationalIdType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, идентифицирующая объект, с указанием кода страны</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="bdt:IdentifierType">
+				<xs:attribute name="countryCode" type="csdo:UnqualifiedCountryCodeType" use="required">
+					<xs:annotation>
+						<xs:documentation>Кодовое обозначение страны, по правилам которой сформирован указанный код</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="countryCodeListId" type="csdo:ReferenceDataIdType" use="required">
+					<xs:annotation>
+						<xs:documentation>Идентификатор классификатора стран мира</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDE.00145: Масса нетто (Масса нетто. Измерение) -->
+	<xs:element name="NetMassMeasure" type="csdo:PhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Масса объекта без упаковки (тары)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00076: Примечание (Примечание. Текст) -->
+	<xs:element name="NoteText" type="csdo:Text4000Type">
+		<xs:annotation>
+			<xs:documentation>Дополнительный поясняющий текст</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00096: Число (Число. Целое двузначное. Тип) -->
+	<xs:simpleType name="Number2Type">
+		<xs:annotation>
+			<xs:documentation>Целое двузначное число в десятичной системе счисления</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:NumberType">
+			<xs:totalDigits value="2"/>
+			<xs:fractionDigits value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00148: Порядковый номер (Объект. Порядковый номер) -->
+	<xs:element name="ObjectOrdinal" type="csdo:Ordinal3Type">
+		<xs:annotation>
+			<xs:documentation>Порядковый номер объекта в последовательности</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00160: Атрибут отчетного показателя (Атрибут отчетного показателя. Текст) -->
+	<xs:element name="ObsAttributeText" type="csdo:ObsComponentTextType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, уточняющая значение показателя</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00109: Значение параметра или атрибута наблюдения (Значение параметра или атрибута наблюдения_ Текст. Тип) -->
+	<xs:complexType name="ObsComponentTextType">
+		<xs:annotation>
+			<xs:documentation>Текстовое значение параметра или атрибута наблюдения с указанием идентификатора</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="csdo:Text4000Type">
+				<xs:attribute name="componentId" type="csdo:Id20Type" use="required">
+					<xs:annotation>
+						<xs:documentation>Идентификатор параметра или атрибута наблюдения</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDE.00158: Параметр отчетного показателя (Параметр отчетного показателя. Текст) -->
+	<xs:element name="ObsKeyText" type="csdo:ObsComponentTextType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, уточняющая условия, для которых задано значение показателя</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00159: Значение отчетного показателя (Отчетный показатель. Значение) -->
+	<xs:element name="ObsValue" type="csdo:Value100Type">
+		<xs:annotation>
+			<xs:documentation>Характеристика какого-либо объекта, процесса или его результата</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00105: Порядковый номер (Порядковый номер. Трехзначный. Тип) -->
+	<xs:simpleType name="Ordinal3Type">
+		<xs:annotation>
+			<xs:documentation>Трехзначная целочисленная величина, установленная в результате упорядочения множества объектов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:OrdinalType">
+			<xs:totalDigits value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00089: Краткое наименование организации (Краткое наименование организации. Имя) -->
+	<xs:element name="OrganizationBriefName" type="csdo:Name120Type">
+		<xs:annotation>
+			<xs:documentation>Сокращенное наименование юридического лица согласно учредительному документу</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00032: Код организации (Организация. Код) -->
+	<xs:element name="OrganizationCode" type="csdo:OrganizationCodeType">
+		<xs:annotation>
+			<xs:documentation>Классификационный код юридического лица, предназначенный для целей статистического учета</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00032: Код организации (Организация_ Код. Тип) -->
+	<xs:simpleType name="OrganizationCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение вида предприятия или организации, предназначенное для целей статистического учета</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00024: Идентификатор организации (Организация. Идентификатор) -->
+	<xs:element name="OrganizationId" type="csdo:OrganizationIdType">
+		<xs:annotation>
+			<xs:documentation>Уникальный идентификатор организации в реестре юридических лиц страны регистрации юридического лица</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00024: Идентификатор организации (Организация_ Идентификатор. Тип) -->
+	<xs:simpleType name="OrganizationIdType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, идентифицирующая организацию в реестре юридических лиц (индивидуальных предпринимателей) страны регистрации</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:IdentifierType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00022: Наименование организации (Организация. Имя) -->
+	<xs:element name="OrganizationName" type="csdo:Name300Type">
+		<xs:annotation>
+			<xs:documentation>Полное наименование юридического лица согласно учредительному документу</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00149: Код вида упаковки (Вид упаковки. Код) -->
+	<xs:element name="PackageKindCode" type="csdo:PackageKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение вида груза, упаковки или упаковочного материала</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00104: Код вида упаковки (Вид упаковки_ Код. Тип) -->
+	<xs:simpleType name="PackageKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение вида груза, упаковки или упаковочного материала</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="[A-Z0-9]{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00150: Количество упаковок (Упаковка. Количество) -->
+	<xs:element name="PackageQuantity" type="csdo:Quantity8Type">
+		<xs:annotation>
+			<xs:documentation>Количество упаковок товара</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00018: Количество листов (Лист. Количество) -->
+	<xs:element name="PageQuantity" type="csdo:Quantity4Type">
+		<xs:annotation>
+			<xs:documentation>Общее количество листов в документе</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00128: Код родительского объекта классификации (Родительский объект классификации. Код) -->
+	<xs:element name="ParentReferenceDataItemCode" type="csdo:ClassifiedReferenceDataItemCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение родительского объекта классификации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00102: Код родительской группы объектов классификации (Родительская группа объектов классификации. Код) -->
+	<xs:element name="ParentReferenceDataSectionCode" type="csdo:ReferenceDataItemCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение родительской группы объектов классификации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00028: Номер счета получателя платежа (Счет получателя платежа. Идентификатор) -->
+	<xs:element name="PayeeAccountId" type="csdo:BankAccountIdType">
+		<xs:annotation>
+			<xs:documentation>Номер счета, на который производится зачисление денежной суммы</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00034: Наименование получателя платежа (Получатель платежа. Имя) -->
+	<xs:element name="PayeeName" type="csdo:Name300Type">
+		<xs:annotation>
+			<xs:documentation>Имя физического лица или наименование юридического лица, получающего денежную сумму</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00035: Сумма платежа (Платеж. Денежная сумма) -->
+	<xs:element name="PaymentAmount" type="csdo:AccountingAmountType">
+		<xs:annotation>
+			<xs:documentation>Величина денежной суммы, передаваемой (перечисляемой) плательщиком получателю платежа</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00029: Код бюджетной классификации платежа (Бюджетная классификация платежа. Код) -->
+	<xs:element name="PaymentBudgetCode" type="csdo:PaymentBudgetCodeType">
+		<xs:annotation>
+			<xs:documentation>Код бюджетной классификации платежа, указываемый в соответствии с группировкой доходов и расходов бюджета по однородным признакам</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00029: Код бюджетной классификации платежа (Бюджетная классификация платежа_ Код. Тип) -->
+	<xs:simpleType name="PaymentBudgetCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая кодовое обозначение группы доходов и расходов бюджета по однородным признакам</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="\d{1,20}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00118: Идентификатор платежа (Платеж. Идентификатор) -->
+	<xs:element name="PaymentId" type="csdo:Id50Type">
+		<xs:annotation>
+			<xs:documentation>Реквизит, идентифицирующий платеж</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00096: Наименование вида платежа (Вид платежа. Имя) -->
+	<xs:element name="PaymentKindName" type="csdo:Name120Type">
+		<xs:annotation>
+			<xs:documentation>Наименование вида платежа</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00033: Назначение платежа (Назначение платежа. Текст) -->
+	<xs:element name="PaymentPurposeText" type="csdo:Text250Type">
+		<xs:annotation>
+			<xs:documentation>Дополнительная информация, необходимая для идентификации назначения платежа</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00121: Счет пользователя платежной системы (Счет пользователя платежной системы. Идентификатор) -->
+	<xs:element name="PaymentSystemAccountId" type="csdo:Id50Type">
+		<xs:annotation>
+			<xs:documentation>Уникальный идентификатор получателя платежа в рамках определенной платежной системы</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00120: Наименование платежной системы (Платежная система. Имя) -->
+	<xs:element name="PaymentSystemName" type="csdo:Name300Type">
+		<xs:annotation>
+			<xs:documentation>Наименование платежной системы, через которую можно совершить платеж</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00095: Физическая величина (Физическая величина_ Измерение. Тип) -->
+	<xs:complexType name="PhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Числовая величина с заданной точностью, определенная в результате измерения физических параметров в каких-либо единицах измерения</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="csdo:DimensionalMeasureType">
+				<xs:totalDigits value="24"/>
+				<xs:fractionDigits value="6"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDT.00148: Рисунок с кодом формата данных (Рисунок с кодом формата данных_ Рисунок. Тип) -->
+	<xs:complexType name="PictureType">
+		<xs:annotation>
+			<xs:documentation>Визуальное статическое представление объекта или явления с указанием кода формата данных</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="bdt:PictureType">
+				<xs:attribute name="mediaTypeCode" type="csdo:MediaTypeCodeType" use="optional">
+					<xs:annotation>
+						<xs:documentation>Кодовое обозначение формата данных</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDE.00127: Наименование должности (Должность. Имя) -->
+	<xs:element name="PositionName" type="csdo:Name120Type">
+		<xs:annotation>
+			<xs:documentation>Наименование должности сотрудника</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00006: Почтовый индекс (Почтовый индекс. Код) -->
+	<xs:element name="PostCode" type="csdo:PostCodeType">
+		<xs:annotation>
+			<xs:documentation>Почтовый индекс предприятия почтовой связи</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00006: Почтовый индекс (Почтовый индекс_ Код. Тип) -->
+	<xs:simpleType name="PostCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение предприятия почтовой связи</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="[A-Z0-9][A-Z0-9 -]{1,8}[A-Z0-9]"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00013: Номер абонентского ящика (Абонентский ящик. Идентификатор) -->
+	<xs:element name="PostOfficeBoxId" type="csdo:Id20Type">
+		<xs:annotation>
+			<xs:documentation>Номер абонентского ящика на предприятии почтовой связи</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.90013: Код результата обработки (Результат обработки. Код) -->
+	<xs:element name="ProcessingResultCode" type="csdo:ProcessingResultCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение результата обработки полученного электронного документа (сведений) информационной системой участника общего процесса</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.90005: Код результата обработки (Результат обработки_ Код. Тип) -->
+	<xs:simpleType name="ProcessingResultCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение результата обработки полученного электронного документа (сведений) информационной системой участника общего процесса</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:enumeration value="1">
+				<xs:annotation>
+					<xs:documentation>сведения отсутствуют</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="2">
+				<xs:annotation>
+					<xs:documentation>сведения получены</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="3">
+				<xs:annotation>
+					<xs:documentation>сведения добавлены</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="4">
+				<xs:annotation>
+					<xs:documentation>сведения изменены</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="5">
+				<xs:annotation>
+					<xs:documentation>сведения удалены</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="6">
+				<xs:annotation>
+					<xs:documentation>сведения обработаны</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDT.90006: Код результата обработки (Результат обработки_ Код: вариант 2. Тип) -->
+	<xs:simpleType name="ProcessingResultCodeV2Type">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение результата обработки полученного электронного документа (сведений) информационной системой участника общего процесса</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType"/>
+	</xs:simpleType>
+	<!-- M.SDE.90014: Код результата обработки (Результат обработки: вариант 2. Код) -->
+	<xs:element name="ProcessingResultV2Code" type="csdo:ProcessingResultCodeV2Type">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение результата обработки полученного электронного документа (сведений) информационной системой участника общего процесса</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00140: Идентификатор продукта (Продукт. Идентификатор) -->
+	<xs:element name="ProductId" type="csdo:Id50Type">
+		<xs:annotation>
+			<xs:documentation>Уникальный идентификатор, присвоенный продукту производителем или поставщиком</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00151: Идентификатор единицы продукта (Единица продукта. Идентификатор) -->
+	<xs:element name="ProductInstanceId" type="csdo:Id50Type">
+		<xs:annotation>
+			<xs:documentation>Уникальный идентификатор продукта или совокупности однородных продуктов, присвоенный производителем</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00152: Наименование продукта (Продукт. Имя) -->
+	<xs:element name="ProductName" type="csdo:Name300Type">
+		<xs:annotation>
+			<xs:documentation>Наименование продукта, присвоенное производителем и отличающее данный продукт от аналогичных продуктов других производителей</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00090: Код (Код с указанием справочника (классификатора)_ Код. Тип) -->
+	<xs:complexType name="QualifiedCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая кодовое обозначение объекта, с указанием справочника (классификатора)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="bdt:CodeType">
+				<xs:attribute name="codeListId" type="csdo:ReferenceDataIdType" use="required">
+					<xs:annotation>
+						<xs:documentation>Обозначение справочника (классификатора), в соответствии с которым указан код</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDT.00127: Идентификатор (Идентификатор с указанием метода идентификации_ Идентификатор. Тип) -->
+	<xs:complexType name="QualifiedIdType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, идентифицирующая объект, с указанием метода идентификации</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="bdt:IdentifierType">
+				<xs:attribute name="schemeId" type="csdo:ReferenceDataIdType" use="required">
+					<xs:annotation>
+						<xs:documentation>Обозначение метода идентификации объектов, в соответствии с которым указан идентификатор</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDT.00097: Количество (Количество. Четырехзначное. Тип) -->
+	<xs:simpleType name="Quantity4Type">
+		<xs:annotation>
+			<xs:documentation>Целочисленное значение, полученное в результате подсчета количества объектов, процессов или явлений, содержащее не более 4 значащих цифр</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:QuantityType">
+			<xs:totalDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDT.00155: Количество (Количество. Пятизначное. Тип) -->
+	<xs:simpleType name="Quantity5Type">
+		<xs:annotation>
+			<xs:documentation>Целочисленное значение, полученное в результате подсчета количества объектов, процессов или явлений, содержащее не более 5 значащих цифр</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:QuantityType">
+			<xs:totalDigits value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDT.00106: Количество (Количество. Шестизначное. Тип) -->
+	<xs:simpleType name="Quantity6Type">
+		<xs:annotation>
+			<xs:documentation>Целочисленное значение, полученное в результате подсчета количества объектов, процессов или явлений, содержащее не более 6 значащих цифр</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:QuantityType">
+			<xs:totalDigits value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDT.00156: Количество (Количество. Восьмизначное. Тип) -->
+	<xs:simpleType name="Quantity8Type">
+		<xs:annotation>
+			<xs:documentation>Целочисленное значение, полученное в результате подсчета количества объектов, процессов или явлений, содержащее не более 8 значащих цифр</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:QuantityType">
+			<xs:totalDigits value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00080: Идентификатор справочника или классификатора (Справочник или классификатор. Идентификатор) -->
+	<xs:element name="ReferenceDataId" type="csdo:ReferenceDataIdType">
+		<xs:annotation>
+			<xs:documentation>Идентификатор из реестра нормативно-справочной информации Евразийского экономического союза</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00091: Идентификатор справочника или классификатора (Справочник или классификатор_ Идентификатор. Тип) -->
+	<xs:simpleType name="ReferenceDataIdType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, идентифицирующая справочник или классификатор</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00097: Код объекта классификации (Объект классификации. Код) -->
+	<xs:element name="ReferenceDataItemCode" type="csdo:ClassifiedReferenceDataItemCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение объекта классификации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00078: Код группы объектов классификации (Группа объектов классификации_ Код. Тип) -->
+	<xs:simpleType name="ReferenceDataItemCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение группы объектов классификации, представленной, например, разделом классификатора</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00098: Наименование объекта классификации (Объект классификации. Имя) -->
+	<xs:element name="ReferenceDataItemName" type="csdo:ClassifiedReferenceDataItemNameType">
+		<xs:annotation>
+			<xs:documentation>Наименование объекта классификации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00099: Описание объекта классификации (Объект классификации. Текст) -->
+	<xs:element name="ReferenceDataItemText" type="csdo:ClassifiedReferenceDataItemTextType">
+		<xs:annotation>
+			<xs:documentation>Текстовое описание объекта классификации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00082: Вид блока сведений об объекте классификации (Вид блока сведений об объекте классификации_ Код. Тип) -->
+	<xs:simpleType name="ReferenceDataKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение вида блока сведений об объекте классификации</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="[0-9]{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00100: Код группы объектов классификации (Группа объектов классификации. Код) -->
+	<xs:element name="ReferenceDataSectionCode" type="csdo:ReferenceDataItemCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение группы объектов классификации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00101: Наименование группы объектов классификации (Группа объектов классификации. Имя) -->
+	<xs:element name="ReferenceDataSectionName" type="csdo:Name300Type">
+		<xs:annotation>
+			<xs:documentation>Наименование группы объектов классификации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00007: Регион (Регион. Имя) -->
+	<xs:element name="RegionName" type="csdo:Name120Type">
+		<xs:annotation>
+			<xs:documentation>Наименование единицы административно-территориального деления первого уровня</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00184: Атрибут отчета (Атрибут отчета. Текст) -->
+	<xs:element name="ReportAttributeText" type="csdo:ObsComponentTextType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, содержащая дополнительную информацию об отчете</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00161: Код вида отчета (Отчет. Код) -->
+	<xs:element name="ReportKindCode" type="csdo:ReportKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение вида отчета</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00111: Код вида отчета (Вид отчета_ Код. Тип) -->
+	<xs:simpleType name="ReportKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение вида отчета</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00164: Наименование отчета (Отчет. Имя) -->
+	<xs:element name="ReportName" type="csdo:Name300Type">
+		<xs:annotation>
+			<xs:documentation>Словесное обозначение отчета</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00012: Номер помещения (Помещение. Идентификатор) -->
+	<xs:element name="RoomNumberId" type="csdo:Id20Type">
+		<xs:annotation>
+			<xs:documentation>Обозначение офиса или квартиры</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00153: Код вида пункта маршрута (Вид пункта маршрута. Код) -->
+	<xs:element name="RoutePointKindCode" type="csdo:RoutePointKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение вида пункта маршрута движения</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00103: Код вида пункта маршрута (Вид пункта маршрута_ Код. Тип) -->
+	<xs:simpleType name="RoutePointKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение вида пункта маршрута движения</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:enumeration value="1">
+				<xs:annotation>
+					<xs:documentation>пункт отправления</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="2">
+				<xs:annotation>
+					<xs:documentation>пункт следования</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="3">
+				<xs:annotation>
+					<xs:documentation>пункт назначения</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00156: Идентификатор защитной пломбы (Защитная пломба. Идентификатор) -->
+	<xs:element name="SealId" type="csdo:Id20Type">
+		<xs:annotation>
+			<xs:documentation>Уникальный идентификационный номер защитной пломбы</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00057: Населенный пункт (Населенный пункт. Имя) -->
+	<xs:element name="SettlementName" type="csdo:Name120Type">
+		<xs:annotation>
+			<xs:documentation>Наименование населенного пункта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00071: Пол (Пол. Код) -->
+	<xs:element name="SexCode" type="csdo:SexCodeType">
+		<xs:annotation>
+			<xs:documentation>Биологический пол организма</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00064: Код пола (Пол_ Код. Тип) -->
+	<xs:simpleType name="SexCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение пола организма</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:enumeration value="F">
+				<xs:annotation>
+					<xs:documentation>женский</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="M">
+				<xs:annotation>
+					<xs:documentation>мужской</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDT.00149: Звук с кодом формата данных (Звук с кодом формата данных_ Звук. Тип) -->
+	<xs:complexType name="SoundType">
+		<xs:annotation>
+			<xs:documentation>Информация, представленная в звуковой форме в цифровом виде, с указанием кода формата данных</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="bdt:SoundType">
+				<xs:attribute name="mediaTypeCode" type="csdo:MediaTypeCodeType" use="optional">
+					<xs:annotation>
+						<xs:documentation>Кодовое обозначение формата данных</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDE.00073: Начальная дата (Начальная дата. Дата) -->
+	<xs:element name="StartDate" type="bdt:DateType">
+		<xs:annotation>
+			<xs:documentation>Начальная дата периода времени с указанием дня, месяца и года</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00133: Начальная дата и время (Начальная дата и время. Дата и время) -->
+	<xs:element name="StartDateTime" type="bdt:DateTimeType">
+		<xs:annotation>
+			<xs:documentation>Начальная дата и время</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00130: Код статуса (Статус. Код) -->
+	<xs:element name="StatusCode" type="csdo:StatusCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение статусного состояния чего-либо (объекта, явления, документа, процесса и т.п.)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00040: Код статуса (Статус_ Код. Тип) -->
+	<xs:simpleType name="StatusCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение статусного состояния чего-либо (объекта, явления, документа, процесса и т.п.)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00010: Улица (Улица. Имя) -->
+	<xs:element name="StreetName" type="csdo:Name120Type">
+		<xs:annotation>
+			<xs:documentation>Наименование элемента улично-дорожной сети городской инфраструктуры</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00030: Код причины постановки на учет (Причина постановки на учет. Код) -->
+	<xs:element name="TaxRegistrationReasonCode" type="csdo:TaxRegistrationReasonCodeType">
+		<xs:annotation>
+			<xs:documentation>Код, идентифицирующий причину постановки организации на налоговый учет в Российской Федерации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00030: Код причины постановки на учет (Причина постановки на налоговый учет_ Код. Тип) -->
+	<xs:simpleType name="TaxRegistrationReasonCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение причины постановки организации на налоговый учет</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="\d{9}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00025: Идентификатор налогоплательщика (Налогоплательщик. Идентификатор) -->
+	<xs:element name="TaxpayerId" type="csdo:TaxpayerIdType">
+		<xs:annotation>
+			<xs:documentation>Идентификатор юридического или физического лица в реестре налогоплательщиков страны регистрации налогоплательщика</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00025: Идентификатор налогоплательщика (Налогоплательщик_ Идентификатор. Тип) -->
+	<xs:simpleType name="TaxpayerIdType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, идентифицирующая юридическое или физическое лицо в реестре налогоплательщиков страны регистрации</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:IdentifierType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00031: Код территории (Территория. Код) -->
+	<xs:element name="TerritoryCode" type="csdo:TerritoryCodeType">
+		<xs:annotation>
+			<xs:documentation>Код единицы административно-территориального деления</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00031: Код территории (Территория_ Код. Тип) -->
+	<xs:simpleType name="TerritoryCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение единицы административно-территориального деления</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="17"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDT.00071: Текст (Текст. До 1000 символов. Тип) -->
+	<xs:simpleType name="Text1000Type">
+		<xs:annotation>
+			<xs:documentation>Неструктурированная текстовая информация, содержащая не более 1000 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:TextType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="1000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- Текст (Текст. До 5000 символов. Тип) -->
+	<xs:simpleType name="Text5000Type">
+		<xs:annotation>
+			<xs:documentation>Неструктурированная текстовая информация, содержащая не более 5000 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:TextType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="5000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDT.00070: Текст (Текст. До 100 символов. Тип) -->
+	<xs:simpleType name="Text100Type">
+		<xs:annotation>
+			<xs:documentation>Неструктурированная текстовая информация, содержащая не более 100 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:TextType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDT.00072: Текст (Текст. До 250 символов. Тип) -->
+	<xs:simpleType name="Text250Type">
+		<xs:annotation>
+			<xs:documentation>Неструктурированная текстовая информация, содержащая не более 250 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:TextType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="250"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDT.00088: Текст (Текст. До 4000 символов. Тип) -->
+	<xs:simpleType name="Text4000Type">
+		<xs:annotation>
+			<xs:documentation>Неструктурированная текстовая информация, содержащая не более 4000 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:TextType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="4000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00003: Транслитерация (Транслитерация. Текст) -->
+	<xs:element name="TransliterationText" type="csdo:TransliterationTextType">
+		<xs:annotation>
+			<xs:documentation>Передача знаков одной письменности знаками другой письменности</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00003: Транслитерация (Транслитерация_ Текст. Тип) -->
+	<xs:complexType name="TransliterationTextType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, передающая знаки одной письменности знаками другой письменности</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="csdo:Text4000Type">
+				<xs:attribute name="sourceLanguage" type="csdo:LanguageCodeType" use="required">
+					<xs:annotation>
+						<xs:documentation>Язык текста до транслитерации</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="targetLanguage" type="csdo:LanguageCodeType" use="required">
+					<xs:annotation>
+						<xs:documentation>Язык текста после транслитерации</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDE.00154: Регистрационный номер транспортного средства (Регистрационный номер транспортного средства. Идентификатор) -->
+	<xs:element name="TransportMeansRegId" type="csdo:TransportMeansRegIdType">
+		<xs:annotation>
+			<xs:documentation>Индивидуальное буквенно-цифровое обозначение, присваиваемое регистрирующим органом транспортному средству</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00101: Регистрационный номер транспортного средства (Регистрационный номер транспортного средства_ Идентификатор. Тип) -->
+	<xs:complexType name="TransportMeansRegIdType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, идентифицирующая транспортное средство</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="csdo:Id40Type">
+				<xs:attribute name="countryCode" type="csdo:UnqualifiedCountryCodeType" use="optional">
+					<xs:annotation>
+						<xs:documentation>Кодовое обозначение страны, по правилам которой сформирован указанный код</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="countryCodeListId" type="csdo:ReferenceDataIdType" use="optional">
+					<xs:annotation>
+						<xs:documentation>Идентификатор классификатора стран мира</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDE.00155: Код вида транспорта (Вид транспорта. Код) -->
+	<xs:element name="TransportModeCode" type="csdo:TransportModeCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение вида транспорта и транспортировки товаров</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00102: Код вида транспорта (Вид транспорта_ Код. Тип) -->
+	<xs:simpleType name="TransportModeCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение вида транспорта в соответствии с классификатором видов транспорта и транспортировки товаров</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDT.00119: Денежная сумма (Бухгалтерский учет_ Денежная сумма. До 24 цифр: вариант 2. Тип) -->
+	<xs:complexType name="UnifiedAccountingAmountType">
+		<xs:annotation>
+			<xs:documentation>Числовое значение с заданной точностью, представляющее количество денежных единиц, дополненное буквенным кодом валюты, указанием на классификатор валют и показателем степени масштабного множителя</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="csdo:UnifiedAmountWithCurrencyType">
+				<xs:totalDigits value="24"/>
+				<xs:fractionDigits value="4"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDT.00120: Денежная сумма с буквенным кодом валюты (Денежная сумма с буквенным кодом валюты_ Денежная сумма: вариант 2. Тип) -->
+	<xs:complexType name="UnifiedAmountWithCurrencyType">
+		<xs:annotation>
+			<xs:documentation>Числовое значение, представляющее количество денежных единиц, дополненное буквенным кодом валюты, указанием на классификатор валют и показателем степени масштабного множителя</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="bdt:AmountType">
+				<xs:attribute name="currencyCode" type="csdo:CurrencyCodeV3Type" use="required">
+					<xs:annotation>
+						<xs:documentation>Кодовое обозначение валюты</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="currencyCodeListId" type="csdo:ReferenceDataIdType" use="required">
+					<xs:annotation>
+						<xs:documentation>Идентификатор классификатора валют</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="scaleNumber" type="csdo:Number2Type" use="optional" default="0">
+					<xs:annotation>
+						<xs:documentation>Масштаб денежной суммы, представленный в виде показателя степени числа 10</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDT.00123: Денежная сумма с цифровым кодом валюты (Денежная сумма с цифровым кодом валюты_ Денежная сумма: вариант 2. Тип) -->
+	<xs:complexType name="UnifiedAmountWithNumericCurrencyType">
+		<xs:annotation>
+			<xs:documentation>Числовое значение, представляющее количество денежных единиц, дополненное цифровым кодом валюты, указанием на классификатор валют и показателем степени масштабного множителя</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="bdt:AmountType">
+				<xs:attribute name="currencyCode" type="csdo:CurrencyN3CodeV3Type" use="required">
+					<xs:annotation>
+						<xs:documentation>Кодовое обозначение валюты</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="currencyCodeListId" type="csdo:ReferenceDataIdType" use="required">
+					<xs:annotation>
+						<xs:documentation>Идентификатор классификатора валют</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="scaleNumber" type="csdo:Number2Type" use="optional" default="0">
+					<xs:annotation>
+						<xs:documentation>Масштаб денежной суммы, представленный в виде показателя степени числа 10</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDE.00178: Идентификатор банка (Банк: вариант 2. Идентификатор) -->
+	<xs:element name="UnifiedBankId" type="csdo:UnifiedBankIdType">
+		<xs:annotation>
+			<xs:documentation>Уникальный идентификатор банка, используемый в платежных документах (платежное поручение, аккредитив)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00128: Идентификатор банка (Банк_ Идентификатор: вариант 2. Тип) -->
+	<xs:complexType name="UnifiedBankIdType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, сформированная по правилам идентификации участников финансовых расчетов в национальной или международной платежной системе</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="csdo:QualifiedIdType">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="20"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDT.00140: Код (Код. До 20 символов: вариант 2. Тип) -->
+	<xs:complexType name="UnifiedCode20Type">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение объекта в соответствии со справочником (классификатором), заданным с помощью контекстной характеристики, содержащая не более 20 символов</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="csdo:QualifiedCodeType">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="20"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDE.00167: Количество товара (Количество товара: вариант 2. Измерение) -->
+	<xs:element name="UnifiedCommodityMeasure" type="csdo:UnifiedPhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Объем товара, выраженный в штуках, единицах массы, объемных или других единицах</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00193: Код вида связи (Вид связи: вариант 2. Код) -->
+	<xs:element name="UnifiedCommunicationChannelCode" type="csdo:UnifiedCode20Type">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение вида средства (канала) связи (телефон, факс, электронная почта и др.)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00162: Код страны (Код страны со ссылкой на справочник (классификатор). Код) -->
+	<xs:element name="UnifiedCountryCode" type="csdo:UnifiedCountryCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение страны</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00112: Двухбуквенный код страны (Код страны со ссылкой на справочник (классификатор)_ Код. Двухбуквенный. Тип) -->
+	<xs:complexType name="UnifiedCountryCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая буквенное обозначение страны, с указанием классификатора</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="csdo:QualifiedCodeType">
+				<xs:pattern value="[A-Z]{2}"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDE.00175: Буквенный код валюты (Буквенный код валюты: вариант 2. Код) -->
+	<xs:element name="UnifiedCurrencyCode" type="csdo:UnifiedCurrencyCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое буквенное обозначение валюты (3-символьное)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00124: Буквенный код валюты (Валюта_ Код. Буквенный: вариант 2. Тип) -->
+	<xs:complexType name="UnifiedCurrencyCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая буквенное обозначение валюты, с указанием классификатора</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="csdo:QualifiedCodeType">
+				<xs:pattern value="[A-Z]{3}"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDE.00176: Цифровой код валюты (Цифровой код валюты: вариант 2. Код) -->
+	<xs:element name="UnifiedCurrencyN3Code" type="csdo:UnifiedCurrencyN3CodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое цифровое обозначение валюты (3-символьное)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00125: Цифровой код валюты (Валюта_ Код. Цифровой: вариант 2. Тип) -->
+	<xs:complexType name="UnifiedCurrencyN3CodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая цифровое обозначение валюты с указанием классификатора валют</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="csdo:QualifiedCodeType">
+				<xs:pattern value="[0-9]{3}"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDT.00121: Величина с единицей измерения (Величина с единицей измерения_ Измерение: вариант 2. Тип) -->
+	<xs:complexType name="UnifiedDimensionalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Числовая величина, определенная в результате измерения физических параметров в каких-либо единицах измерения, с указанием классификатора единиц измерения</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="bdt:MeasureType">
+				<xs:attribute name="measurementUnitCode" type="csdo:MeasurementUnitCodeType" use="required">
+					<xs:annotation>
+						<xs:documentation>Кодовое обозначение единицы измерения</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="measurementUnitCodeListId" type="csdo:ReferenceDataIdType">
+					<xs:annotation>
+						<xs:documentation>Идентификатор классификатора единиц измерения</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDE.00206: Идентификатор органа Союза, утвердившего (принявшего) акт (Орган Союза, утвердивший (принявший) акт: вариант 2. Идентификатор) -->
+	<xs:element name="UnifiedEAEUDocIssuerId" type="csdo:UnifiedId20Type">
+		<xs:annotation>
+			<xs:documentation>Идентификатор органа Союза, утвердившего (принявшего) акт Союза</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00207: Код вида акта (Вид акта Союза: вариант 2. Код) -->
+	<xs:element name="UnifiedEAEUDocKindCode" type="csdo:UnifiedCode20Type">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение вида акта Союза</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00168: Масса брутто (Масса брутто: вариант 2. Измерение) -->
+	<xs:element name="UnifiedGrossMassMeasure" type="csdo:UnifiedPhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Масса объекта с упаковкой (тарой)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00169: Высота (Высота: вариант 2. Измерение) -->
+	<xs:element name="UnifiedHeightMeasure" type="csdo:UnifiedPhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Линейный размер предмета или его местоположение, измеренные в вертикальном направлении</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00152: Идентификатор (Идентификатор. До 20 символов: вариант 2. Тип) -->
+	<xs:complexType name="UnifiedId20Type">
+		<xs:annotation>
+			<xs:documentation>Строка символов, идентифицирующая объект, с указанием метода идентификации, заданным с помощью контекстной характеристики, содержащая не более 20 символов</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="csdo:QualifiedIdType">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="20"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDE.00185: Код вида документа, удостоверяющего личность (Вид документа, удостоверяющего личность: вариант 2. Код) -->
+	<xs:element name="UnifiedIdentityDocKindCode" type="csdo:UnifiedCode20Type">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение вида документа, удостоверяющего личность</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00138: Код вида документа, удостоверяющего личность (Вид документа, удостоверяющего личность_ Код: вариант 2. Тип) -->
+	<xs:complexType name="UnifiedIdentityDocKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение вида документа, удостоверяющего личность</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="csdo:NationalCodeType">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="10"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDE.00171: Длина (Длина: вариант 2. Измерение) -->
+	<xs:element name="UnifiedLengthMeasure" type="csdo:UnifiedPhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Протяженность линии или линейный размер предмета в продольном направлении</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00173: Масса (Масса: вариант 2. Измерение) -->
+	<xs:element name="UnifiedMassMeasure" type="csdo:UnifiedPhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Масса объекта с указанием классификатора единиц измерения</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00177: Единица измерения (Единица измерения: вариант 2. Код) -->
+	<xs:element name="UnifiedMeasurementUnitCode" type="csdo:UnifiedCode20Type">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение единицы измерения</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00126: Код единицы измерения (Единица измерения_ Код: вариант 2. Тип) -->
+	<xs:complexType name="UnifiedMeasurementUnitCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая кодовое обозначение единицы измерения, с указанием классификатора</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="csdo:QualifiedCodeType">
+				<xs:pattern value="[0-9A-Z]{2,3}"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDE.00174: Масса нетто (Масса нетто: вариант 2. Измерение) -->
+	<xs:element name="UnifiedNetMassMeasure" type="csdo:UnifiedPhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Масса объекта без упаковки (тары)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00179: Код организации (Организация: вариант 2. Код) -->
+	<xs:element name="UnifiedOrganizationCode" type="csdo:UnifiedOrganizationCodeType">
+		<xs:annotation>
+			<xs:documentation>Классификационный код юридического лица, предназначенный для целей статистического учета</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00129: Код организации (Организация_ Код: вариант 2. Тип) -->
+	<xs:complexType name="UnifiedOrganizationCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение предприятия или организации, предназначенное для целей статистического учета</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="csdo:NationalCodeType">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="20"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDE.00180: Идентификатор организации (Организация: вариант 2. Идентификатор) -->
+	<xs:element name="UnifiedOrganizationId" type="csdo:UnifiedOrganizationIdType">
+		<xs:annotation>
+			<xs:documentation>Уникальный идентификатор организации в реестре юридических лиц страны регистрации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00130: Идентификатор организации (Организация_ Идентификатор: вариант 2. Тип) -->
+	<xs:complexType name="UnifiedOrganizationIdType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, идентифицирующая организацию в реестре юридических лиц страны регистрации</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="csdo:NationalIdType">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="20"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDE.00165: Код вида упаковки (Вид упаковки: вариант 2. Код) -->
+	<xs:element name="UnifiedPackageKindCode" type="csdo:UnifiedCode20Type">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение вида груза, упаковки или упаковочного материала</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00117: Код вида упаковки (Вид упаковки_ Код: вариант 2. Тип) -->
+	<xs:complexType name="UnifiedPackageKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение вида груза, упаковки или упаковочного материала, с указанием классификатора</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="csdo:QualifiedCodeType">
+				<xs:pattern value="[A-Z0-9]{2}"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDE.00163: Сумма платежа (Платеж: вариант 2. Денежная сумма) -->
+	<xs:element name="UnifiedPaymentAmount" type="csdo:AccountingAmountV3Type">
+		<xs:annotation>
+			<xs:documentation>Величина денежной суммы, передаваемой (перечисляемой) плательщиком получателю платежа</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00181: Код бюджетной классификации платежа (Бюджетная классификация платежа: вариант 2. Код) -->
+	<xs:element name="UnifiedPaymentBudgetCode" type="csdo:UnifiedPaymentBudgetCodeType">
+		<xs:annotation>
+			<xs:documentation>Код бюджетной классификации платежа, указываемый в соответствии с группировкой доходов и расходов бюджета по однородным признакам</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00131: Код бюджетной классификации платежа (Бюджетная классификация платежа_ Код: вариант 2. Тип) -->
+	<xs:complexType name="UnifiedPaymentBudgetCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая кодовое обозначение группы доходов и расходов бюджета по однородным признакам с указанием страны осуществления платежа</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="csdo:NationalCodeType">
+				<xs:pattern value="\d{1,20}"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDT.00122: Физическая величина (Физическая величина_ Измерение: вариант 2. Тип) -->
+	<xs:complexType name="UnifiedPhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Числовая величина с заданной точностью, определенная в результате измерения физических параметров в каких-либо единицах измерения, с указанием классификатора единиц измерения</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="csdo:UnifiedDimensionalMeasureType">
+				<xs:totalDigits value="24"/>
+				<xs:fractionDigits value="6"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDE.00209: Код вида пункта маршрута (Вид пункта маршрута: вариант 2. Код) -->
+	<xs:element name="UnifiedRoutePointKindCode" type="csdo:UnifiedCode20Type">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение вида пункта маршрута движения</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00195: Пол (Пол: вариант 2. Код) -->
+	<xs:element name="UnifiedSexCode" type="csdo:UnifiedCode20Type">
+		<xs:annotation>
+			<xs:documentation>Биологический пол организма</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00182: Идентификатор налогоплательщика (Налогоплательщик: вариант 2. Идентификатор) -->
+	<xs:element name="UnifiedTaxpayerId" type="csdo:UnifiedTaxpayerIdType">
+		<xs:annotation>
+			<xs:documentation>Идентификатор юридического или физического лица в реестре налогоплательщиков страны регистрации с указанием кода страны</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00132: Идентификатор налогоплательщика (Налогоплательщик_ Идентификатор: вариант 2. Тип) -->
+	<xs:complexType name="UnifiedTaxpayerIdType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, идентифицирующая юридическое или физическое лицо в реестре налогоплательщиков страны регистрации</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="csdo:NationalIdType">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="20"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDE.00183: Код территории (Территория: вариант 2. Код) -->
+	<xs:element name="UnifiedTerritoryCode" type="csdo:UnifiedTerritoryCodeType">
+		<xs:annotation>
+			<xs:documentation>Код единицы административно-территориального деления с указанием кода страны</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00133: Код территории (Территория_ Код: вариант 2. Тип) -->
+	<xs:complexType name="UnifiedTerritoryCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение единицы административно-территориального деления с указанием страны нахождения</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="csdo:NationalCodeType">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="17"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDE.00166: Код вида транспорта (Вид транспорта: вариант 2. Код) -->
+	<xs:element name="UnifiedTransportModeCode" type="csdo:UnifiedCode20Type">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение вида транспорта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00118: Код вида транспорта (Вид транспорта_ Код: вариант 2. Тип) -->
+	<xs:complexType name="UnifiedTransportModeCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение вида транспорта или транспортировки с указанием классификатора</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="csdo:QualifiedCodeType">
+				<xs:pattern value="\d{1,2}"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDE.00196: День недели (День недели: вариант 2. Код) -->
+	<xs:element name="UnifiedWeekDayCode" type="csdo:UnifiedCode20Type">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение дня недели</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00170: Ширина (Ширина: вариант 2. Измерение) -->
+	<xs:element name="UnifiedWidthMeasure" type="csdo:UnifiedPhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Линейный размер предмета в поперечном направлении</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00135: Уникальный идентификационный таможенный номер (Уникальный идентификационный таможенный номер. Идентификатор) -->
+	<xs:element name="UniqueCustomsNumberId" type="csdo:UniqueCustomsNumberIdType">
+		<xs:annotation>
+			<xs:documentation>Уникальный идентификационный номер участника экономической деятельности, предназначенный для целей таможенного контроля</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00089: Уникальный идентификационный таможенный номер (Уникальный идентификационный таможенный номер_ Идентификатор. Тип) -->
+	<xs:simpleType name="UniqueCustomsNumberIdType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, идентифицирующая участника внешнеэкономической деятельности для целей таможенного контроля</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:IdentifierType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="17"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDT.90003: Универсально уникальный идентификатор (Универсально уникальный_ Идентификатор. Тип) -->
+	<xs:simpleType name="UniversallyUniqueIdType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая универсально уникальный идентификатор (UUID) в соответствии с ISO/IEC 9834-8</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:IdentifierType">
+			<xs:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDT.00159: Двухбуквенный код страны (Код страны без ссылки на справочник (классификатор)_ Код. Двухбуквенный. Тип) -->
+	<xs:simpleType name="UnqualifiedCountryCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая двухбуквенное условное обозначение страны</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:pattern value="[A-Z]{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00079: Дата и время обновления (Дата и время обновления. Дата и время) -->
+	<xs:element name="UpdateDateTime" type="bdt:DateTimeType">
+		<xs:annotation>
+			<xs:documentation>Дата и время актуализации сведений о каком-либо субъекте, объекте или событии</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00110: Значение (Значение. До 100 символов. Тип) -->
+	<xs:simpleType name="Value100Type">
+		<xs:annotation>
+			<xs:documentation>Величина, выраженная в числовой или нечисловой форме, содержащая не более 100 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:ValueType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00213: Идентификационный номер кузова транспортного средства (Идентификационный номер кузова транспортного средства. Идентификатор) -->
+	<xs:element name="VehicleBodyId" type="csdo:Id20Type">
+		<xs:annotation>
+			<xs:documentation>Идентификационный номер кузова (кабины) транспортного средства (шасси транспортного средства, самоходной машины), присвоенный изготовителем</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00214: Идентификационный номер шасси (рамы) транспортного средства (Идентификационный номер шасси (рамы) транспортного средства. Идентификатор) -->
+	<xs:element name="VehicleChassisId" type="csdo:Id20Type">
+		<xs:annotation>
+			<xs:documentation>Идентификационный номер шасси (рамы) транспортного средства, присвоенный изготовителем</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00220: Коммерческое наименование транспортного средства (Коммерческое наименование транспортного средства. Имя) -->
+	<xs:element name="VehicleCommercialName" type="csdo:Name120Type">
+		<xs:annotation>
+			<xs:documentation>Коммерческое наименование транспортного средства (шасси транспортного средства, самоходной машины)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDE.00212: Идентификационный номер транспортного средства (Идентификационный номер транспортного средства. Идентификатор) -->
+	<xs:element name="VehicleId" type="csdo:VehicleIdType">
+		<xs:annotation>
+			<xs:documentation>Идентификационный номер транспортного средства (шасси транспортного средства, самоходной машины), присвоенный изготовителем</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00161: Идентификационный номер транспортного средства (Транспортное средство_ Идентификатор. Тип) -->
+	<xs:simpleType name="VehicleIdType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, идентифицирующая транспортное средство</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:IdentifierType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="17"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00219: Наименование марки транспортного средства (Марка транспортного средства. Имя) -->
+	<xs:element name="VehicleMakeName" type="csdo:Name120Type">
+		<xs:annotation>
+			<xs:documentation>Наименование марки транспортного средства (шасси транспортного средства, самоходной машины)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00151: Видео с кодом формата данных (Видео с кодом формата данных_ График. Тип) -->
+	<xs:complexType name="VideoType">
+		<xs:annotation>
+			<xs:documentation>Запись динамических визуальных образов в цифровом виде с указанием кода формата данных</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="bdt:VideoType">
+				<xs:attribute name="mediaTypeCode" type="csdo:MediaTypeCodeType" use="optional">
+					<xs:annotation>
+						<xs:documentation>Кодовое обозначение формата данных</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- M.SDE.00081: День недели (День недели. Код) -->
+	<xs:element name="WeekDayCode" type="csdo:WeekDayCodeType">
+		<xs:annotation>
+			<xs:documentation>Кодовое обозначение дня недели</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- M.SDT.00066: День недели (День недели_ Код. Тип) -->
+	<xs:simpleType name="WeekDayCodeType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, представляющая краткое условное обозначение дня недели</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:CodeType">
+			<xs:enumeration value="1">
+				<xs:annotation>
+					<xs:documentation>понедельник</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="2">
+				<xs:annotation>
+					<xs:documentation>вторник</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="3">
+				<xs:annotation>
+					<xs:documentation>среда</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="4">
+				<xs:annotation>
+					<xs:documentation>четверг</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="5">
+				<xs:annotation>
+					<xs:documentation>пятница</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="6">
+				<xs:annotation>
+					<xs:documentation>суббота</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="7">
+				<xs:annotation>
+					<xs:documentation>воскресенье</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- M.SDE.00113: Ширина (Ширина. Измерение) -->
+	<xs:element name="WidthMeasure" type="csdo:PhysicalMeasureType">
+		<xs:annotation>
+			<xs:documentation>Линейный размер предмета в поперечном направлении</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--  -->
+	<xs:simpleType name="TNVEDNumberType">
+		<xs:annotation>
+			<xs:documentation>Строка символов, не содержащая символов разрыва строки и табуляции. Максимальная длина 50 символов.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="bdt:TextType">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

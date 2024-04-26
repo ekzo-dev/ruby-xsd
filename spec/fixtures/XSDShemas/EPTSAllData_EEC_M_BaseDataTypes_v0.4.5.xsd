@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_BaseDataTypes/0.4.5" xmlns:bdt="urn://x-artefacts-epts-ru/EPTSAllData_EEC_M_BaseDataTypes/0.4.5" version="0.4.5">
+	<!-- Базовые типы данных -->
+	<!-- M.BDT.00007: Денежная сумма (Денежная сумма. Тип) -->
+	<xs:simpleType name="AmountType">
+		<xs:annotation>
+			<xs:documentation>Количество денежных единиц в заданной валюте</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal"/>
+	</xs:simpleType>
+	<!-- M.BDT.00001: Бинарный текст (Бинарный текст. Тип) -->
+	<xs:simpleType name="BinaryTextType">
+		<xs:annotation>
+			<xs:documentation>Текстовая информация, представленная в двоичной форме</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:base64Binary"/>
+	</xs:simpleType>
+	<!-- M.BDT.00014: Код (Код. Тип) -->
+	<xs:simpleType name="CodeType">
+		<xs:annotation>
+			<xs:documentation>Точное значение, метод или описание свойства в краткой и независимой от естественного языка форме, которая является частью конечного списка допустимых значений</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:token"/>
+	</xs:simpleType>
+	<!-- M.BDT.00006: Дата и время (Дата и время. Тип) -->
+	<xs:simpleType name="DateTimeType">
+		<xs:annotation>
+			<xs:documentation>Дата по григорианскому календарю и время суток с указанием года, месяца, дня, часа, минуты, секунды и доли секунды</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	<!-- M.BDT.00005: Дата (Дата. Тип) -->
+	<xs:simpleType name="DateType">
+		<xs:annotation>
+			<xs:documentation>Дата по григорианскому календарю с указанием года, месяца и дня</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<!-- M.BDT.00023: День (День. Тип) -->
+	<xs:simpleType name="DayType">
+		<xs:annotation>
+			<xs:documentation>День произвольного месяца и года по григорианскому календарю</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:gDay"/>
+	</xs:simpleType>
+	<!-- M.BDT.00021: Продолжительность времени (Продолжительность. Тип) -->
+	<xs:simpleType name="DurationType">
+		<xs:annotation>
+			<xs:documentation>Количество времени в единицах григорианского календаря, обозначенное одним или более элементами, но не началом и концом</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:duration"/>
+	</xs:simpleType>
+	<!-- M.BDT.00004: График (График. Тип) -->
+	<xs:simpleType name="GraphicType">
+		<xs:annotation>
+			<xs:documentation>Информация, представленная в форме диаграмм, графов, математических кривых в двоичной нотации (октеты)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:base64Binary"/>
+	</xs:simpleType>
+	<!-- M.BDT.00010: Идентификатор (Идентификатор. Тип) -->
+	<xs:simpleType name="IdentifierType">
+		<xs:annotation>
+			<xs:documentation>Строка символов для уникальной идентификации объекта в соответствии с общей идентификационной схемой</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:token"/>
+	</xs:simpleType>
+	<!-- M.BDT.00013: Индикатор (Индикатор. Тип) -->
+	<xs:simpleType name="IndicatorType">
+		<xs:annotation>
+			<xs:documentation>Логическое значение, выражающее одно из двух возможных взаимоисключающих состояний объекта</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<!-- M.BDT.00011: Результат измерения (Измерение. Тип) -->
+	<xs:simpleType name="MeasureType">
+		<xs:annotation>
+			<xs:documentation>Числовая величина, определенная в результате измерения объекта</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal"/>
+	</xs:simpleType>
+	<!-- M.BDT.00026: День месяца (День месяца. Тип) -->
+	<xs:simpleType name="MonthDayType">
+		<xs:annotation>
+			<xs:documentation>День определенного месяца и произвольного года по григорианскому календарю</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:gMonthDay"/>
+	</xs:simpleType>
+	<!-- M.BDT.00024: Месяц (Месяц. Тип) -->
+	<xs:simpleType name="MonthType">
+		<xs:annotation>
+			<xs:documentation>Месяц произвольного года по григорианскому календарю</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:gMonth"/>
+	</xs:simpleType>
+	<!-- M.BDT.00012: Имя (Имя. Тип) -->
+	<xs:simpleType name="NameType">
+		<xs:annotation>
+			<xs:documentation>Слово или фраза, обозначающая отличительную особенность объекта, явления или процесса</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:token"/>
+	</xs:simpleType>
+	<!-- M.BDT.00020: Число (Число. Тип) -->
+	<xs:simpleType name="NumberType">
+		<xs:annotation>
+			<xs:documentation>Математическая величина, не требующая указания количества, мер или валют</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal"/>
+	</xs:simpleType>
+	<!-- M.BDT.00022: Порядковый номер (Порядковый номер. Тип) -->
+	<xs:simpleType name="OrdinalType">
+		<xs:annotation>
+			<xs:documentation>Целочисленная величина, установленная в результате упорядочения множества объектов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:positiveInteger"/>
+	</xs:simpleType>
+	<!-- M.BDT.00017: Процент (Процент. Тип) -->
+	<xs:simpleType name="PercentType">
+		<xs:annotation>
+			<xs:documentation>Сотая доля основного значения, выраженная в виде коэффициента</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal"/>
+	</xs:simpleType>
+	<!-- M.BDT.00018: Рисунок (Рисунок. Тип) -->
+	<xs:simpleType name="PictureType">
+		<xs:annotation>
+			<xs:documentation>Визуальное статическое представление объекта или явления в двоичной нотации (октеты)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:base64Binary"/>
+	</xs:simpleType>
+	<!-- M.BDT.00015: Количество (Количество. Тип) -->
+	<xs:simpleType name="QuantityType">
+		<xs:annotation>
+			<xs:documentation>Результат подсчета количества объектов, процессов или явлений</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:nonNegativeInteger"/>
+	</xs:simpleType>
+	<!-- M.BDT.00016: Коэффициент (Коэффициент. Тип) -->
+	<xs:simpleType name="RateType">
+		<xs:annotation>
+			<xs:documentation>Числовая величина чего-либо, пропорционально соответствующая определенной величине чего-либо другого</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal"/>
+	</xs:simpleType>
+	<!-- M.BDT.00008: Звук (Звук. Тип) -->
+	<xs:simpleType name="SoundType">
+		<xs:annotation>
+			<xs:documentation>Информация, представленная в звуковой форме в цифровом виде в двоичной нотации (октеты)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:base64Binary"/>
+	</xs:simpleType>
+	<!-- M.BDT.00019: Текст (Текст. Тип) -->
+	<xs:simpleType name="TextType">
+		<xs:annotation>
+			<xs:documentation>Строка символов конечной длины, как правило, в виде слов определенного естественного языка</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:token"/>
+	</xs:simpleType>
+	<!-- M.BDT.00003: Время (Время. Тип) -->
+	<xs:simpleType name="TimeType">
+		<xs:annotation>
+			<xs:documentation>Время суток с указанием часа, минуты, секунды и доли секунды</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:time"/>
+	</xs:simpleType>
+	<!-- M.BDT.00009: Значение (Значение. Тип) -->
+	<xs:simpleType name="ValueType">
+		<xs:annotation>
+			<xs:documentation>Количественная величина, выраженная в числовой или нечисловой форме</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:token"/>
+	</xs:simpleType>
+	<!-- M.BDT.00002: Видео (Видео. Тип) -->
+	<xs:simpleType name="VideoType">
+		<xs:annotation>
+			<xs:documentation>Запись динамических визуальных образов в цифровом виде в двоичной нотации (октеты)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:base64Binary"/>
+	</xs:simpleType>
+	<!-- M.BDT.00027: Месяц года (Месяц года. Тип) -->
+	<xs:simpleType name="YearMonthType">
+		<xs:annotation>
+			<xs:documentation>Месяц определенного года по григорианскому календарю</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:gYearMonth"/>
+	</xs:simpleType>
+	<!-- M.BDT.00025: Год (Год. Тип) -->
+	<xs:simpleType name="YearType">
+		<xs:annotation>
+			<xs:documentation>Год по григорианскому календарю</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:gYear"/>
+	</xs:simpleType>
+</xs:schema>

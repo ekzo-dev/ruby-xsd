@@ -132,7 +132,13 @@ module XSD
         end
       else
         extension = simple_content.extension
-        extension.base_simple_type&.data_type || strip_prefix(extension.base)
+        if extension.base_simple_type
+          extension.base_simple_type.data_type
+        elsif extension.base_complex_type
+          extension.base_complex_type.data_type
+        else
+          strip_prefix(extension.base)
+        end
       end
     end
   end
