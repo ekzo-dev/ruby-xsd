@@ -1,3 +1,7 @@
+## [2.7.10] - 2024-04-26
+
+- Fix data_type detection in complex_type simple_content extension
+
 ## [2.7.9] - 2024-04-25
 
 - Fix resolving schemas with unprefixed namespace
