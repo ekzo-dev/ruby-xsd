@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'xsd/version'
 require 'xsd/base_object'
 require 'xsd/shared/named'
 require 'xsd/shared/min_max_occurs'

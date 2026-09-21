@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.name    = 'xsd'
   spec.version = XSD::VERSION
   spec.authors = ['d.arkhipov']
-  spec.email   = ['d.arkhipov@netcitylife.ru']
+  spec.email   = ['d.arkhipov@ekzo.dev']
 
   spec.summary     = 'The Ruby XSD library is an XML Schema implementation for Ruby.'
   spec.description =
@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
 
   spec.metadata['homepage_uri']    = spec.homepage
   spec.metadata['source_code_uri'] = spec.homepage
-  spec.metadata['changelog_uri']   = 'https://github.com/ekzo-dev/ruby-xsd/CHANGELOG.md'
+  spec.metadata['changelog_uri']   = 'https://github.com/ekzo-dev/ruby-xsd/blob/main/CHANGELOG.md'
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.

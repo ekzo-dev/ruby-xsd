@@ -246,4 +246,20 @@ RSpec.describe XSD do
       end
     end
   end
+
+  describe 'VERSION' do
+    it 'is defined by requiring the library alone' do
+      expect(described_class.const_defined?(:VERSION)).to be true
+    end
+
+    it 'looks like a version number' do
+      expect(described_class::VERSION).to match(/\A\d+\.\d+\.\d+\z/)
+    end
+
+    it 'matches the most recent changelog entry' do
+      latest = File.read(File.expand_path('../CHANGELOG.md', __dir__)).match(/^## \[([^\]]+)\]/)[1]
+
+      expect(latest).to eq described_class::VERSION
+    end
+  end
 end

@@ -1,4 +1,4 @@
-## [Unreleased]
+## [2.8.0] - 2026-09-21
 
 ### Fixed
 
@@ -17,6 +17,7 @@
 - The compiled validator no longer leaks an open file descriptor
 - `Element#attributes?` and `ComplexType#complex_content?` return booleans instead of the underlying objects
 - Import/include error messages name the namespaces that did not match
+- `require 'xsd'` defines `XSD::VERSION`, which previously needed `require 'xsd/version'` on top of it
 
 ### Changed
 
