@@ -23,9 +23,6 @@ Layout/HashAlignment:
 Layout/LineLength:
   Enabled: false
 
-Lint/HashCompareByIdentity:
-  Enabled: false
-
 Layout/SpaceAroundOperators:
   Enabled: false
 

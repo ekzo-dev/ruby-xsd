@@ -142,13 +142,13 @@ module XSD
     # @return BaseObject
     def node_to_object(node)
       # check object in cache first
-      cached = reader.object_cache[node.object_id]
+      cached = reader.object_cache[node]
       return cached if cached
 
       klass = XML::CLASS_MAP[node.name]
       raise Error, "Object class not found for '#{node.name}'" unless klass
 
-      reader.object_cache[node.object_id] = klass.new(options.merge(node: node, schema: schema))
+      reader.object_cache[node] = klass.new(options.merge(node: node, schema: schema))
     end
 
     # Get xml parent object

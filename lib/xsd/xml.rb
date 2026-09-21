@@ -81,7 +81,8 @@ module XSD
 
     def initialize(**options)
       @options              = options
-      @object_cache         = {}
+      # keyed by node identity, the parsed documents are treated as immutable
+      @object_cache         = {}.compare_by_identity
       @schemas              = []
       @schemas_by_location  = {}
     end

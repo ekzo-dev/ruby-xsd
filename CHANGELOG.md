@@ -25,6 +25,8 @@
 - Property, link and child lookups cache `nil` and `false` results, which cuts repeated xpath searches (roughly 2.5x
   faster traversal of the bundled example schemas)
 - `XSD::XML#add_schema_xml`/`#add_schema_node` accept a `location:` keyword, and `Schema#location` exposes it
+- `XML#object_cache` is keyed by node identity (`Hash#compare_by_identity`) rather than by `node.object_id`, which
+  lets the `Lint/HashCompareByIdentity` rule be enabled again
 
 ## [2.7.10] - 2024-04-26
 
