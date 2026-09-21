@@ -106,12 +106,136 @@ RSpec.describe XSD::Schema do
 
   context 'with retail_license_notification example file' do
     subject(:schema) { reader.schema }
+
     let(:file) { fixture_file(%w[retail_license_notification scheme.xsd], read: false) }
 
     describe '#schemas_for_namespace' do
       it 'gets schema for unprefixed namespace' do
         expect(schema.schemas_for_namespace('').first.target_namespace).to eq('urn://fsrar/smev/retail_license_notification/types/1.0.0')
         expect(schema.object_by_name('complexType', 'DocumentType').name).to eq('DocumentType')
+      end
+    end
+  end
+
+  context 'with gkn example files, whose schemas are wired together with includes' do
+    let(:file) { fixture_file(%w[gkn CR_ZC_REQ_Reqest.xsd], read: false) }
+
+    describe '#validate' do
+      it 'validates a schema that pulls in other schemas with include' do
+        expect { reader.schema.validate }.not_to raise_error
+      end
+
+      it 'memoizes the compiled validator' do
+        validator = reader.schema.validate
+
+        expect(validator).to be_a Nokogiri::XML::Schema
+        expect(reader.schema.validate).to be validator
+      end
+    end
+  end
+
+  context 'with kitchen-sink example files' do
+    subject(:reader) { XSD::XML.open(file, logger: spec_logger) }
+
+    let(:file) { fixture_file(%w[kitchen-sink kitchen-sink.xsd], read: false) }
+    let(:schema) { reader.schema }
+
+    describe 'properties' do
+      it 'reads the schema level defaults' do
+        expect(schema.version).to eq '1.4'
+        expect(schema.element_form_default).to eq 'qualified'
+        expect(schema.attribute_form_default).to eq 'unqualified'
+        expect(schema.block_default).to eq 'extension'
+        expect(schema.final_default).to eq 'list'
+      end
+
+      it 'falls back to the XSD defaults when the attributes are absent' do
+        bare = XSD::XML.open(fixture_file(%w[referencing.xsd], read: false), logger: spec_logger).schema
+
+        expect(bare.attribute_form_default).to eq 'unqualified'
+        expect(bare.target_namespace).to be_nil
+        expect(bare.version).to be_nil
+      end
+    end
+
+    describe '#namespace_prefix' do
+      it 'gives the prefix the XMLSchema namespace is bound to' do
+        expect(schema.namespace_prefix).to eq 'xs'
+      end
+    end
+
+    describe '#target_namespace_prefix' do
+      it 'gives the prefix the target namespace is bound to' do
+        expect(schema.target_namespace_prefix).to eq 'ks'
+      end
+
+      it 'is nil when the target namespace is not bound to any prefix' do
+        bare = XSD::XML.open(fixture_file(%w[referencing.xsd], read: false), logger: spec_logger).schema
+
+        expect(bare.target_namespace_prefix).to be_nil
+      end
+    end
+
+    describe '#targets_namespace?' do
+      it 'accepts the namespace itself as well as a prefix bound to it' do
+        expect(schema.targets_namespace?('urn:kitchen-sink')).to be true
+        expect(schema.targets_namespace?('ks')).to be true
+      end
+
+      it 'rejects anything else' do
+        expect(schema.targets_namespace?('imp')).to be false
+        expect(schema.targets_namespace?('urn:nope')).to be false
+      end
+    end
+
+    describe '#collect_elements' do
+      it 'is the list of global elements' do
+        expect(schema.collect_elements).to eq schema.elements
+        expect(schema.collect_elements.map(&:name)).to eq %w[Shape Circle Square SharedNote Catalog]
+      end
+    end
+
+    describe '#collect_attributes' do
+      it 'is the list of global attributes' do
+        expect(schema.collect_attributes).to eq schema.attributes
+      end
+    end
+
+    describe '#validate' do
+      it 'validates a schema with both imports and includes' do
+        expect { schema.validate }.not_to raise_error
+      end
+    end
+
+    describe '#validate_xml' do
+      it 'accepts a conforming document given as a string' do
+        expect { schema.validate_xml(fixture_file(%w[kitchen-sink samples catalog-valid.xml])) }.not_to raise_error
+      end
+
+      it 'accepts a conforming document given as a pathname' do
+        path = fixture_file(%w[kitchen-sink samples catalog-valid.xml], read: false)
+
+        expect { schema.validate_xml(path) }.not_to raise_error
+      end
+
+      it 'accepts a conforming document given as a parsed document' do
+        document = Nokogiri::XML(fixture_file(%w[kitchen-sink samples catalog-valid.xml]))
+
+        expect { schema.validate_xml(document) }.not_to raise_error
+      end
+
+      it 'reports every violation of a non conforming document' do
+        expect { schema.validate_xml(fixture_file(%w[kitchen-sink samples catalog-invalid.xml])) }
+          .to raise_error(XSD::ValidationError, /attribute 'name' is required but missing.+not expected/m)
+      end
+
+      it 'rejects an unsupported input type' do
+        expect { schema.validate_xml(42) }
+          .to raise_error(XSD::ValidationError, /must be a String, Pathname or Nokogiri::XML::Document, got Integer/)
+      end
+
+      it 'reports malformed xml as a validation error' do
+        expect { schema.validate_xml('<not-xml') }.to raise_error(XSD::ValidationError)
       end
     end
   end

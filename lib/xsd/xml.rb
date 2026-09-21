@@ -2,13 +2,21 @@
 
 require 'nokogiri'
 require 'net/http'
+require 'pathname'
+require 'logger'
+require 'uri'
 
 module XSD
   class XML
     attr_reader :options, :object_cache, :schemas
 
+    # Matches locations that have to be fetched over the network
+    REMOTE_LOCATION = %r{\Ahttps?://}i
+
+    # Legacy resource resolver, kept for backwards compatibility. Resolves absolute paths and URLs only,
+    # relative locations are resolved by the reader itself, see #read_resource
     DEFAULT_RESOURCE_RESOLVER = proc do |location, namespace|
-      if location =~ /^https?:/
+      if location.match?(REMOTE_LOCATION)
         Net::HTTP.get(URI(location))
       elsif Pathname.new(location).absolute?
         File.read(location)
@@ -62,31 +70,34 @@ module XSD
     }.freeze
 
     # Create reader from a file path
-    # @param [String] path
+    # @param [String, Pathname] path
     # @param [Hash] options
     # @return XML
     def self.open(path, **options)
       reader = new(**options)
-      reader.add_schema_xml(File.read(path))
+      reader.add_schema_xml(File.read(path.to_s), location: path.to_s)
       reader
     end
 
     def initialize(**options)
-      @options      = options
-      @object_cache = {}
-      @schemas      = []
+      @options              = options
+      @object_cache         = {}
+      @schemas              = []
+      @schemas_by_location  = {}
     end
 
     def logger
       options[:logger] || default_logger
     end
 
+    # Resolver used to fetch imported/included schemas
+    # @return Proc
     def resource_resolver
       @options[:resource_resolver] || DEFAULT_RESOURCE_RESOLVER
     end
 
     def tmp_dir
-      @tmp_dir ||= options[:tmp_dir]
+      options[:tmp_dir]
     end
 
     def read_document(xml)
@@ -94,22 +105,49 @@ module XSD
     end
 
     # Add schema xml to reader instance
+    # @param [String] xml
+    # @param [String, nil] location Location the xml was read from, used to resolve relative imports
     # @return Schema
-    def add_schema_xml(xml)
+    def add_schema_xml(xml, location: nil)
       doc = read_document(xml)
       raise Error, 'Schema node not found, xml does not seem to be a valid XSD' unless doc.root&.name == 'schema'
 
-      add_schema_node(doc.root)
+      add_schema_node(doc.root, location: location)
     end
 
     # Add schema node to reader instance
+    # @param [Nokogiri::XML::Node] node
+    # @param [String, nil] location Location the node was read from, used to resolve relative imports
     # @return Schema
-    def add_schema_node(node)
+    def add_schema_node(node, location: nil)
       raise Error, 'Added schema must be of type Nokogiri::XML::Node' unless node.is_a?(Nokogiri::XML::Node)
 
-      new_schema = Schema.new(options.merge(node: node, reader: self))
+      new_schema = Schema.new(options.merge(node: node, reader: self, location: location))
       schemas.push(new_schema)
+      # register the schema so that an import/include pointing back at this location reuses it
+      @schemas_by_location[location] ||= new_schema if location
       new_schema
+    end
+
+    # Load schema referenced by an import/include, reusing an already loaded one when possible
+    # @param [String] location
+    # @param [String, nil] namespace
+    # @param [String, nil] base Location of the referencing schema
+    # @return Schema
+    def load_schema(location, namespace: nil, base: nil)
+      raise ImportError, 'Schema location must be provided' if location.nil? || location.empty?
+
+      expanded = expand_location(location, base)
+      return @schemas_by_location[expanded] if @schemas_by_location.key?(expanded)
+
+      # a custom resolver is responsible for resolving relative locations on its own
+      xml = if options[:resource_resolver]
+              options[:resource_resolver].call(location, namespace)
+            else
+              read_resource(expanded, namespace)
+            end
+
+      @schemas_by_location[expanded] = add_schema_xml(xml, location: expanded)
     end
 
     # Get first added (considered primary) schema
@@ -160,10 +198,34 @@ module XSD
 
     private
 
+    # Read schema contents from an absolute path or URL
+    # @param [String] location
+    # @param [String, nil] namespace
+    # @return String
+    def read_resource(location, namespace = nil)
+      if location.match?(REMOTE_LOCATION)
+        Net::HTTP.get(URI(location))
+      elsif File.file?(location)
+        File.read(location)
+      else
+        raise ImportError, "Failed to locate import '#{location}'#{namespace ? " for namespace '#{namespace}'" : ''}"
+      end
+    end
+
+    # Resolve a possibly relative location against the location of the referencing schema
+    # @param [String] location
+    # @param [String, nil] base
+    # @return String
+    def expand_location(location, base)
+      return location if location.match?(REMOTE_LOCATION) || Pathname.new(location).absolute?
+      return location if base.nil?
+      return URI.join(base, location).to_s if base.match?(REMOTE_LOCATION)
+
+      Pathname.new(base).dirname.join(location).cleanpath.to_s
+    end
+
     def collect(name, *args)
-      result = Set.new
-      schemas.each { |schema| result.merge(schema.send(name, *args)) }
-      result.to_a
+      schemas.flat_map { |schema| schema.send(name, *args) }.uniq
     end
 
     def default_logger

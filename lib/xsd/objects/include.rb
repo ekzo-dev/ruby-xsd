@@ -10,20 +10,20 @@ module XSD
     # @return String
     property :schemaLocation, :string
 
-    # Get imported schema
+    # Get included schema
     # @return Schema
     def imported_schema
-      # cache included schema locally as it has no unique namespace to check in global registry
-      return @imported_schema if @imported_schema
+      raise ImportError, 'Schema location not provided for include' unless schema_location
 
-      xml = reader.resource_resolver.call(schema_location)
-      new_schema = reader.add_schema_xml(xml)
+      new_schema = reader.load_schema(schema_location, base: schema.location)
 
-      unless schema.target_namespace == new_schema.target_namespace
-        raise ImportError, 'Schema targetNamespace does not match included schema targetNamespace'
+      # an included schema without a target namespace adopts the namespace of the including schema ("chameleon" include)
+      unless new_schema.target_namespace.nil? || schema.target_namespace == new_schema.target_namespace
+        raise ImportError, "Schema targetNamespace '#{schema.target_namespace}' does not match included schema " \
+                           "targetNamespace '#{new_schema.target_namespace}'"
       end
 
-      @imported_schema = new_schema
+      new_schema
     end
   end
 end

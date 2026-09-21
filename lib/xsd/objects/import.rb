@@ -18,18 +18,20 @@ module XSD
     # Get imported schema
     # @return Schema
     def imported_schema
-      known_schemas = reader.schemas_for_namespace(namespace)
-      return known_schemas.first if known_schemas.any?
+      # a schema for the namespace may already be known, either added manually or by another import
+      known_schema = reader.schemas_for_namespace(namespace).find { |s| !s.equal?(schema) }
+      return known_schema if known_schema
 
       unless schema_location
-        raise ImportError, "Schema location not provided for namespace '#{namespace}', use add_schema_xml()/add_schema_node()"
+        raise ImportError,
+              "Schema location not provided for namespace '#{namespace}', use add_schema_xml()/add_schema_node()"
       end
 
-      xml = reader.resource_resolver.call(schema_location, namespace)
-      new_schema = reader.add_schema_xml(xml)
+      new_schema = reader.load_schema(schema_location, namespace: namespace, base: schema.location)
 
       unless namespace == new_schema.target_namespace
-        raise ImportError, 'Import namespace does not match imported schema targetNamespace'
+        raise ImportError, "Import namespace '#{namespace}' does not match imported schema targetNamespace " \
+                           "'#{new_schema.target_namespace}'"
       end
 
       new_schema

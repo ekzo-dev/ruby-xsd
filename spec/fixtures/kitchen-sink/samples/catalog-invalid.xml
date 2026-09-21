@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Missing the required "name" attribute and the mandatory Title element -->
+<ks:Catalog xmlns:ks="urn:kitchen-sink">
+  <ks:Item sku="A-1">
+    <ks:Size>M</ks:Size>
+  </ks:Item>
+</ks:Catalog>

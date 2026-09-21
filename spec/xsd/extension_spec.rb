@@ -42,4 +42,55 @@ RSpec.describe XSD::Extension do
       end
     end
   end
+
+  context 'with kitchen-sink example files' do
+    subject(:reader) { XSD::XML.open(file, logger: spec_logger) }
+
+    let(:file) { fixture_file(%w[kitchen-sink kitchen-sink.xsd], read: false) }
+    let(:extension) { reader['Catalog']['Item'].complex_type.complex_content.extension }
+
+    describe '#base' do
+      it 'gives the base type name and resolves it' do
+        expect(extension.base).to eq 'ks:AbstractItemType'
+        expect(extension.base_complex_type.name).to eq 'AbstractItemType'
+        expect(extension.base_simple_type).to be_nil
+      end
+    end
+
+    describe '#collect_elements' do
+      it 'puts the base type elements first' do
+        expect(extension.collect_elements.map(&:name))
+          .to eq %w[Title Description Size Measure Tags Comment Note Link #any]
+      end
+
+      it 'omits the base type elements when asked to' do
+        expect(extension.collect_elements(false).map(&:name)).to eq %w[Size Measure Tags Comment Note Link #any]
+      end
+    end
+
+    describe '#collect_attributes' do
+      it 'puts the base type attributes first' do
+        expect(extension.collect_attributes.map(&:name)).to eq %w[lang revision sku #anyAttribute]
+      end
+
+      it 'omits the base type attributes when asked to' do
+        expect(extension.collect_attributes(false).map(&:name)).to eq %w[sku #anyAttribute]
+      end
+    end
+
+    describe 'simpleContent extension' do
+      subject(:simple) { reader['Catalog']['Item']['Measure'].complex_type.simple_content.extension }
+
+      it 'resolves a simple base type' do
+        expect(simple.base).to eq 'ks:CountType'
+        expect(simple.base_simple_type.name).to eq 'CountType'
+        expect(simple.base_complex_type).to be_nil
+      end
+
+      it 'declares the attributes added on top of the simple content' do
+        expect(simple.collect_attributes.map(&:name)).to eq %w[unit]
+        expect(simple.collect_elements).to eq []
+      end
+    end
+  end
 end

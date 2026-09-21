@@ -121,7 +121,7 @@ module XSD
     # Determine if element has attributes
     # @return Boolean
     def attributes?
-      complex_type && collect_attributes.any?
+      !!complex_type && collect_attributes.any?
     end
 
     # Determine if element has mixed content
@@ -133,17 +133,16 @@ module XSD
     # Get substitutable elements
     # @return Array<Element>
     def substitutable_elements
-      @substitutable_elements ||= begin
-                                    if ref
-                                      reference.substitutable_elements
-                                    elsif !global? || %w[#all substitution].include?(block)
-                                      []
-                                    else
-                                      # TODO: we search substituted element only in the same schema with head element, is this enough?
-                                      # TODO: maybe don't collect all elements but search with xpath first?
-                                      schema.collect_elements.select do |element|
-                                        strip_prefix(element.substitution_group) == name
-                                      end
+      @substitutable_elements ||= if ref
+                                    reference.substitutable_elements
+                                  elsif !global? || %w[#all substitution].include?(block)
+                                    []
+                                  else
+                                    # TODO: we search substituted element only in the same schema with head element,
+                                    # is this enough?
+                                    # TODO: maybe don't collect all elements but search with xpath first?
+                                    schema.collect_elements.select do |element|
+                                      strip_prefix(element.substitution_group) == name
                                     end
                                   end
     end

@@ -16,6 +16,9 @@ module XSD
     # Base XMLSchema namespace
     XML_SCHEMA = 'http://www.w3.org/2001/XMLSchema'
 
+    # Namespace map used for all internal xpath queries
+    XML_SCHEMA_NS = { 'xs' => XML_SCHEMA }.freeze
+
     class << self
       attr_reader :properties, :children, :links
 
@@ -33,10 +36,10 @@ module XSD
     end
 
     def initialize(options = {})
-      @options = options
-      @cache = {}
+      raise Error, "#{self.class}.new expects a hash parameter" unless options.is_a?(Hash)
 
-      raise Error, "#{self.class}.new expects a hash parameter" unless @options.is_a?(Hash)
+      @options = options
+      @cache   = {}
     end
 
     # Get current XML node
@@ -67,9 +70,10 @@ module XSD
 
     # Get child nodes
     # @param [Symbol] name
+    # @param [Boolean] deep
     # @return Nokogiri::XML::NodeSet
     def nodes(name = :*, deep = false)
-      node.xpath("./#{deep ? '/' : ''}xs:#{name}", { 'xs' => XML_SCHEMA })
+      node.xpath("./#{deep ? '/' : ''}xs:#{name}", XML_SCHEMA_NS)
     end
 
     # Get schemas by namespace or prefix
@@ -77,7 +81,7 @@ module XSD
     # @return Array<Schema>
     def schemas_for_namespace(ns_or_prefix)
       # resolve namespace for current node if prefix was provided
-      prefix = node.namespaces[['xmlns', (ns_or_prefix == '' ? nil : ns_or_prefix)].compact.join(':')]
+      prefix = namespaces[['xmlns', (ns_or_prefix == '' ? nil : ns_or_prefix)].compact.join(':')]
       ns = prefix || ns_or_prefix
 
       if schema.targets_namespace?(ns)
@@ -116,7 +120,7 @@ module XSD
     def object_by_name(node_name, name)
       # get prefix and local name
       name_prefix = get_prefix(name)
-      name_local = strip_prefix(name)
+      name_local  = strip_prefix(name)
 
       # do not search for built-in types
       return nil if schema.namespace_prefix == name_prefix
@@ -124,9 +128,9 @@ module XSD
       # determine schema for namespace
       search_schemas = schemas_for_namespace(name_prefix)
 
-      # find element in target schema
+      # find element in target schema, name is passed as an xpath variable to stay safe with any name contents
       search_schemas.each do |s|
-        node = s.node.at_xpath("./xs:#{node_name}[@name=\"#{name_local}\"]", { 'xs' => XML_SCHEMA })
+        node = s.node.at_xpath("./xs:#{node_name}[@name=$name]", XML_SCHEMA_NS, name: name_local)
         return s.node_to_object(node) if node
       end
 
@@ -134,11 +138,12 @@ module XSD
     end
 
     # Get reader object for node
-    # @param [Nokogiri::XML::Node]
+    # @param [Nokogiri::XML::Node] node
     # @return BaseObject
     def node_to_object(node)
       # check object in cache first
-      return reader.object_cache[node.object_id] if reader.object_cache[node.object_id]
+      cached = reader.object_cache[node.object_id]
+      return cached if cached
 
       klass = XML::CLASS_MAP[node.name]
       raise Error, "Object class not found for '#{node.name}'" unless klass
@@ -149,7 +154,14 @@ module XSD
     # Get xml parent object
     # @return BaseObject, nil
     def parent
-      node.respond_to?(:parent) && node.parent ? node_to_object(node.parent) : nil
+      return @parent if defined?(@parent)
+
+      parent_node = node.respond_to?(:parent) ? node.parent : nil
+
+      # the parent may be a document or a node of a foreign schema (e.g. wsdl:types), there is no object for those
+      @parent = if parent_node.is_a?(Nokogiri::XML::Element) && XML::CLASS_MAP.key?(parent_node.name)
+                  node_to_object(parent_node)
+                end
     end
 
     # Get current schema object
@@ -205,55 +217,47 @@ module XSD
     # @param [Nokogiri::XML::Node] node
     # @return Array<String>
     def documentation_for(node)
-      node.xpath('./xs:annotation/xs:documentation/text()', { 'xs' => XML_SCHEMA }).map { |x| x.text.strip }
+      node.xpath('./xs:annotation/xs:documentation/text()', XML_SCHEMA_NS).map { |x| x.text.strip }
     end
 
     # Get all available elements on the current stack level
     # @return Array<Element>
     def collect_elements(*)
-      return @collect_elements if @collect_elements
-
-      r = if NO_ELEMENTS_CONTAINER.include?(self.class.mapped_name)
-            []
-          elsif is_a?(Referenced) && ref
-            reference.collect_elements
-          else
-            # map children recursive
-            map_children(:*).map do |obj|
-              if obj.is_a?(Element) || obj.is_a?(Any)
-                obj
-              else
-                # get elements considering references
-                (obj.is_a?(Referenced) && obj.ref ? obj.reference : obj).collect_elements
-              end
-            end.flatten
-          end
-
-      @collect_elements = r
+      @collect_elements ||= if NO_ELEMENTS_CONTAINER.include?(self.class.mapped_name)
+                              []
+                            elsif is_a?(Referenced) && ref
+                              reference.collect_elements
+                            else
+                              # map children recursive
+                              map_children(:*).flat_map do |obj|
+                                if obj.is_a?(Element) || obj.is_a?(Any)
+                                  obj
+                                else
+                                  # get elements considering references
+                                  (obj.is_a?(Referenced) && obj.ref ? obj.reference : obj).collect_elements
+                                end
+                              end
+                            end
     end
 
     # Get all available attributes on the current stack level
     # @return Array<Attribute>
     def collect_attributes(*)
-      return @collect_attributes if @collect_attributes
-
-      r = if NO_ATTRIBUTES_CONTAINER.include?(self.class.mapped_name)
-            []
-          elsif is_a?(Referenced) && ref
-            reference.collect_attributes
-          else
-            # map children recursive
-            map_children(:*).map do |obj|
-              if obj.is_a?(Attribute) || obj.is_a?(AnyAttribute)
-                obj
-              else
-                # get attributes considering references
-                (obj.is_a?(Referenced) && obj.ref ? obj.reference : obj).collect_attributes
-              end
-            end.flatten
-          end
-
-      @collect_attributes = r
+      @collect_attributes ||= if NO_ATTRIBUTES_CONTAINER.include?(self.class.mapped_name)
+                                []
+                              elsif is_a?(Referenced) && ref
+                                reference.collect_attributes
+                              else
+                                # map children recursive
+                                map_children(:*).flat_map do |obj|
+                                  if obj.is_a?(Attribute) || obj.is_a?(AnyAttribute)
+                                    obj
+                                  else
+                                    # get attributes considering references
+                                    (obj.is_a?(Referenced) && obj.ref ? obj.reference : obj).collect_attributes
+                                  end
+                                end
+                              end
     end
 
     # Get reader instance
@@ -307,35 +311,17 @@ module XSD
     # @param [Symbol] method
     # @param [Array] args
     def method_missing(method, *args)
-      # check cache first
-      return @cache[method] if @cache[method]
+      # check cache first, nil and false results are cached as well
+      return @cache[method] if @cache.key?(method)
 
       # check for property first
       if (property = self.class.properties[method])
-        value = property[:resolve] ? property[:resolve].call(self) : node[property[:name].to_s]
-        r = if value.nil?
-              if node['ref']
-                # if object has reference - search property in referenced object
-                reference.send(method, *args)
-              else
-                property[:default].is_a?(Proc) ? instance_eval(&property[:default]) : property[:default]
-              end
-            else
-              case property[:type]
-              when :integer
-                property[:name] == :maxOccurs && value == 'unbounded' ? :unbounded : value.to_i
-              when :boolean
-                value == 'true'
-              else
-                value
-              end
-            end
-        return @cache[method] = r
+        return @cache[method] = property_value(property, method, args)
       end
 
       # if object has ref it cannot contain any type and children, so proxy call to target object
       if node['ref'] && method != :ref && method != :reference
-        return reference.send(method, *args)
+        return @cache[method] = reference.send(method, *args)
       end
 
       # then check for linked types
@@ -345,7 +331,7 @@ module XSD
           return @cache[method] = object_by_name(link[:type], name)
         elsif is_a?(Restriction) && %i[base_simple_type base_complex_type].include?(method)
           # handle restriction without base
-          return nil
+          return @cache[method] = nil
         end
       end
 
@@ -356,26 +342,24 @@ module XSD
       end
 
       super
-      # api = self.class.properties.keys + self.class.links.keys + self.class.children.keys
-      # raise Error, "Tried to access unknown object '#{method}' on '#{self.class.name}'. Available options are: #{api}"
     end
 
     # Does object has property/link/child?
     # @param [Symbol] method
-    # @param [Array] args
-    def respond_to_missing?(method, *args)
-      self.class.properties[method] || self.class.links[method] || self.class.children[method] || super
+    # @param [Boolean] include_private
+    def respond_to_missing?(method, include_private = false)
+      !self.class.properties[method].nil? || !self.class.links[method].nil? ||
+        !self.class.children[method].nil? || super
     end
 
     # Get mapped element name
     # @return Symbol
     def self.mapped_name
-      # @mapped_name ||= XML::CLASS_MAP.each { |k, v| return k.to_sym if v == self }
       @mapped_name ||= begin
-                         name = self.name.split('::').last
-                         name[0] = name[0].downcase
-                         name.to_sym
-                       end
+        name = self.name.split('::').last
+        name[0] = name[0].downcase
+        name.to_sym
+      end
     end
 
     # Return string if it is not empty, or nil otherwise
@@ -387,6 +371,34 @@ module XSD
 
     private
 
+    # Resolve property value from the node attribute, resolver block, reference or default
+    # @param [Hash] property
+    # @param [Symbol] method
+    # @param [Array] args
+    def property_value(property, method, args)
+      value = property[:resolve] ? property[:resolve].call(self) : node[property[:name].to_s]
+      return cast_property_value(property, value) unless value.nil?
+
+      # if object has reference - search property in referenced object
+      return reference.send(method, *args) if node['ref']
+
+      property[:default].is_a?(Proc) ? instance_eval(&property[:default]) : property[:default]
+    end
+
+    # Cast raw attribute value to the declared property type
+    # @param [Hash] property
+    # @param [String] value
+    def cast_property_value(property, value)
+      case property[:type]
+      when :integer
+        property[:name] == :maxOccurs && value == 'unbounded' ? :unbounded : value.to_i
+      when :boolean
+        value == 'true'
+      else
+        value
+      end
+    end
+
     def definition_match?(definition, query)
       # namespace included in query
       if query.start_with?('{')
@@ -395,7 +407,7 @@ module XSD
 
         namespace, name = parts
 
-        return false if namespace != definition.namespace
+        return false if nil_if_empty(namespace) != definition.namespace
       else
         name = query
       end

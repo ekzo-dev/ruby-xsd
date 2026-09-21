@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:ks="urn:kitchen-sink"
+           xmlns:imp="urn:kitchen-sink:imported"
+           targetNamespace="urn:kitchen-sink"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified"
+           version="1.4"
+           blockDefault="extension"
+           finalDefault="list">
+  <xs:annotation>
+    <xs:documentation>Schema exercising every construct the library maps.</xs:documentation>
+    <xs:appinfo source="urn:kitchen-sink:appinfo">generator=handwritten</xs:appinfo>
+  </xs:annotation>
+
+  <xs:import namespace="urn:kitchen-sink:imported" schemaLocation="nested/imported.xsd"/>
+  <xs:include schemaLocation="chameleon.xsd"/>
+
+  <xs:simpleType name="SizeType">
+    <xs:annotation>
+      <xs:documentation>Size of an item</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="S">
+        <xs:annotation>
+          <xs:documentation>Small</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="M">
+        <xs:annotation>
+          <xs:documentation>Medium</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="L"/>
+      <xs:pattern value="[SML]"/>
+      <xs:pattern value="\w"/>
+      <xs:minLength value="1"/>
+      <xs:maxLength value="1"/>
+      <xs:whiteSpace value="collapse"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="CountType">
+    <xs:restriction base="xs:decimal">
+      <xs:minInclusive value="0"/>
+      <xs:maxInclusive value="100"/>
+      <xs:totalDigits value="5"/>
+      <xs:fractionDigits value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ExclusiveCountType">
+    <xs:restriction base="ks:CountType">
+      <xs:minExclusive value="1"/>
+      <xs:maxExclusive value="99"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="SizeOrCountType">
+    <xs:union memberTypes="ks:SizeType xs:int"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="NestedUnionType">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:token"/>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction base="xs:token"/>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+
+  <xs:simpleType name="TagListType">
+    <xs:list itemType="xs:NMTOKEN"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="NestedListType">
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base="xs:int"/>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+
+  <xs:simpleType name="AnonymousBaseType">
+    <xs:restriction>
+      <xs:simpleType>
+        <xs:restriction base="xs:int"/>
+      </xs:simpleType>
+      <xs:minInclusive value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:attributeGroup name="CommonAttributes">
+    <xs:attribute name="lang" type="xs:language" default="en"/>
+    <xs:attribute name="revision" type="xs:string" fixed="1.0"/>
+  </xs:attributeGroup>
+
+  <xs:group name="DescriptionGroup">
+    <xs:sequence>
+      <xs:element name="Title" type="xs:string"/>
+      <xs:element name="Description" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:group>
+
+  <xs:complexType name="MeasureType">
+    <xs:simpleContent>
+      <xs:extension base="ks:CountType">
+        <xs:attribute name="unit" type="xs:string" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="AbstractItemType" abstract="true">
+    <xs:sequence>
+      <xs:group ref="ks:DescriptionGroup"/>
+    </xs:sequence>
+    <xs:attributeGroup ref="ks:CommonAttributes"/>
+  </xs:complexType>
+
+  <xs:complexType name="ItemType">
+    <xs:complexContent>
+      <xs:extension base="ks:AbstractItemType">
+        <xs:sequence>
+          <xs:element name="Size" type="ks:SizeType" minOccurs="0"/>
+          <xs:element name="Measure" type="ks:MeasureType" minOccurs="0"/>
+          <xs:element name="Tags" type="ks:TagListType" minOccurs="0"/>
+          <xs:element name="Comment" type="xs:string" minOccurs="0" nillable="true"/>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="Note" type="xs:string"/>
+            <xs:element name="Link" type="xs:string"/>
+          </xs:choice>
+          <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="sku" type="xs:string" use="required"/>
+        <xs:anyAttribute namespace="##other" processContents="skip"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="RestrictedItemType">
+    <xs:complexContent>
+      <xs:restriction base="ks:ItemType">
+        <xs:sequence>
+          <xs:element name="Title" type="xs:string"/>
+          <xs:element name="Size" type="ks:SizeType"/>
+        </xs:sequence>
+        <xs:attribute name="sku" type="xs:string" use="required"/>
+        <xs:attribute name="lang" type="xs:language" use="required"/>
+        <xs:attribute name="revision" use="prohibited"/>
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="MixedTextType" mixed="true">
+    <xs:sequence>
+      <xs:element name="Emphasis" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="DerivedMixedType">
+    <xs:complexContent>
+      <xs:extension base="ks:MixedTextType"/>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:element name="Shape" type="xs:string" abstract="true"/>
+  <xs:element name="Circle" type="xs:string" substitutionGroup="ks:Shape"/>
+  <xs:element name="Square" type="xs:string" substitutionGroup="ks:Shape"/>
+  <xs:element name="SharedNote" type="xs:string"/>
+
+  <xs:element name="Catalog">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Item" type="ks:ItemType" maxOccurs="unbounded"/>
+        <xs:element name="RestrictedItem" type="ks:RestrictedItemType" minOccurs="0"/>
+        <xs:element name="Region" type="imp:RegionType" minOccurs="0"/>
+        <xs:element name="Legacy" type="ks:ChameleonType" minOccurs="0"/>
+        <xs:element name="MixedText" type="ks:DerivedMixedType" minOccurs="0"/>
+        <xs:element ref="ks:SharedNote" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="ks:Shape" minOccurs="0"/>
+        <xs:element name="Anywhere" minOccurs="0">
+          <xs:complexType>
+            <xs:all>
+              <xs:element name="First" type="xs:string"/>
+              <xs:element name="Second" type="xs:string" minOccurs="0"/>
+            </xs:all>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="name" type="xs:string" use="required"/>
+      <xs:attribute name="size" type="ks:SizeOrCountType"/>
+    </xs:complexType>
+    <xs:key name="ItemKey">
+      <xs:selector xpath="ks:Item"/>
+      <xs:field xpath="@sku"/>
+    </xs:key>
+    <xs:keyref name="ItemRef" refer="ks:ItemKey">
+      <xs:selector xpath="ks:Item/ks:Link"/>
+      <xs:field xpath="."/>
+    </xs:keyref>
+    <xs:unique name="ItemTitleUnique">
+      <xs:selector xpath="ks:Item"/>
+      <xs:field xpath="ks:Title"/>
+    </xs:unique>
+  </xs:element>
+</xs:schema>

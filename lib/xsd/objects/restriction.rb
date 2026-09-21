@@ -39,22 +39,20 @@ module XSD
     # Get restriction facets
     # @return Hash
     def facets
-      nodes.inject({}) do |hash, node|
-        if FACET_ELEMENTS.include?(node.name)
-          key   = node.name
-          value = node['value']
+      @facets ||= nodes.each_with_object({}) do |node, hash|
+        next unless FACET_ELEMENTS.include?(node.name)
 
-          if key == 'enumeration'
-            hash[key]        ||= {}
-            hash[key][value] = documentation_for(node)
-          elsif key == 'pattern'
-            hash[key] ||= []
-            hash[key].push(value)
-          else
-            hash[key] = value
-          end
+        key   = node.name
+        value = node['value']
+
+        case key
+        when 'enumeration'
+          (hash[key] ||= {})[value] = documentation_for(node)
+        when 'pattern'
+          (hash[key] ||= []).push(value)
+        else
+          hash[key] = value
         end
-        hash
       end
     end
 
@@ -73,7 +71,7 @@ module XSD
     def collect_attributes(include_base = true)
       result = super(include_base)
       # Filter restricted attributes to avoid duplicates from restricting and restricted type
-      include_base ? result.inject({}) { |hash, item| hash[item.name] = item; hash }.values : result
+      include_base ? result.to_h { |item| [item.name, item] }.values : result
     end
   end
 end

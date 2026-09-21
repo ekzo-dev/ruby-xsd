@@ -88,7 +88,9 @@ module XSD
       if complex_content
         return true if complex_content.mixed
 
-        return (complex_content.extension || complex_content.restriction).base_complex_type&.mixed_content?
+        derivation = complex_content.extension || complex_content.restriction
+
+        return derivation&.base_complex_type&.mixed_content? || false
       end
 
       false
@@ -102,7 +104,7 @@ module XSD
       elsif complex_content
         true
       else
-        group || all || choice || sequence
+        !!(group || all || choice || sequence)
       end
     end
 
@@ -118,28 +120,23 @@ module XSD
       return nil unless simple_content
 
       restriction = simple_content.restriction
-      if restriction
-        if restriction.base
-          if restriction.base_simple_type
-            restriction.base_simple_type.data_type
-          elsif restriction.base_complex_type
-            restriction.base_complex_type.data_type
-          else
-            strip_prefix(restriction.base)
-          end
-        else
-          restriction.simple_type&.data_type
-        end
-      else
-        extension = simple_content.extension
-        if extension.base_simple_type
-          extension.base_simple_type.data_type
-        elsif extension.base_complex_type
-          extension.base_complex_type.data_type
-        else
-          strip_prefix(extension.base)
-        end
-      end
+      return base_data_type(simple_content.extension) unless restriction
+      return restriction.simple_type&.data_type unless restriction.base
+
+      base_data_type(restriction)
+    end
+
+    private
+
+    # Get data type of an extension/restriction base type
+    # @param [Extension, Restriction, nil] derivation
+    # @return String, nil
+    def base_data_type(derivation)
+      return nil if derivation.nil?
+
+      derivation.base_simple_type&.data_type ||
+        derivation.base_complex_type&.data_type ||
+        strip_prefix(derivation.base)
     end
   end
 end

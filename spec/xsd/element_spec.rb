@@ -126,7 +126,7 @@ RSpec.describe XSD::Element do
   context 'with overriding namespaces per element' do
     let(:file) { fixture_file(%w[rosavia-epgu/schemas.xsd], read: false) }
 
-    it "correctly resolves complex_type" do
+    it 'correctly resolves complex_type' do
       expect(reader['FormDataResponse']['changeOrderInfo'].complex_type).not_to be_nil
     end
   end
@@ -191,6 +191,159 @@ RSpec.describe XSD::Element do
     describe '#substitutable_elements' do
       it 'gets all substitutable elements' do
         expect(element.substitutable_elements.map(&:name)).to eq(%w[DiscountSize DiscountFixed MultiplierSize])
+      end
+    end
+  end
+
+  context 'with kitchen-sink example files' do
+    subject(:reader) { XSD::XML.open(file, logger: spec_logger) }
+
+    let(:file) { fixture_file(%w[kitchen-sink kitchen-sink.xsd], read: false) }
+    let(:catalog) { reader['Catalog'] }
+
+    describe '#global?' do
+      it 'is true for an immediate child of the schema element' do
+        expect(catalog).to be_global
+      end
+
+      it 'is false for a nested element' do
+        expect(catalog['Item']).not_to be_global
+      end
+    end
+
+    describe '#abstract' do
+      it 'defaults to false' do
+        expect(catalog.abstract).to be false
+      end
+
+      it 'reads the attribute as a boolean' do
+        expect(reader['Shape'].abstract).to be true
+      end
+    end
+
+    describe '#nillable' do
+      it 'defaults to false' do
+        expect(catalog['Item']['Title'].nillable).to be false
+      end
+
+      it 'reads the attribute as a boolean' do
+        expect(catalog['Item']['Comment'].nillable).to be true
+      end
+    end
+
+    describe '#default and #fixed' do
+      it 'are nil unless declared' do
+        expect(catalog['Item']['Title'].default).to be_nil
+        expect(catalog['Item']['Title'].fixed).to be_nil
+      end
+    end
+
+    describe '#attributes?' do
+      it 'is a boolean, false when the element carries no complex type at all' do
+        expect(catalog['Item']['Title'].attributes?).to be false
+      end
+
+      it 'is false for a complex type without attributes' do
+        expect(catalog['Anywhere'].attributes?).to be false
+      end
+
+      it 'is true for a complex type with attributes' do
+        expect(catalog.attributes?).to be true
+      end
+    end
+
+    describe '#complex_content? and #simple_content?' do
+      it 'are booleans rather than the underlying definition objects' do
+        expect(catalog.complex_content?).to be true
+        expect(catalog.simple_content?).to be false
+      end
+
+      it 'treat an element with a simpleContent type as simple content' do
+        expect(catalog['Item']['Measure'].simple_content?).to be true
+        expect(catalog['Item']['Measure'].complex_content?).to be false
+      end
+
+      it 'treat an element without any complex type as simple content' do
+        expect(catalog['Item']['Title'].simple_content?).to be true
+        expect(catalog['Item']['Title'].complex_content?).to be false
+      end
+    end
+
+    describe '#mixed_content?' do
+      it 'is inherited from the base type of an extension' do
+        expect(catalog['MixedText'].complex_type.name).to eq 'DerivedMixedType'
+        expect(catalog['MixedText']).to be_mixed_content
+      end
+
+      it 'is false for an ordinary complex type' do
+        expect(catalog).not_to be_mixed_content
+      end
+    end
+
+    describe '#data_type' do
+      it 'resolves through a linked simple type' do
+        expect(catalog['Item']['Size'].data_type).to eq 'string'
+      end
+
+      it 'resolves through a simpleContent complex type' do
+        expect(catalog['Item']['Measure'].data_type).to eq 'decimal'
+      end
+
+      it 'is the stripped type name for a built-in type' do
+        expect(catalog['Item']['Title'].data_type).to eq 'string'
+      end
+
+      it 'is nil for a complex type with element content' do
+        expect(catalog['Item'].data_type).to be_nil
+      end
+    end
+
+    describe '#substitutable_elements' do
+      it 'finds the elements substituting the head element' do
+        expect(reader['Shape'].substitutable_elements.map(&:name)).to eq %w[Circle Square]
+      end
+
+      it 'is empty for an element that is not a substitution head' do
+        expect(reader['Circle'].substitutable_elements).to eq []
+      end
+
+      it 'is empty for a non global element' do
+        expect(catalog['Item'].substitutable_elements).to eq []
+      end
+
+      it 'is resolved through the reference' do
+        expect(catalog['Shape']).to be_referenced
+        expect(catalog['Shape'].substitutable_elements.map(&:name)).to eq %w[Circle Square]
+      end
+    end
+
+    describe '#form' do
+      it 'defaults to the elementFormDefault of the schema' do
+        expect(catalog.form).to eq 'qualified'
+      end
+    end
+
+    describe '#absolute_name' do
+      it 'combines the namespace and the name' do
+        expect(catalog.absolute_name).to eq '{urn:kitchen-sink}Catalog'
+      end
+
+      it 'is nil for an anonymous definition' do
+        expect(catalog.complex_type.name).to be_nil
+        expect(catalog.complex_type.absolute_name).to be_nil
+      end
+    end
+
+    describe 'elements of an xs:all' do
+      it 'are collected like the members of a sequence' do
+        expect(catalog['Anywhere'].collect_elements.map(&:name)).to eq %w[First Second]
+      end
+    end
+
+    describe 'elements reached through an include' do
+      it 'come from the included schema' do
+        expect(catalog['Legacy'].complex_type.name).to eq 'ChameleonType'
+        expect(catalog['Legacy'].collect_elements.map(&:name)).to eq %w[LegacyCode]
       end
     end
   end

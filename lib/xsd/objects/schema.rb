@@ -120,7 +120,13 @@ module XSD
     # Get schema namespace prefix
     # @return String, nil
     def namespace_prefix
-      nil_if_empty(@namespace_prefix ||= namespaces.key(XML_SCHEMA).sub(/^xmlns:?/, ''))
+      nil_if_empty(@namespace_prefix ||= namespaces.key(XML_SCHEMA)&.sub(/^xmlns:?/, '') || '')
+    end
+
+    # Location the schema was read from, used to resolve relative import/include locations
+    # @return String, nil
+    def location
+      options[:location]
     end
 
     # Check if namespace is a target namespace
@@ -132,26 +138,26 @@ module XSD
 
     # Override map_children on schema to get objects from all loaded schemas
     # @param [Symbol] name
+    # @param [Hash] cache Schema nodes already visited, guards against import/include cycles
     # @return Array<BaseObject>
     def map_children(name, cache = {})
+      cache[node] = true
       super(name) + import_map_children(name, cache)
     end
 
     # Get children from all loaded schemas
     # @param [Symbol] name
+    # @param [Hash] cache
     # @return Array<BaseObject>
     def import_map_children(name, cache)
       return [] if %i[import include].include?(name.to_sym)
 
-      (includes + imports).map do |import|
-        key = import.respond_to?(:namespace) && import.namespace ? import.namespace : import.schema_location
-        if cache.key?(key)
-          nil
-        else
-          cache[key] = true
-          import.imported_schema.map_children(name, cache)
-        end
-      end.compact.flatten
+      (includes + imports).flat_map do |import|
+        imported = import.imported_schema
+        next [] if cache.key?(imported.node)
+
+        imported.map_children(name, cache)
+      end
     end
 
     # Get import by namespace or prefix
@@ -170,7 +176,9 @@ module XSD
     # @param [String, Pathname, Nokogiri::XML::Document] xml
     def validate_xml(xml)
       # validate input
-      raise ValidationError unless xml.is_a?(Nokogiri::XML::Document) || xml.is_a?(Pathname) || xml.is_a?(String)
+      unless xml.is_a?(Nokogiri::XML::Document) || xml.is_a?(Pathname) || xml.is_a?(String)
+        raise ValidationError, "XML must be a String, Pathname or Nokogiri::XML::Document, got #{xml.class}"
+      end
 
       begin
         document = xml.is_a?(Nokogiri::XML::Document) ? xml : Nokogiri::XML(xml)
@@ -200,69 +208,61 @@ module XSD
     def schema_validator
       return @schema_validator if @schema_validator
 
-      # if !imported_xsd.empty?
-      # imports are explicitly provided - put all files in one tmpdir and update import paths appropriately
-      # TODO: save file/path map to display in errors
+      # imports/includes are resolved by the reader, so put all schemas in one tmpdir with rewritten locations
       Dir.mktmpdir('XSD', reader.tmp_dir) do |dir|
-        # create primary xsd file
-        file = "#{::SecureRandom.urlsafe_base64}.xsd"
-
-        # create imported xsd files
-        recursive_import_xsd(self, file, Set.new) do |f, data|
-          File.write("#{dir}/#{f}", data)
+        file = recursive_import_xsd(self, {}) do |name, data|
+          File.write(File.join(dir, name), data, encoding: Encoding::UTF_8)
         end
 
         # read schema from tmp file descriptor
-        io = File.open("#{dir}/#{file}")
-        @schema_validator = create_xml_schema(io)
+        File.open(File.join(dir, file)) { |io| @schema_validator = create_xml_schema(io) }
       end
-      # else
-      #   @schema_validator = create_xml_schema(schema.node.to_xml)
-      # end
 
       @schema_validator
     end
 
-    # Сформировать имена файлов и содержимое XSD схем для корректной валидации
+    # Write the schema and all of its imports/includes as a flat set of files with rewritten locations
     # @param [Schema] schema
-    # @param [String] file
-    # @param [Set] processed
-    def recursive_import_xsd(schema, file, processed, &block)
-      # handle recursion
-      return if processed.include?(schema.target_namespace)
+    # @param [Hash] processed Maps already written schema nodes to generated file names
+    # @return String Name of the file the schema was written to
+    def recursive_import_xsd(schema, processed, &block)
+      # handle recursion, schemas are identified by node because includes share the target namespace
+      return processed[schema.node] if processed.key?(schema.node)
 
-      processed.add(schema.target_namespace)
+      file = "#{::SecureRandom.urlsafe_base64}.xsd"
+      processed[schema.node] = file
 
-      # prepare schema XML with all namespaces included, clone node to avoid mutating original schema
-      node = schema.node
-      if node.namespaces.size != node.namespace_definitions.size
-        prefixes = node.namespace_definitions.map(&:prefix)
-        node = schema.node.dup
+      node       = schema_node_with_namespaces(schema)
+      references = schema.imports + schema.includes
+      nodes      = node.xpath('./xs:import', XML_SCHEMA_NS).to_a + node.xpath('./xs:include', XML_SCHEMA_NS).to_a
 
-        schema.node.namespaces.each do |attr, ns|
-          prefix = attr == 'xmlns' ? nil : attr.sub('xmlns:', '')
-          # does not work!
-          # node.add_namespace_definition(prefix, ns) unless prefixes.include?(prefix)
-          node[attr] = ns unless prefixes.include?(prefix)
-        end
+      # point every import/include to the generated file of the referenced schema
+      references.zip(nodes).each do |reference, reference_node|
+        next if reference_node.nil?
+
+        reference_node['schemaLocation'] = recursive_import_xsd(reference.imported_schema, processed, &block)
       end
 
-      data = node.to_xml
+      # always serialize as UTF-8 with an explicit declaration, the source document may use another encoding
+      block.call(file, %(<?xml version="1.0" encoding="UTF-8"?>\n#{node.to_xml(encoding: 'UTF-8')}))
 
-      schema.imports.each do |import|
-        name      = "#{::SecureRandom.urlsafe_base64}.xsd"
-        location  = import.schema_location
-        namespace = import.namespace
+      file
+    end
 
-        if location
-          data = data.sub("schemaLocation=\"#{location}\"", "schemaLocation=\"#{name}\"")
-        else
-          data = data.sub("namespace=\"#{namespace}\"", "namespace=\"#{namespace}\" schemaLocation=\"#{name}\"")
-        end
-        recursive_import_xsd(import.imported_schema, name, processed, &block)
+    # Get a detached copy of the schema node with all inherited namespaces declared on it
+    # @param [Schema] schema
+    # @return Nokogiri::XML::Node
+    def schema_node_with_namespaces(schema)
+      node = schema.node.dup
+      prefixes = schema.node.namespace_definitions.map(&:prefix)
+
+      schema.node.namespaces.each do |attr, ns|
+        prefix = attr == 'xmlns' ? nil : attr.sub('xmlns:', '')
+        # add_namespace_definition does not work on a detached node, declare the namespace as an attribute instead
+        node[attr] = ns unless prefixes.include?(prefix)
       end
 
-      block.call(file, data)
+      node
     end
 
     # Create Nokogiri XML Schema instance with preconfigured options

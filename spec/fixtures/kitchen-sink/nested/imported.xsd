@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:imp="urn:kitchen-sink:imported"
+           targetNamespace="urn:kitchen-sink:imported"
+           elementFormDefault="qualified">
+  <!-- relative location that only resolves against this file's directory, not the root schema's -->
+  <xs:include schemaLocation="imported-part.xsd"/>
+
+  <xs:complexType name="RegionType">
+    <xs:sequence>
+      <xs:element name="Code" type="imp:RegionCodeType"/>
+      <xs:element name="Name" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

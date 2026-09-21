@@ -1,3 +1,31 @@
+## [Unreleased]
+
+### Fixed
+
+- `XSD::XML.open` resolves relative import/include locations against the schema they were read from, so the default
+  resource resolver no longer requires a custom one for ordinary multi-file schemas
+- `Schema#validate` writes included schemas into the temporary directory too, so schemas wired together with
+  `<xs:include>` can be validated
+- `Schema#validate` serializes the temporary schemas as UTF-8, so schemas in another encoding no longer fail to load
+- `XML#logger` no longer raises `NameError` when no logger is configured (`logger` was never required)
+- `BaseObject#parent` returns `nil` instead of raising when the parent node has no XSD object (document, `wsdl:types`)
+- `object_by_name` passes the searched name as an xpath variable instead of interpolating it into the expression
+- `ComplexType#mixed_content?` and `#data_type` no longer raise on a `complexContent`/`simpleContent` without a
+  derivation
+- An `<xs:include>` of a schema without a target namespace ("chameleon" include) is accepted
+- Import/include cycles no longer yield duplicated definitions
+- The compiled validator no longer leaks an open file descriptor
+- `Element#attributes?` and `ComplexType#complex_content?` return booleans instead of the underlying objects
+- Import/include error messages name the namespaces that did not match
+
+### Changed
+
+- Imported/included schemas are loaded once per location and shared, instead of being re-read and re-parsed for every
+  reference to them
+- Property, link and child lookups cache `nil` and `false` results, which cuts repeated xpath searches (roughly 2.5x
+  faster traversal of the bundled example schemas)
+- `XSD::XML#add_schema_xml`/`#add_schema_node` accept a `location:` keyword, and `Schema#location` exposes it
+
 ## [2.7.10] - 2024-04-26
 
 - Fix data_type detection in complex_type simple_content extension

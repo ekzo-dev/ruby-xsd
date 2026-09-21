@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ks:Catalog xmlns:ks="urn:kitchen-sink"
+            xmlns:imp="urn:kitchen-sink:imported"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            name="Spring">
+  <ks:Item sku="A-1" lang="en">
+    <ks:Title>Chair</ks:Title>
+    <ks:Description>A wooden chair</ks:Description>
+    <ks:Size>M</ks:Size>
+    <ks:Measure unit="kg">12.50</ks:Measure>
+    <ks:Tags>wood indoor</ks:Tags>
+    <ks:Comment xsi:nil="true"/>
+    <ks:Link>A-1</ks:Link>
+  </ks:Item>
+  <ks:Item sku="A-2">
+    <ks:Title>Table</ks:Title>
+  </ks:Item>
+  <ks:Region>
+    <imp:Code>77</imp:Code>
+    <imp:Name>Moscow</imp:Name>
+  </ks:Region>
+  <ks:Legacy>
+    <ks:LegacyCode>OLD-1</ks:LegacyCode>
+  </ks:Legacy>
+  <ks:MixedText>text <ks:Emphasis>here</ks:Emphasis> and more</ks:MixedText>
+  <ks:SharedNote>note</ks:SharedNote>
+  <ks:Circle>round</ks:Circle>
+  <ks:Anywhere>
+    <ks:Second>2</ks:Second>
+    <ks:First>1</ks:First>
+  </ks:Anywhere>
+</ks:Catalog>

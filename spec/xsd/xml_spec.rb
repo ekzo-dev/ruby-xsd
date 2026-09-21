@@ -41,4 +41,134 @@ RSpec.describe XSD::XML do
       expect(element).to be_multiple_allowed
     end
   end
+
+  context 'with kitchen-sink example files' do
+    subject(:reader) { described_class.open(file, logger: spec_logger) }
+
+    let(:file) { fixture_file(%w[kitchen-sink kitchen-sink.xsd], read: false) }
+
+    describe '.open' do
+      it 'resolves relative import locations against the schema it read them from' do
+        expect(reader['Catalog']['Region'].collect_elements.map(&:name)).to eq %w[Code Name]
+      end
+
+      it 'resolves a relative include of an imported schema against that schema, not against the root one' do
+        expect(reader['Catalog']['Region']['Code'].simple_type.name).to eq 'RegionCodeType'
+      end
+
+      it 'records the location of the schema it read' do
+        expect(reader.schema.location).to eq file.to_s
+      end
+    end
+
+    describe '#load_schema' do
+      it 'rejects an empty location' do
+        expect { reader.load_schema(nil) }.to raise_error(XSD::ImportError, /location must be provided/)
+        expect { reader.load_schema('') }.to raise_error(XSD::ImportError, /location must be provided/)
+      end
+    end
+
+    describe '#schemas' do
+      it 'holds every schema pulled in so far, primary one first' do
+        reader.simple_types
+
+        expect(reader.schemas.first).to be reader.schema
+        expect(reader.schemas.map(&:target_namespace))
+          .to eq ['urn:kitchen-sink', nil, 'urn:kitchen-sink:imported', 'urn:kitchen-sink:imported']
+      end
+    end
+
+    describe '#schemas_for_namespace' do
+      it 'selects the schemas with a matching target namespace' do
+        reader.simple_types
+
+        expect(reader.schemas_for_namespace('urn:kitchen-sink')).to eq [reader.schema]
+        expect(reader.schemas_for_namespace('urn:kitchen-sink:imported').size).to eq 2
+        expect(reader.schemas_for_namespace('urn:nope')).to eq []
+      end
+    end
+
+    describe '#complex_types' do
+      it 'collects the global complex types of every schema without duplicates' do
+        expect(reader.complex_types.map(&:name))
+          .to eq %w[MeasureType AbstractItemType ItemType RestrictedItemType MixedTextType DerivedMixedType
+                    ChameleonType RegionType]
+      end
+    end
+
+    describe '#attributes' do
+      it 'collects the global attributes of every schema' do
+        expect(reader.attributes).to eq []
+      end
+    end
+
+    describe '#[]' do
+      it 'is nil when no schema has a matching definition' do
+        expect(reader['Nope']).to be_nil
+      end
+    end
+
+    describe '#tmp_dir' do
+      it 'is nil unless configured' do
+        expect(reader.tmp_dir).to be_nil
+        expect(described_class.new(tmp_dir: '/tmp').tmp_dir).to eq '/tmp'
+      end
+    end
+  end
+
+  describe '#logger' do
+    it 'gives the configured logger' do
+      expect(described_class.new(logger: spec_logger).logger).to be spec_logger
+    end
+
+    it 'falls back to a warn level stdout logger' do
+      logger = described_class.new.logger
+
+      expect(logger).to be_a Logger
+      expect(logger.level).to eq Logger::WARN
+    end
+  end
+
+  describe '#add_schema_xml' do
+    it 'rejects xml whose root is not a schema element' do
+      expect { described_class.new.add_schema_xml('<nope/>') }
+        .to raise_error(XSD::Error, /does not seem to be a valid XSD/)
+    end
+
+    it 'rejects xml that cannot be parsed into a document with a root' do
+      expect { described_class.new.add_schema_xml('') }.to raise_error(XSD::Error, /does not seem to be a valid XSD/)
+    end
+  end
+
+  describe '#add_schema_node' do
+    it 'rejects anything that is not a nokogiri node' do
+      expect { described_class.new.add_schema_node('<xs:schema/>') }
+        .to raise_error(XSD::Error, /must be of type Nokogiri::XML::Node/)
+    end
+
+    it 'accepts a schema node embedded in another document, with the namespaces it inherits' do
+      wsdl = Nokogiri::XML(fixture_file(%w[mvd service.wsdl]))
+      node = wsdl.at_xpath('//xs:schema', 'xs' => XSD::BaseObject::XML_SCHEMA)
+      reader = described_class.new(logger: spec_logger)
+
+      expect(reader.add_schema_node(node)).to be_a XSD::Schema
+      expect(reader.schema.target_namespace).to eq 'http://v2_4_3.incomingRequests.webservices.kernel.sx.fms.ru'
+      expect(node.namespace_definitions).to be_empty
+      expect(reader.schema.namespace_prefix).to eq 'xs'
+      expect(reader.schema.nodes(:element).size).to eq 12
+    end
+  end
+
+  describe 'DEFAULT_RESOURCE_RESOLVER' do
+    it 'reads an absolute path' do
+      xml = described_class::DEFAULT_RESOURCE_RESOLVER.call(fixture_file(%w[referencing.xsd], read: false).to_s, nil)
+
+      expect(xml).to include 'xs:schema'
+    end
+
+    it 'refuses a relative location, which only the reader itself can resolve' do
+      expect { described_class::DEFAULT_RESOURCE_RESOLVER.call('nope.xsd', 'urn:x') }
+        .to raise_error(XSD::ImportError, /Failed to locate import 'nope.xsd' for namespace 'urn:x'/)
+    end
+  end
 end

@@ -30,4 +30,50 @@ RSpec.describe XSD::Import do
       expect(s1.simple_types.map(&:name)).to eq s2.simple_types.map(&:name)
     end
   end
+
+  context 'with a broken import' do
+    let(:importing_xsd) do
+      <<~XML
+        <?xml version="1.0"?>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:other="urn:other"
+                   targetNamespace="urn:main">
+          <xs:import namespace="urn:other"/>
+          <xs:element name="Root" type="other:Thing"/>
+        </xs:schema>
+      XML
+    end
+
+    it 'asks the caller to register the schema when no location is given' do
+      reader = XSD::XML.new(logger: spec_logger)
+      reader.add_schema_xml(importing_xsd)
+
+      expect { reader.schema.imports[0].imported_schema }
+        .to raise_error(XSD::ImportError, /Schema location not provided for namespace 'urn:other'/)
+    end
+
+    it 'uses a schema registered for the namespace instead of loading one' do
+      reader = XSD::XML.new(logger: spec_logger)
+      reader.add_schema_xml(importing_xsd)
+      imported = reader.add_schema_xml(<<~XML)
+        <?xml version="1.0"?>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:other">
+          <xs:complexType name="Thing"><xs:sequence/></xs:complexType>
+        </xs:schema>
+      XML
+
+      expect(reader.schema.imports[0].imported_schema).to be imported
+      expect(reader['Root'].complex_type.name).to eq 'Thing'
+    end
+
+    it 'rejects a schema whose target namespace does not match the import' do
+      reader = XSD::XML.new(logger: spec_logger, resource_resolver: proc { <<~XML })
+        <?xml version="1.0"?>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:surprise"/>
+      XML
+      reader.add_schema_xml(importing_xsd.sub('namespace="urn:other"', 'namespace="urn:other" schemaLocation="o.xsd"'))
+
+      expect { reader.schema.imports[0].imported_schema }
+        .to raise_error(XSD::ImportError, /'urn:other' does not match imported schema targetNamespace 'urn:surprise'/)
+    end
+  end
 end
