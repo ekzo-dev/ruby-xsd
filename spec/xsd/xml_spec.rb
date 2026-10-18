@@ -62,6 +62,32 @@ RSpec.describe XSD::XML do
     end
 
     describe '#load_schema' do
+      it 'reads a location written with backslashes as one written with slashes' do
+        reader = described_class.new(logger: spec_logger)
+        root = reader.add_schema_xml(<<~XSD, location: 'set/root.xsd')
+          <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:root">
+            <xs:include schemaLocation="common\\amount.xsd"/>
+          </xs:schema>
+        XSD
+        included = reader.add_schema_xml(<<~XSD, location: 'set/common/amount.xsd')
+          <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"><xs:simpleType name="Amount"/></xs:schema>
+        XSD
+
+        expect(root.includes.first.imported_schema).to be included
+      end
+
+      it 'hands a custom resolver the location with slashes' do
+        asked = []
+        resolver = lambda do |location, _namespace|
+          asked << location
+          '<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"/>'
+        end
+        reader = described_class.new(logger: spec_logger, resource_resolver: resolver)
+        reader.load_schema('dir\\sub\\types.xsd', base: 'root.xsd')
+
+        expect(asked).to eq ['dir/sub/types.xsd']
+      end
+
       it 'rejects an empty location' do
         expect { reader.load_schema(nil) }.to raise_error(XSD::ImportError, /location must be provided/)
         expect { reader.load_schema('') }.to raise_error(XSD::ImportError, /location must be provided/)

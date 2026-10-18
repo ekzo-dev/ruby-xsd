@@ -1,3 +1,11 @@
+## [2.8.1] - 2026-10-18
+
+### Fixed
+
+- An import/include location written with backslashes (`import\types.xsd`) is resolved as one written with
+  slashes. A `schemaLocation` is a URI reference, but schemas authored on Windows carry such locations; a custom
+  resource resolver is handed the location so normalized
+
 ## [2.8.0] - 2026-09-21
 
 ### Fixed

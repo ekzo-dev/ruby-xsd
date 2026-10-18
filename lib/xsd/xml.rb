@@ -130,7 +130,12 @@ module XSD
       new_schema
     end
 
-    # Load schema referenced by an import/include, reusing an already loaded one when possible
+    # Load schema referenced by an import/include, reusing an already loaded one when possible.
+    #
+    # A location written with backslashes (`import\types.xsd`) is read as one written with slashes: a
+    # `schemaLocation` is a URI reference, where the separator is `/` alone, but schemas authored on Windows
+    # carry such locations, and the tools they were made with accept them. A custom resolver is handed the
+    # location so normalized.
     # @param [String] location
     # @param [String, nil] namespace
     # @param [String, nil] base Location of the referencing schema
@@ -138,6 +143,7 @@ module XSD
     def load_schema(location, namespace: nil, base: nil)
       raise ImportError, 'Schema location must be provided' if location.nil? || location.empty?
 
+      location = location.tr('\\', '/')
       expanded = expand_location(location, base)
       return @schemas_by_location[expanded] if @schemas_by_location.key?(expanded)
 
