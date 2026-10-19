@@ -99,6 +99,47 @@ module XSD
       self
     end
 
+    # Target namespace of the schema. For a chameleon view (see XML#chameleon), the namespace of the schema
+    # that includes it — the one everything it declares belongs to.
+    # @return String, nil
+    def target_namespace
+      return options[:chameleon_namespace] if chameleon?
+
+      method_missing(:target_namespace)
+    end
+
+    # Is this a schema with no target namespace, seen as part of the namespace of a schema including it?
+    # @return Boolean
+    def chameleon?
+      options.key?(:chameleon_namespace)
+    end
+
+    # The schema a chameleon view is a view of
+    # @return Schema, nil
+    def chameleon_source
+      options[:chameleon_source]
+    end
+
+    # Objects made of this schema's nodes. A chameleon view keeps its own: the same node is a different
+    # definition in each namespace that includes it.
+    # @return Hash
+    def object_cache
+      chameleon? ? (@object_cache ||= {}.compare_by_identity) : reader.object_cache
+    end
+
+    # This schema and every schema it includes, those included in turn too
+    # @return Array<Schema>
+    def with_includes
+      found = [self]
+      found.each do |schema|
+        schema.includes.each do |include|
+          included = include.imported_schema
+          found << included unless found.any? { |known| known.equal?(included) }
+        end
+      end
+      found
+    end
+
     # Get all available elements on the current stack level, for schema same as elements
     # @return Array<Element>
     def collect_elements(*)
@@ -133,15 +174,17 @@ module XSD
     # @param [String, nil] namespace
     # @return Boolean
     def targets_namespace?(namespace)
-      namespace == target_namespace || namespaces[namespace.nil? ? 'xmlns' : "xmlns:#{namespace}"] == target_namespace
+      namespace == target_namespace || namespaces[namespace.nil? ? 'xmlns' : "xmlns:#{namespace}"] == target_namespace ||
+        # an unqualified name in a chameleon schema names something of the namespace it was included into
+        (chameleon? && namespace.nil? && !namespaces.key?('xmlns'))
     end
 
     # Override map_children on schema to get objects from all loaded schemas
     # @param [Symbol] name
     # @param [Hash] cache Schema nodes already visited, guards against import/include cycles
     # @return Array<BaseObject>
-    def map_children(name, cache = {})
-      cache[node] = true
+    def map_children(name, cache = {}.compare_by_identity)
+      cache[self] = true
       super(name) + import_map_children(name, cache)
     end
 
@@ -154,7 +197,7 @@ module XSD
 
       (includes + imports).flat_map do |import|
         imported = import.imported_schema
-        next [] if cache.key?(imported.node)
+        next [] if cache.key?(imported)
 
         imported.map_children(name, cache)
       end

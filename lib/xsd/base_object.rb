@@ -85,9 +85,10 @@ module XSD
       ns = prefix || ns_or_prefix
 
       if schema.targets_namespace?(ns)
-        [schema, *schema.includes.map(&:imported_schema)]
+        schema.with_includes
       elsif (import = schema.import_by_namespace(ns))
-        [import.imported_schema]
+        # what the imported schema includes is part of its namespace too
+        import.imported_schema.with_includes
       else
         raise Error, "Schema not found for namespace '#{ns}' in '#{schema.id || schema.target_namespace}'"
       end
@@ -141,14 +142,15 @@ module XSD
     # @param [Nokogiri::XML::Node] node
     # @return BaseObject
     def node_to_object(node)
-      # check object in cache first
-      cached = reader.object_cache[node]
+      # check object in cache first; a chameleon view keeps a cache of its own (see Schema#object_cache)
+      cache = schema.object_cache
+      cached = cache[node]
       return cached if cached
 
       klass = XML::CLASS_MAP[node.name]
       raise Error, "Object class not found for '#{node.name}'" unless klass
 
-      reader.object_cache[node] = klass.new(options.merge(node: node, schema: schema))
+      cache[node] = klass.new(options.merge(node: node, schema: schema))
     end
 
     # Get xml parent object

@@ -90,8 +90,9 @@ RSpec.describe XSD::Include do
         </xs:schema>
       XML
 
-      expect(reader.schema.includes[0].imported_schema.target_namespace).to be_nil
+      expect(reader.schema.includes[0].imported_schema.target_namespace).to eq 'urn:main'
       expect(reader['Root'].complex_type.name).to eq 'Thing'
+      expect(reader['Root'].complex_type.namespace).to eq 'urn:main'
     end
 
     it 'rejects an included schema that targets a different namespace' do

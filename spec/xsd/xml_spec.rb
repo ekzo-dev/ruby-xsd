@@ -73,7 +73,8 @@ RSpec.describe XSD::XML do
           <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"><xs:simpleType name="Amount"/></xs:schema>
         XSD
 
-        expect(root.includes.first.imported_schema).to be included
+        # a chameleon include: a view of the file added at that path, in the including namespace
+        expect(root.includes.first.imported_schema.chameleon_source).to be included
       end
 
       it 'hands a custom resolver the location with slashes' do
@@ -108,7 +109,10 @@ RSpec.describe XSD::XML do
       it 'selects the schemas with a matching target namespace' do
         reader.simple_types
 
-        expect(reader.schemas_for_namespace('urn:kitchen-sink')).to eq [reader.schema]
+        # the schema, and chameleon.xsd it includes, seen in its namespace
+        expect(reader.schemas_for_namespace('urn:kitchen-sink').size).to eq 2
+        expect(reader.schemas_for_namespace('urn:kitchen-sink').first).to be reader.schema
+        expect(reader.schemas_for_namespace('urn:kitchen-sink').last).to be_chameleon
         expect(reader.schemas_for_namespace('urn:kitchen-sink:imported').size).to eq 2
         expect(reader.schemas_for_namespace('urn:nope')).to eq []
       end

@@ -1,3 +1,26 @@
+## [2.9.0] - 2026-10-18
+
+### Changed
+
+- A schema with no target namespace included into one that has a namespace ("chameleon" include) is seen through
+  a view in the including namespace (`XML#chameleon`, `Schema#chameleon?`, `#chameleon_source`). Everything it
+  declares reports that namespace (`namespace`, `absolute_name`, `Schema#target_namespace`), and an unqualified
+  name inside it resolves in that namespace. Before, its definitions reported no namespace at all.
+- A schema included into two namespaces declares two sets of definitions, one per namespace: a view keeps its own
+  object cache (`Schema#object_cache`), where one object per node used to serve both.
+- `XML#schemas_for_namespace` returns what the schemas of the namespace include as well, chameleon views among
+  them, and so does the lookup of a referenced name: includes of includes, and what a schema reached through an
+  import includes (only the schema itself, or one level of includes, was searched). A schema only seen through a
+  chameleon view is no longer among those of the absent namespace
+- `XML#[]` and the collectors (`elements`, `complex_types`, `simple_types`, …) go through the schemas that stand
+  on their own (`XML#standalone_schemas`): a schema only seen through a chameleon view contributes its
+  definitions through the schemas including it, not a second time in the absent namespace
+
+### Added
+
+- `XML#target_namespaces`: every namespace the schemas declare definitions in, includes resolved; the absent
+  namespace (nil) only for a schema with no namespace that nothing includes
+
 ## [2.8.1] - 2026-10-18
 
 ### Fixed

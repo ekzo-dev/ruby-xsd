@@ -17,7 +17,12 @@ module XSD
 
       new_schema = reader.load_schema(schema_location, base: schema.location)
 
-      # an included schema without a target namespace adopts the namespace of the including schema ("chameleon" include)
+      # an included schema without a target namespace adopts the namespace of the including schema ("chameleon"
+      # include): what it declares belongs to that namespace, so it is seen through a view that says so
+      if new_schema.target_namespace.nil? && !schema.target_namespace.nil?
+        return reader.chameleon(new_schema, schema.target_namespace)
+      end
+
       unless new_schema.target_namespace.nil? || schema.target_namespace == new_schema.target_namespace
         raise ImportError, "Schema targetNamespace '#{schema.target_namespace}' does not match included schema " \
                            "targetNamespace '#{new_schema.target_namespace}'"

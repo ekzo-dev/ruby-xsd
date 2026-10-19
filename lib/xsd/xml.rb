@@ -85,6 +85,7 @@ module XSD
       @object_cache         = {}.compare_by_identity
       @schemas              = []
       @schemas_by_location  = {}
+      @chameleons           = {}
     end
 
     def logger
@@ -163,15 +164,55 @@ module XSD
       schemas.first
     end
 
-    # Get schemas by namespace
+    # Get schemas by namespace: those that target it, and what they include — a chameleon schema (one with no
+    # target namespace of its own) as a view in this namespace
     # @param [String, nil] namespace
     # @return Array<Schema>
     def schemas_for_namespace(namespace)
-      schemas.select { |schema| schema.target_namespace == namespace }
+      found = []
+      # a schema only seen through a chameleon view is not one of the absent namespace
+      standalone_schemas.select { |schema| schema.target_namespace == namespace }.each do |schema|
+        schema.with_includes.each { |included| found << included unless found.any? { |known| known.equal?(included) } }
+      end
+      found
+    end
+
+    # A schema with no target namespace, seen as part of the namespace of a schema that includes it ("chameleon"
+    # include): the same document, with everything it declares in that namespace. One view per schema and
+    # namespace, so a schema included into two namespaces declares two sets of definitions.
+    # @param [Schema] source
+    # @param [String] namespace
+    # @return Schema
+    def chameleon(source, namespace)
+      @chameleons[[source.object_id, namespace]] ||=
+        Schema.new(source.options.merge(chameleon_namespace: namespace, chameleon_source: source))
+    end
+
+    # The chameleon views made so far
+    # @return Array<Schema>
+    def chameleons
+      @chameleons.values
+    end
+
+    # Every namespace the schemas declare definitions in, includes resolved. A schema with no target namespace
+    # stands for the absent namespace (nil) only when no schema includes it: otherwise what it declares is part
+    # of the namespaces including it.
+    # @return Array<String, nil>
+    def target_namespaces
+      (standalone_schemas + chameleons).map(&:target_namespace).uniq
+    end
+
+    # The schemas that stand on their own, includes resolved: all but those only seen through a chameleon view,
+    # whose definitions belong to the namespaces including them
+    # @return Array<Schema>
+    def standalone_schemas
+      schemas.each(&:with_includes)
+      sources = chameleons.map(&:chameleon_source)
+      schemas.reject { |schema| sources.any? { |source| source.equal?(schema) } }
     end
 
     def [](*args)
-      schemas.each do |schema|
+      standalone_schemas.each do |schema|
         item = schema[*args]
         return item if item
       end
@@ -232,7 +273,7 @@ module XSD
     end
 
     def collect(name, *args)
-      schemas.flat_map { |schema| schema.send(name, *args) }.uniq
+      standalone_schemas.flat_map { |schema| schema.send(name, *args) }.uniq
     end
 
     def default_logger
