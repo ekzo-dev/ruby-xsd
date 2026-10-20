@@ -5,6 +5,59 @@ require_relative '../spec_helper'
 RSpec.describe XSD::Schema do
   subject(:reader) { XSD::XML.open(file, logger: spec_logger, resource_resolver: resource_resolver(file)) }
 
+  describe '#declaration_node' do
+    let(:files) do
+      {
+        'main.xsd' => <<~XML,
+          <?xml version="1.0"?>
+          <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:t="urn:t" targetNamespace="urn:t">
+            <xs:include schemaLocation="types.xsd"/>
+            <xs:element name="Order" type="t:Order"/>
+            <xs:complexType name="Order"><xs:sequence>
+              <xs:element name="Code" type="t:Code"/>
+              <xs:element name="Inner"><xs:complexType><xs:sequence><xs:element name="X" type="xs:string"/></xs:sequence></xs:complexType></xs:element>
+            </xs:sequence></xs:complexType>
+            <xs:simpleType name="Twice"><xs:restriction base="xs:string"/></xs:simpleType>
+            <xs:simpleType name="Twice"><xs:restriction base="xs:int"/></xs:simpleType>
+          </xs:schema>
+        XML
+        'types.xsd' => <<~XML
+          <?xml version="1.0"?>
+          <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:t">
+            <xs:simpleType name="Code"><xs:restriction base="xs:string"><xs:maxLength value="3"/></xs:restriction></xs:simpleType>
+          </xs:schema>
+        XML
+      }
+    end
+
+    let(:reader) do
+      XSD::XML.new(logger: spec_logger, resource_resolver: proc { |location, _| files[location] }).tap do |reader|
+        reader.add_schema_xml(files['main.xsd'], location: 'main.xsd')
+      end
+    end
+
+    it 'finds a top-level declaration by its kind and name' do
+      expect(reader.schema.declaration_node(:complexType, 'Order').name).to eq 'complexType'
+      expect(reader.schema.declaration_node(:element, 'Order').name).to eq 'element'
+      expect(reader.schema.declaration_node(:simpleType, 'Order')).to be_nil
+    end
+
+    it 'does not find a declaration nested in another one' do
+      expect(reader.schema.declaration_node(:element, 'Inner')).to be_nil
+    end
+
+    it 'finds the first of two declarations of one name, as a query does' do
+      expect(reader.schema.declaration_node(:simpleType, 'Twice').at_xpath('.//@base').value).to eq 'xs:string'
+    end
+
+    it 'resolves a reference by name through it, in an included schema too' do
+      code = reader['Order']['Code']
+
+      expect(code.simple_type.name).to eq 'Code'
+      expect(code.simple_type.restriction.base).to eq 'xs:string'
+    end
+  end
+
   context 'with ddex-v36 example files' do
     subject(:schema) { reader.schema }
 
@@ -239,25 +292,4 @@ RSpec.describe XSD::Schema do
       end
     end
   end
-
-  # context 'with mvd example files' do
-  #   subject(:schema) do
-  #     wsdl = Wasabi.document(fixture_file(%w[mvd service.wsdl]))
-  #
-  #     xsd = XSD::XML.new(logger: spec_logger)
-  #     xsd.add_schema_node(wsdl.parser.schemas.first)
-  #
-  #     xsd.schema
-  #   end
-  #
-  #   describe '#validate' do
-  #     it 'validates schema from WSDL document' do
-  #       expect { schema.validate }.not_to raise_error
-  #     end
-  #
-  #     it 'validates xml against schema from WSDL document' do
-  #       expect { schema.validate_xml(fixture_file(%w[mvd request.xml])) }.not_to raise_error
-  #     end
-  #   end
-  # end
 end

@@ -1,3 +1,14 @@
+## [2.9.1] - 2026-10-20
+
+### Changed
+
+- A reference by name (a `type`, `ref`, `base`, …) is looked up in an index of the schema's top-level declarations
+  (`Schema#declaration_node`), built on the first lookup, instead of an XPath query that scanned every child of the
+  schema again for each reference. Large schemas referenced thousands of times are read several times faster
+  there; what is found is the same.
+- The specs no longer load `wasabi`, which only a commented-out example used and which does not load on Ruby 3.4
+  (it requires `kconv`): the suite runs on Ruby 3.4.
+
 ## [2.9.0] - 2026-10-18
 
 ### Changed

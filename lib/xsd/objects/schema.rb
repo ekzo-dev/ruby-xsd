@@ -127,6 +127,22 @@ module XSD
       chameleon? ? (@object_cache ||= {}.compare_by_identity) : reader.object_cache
     end
 
+    # The node of a top-level declaration of this schema, by its kind and name — what a reference by name looks up
+    # (BaseObject#object_by_name). The children are indexed in one pass on the first lookup: a query per lookup
+    # scans all of them again, and a large schema is looked up in once for every reference to it.
+    # @param [Symbol, String] node_name kind of declaration: complexType, simpleType, element, group, ...
+    # @param [String] name local name
+    # @return Nokogiri::XML::Element, nil
+    def declaration_node(node_name, name)
+      @declaration_nodes ||= node.element_children.each_with_object({}) do |child, index|
+        next unless child.namespace&.href == XML_SCHEMA
+
+        # the first one, as a query would find it
+        index[[child.name, child['name']]] ||= child
+      end
+      @declaration_nodes[[node_name.to_s, name]]
+    end
+
     # This schema and every schema it includes, those included in turn too
     # @return Array<Schema>
     def with_includes

@@ -129,9 +129,9 @@ module XSD
       # determine schema for namespace
       search_schemas = schemas_for_namespace(name_prefix)
 
-      # find element in target schema, name is passed as an xpath variable to stay safe with any name contents
+      # find the declaration in the schemas of the namespace
       search_schemas.each do |s|
-        node = s.node.at_xpath("./xs:#{node_name}[@name=$name]", XML_SCHEMA_NS, name: name_local)
+        node = s.declaration_node(node_name, name_local)
         return s.node_to_object(node) if node
       end
 
