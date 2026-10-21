@@ -5,6 +5,7 @@ module XSD
   # Parent elements: schema, choice, all, sequence, group
   # https://www.w3schools.com/xml/el_element.asp
   class Element < BaseObject
+    prepend CachedDataType
     TYPE_PROPERTY = :type
 
     include MinMaxOccurs

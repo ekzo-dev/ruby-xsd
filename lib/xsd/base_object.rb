@@ -279,12 +279,14 @@ module XSD
     # @param [Symbol] type
     # @param [Hash] options
     def self.property(name, type, options = {}, &block)
-      properties[to_underscore(name)] = {
+      method = to_underscore(name)
+      properties[method] = {
         name: name,
         type: type,
         resolve: block,
         **options
       }
+      define_member_reader(method)
     end
 
     # Define new object child
@@ -292,10 +294,12 @@ module XSD
     # @param [Symbol, Array<Symbol>] type
     # @param [Hash] options
     def self.child(name, type, options = {})
-      children[to_underscore(name)] = {
+      method = to_underscore(name)
+      children[method] = {
         type: type,
         **options
       }
+      define_member_reader(method)
     end
 
     # Define new object child
@@ -303,16 +307,53 @@ module XSD
     # @param [Symbol] type
     # @param [Hash] options
     def self.link(name, type, options = {})
-      links[to_underscore(name)] = {
+      method = to_underscore(name)
+      links[method] = {
         type: type,
         **options
       }
+      define_member_reader(method)
     end
+
+    # A property, link or child is read through a method of its own: reaching it through method_missing costs far
+    # more per call, and an object is asked for its members all the time. The method goes in a module of the class's
+    # own, so that a method the class defines itself still wins, and is not defined where a method of that name
+    # exists already — an ancestor's own keeps answering, as it did when the name went to method_missing.
+    # @param [Symbol] method
+    def self.define_member_reader(method)
+      return if method_defined?(method) || private_method_defined?(method)
+
+      member_readers.define_method(method) do |*args|
+        value = read_member(method, args)
+        raise NoMethodError.new("undefined method '#{method}' for an instance of #{self.class}", method) if value.equal?(NOT_A_MEMBER)
+
+        value
+      end
+    end
+
+    # The module a class's member readers are defined in
+    # @return Module
+    def self.member_readers
+      @member_readers ||= Module.new.tap { |readers| include(readers) }
+    end
+
+    # What #read_member answers when the name is none of the object's members
+    NOT_A_MEMBER = Object.new.freeze
 
     # Lookup for properties
     # @param [Symbol] method
     # @param [Array] args
     def method_missing(method, *args)
+      value = read_member(method, args)
+      value.equal?(NOT_A_MEMBER) ? super : value
+    end
+
+    # The value of a property, link or child, cached: from the node, through a reference, or by its name in the
+    # schemas. A member reader and method_missing both come here.
+    # @param [Symbol] method
+    # @param [Array] args
+    # @return Object, NOT_A_MEMBER
+    def read_member(method, args)
       # check cache first, nil and false results are cached as well
       return @cache[method] if @cache.key?(method)
 
@@ -343,7 +384,7 @@ module XSD
         return @cache[method] = result
       end
 
-      super
+      NOT_A_MEMBER
     end
 
     # Does object has property/link/child?

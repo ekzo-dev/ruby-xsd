@@ -7,6 +7,7 @@ module XSD
   # https://www.w3schools.com/xml/el_simpletype.asp
   class SimpleType < BaseObject
     include Named
+    prepend CachedDataType
 
     # Specifies a name for the element. This attribute is required if the simpleType element is a child of the
     # schema element, otherwise it is not allowed

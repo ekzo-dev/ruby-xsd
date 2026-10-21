@@ -6,6 +6,7 @@ module XSD
   # Parent elements: element, redefine, schema
   # https://www.w3schools.com/xml/el_complextype.asp
   class ComplexType < BaseObject
+    prepend CachedDataType
     include AttributeContainer
     include Named
 

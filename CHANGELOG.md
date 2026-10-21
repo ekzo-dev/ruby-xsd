@@ -1,3 +1,14 @@
+## [2.9.2] - 2026-10-21
+
+### Changed
+
+- A property, link or child of a schema object (`name`, `type`, `max_occurs`, `complex_type`, …) is read through a
+  method of its own, defined when the class declares it, instead of `method_missing`, which costs far more per call.
+  The lookup order is the same: a method a class or an ancestor defines itself still answers first, and
+  `respond_to?` answers as before. Reading XML against a large schema runs about 40% faster under YJIT.
+- `data_type` of an element, attribute, simple and complex type is worked out once and kept: the schema does not
+  change once read, and converting a document asked for it once per value.
+
 ## [2.9.1] - 2026-10-20
 
 ### Changed

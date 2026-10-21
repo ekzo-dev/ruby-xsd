@@ -182,4 +182,68 @@ RSpec.describe XSD::BaseObject do
       expect(shared_note.documentation).to eq catalog.schema['SharedNote'].documentation
     end
   end
+
+  # Members are read through methods of their own rather than method_missing, which costs far more per call. The
+  # lookup order stays as it was: a method a class defines itself, or one an ancestor defines, answers before the
+  # member reader does.
+  describe 'member readers' do
+    let(:parent_class) do
+      Class.new(XSD::BaseObject) do
+        def label
+          'own'
+        end
+      end
+    end
+
+    let(:probe_class) do
+      Class.new(parent_class) do
+        property :label, :string
+        property :code, :string, default: 'none'
+        child :annotation, :annotation
+
+        def code_twice
+          code * 2
+        end
+      end
+    end
+
+    let(:probe) do
+      node = Nokogiri::XML('<xs:element xmlns:xs="http://www.w3.org/2001/XMLSchema" label="x" code="c"/>').root
+      probe_class.new(node: node)
+    end
+
+    it 'reads a member through a method of its own' do
+      allow(probe).to receive(:method_missing).and_call_original
+
+      expect(probe_class.instance_method(:code).owner).not_to eq described_class
+      expect(probe.code_twice).to eq 'cc'
+      expect(probe.annotation).to be_nil
+      expect(probe).not_to have_received(:method_missing)
+    end
+
+    it 'leaves an ancestor\'s own method of the same name answering' do
+      expect(probe.label).to eq 'own'
+    end
+
+    it 'answers respond_to? as before' do
+      expect(probe).to respond_to(:code)
+      expect(probe).not_to respond_to(:unknown_member)
+      expect { probe.unknown_member }.to raise_error(NoMethodError)
+    end
+
+    it 'still reads a member of a referenced definition through the reference' do
+      expect(catalog.schema['SharedNote']).to be_a XSD::Element
+      expect(catalog['SharedNote'].type).to eq catalog.schema['SharedNote'].type
+    end
+  end
+
+  describe '#data_type' do
+    it 'is worked out once' do
+      element = catalog['Item']['Size']
+      first = element.data_type
+
+      expect(element.data_type).to equal first
+      expect(element.instance_variable_get(:@data_type)).to eq first
+    end
+  end
 end
