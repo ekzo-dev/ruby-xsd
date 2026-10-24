@@ -7,6 +7,7 @@ module XSD
   # https://www.w3schools.com/xml/el_attribute.asp
   class Attribute < BaseObject
     prepend CachedDataType
+
     TYPE_PROPERTY = :type
 
     include SimpleTyped

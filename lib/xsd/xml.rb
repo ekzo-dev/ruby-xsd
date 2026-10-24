@@ -21,7 +21,7 @@ module XSD
       elsif Pathname.new(location).absolute?
         File.read(location)
       else
-        raise ImportError, "Failed to locate import '#{location}'#{namespace ? " for namespace '#{namespace}'" : ''}"
+        raise ImportError, "Failed to locate import '#{location}'#{" for namespace '#{namespace}'" if namespace}"
       end
     end
 
@@ -158,6 +158,14 @@ module XSD
       @schemas_by_location[expanded] = add_schema_xml(xml, location: expanded)
     end
 
+    # The schema already read from a location, relative to a base as an import or an include names it
+    # @param [String] location
+    # @param [String, nil] base Location of the referencing schema
+    # @return Schema, nil
+    def loaded_schema(location, base: nil)
+      @schemas_by_location[expand_location(location.tr('\\', '/'), base)]
+    end
+
     # Get first added (considered primary) schema
     # @return Schema, nil
     def schema
@@ -256,7 +264,7 @@ module XSD
       elsif File.file?(location)
         File.read(location)
       else
-        raise ImportError, "Failed to locate import '#{location}'#{namespace ? " for namespace '#{namespace}'" : ''}"
+        raise ImportError, "Failed to locate import '#{location}'#{" for namespace '#{namespace}'" if namespace}"
       end
     end
 

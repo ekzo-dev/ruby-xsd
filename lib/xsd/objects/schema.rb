@@ -190,7 +190,10 @@ module XSD
     # @param [String, nil] namespace
     # @return Boolean
     def targets_namespace?(namespace)
-      namespace == target_namespace || namespaces[namespace.nil? ? 'xmlns' : "xmlns:#{namespace}"] == target_namespace ||
+      key = namespace.nil? ? 'xmlns' : "xmlns:#{namespace}"
+      # a prefix names a namespace only when the schema declares it: looking up a namespace URI as a prefix finds
+      # nothing, and nothing must not pass for the absent target namespace of a schema that has none
+      namespace == target_namespace || (namespaces.key?(key) && namespaces[key] == target_namespace) ||
         # an unqualified name in a chameleon schema names something of the namespace it was included into
         (chameleon? && namespace.nil? && !namespaces.key?('xmlns'))
     end

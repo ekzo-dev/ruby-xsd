@@ -73,7 +73,7 @@ module XSD
     # @param [Boolean] deep
     # @return Nokogiri::XML::NodeSet
     def nodes(name = :*, deep = false)
-      node.xpath("./#{deep ? '/' : ''}xs:#{name}", XML_SCHEMA_NS)
+      node.xpath("./#{'/' if deep}xs:#{name}", XML_SCHEMA_NS)
     end
 
     # Get schemas by namespace or prefix
@@ -409,7 +409,7 @@ module XSD
     # @param [String, nil] string
     # @return String, nil
     def nil_if_empty(string)
-      string&.empty? ? nil : string
+      string && string.empty? ? nil : string
     end
 
     private

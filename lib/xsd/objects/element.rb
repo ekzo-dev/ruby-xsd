@@ -6,6 +6,7 @@ module XSD
   # https://www.w3schools.com/xml/el_element.asp
   class Element < BaseObject
     prepend CachedDataType
+
     TYPE_PROPERTY = :type
 
     include MinMaxOccurs

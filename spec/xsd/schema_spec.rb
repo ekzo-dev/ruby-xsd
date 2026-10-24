@@ -58,6 +58,95 @@ RSpec.describe XSD::Schema do
     end
   end
 
+  context 'with schemas of no target namespace imported side by side' do
+    # As a provider ships them (Rosreestr's EGRN extracts and notifications): every document a schema of its own, with
+    # no target namespace and its own copies of the common types, which differ from one copy to another; and one
+    # schema that imports them all. Every import of the absent namespace is read, and a name resolves within the
+    # include tree of the schema it is written in.
+    let(:files) do
+      {
+        'main.xsd' => <<~XML,
+          <?xml version="1.0"?>
+          <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:main">
+            <xs:import schemaLocation="a.xsd"/>
+            <xs:import schemaLocation="b.xsd"/>
+          </xs:schema>
+        XML
+        'a.xsd' => <<~XML,
+          <?xml version="1.0"?>
+          <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:d="urn:dsig">
+            <xs:include schemaLocation="a-types.xsd"/>
+            <xs:import namespace="urn:dsig" schemaLocation="dsig.xsd"/>
+            <xs:element name="A"><xs:complexType><xs:sequence>
+              <xs:element name="Code" type="Code"/>
+              <xs:element name="Sig" type="d:SigType"/>
+            </xs:sequence></xs:complexType></xs:element>
+          </xs:schema>
+        XML
+        'a-types.xsd' => <<~XML,
+          <?xml version="1.0"?>
+          <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:simpleType name="Code"><xs:restriction base="xs:string"><xs:maxLength value="3"/></xs:restriction></xs:simpleType>
+          </xs:schema>
+        XML
+        'b.xsd' => <<~XML,
+          <?xml version="1.0"?>
+          <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:include schemaLocation="b-types.xsd"/>
+            <xs:element name="B"><xs:complexType><xs:sequence>
+              <xs:element name="Code" type="Code"/>
+            </xs:sequence></xs:complexType></xs:element>
+          </xs:schema>
+        XML
+        'b-types.xsd' => <<~XML,
+          <?xml version="1.0"?>
+          <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:simpleType name="Code"><xs:restriction base="xs:string"><xs:maxLength value="5"/></xs:restriction></xs:simpleType>
+          </xs:schema>
+        XML
+        # written with XMLSchema as the default namespace, as the W3C's XMLDSig schema is
+        'dsig.xsd' => <<~XML
+          <?xml version="1.0"?>
+          <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:d="urn:dsig" targetNamespace="urn:dsig">
+            <complexType name="SigType"><sequence><element name="Value" type="string"/></sequence></complexType>
+          </schema>
+        XML
+      }
+    end
+
+    let(:reader) do
+      XSD::XML.new(logger: spec_logger, resource_resolver: proc { |location, _| files[location] }).tap do |reader|
+        reader.add_schema_xml(files['main.xsd'], location: 'main.xsd')
+      end
+    end
+
+    it 'reads every import of the absent namespace, not only the first' do
+      expect(reader.elements.map(&:name)).to include('A', 'B')
+    end
+
+    it 'resolves a name within the include tree of the schema it is written in' do
+      expect(reader['A']['Code'].simple_type.restriction.facets['maxLength']).to eq '3'
+      expect(reader['B']['Code'].simple_type.restriction.facets['maxLength']).to eq '5'
+    end
+
+    it 'resolves a prefixed name of a schema with no target namespace through its import' do
+      sig = reader['A']['Sig']
+
+      expect(sig.complex_type.name).to eq 'SigType'
+      expect(sig.complex_type.namespace).to eq 'urn:dsig'
+    end
+
+    describe '#targets_namespace?' do
+      let(:schema) { reader['A'].schema }
+
+      it 'accepts the absent namespace only' do
+        expect(schema.targets_namespace?(nil)).to be true
+        expect(schema.targets_namespace?('urn:dsig')).to be false
+        expect(schema.targets_namespace?('d')).to be false
+      end
+    end
+  end
+
   context 'with ddex-v36 example files' do
     subject(:schema) { reader.schema }
 

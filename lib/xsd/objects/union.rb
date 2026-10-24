@@ -9,7 +9,7 @@ module XSD
     # @!attribute member_types
     # @return Array<String>
     property :memberTypes, :array, default: [] do |union|
-      union.node['memberTypes']&.split(' ')
+      union.node['memberTypes']&.split
     end
 
     # Nested simple and built-in types

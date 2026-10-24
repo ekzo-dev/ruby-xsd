@@ -15,12 +15,21 @@ module XSD
     # @return String, nil
     property :schemaLocation, :string
 
-    # Get imported schema
+    # Get imported schema: the one at the import's location when that one is loaded already; otherwise one known for
+    # the namespace, added manually or by another import. Not for the absent namespace: schemas with no target
+    # namespace are each a schema of its own (a provider's documents, every one with its own copies of the common
+    # types), so every import of it is read from its own location.
     # @return Schema
     def imported_schema
-      # a schema for the namespace may already be known, either added manually or by another import
-      known_schema = reader.schemas_for_namespace(namespace).find { |s| !s.equal?(schema) }
-      return known_schema if known_schema
+      if schema_location
+        located = reader.loaded_schema(schema_location, base: schema.location)
+        return located if located
+      end
+
+      unless namespace.nil?
+        known_schema = reader.schemas_for_namespace(namespace).find { |s| !s.equal?(schema) }
+        return known_schema if known_schema
+      end
 
       unless schema_location
         raise ImportError,

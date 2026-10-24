@@ -1,3 +1,21 @@
+## [2.9.3] - 2026-10-24
+
+### Fixed
+
+- A schema with no target namespace that imports another namespace (an XMLDSig `Signature` referenced as
+  `ds:SignatureType`) now finds what it imports. `Schema#targets_namespace?` took a namespace URI for a prefix, looked
+  it up among the schema's prefixes, found nothing, and matched that nothing against the absent target namespace:
+  every reference by a prefixed name was looked for in the schema itself.
+
+### Changed
+
+- Every import of the absent namespace is read from its own location. Schemas with no target namespace are each a
+  schema of their own (a provider's documents, every one shipping its own copies of the common types, which may
+  differ), so a second import of the absent namespace was not the same schema as the first one; before, it was
+  answered with whichever such schema had been loaded first. An import whose location is loaded already is answered
+  with that schema in any namespace (`XML#loaded_schema`); an import of a named namespace is still answered with a
+  schema known for it before its location is read.
+
 ## [2.9.2] - 2026-10-21
 
 ### Changed

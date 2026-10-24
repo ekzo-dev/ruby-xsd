@@ -8,8 +8,8 @@ gemspec
 group :development do
   gem 'logger', '~> 1.5'
   gem 'rspec', '~> 3.12'
-  gem 'rubocop', '~> 1.50'
-  gem 'rubocop-performance', '~> 1.17'
-  gem 'rubocop-rake', '~> 0.6'
-  gem 'rubocop-rspec', '~> 2.10'
+  gem 'rubocop', '~> 1.92'
+  gem 'rubocop-performance', '~> 1.27'
+  gem 'rubocop-rake', '~> 0.7'
+  gem 'rubocop-rspec', '~> 3.8'
 end

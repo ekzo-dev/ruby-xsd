@@ -61,6 +61,16 @@ element.multiple_allowed? # => true
 element.required? # => false
 ```
 
+### Imports and the absent namespace
+
+XML Schema leaves it to the processor whether every `<xs:import>` of a namespace is read or only the first (a
+`schemaLocation` is a hint); libxml2, and so Nokogiri's validator, reads the first. This reader reads them all, and
+resolves a name within the include tree of the schema the name is written in. That is what a set of schemas with no
+target namespace needs when one schema imports them all: every document a schema of its own, with its own copies of
+common types that may differ from one copy to another. Put together into one schema they break the rule that names
+are unique within a namespace, so a validator assembling one schema of them (`Schema#validate_xml`, which validates
+through Nokogiri) sees only the first of them.
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can

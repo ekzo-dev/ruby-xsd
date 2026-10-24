@@ -62,14 +62,14 @@ module XSD
     def collect_elements(include_base = false)
       # Don't include elements from base by default, that will lead to element duplicates because
       # elements in complex restriction MUST be all listen in restricting type
-      super(include_base)
+      super
     end
 
     # Get all available attributes on the current stack level, optionally including base type attributes
     # @param [Boolean] include_base
     # @return Array<Attribute>
     def collect_attributes(include_base = true)
-      result = super(include_base)
+      result = super
       # Filter restricted attributes to avoid duplicates from restricting and restricted type
       include_base ? result.to_h { |item| [item.name, item] }.values : result
     end
