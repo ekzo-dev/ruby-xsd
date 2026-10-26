@@ -1,0 +1,1071 @@
+# Signatures of the gem, from `rbs prototype rb` of lib/ and refined by hand. The readers that
+# BaseObject's `property`, `child` and `link` define are in xsd_members.rbs, generated: `rake rbs:members`.
+module XSD
+  # Base object
+  class BaseObject
+    self.@properties: untyped
+
+    self.@links: untyped
+
+    self.@children: untyped
+
+    self.@member_readers: untyped
+
+    self.@mapped_name: untyped
+
+    @options: untyped
+
+    @cache: untyped
+
+    # the parent may be a document or a node of a foreign schema (e.g. wsdl:types), there is no object for those
+    @parent: untyped
+
+    @documentation: untyped
+
+    @collect_elements: untyped
+
+    @collect_attributes: untyped
+
+    attr_reader options: untyped
+
+    # Objects that can not have nested elements
+    NO_ELEMENTS_CONTAINER: ::Array[:annotation | :simpleType | :attributeGroup | :attribute | :unique | :union | :simpleContent | :list | :any | :anyAttribute | :key | :keyref]
+
+    # Objects that cannot have nested attributes
+    NO_ATTRIBUTES_CONTAINER: ::Array[:annotation | :unique | :anyAttribute | :all | :attribute | :choice | :sequence | :group | :simpleType | :facet | :key | :keyref]
+
+    # Base XMLSchema namespace
+    XML_SCHEMA: "http://www.w3.org/2001/XMLSchema"
+
+    # Namespace map used for all internal xpath queries
+    XML_SCHEMA_NS: { "xs" => untyped }
+
+    def self.properties: () -> untyped
+
+    def self.links: () -> untyped
+
+    def self.children: () -> untyped
+
+    def initialize: (?::Hash[untyped, untyped] options) -> void
+
+    # Get current XML node
+    # @return Nokogiri::XML::Node
+    def node: () -> untyped
+
+    # Get object string representation
+    # @return String
+    def inspect: () -> ::String
+
+    # Optional. Specifies a unique ID for the element
+    # @!attribute id
+    # @return String
+    # property :id, :string
+    def id: () -> untyped
+
+    # Get current namespaces
+    # @return Hash
+    def namespaces: () -> untyped
+
+    # Get child nodes
+    # @param [Symbol] name
+    # @param [Boolean] deep
+    # @return Nokogiri::XML::NodeSet
+    def nodes: (?::Symbol name, ?bool deep) -> untyped
+
+    # Get schemas by namespace or prefix
+    # @param [String, nil] ns_or_prefix
+    # @return Array<Schema>
+    def schemas_for_namespace: (untyped ns_or_prefix) -> untyped
+
+    # Get element or attribute by path
+    # @return Element, Attribute, nil
+    def []: (*untyped args) -> untyped
+
+    # Search node by name in all available schemas and return its object
+    # @param [Symbol] node_name
+    # @param [String] name
+    # @return BaseObject, nil
+    def object_by_name: (untyped node_name, untyped name) -> (nil | untyped)
+
+    # Get reader object for node
+    # @param [Nokogiri::XML::Node] node
+    # @return BaseObject
+    def node_to_object: (untyped node) -> untyped
+
+    # Get xml parent object
+    # @return BaseObject, nil
+    def parent: () -> untyped
+
+    # Get current schema object
+    # @return Schema
+    def schema: () -> untyped
+
+    # Get child objects
+    # @param [Symbol] name
+    # @return Array<BaseObject>
+    def map_children: (untyped name) -> untyped
+
+    # Get child object
+    # @param [Symbol] name
+    # @return BaseObject, nil
+    def map_child: (untyped name) -> untyped
+
+    # Strip namespace prefix from node name
+    # @param [String, nil] name Name to strip from
+    # @return String, nil
+    def strip_prefix: (untyped name) -> untyped
+
+    # Get namespace prefix from node name
+    # @param [String, nil] name Name to strip from
+    # @return String, nil
+    def get_prefix: (untyped name) -> (untyped | nil)
+
+    # Return element documentation
+    # @return Array<String>
+    def documentation: () -> untyped
+
+    # Return documentation for specified node
+    # @param [Nokogiri::XML::Node] node
+    # @return Array<String>
+    def documentation_for: (untyped node) -> untyped
+
+    # Get all available elements on the current stack level
+    # @return Array<Element>
+    def collect_elements: (*untyped) -> untyped
+
+    # Get all available attributes on the current stack level
+    # @return Array<Attribute>
+    def collect_attributes: (*untyped) -> untyped
+
+    # Get reader instance
+    # @return XML
+    def reader: () -> untyped
+
+    def self.to_underscore: (untyped string) -> untyped
+
+    # Define new object property
+    # @param [Symbol] name
+    # @param [Symbol] type
+    # @param [Hash] options
+    def self.property: (untyped name, untyped type, ?::Hash[untyped, untyped] options) { (?) -> untyped } -> untyped
+
+    # Define new object child
+    # @param [Symbol] name
+    # @param [Symbol, Array<Symbol>] type
+    # @param [Hash] options
+    def self.child: (untyped name, untyped type, ?::Hash[untyped, untyped] options) -> untyped
+
+    # Define new object child
+    # @param [Symbol] name
+    # @param [Symbol] type
+    # @param [Hash] options
+    def self.link: (untyped name, untyped type, ?::Hash[untyped, untyped] options) -> untyped
+
+    # A property, link or child is read through a method of its own: reaching it through method_missing costs far
+    # more per call, and an object is asked for its members all the time. The method goes in a module of the class's
+    # own, so that a method the class defines itself still wins, and is not defined where a method of that name
+    # exists already — an ancestor's own keeps answering, as it did when the name went to method_missing.
+    # @param [Symbol] method
+    def self.define_member_reader: (untyped method) -> (nil | untyped)
+
+    # The module a class's member readers are defined in
+    # @return Module
+    def self.member_readers: () -> untyped
+
+    # What #read_member answers when the name is none of the object's members
+    NOT_A_MEMBER: untyped
+
+    # Lookup for properties
+    # @param [Symbol] method
+    # @param [Array] args
+    def method_missing: (untyped method, *untyped args) -> untyped
+
+    # The value of a property, link or child, cached: from the node, through a reference, or by its name in the
+    # schemas. A member reader and method_missing both come here.
+    # @param [Symbol] method
+    # @param [Array] args
+    # @return Object, NOT_A_MEMBER
+    def read_member: (untyped method, untyped args) -> untyped
+
+    # Does object has property/link/child?
+    # @param [Symbol] method
+    # @param [Boolean] include_private
+    def respond_to_missing?: (untyped method, ?bool include_private) -> untyped
+
+    # Get mapped element name
+    # @return Symbol
+    def self.mapped_name: () -> untyped
+
+    # Return string if it is not empty, or nil otherwise
+    # @param [String, nil] string
+    # @return String, nil
+    def nil_if_empty: (untyped string) -> (nil | untyped)
+
+    private
+
+    # Resolve property value from the node attribute, resolver block, reference or default
+    # @param [Hash] property
+    # @param [Symbol] method
+    # @param [Array] args
+    def property_value: (untyped property, untyped method, untyped args) -> untyped
+
+    # Cast raw attribute value to the declared property type
+    # @param [Hash] property
+    # @param [String] value
+    def cast_property_value: (untyped property, untyped value) -> untyped
+
+    def definition_match?: (untyped definition, untyped query) -> (false | untyped)
+  end
+end
+
+module XSD
+  class Error < StandardError
+  end
+
+  class ValidationError < Error
+  end
+
+  class ImportError < Error
+  end
+end
+
+module XSD
+  # The all element specifies that the child elements can appear in any order and that each child element can
+  # occur zero or one time.
+  # Parent elements: group, complexType, restriction (both simpleContent and complexContent),
+  # extension (both simpleContent and complexContent)
+  # https://www.w3schools.com/xml/el_all.asp
+  class All < BaseObject
+    include MinMaxOccurs
+
+    include ElementContainer
+  end
+end
+
+module XSD
+  # The annotation element is a top level element that specifies schema comments. The comments serve as inline
+  # documentation.
+  # Parent elements: Any element
+  # https://www.w3schools.com/xml/el_annotation.asp
+  class Annotation < BaseObject
+  end
+end
+
+module XSD
+  # The any element enables the author to extend the XML document with elements not specified by the schema.
+  # Parent elements: choice, sequence
+  # https://www.w3schools.com/xml/el_any.asp
+  class Any < BaseObject
+    include MinMaxOccurs
+
+    # Get virtual element name
+    # @return String
+    def name: () -> "#any"
+  end
+end
+
+module XSD
+  # The anyAttribute element enables the author to extend the XML document with attributes not specified by the schema.
+  # Parent elements: complexType, restriction (both simpleContent and complexContent), extension (both simpleContent
+  # and complexContent), attributeGroup
+  # https://www.w3schools.com/xml/el_anyattribute.asp
+  class AnyAttribute < BaseObject
+    # Get virtual attribute name
+    # @return String
+    def name: () -> "#anyAttribute"
+  end
+end
+
+module XSD
+  # The appinfo element specifies information to be used by the application.
+  # Parent elements: annotation
+  # https://www.w3schools.com/xml/el_appinfo.asp
+  class Appinfo < BaseObject
+  end
+end
+
+module XSD
+  # The attribute element defines an attribute.
+  # Parent elements: attributeGroup, schema, complexType, restriction (both simpleContent and complexContent),
+  # extension (both simpleContent and complexContent)
+  # https://www.w3schools.com/xml/el_attribute.asp
+  class Attribute < BaseObject
+    prepend CachedDataType
+
+    TYPE_PROPERTY: :type
+
+    include SimpleTyped
+
+    include Referenced
+
+    include Named
+
+    # Determine if attribute is required
+    # @return Boolean
+    def required?: () -> untyped
+
+    # Determine if attribute is optional
+    # @return Boolean
+    def optional?: () -> untyped
+
+    # Determine if attribute is prohibited
+    # @return Boolean
+    def prohibited?: () -> untyped
+
+    # Get base data type
+    # @return String, nil
+    def data_type: () -> untyped
+  end
+end
+
+module XSD
+  # The attributeGroup element is used to group a set of attribute declarations so that they can be incorporated as a
+  # group into complex type definitions.
+  # Parent elements: attributeGroup, complexType, schema, restriction (both simpleContent and complexContent),
+  # extension (both simpleContent and complexContent
+  # https://www.w3schools.com/xml/el_attributegroup.asp
+  class AttributeGroup < BaseObject
+    include Referenced
+
+    include AttributeContainer
+
+    include Named
+  end
+end
+
+module XSD
+  # XML Schema choice element allows only one of the elements contained in the <choice> declaration to be present
+  # within the containing element.
+  # Parent elements: group, choice, sequence, complexType, restriction (both simpleContent and complexContent),
+  # extension (both simpleContent and complexContent)
+  # https://www.w3schools.com/xml/el_choice.asp
+  class Choice < BaseObject
+    include MinMaxOccurs
+
+    include ElementContainer
+  end
+end
+
+module XSD
+  # The complexContent element defines extensions or restrictions
+  # on a complex type that contains mixed content or elements only.
+  # Parent elements: complexType
+  # https://www.w3schools.com/xml/el_complexcontent.asp
+  class ComplexContent < BaseObject
+  end
+end
+
+module XSD
+  # The complexType element defines a complex type. A complex type element is an XML element that contains other
+  # elements and/or attributes.
+  # Parent elements: element, redefine, schema
+  # https://www.w3schools.com/xml/el_complextype.asp
+  class ComplexType < BaseObject
+    prepend CachedDataType
+
+    include AttributeContainer
+
+    include Named
+
+    # Determine if this is a linked type
+    # @return Boolean
+    def linked?: () -> untyped
+
+    # Determine if this type has mixed content definition
+    # @return Boolean
+    def mixed_content?: () -> (true | untyped | false)
+
+    # Determine if this type has complex content definition
+    # @return Boolean
+    def complex_content?: () -> (false | true | untyped)
+
+    # Determine if this type has simple content definition
+    # @return Boolean
+    def simple_content?: () -> untyped
+
+    # Get simple content data type
+    # @return String, nil
+    def data_type: () -> (nil | untyped)
+
+    private
+
+    # Get data type of an extension/restriction base type
+    # @param [Extension, Restriction, nil] derivation
+    # @return String, nil
+    def base_data_type: (untyped derivation) -> (nil | untyped)
+  end
+end
+
+module XSD
+  # The documentation element is used to enter text comments in a schema.
+  # Parent elements: annotation
+  # https://www.w3schools.com/xml/el_documentation.asp
+  class Documentation < BaseObject
+  end
+end
+
+module XSD
+  # The element element defines an element.
+  # Parent elements: schema, choice, all, sequence, group
+  # https://www.w3schools.com/xml/el_element.asp
+  class Element < BaseObject
+    @substitutable_elements: untyped
+
+    prepend CachedDataType
+
+    TYPE_PROPERTY: :type
+
+    include MinMaxOccurs
+
+    include SimpleTyped
+
+    include ComplexTyped
+
+    include Referenced
+
+    include Named
+
+    # Determine if element is required
+    # @return Boolean
+    def required?: () -> untyped
+
+    # Determine if element is optional
+    # @return Boolean
+    def optional?: () -> untyped
+
+    # Determine if element has complex content
+    # @return Boolean
+    def complex_content?: () -> untyped
+
+    # Determine if element has simple content
+    # @return Boolean
+    def simple_content?: () -> (untyped | true)
+
+    # Determine if element has attributes
+    # @return Boolean
+    def attributes?: () -> untyped
+
+    # Determine if element has mixed content
+    # @return Boolean
+    def mixed_content?: () -> untyped
+
+    # Get substitutable elements
+    # @return Array<Element>
+    def substitutable_elements: () -> untyped
+
+    # Check is this attribute is global (immediate child of schema element)
+    # @return Boolean
+    def global?: () -> untyped
+
+    # Get base data type
+    # @return String, nil
+    def data_type: () -> untyped
+  end
+end
+
+module XSD
+  # The extension element extends an existing simpleType or complexType element.
+  # Parent elements: simpleContent, complexContent
+  # https://www.w3schools.com/xml/el_extension.asp
+  class Extension < BaseObject
+    TYPE_PROPERTY: nil
+
+    include Based
+
+    include AttributeContainer
+  end
+end
+
+module XSD
+  # Virtual object for all restriction facets
+  # Parent elements: restriction
+  class Facet < BaseObject
+  end
+end
+
+module XSD
+  # The field element specifies an XPath expression that specifies the value used to define an identity constraint.
+  # Parent elements: key, keyref, unique
+  # https://www.w3schools.com/xml/el_field.asp
+  class Field < BaseObject
+  end
+end
+
+module XSD
+  # The group element is used to define a group of elements to be used in complex type definitions.
+  # Parent elements: schema, choice, sequence, complexType, restriction (both simpleContent and complexContent),
+  # extension (both simpleContent and complexContent)
+  # https://www.w3schools.com/xml/el_group.asp
+  class Group < BaseObject
+    include MinMaxOccurs
+
+    include Referenced
+
+    include Named
+  end
+end
+
+module XSD
+  # The import element is used to add multiple schemas with different target namespace to a document.
+  # Parent elements: schema
+  # https://www.w3schools.com/xml/el_import.asp
+  class Import < BaseObject
+    # Get imported schema: the one at the import's location when that one is loaded already; otherwise one known for
+    # the namespace, added manually or by another import. Not for the absent namespace: schemas with no target
+    # namespace are each a schema of its own (a provider's documents, every one with its own copies of the common
+    # types), so every import of it is read from its own location.
+    # @return Schema
+    def imported_schema: () -> untyped
+  end
+end
+
+module XSD
+  # The include element is used to add multiple schemas with the same target namespace to a document.
+  # Parent elements: schema
+  # https://www.w3schools.com/xml/el_include.asp
+  class Include < BaseObject
+    # Get included schema
+    # @return Schema
+    def imported_schema: () -> untyped
+  end
+end
+
+module XSD
+  # The unique element defines that an element or an attribute value must be unique within the scope.
+  # Parent elements: element
+  # https://www.w3schools.com/xml/el_unique.asp
+  class Key < BaseObject
+  end
+end
+
+module XSD
+  # The unique element defines that an element or an attribute value must be unique within the scope.
+  # Parent elements: element
+  # https://www.w3schools.com/xml/el_unique.asp
+  class Keyref < BaseObject
+  end
+end
+
+module XSD
+  # The list element defines a simple type element as a list of values of a specified data type.
+  # Parent elements: simpleType
+  # https://www.w3schools.com/xml/el_list.asp
+  class List < BaseObject
+    TYPE_PROPERTY: :item_type
+
+    include SimpleTyped
+  end
+end
+
+module XSD
+  # The restriction element defines restrictions on a simpleType, simpleContent, or complexContent definition.
+  # Parent elements: simpleType, simpleContent, complexContent
+  # https://www.w3schools.com/xml/el_restriction.asp
+  class Restriction < BaseObject
+    @facets: untyped
+
+    TYPE_PROPERTY: nil
+
+    include Based
+
+    include SimpleTyped
+
+    include AttributeContainer
+
+    FACET_ELEMENTS: ::Array["minExclusive" | "minInclusive" | "maxExclusive" | "maxInclusive" | "totalDigits" | "fractionDigits" | "length" | "minLength" | "maxLength" | "enumeration" | "whiteSpace" | "pattern"]
+
+    # Get restriction facets
+    # @return Hash
+    def facets: () -> untyped
+
+    # Get all available elements on the current stack level, optionally including base type elements
+    # @param [Boolean] include_base
+    # @return Array<Element>
+    def collect_elements: (?bool include_base) -> untyped
+
+    # Get all available attributes on the current stack level, optionally including base type attributes
+    # @param [Boolean] include_base
+    # @return Array<Attribute>
+    def collect_attributes: (?bool include_base) -> untyped
+  end
+end
+
+module XSD
+  # The schema element defines the root element of a schema.
+  # Parent elements: NONE
+  # https://www.w3schools.com/xml/el_schema.asp
+  class Schema < BaseObject
+    @object_cache: untyped
+
+    @declaration_nodes: untyped
+
+    @target_namespace_prefix: untyped
+
+    @namespace_prefix: untyped
+
+    include AttributeContainer
+
+    include ElementContainer
+
+    # Get current schema object
+    # @return Schema
+    def schema: () -> self
+
+    # Target namespace of the schema. For a chameleon view (see XML#chameleon), the namespace of the schema
+    # that includes it — the one everything it declares belongs to.
+    # @return String, nil
+    def target_namespace: () -> untyped
+
+    # Is this a schema with no target namespace, seen as part of the namespace of a schema including it?
+    # @return Boolean
+    def chameleon?: () -> untyped
+
+    # The schema a chameleon view is a view of
+    # @return Schema, nil
+    def chameleon_source: () -> untyped
+
+    # Objects made of this schema's nodes. A chameleon view keeps its own: the same node is a different
+    # definition in each namespace that includes it.
+    # @return Hash
+    def object_cache: () -> untyped
+
+    # The node of a top-level declaration of this schema, by its kind and name — what a reference by name looks up
+    # (BaseObject#object_by_name). The children are indexed in one pass on the first lookup: a query per lookup
+    # scans all of them again, and a large schema is looked up in once for every reference to it.
+    # @param [Symbol, String] node_name kind of declaration: complexType, simpleType, element, group, ...
+    # @param [String] name local name
+    # @return Nokogiri::XML::Element, nil
+    def declaration_node: (untyped node_name, untyped name) -> untyped
+
+    # This schema and every schema it includes, those included in turn too
+    # @return Array<Schema>
+    def with_includes: () -> untyped
+
+    # Get all available elements on the current stack level, for schema same as elements
+    # @return Array<Element>
+    def collect_elements: (*untyped) -> untyped
+
+    # Get all available attributes on the current stack level, for schema same as attributes
+    # @return Array<Attribute>
+    def collect_attributes: (*untyped) -> untyped
+
+    # Get target namespace prefix
+    # @return String, nil
+    def target_namespace_prefix: () -> untyped
+
+    # Get schema namespace prefix
+    # @return String, nil
+    def namespace_prefix: () -> untyped
+
+    # Location the schema was read from, used to resolve relative import/include locations
+    # @return String, nil
+    def location: () -> untyped
+
+    # Check if namespace is a target namespace
+    # @param [String, nil] namespace
+    # @return Boolean
+    def targets_namespace?: (untyped namespace) -> untyped
+
+    # Override map_children on schema to get objects from all loaded schemas
+    # @param [Symbol] name
+    # @param [Hash] cache Schema nodes already visited, guards against import/include cycles
+    # @return Array<BaseObject>
+    def map_children: (untyped name, ?untyped cache) -> untyped
+
+    # Get children from all loaded schemas
+    # @param [Symbol] name
+    # @param [Hash] cache
+    # @return Array<BaseObject>
+    def import_map_children: (untyped name, untyped cache) -> (::Array[untyped] | untyped)
+
+    # Get import by namespace or prefix
+    # @param [String, nil] ns_or_prefix
+    # @return Import
+    def import_by_namespace: (untyped ns_or_prefix) -> untyped
+
+    # Validate XML against current schema
+    # @param [String, Pathname, Nokogiri::XML::Document] xml
+    def validate_xml: (untyped xml) -> untyped
+
+    # Validate current schema against XMLSchema 1.0
+    def validate: () -> untyped
+
+    private
+
+    # Get Nokogiri::XML::Schema object to validate against
+    # @return Nokogiri::XML::Schema
+    def schema_validator: () -> untyped
+
+    # Write the schema and all of its imports/includes as a flat set of files with rewritten locations
+    # @param [Schema] schema
+    # @param [Hash] processed Maps already written schema nodes to generated file names
+    # @return String Name of the file the schema was written to
+    def recursive_import_xsd: (untyped schema, untyped processed) { (?) -> untyped } -> untyped
+
+    # Get a detached copy of the schema node with all inherited namespaces declared on it
+    # @param [Schema] schema
+    # @return Nokogiri::XML::Node
+    def schema_node_with_namespaces: (untyped schema) -> untyped
+
+    # Create Nokogiri XML Schema instance with preconfigured options
+    # @param [IO, String] io
+    def create_xml_schema: (untyped io) -> untyped
+  end
+end
+
+module XSD
+  # The selector element specifies an XPath expression that selects a set of elements for an identity constraint
+  # (unique, key, and keyref elements).
+  # Parent elements: key, keyref, unique
+  # https://www.w3schools.com/xml/el_selector.asp
+  class Selector < BaseObject
+  end
+end
+
+module XSD
+  # The sequence element specifies that the child elements must appear in a sequence.
+  # Each child element can occur from 0 to any number of times.
+  # Parent elements: group, choice, sequence, complexType, restriction (both simpleContent and complexContent),
+  # extension (both simpleContent and complexContent)
+  # https://www.w3schools.com/xml/el_sequence.asp
+  class Sequence < BaseObject
+    include MinMaxOccurs
+
+    include ElementContainer
+  end
+end
+
+module XSD
+  # The simpleContent element contains extensions or restrictions on a text-only complex type or on a simple type as
+  # content and contains no elements.
+  # Parent elements: complexType
+  # https://www.w3schools.com/xml/el_simpleContent.asp
+  class SimpleContent < BaseObject
+  end
+end
+
+module XSD
+  # The simpleType element defines a simple type and specifies the constraints and information about the values
+  # of attributes or text-only elements.
+  # Parent elements: attribute, element, list, restriction, schema, union
+  # https://www.w3schools.com/xml/el_simpletype.asp
+  class SimpleType < BaseObject
+    include Named
+
+    prepend CachedDataType
+
+    # Determine if this is a linked type
+    # @return Boolean
+    def linked?: () -> untyped
+
+    # Get base data type
+    # @return String, nil
+    def data_type: () -> (untyped | untyped | "string")
+  end
+end
+
+module XSD
+  # The union element defines a simple type as a collection (union) of values from specified simple data types.
+  # Parent elements: simpleType
+  # https://www.w3schools.com/xml/el_union.asp
+  class Union < BaseObject
+    @types: untyped
+
+    # Nested simple and built-in types
+    # @return Array<SimpleType, String>
+    def types: () -> untyped
+  end
+end
+
+module XSD
+  # The unique element defines that an element or an attribute value must be unique within the scope.
+  # Parent elements: element
+  # https://www.w3schools.com/xml/el_unique.asp
+  class Unique < BaseObject
+  end
+end
+
+module XSD
+  module AttributeContainer
+    # Nested attribute groups
+    # @!attribute attribute_groups
+    # @return Array<AttributeGroup>
+    def self.included: (untyped obj) -> untyped
+  end
+end
+
+module XSD
+  # Used by extension and restriction elements
+  module Based
+    # Base simpleType
+    # @!attribute base_simple_type
+    # @return SimpleType, nil
+    def self.included: (untyped obj) -> untyped
+
+    # Get all available elements on the current stack level, optionally including base type elements
+    # @param [Boolean] include_base
+    # @return Array<Element>
+    def collect_elements: (?bool include_base) -> untyped
+
+    # Get all available attributes on the current stack level, optionally including base type attributes
+    # @param [Boolean] include_base
+    # @return Array<Attribute>
+    def collect_attributes: (?bool include_base) -> untyped
+  end
+end
+
+module XSD
+  # A definition's data type follows from the schema, which does not change once read: it is worked out on first use
+  # and kept. Reading XML casts every value by it, so it is asked for once per value otherwise.
+  module CachedDataType
+    @data_type: untyped
+
+    def data_type: () -> untyped
+  end
+end
+
+module XSD
+  # Provides object an ability to have complex type (nested or linked)
+  module ComplexTyped
+    # Child/linked complex type
+    # @!attribute complex_type
+    # @return ComplexType, nil
+    def self.included: (untyped obj) -> untyped
+
+    # Get all available elements on the current stack level or linked type elements
+    # @param [Boolean] linked_type
+    # @return Array<Element>
+    def collect_elements: (?bool linked_type) -> untyped
+
+    # Get all available attributes on the current stack level or linked type attributes
+    # @param [Boolean] linked_type
+    # @return Array<Attribute>
+    def collect_attributes: (?bool linked_type) -> untyped
+  end
+end
+
+module XSD
+  module ElementContainer
+    # Nested elements
+    # @!attribute elements
+    # @return Array<Element>
+    def self.included: (untyped obj) -> untyped
+  end
+end
+
+module XSD
+  module MinMaxOccurs
+    @computed_max_occurs: untyped
+
+    @computed_min_occurs: untyped
+
+    # Optional. Specifies the maximum number of times the choice element can occur in the parent element.
+    # The value can be any number >= 0, or if you want to set no limit on the maximum number, use the value "unbounded".
+    # Default value is 1
+    # @!attribute max_occurs
+    # @return Integer, Symbol
+    def self.included: (untyped obj) -> untyped
+
+    # Compute actual max_occurs accounting parents
+    # @return Integer, Symbol
+    def computed_max_occurs: () -> untyped
+
+    # Compute actual min_occurs accounting parents
+    # @return Integer
+    def computed_min_occurs: () -> untyped
+
+    # Determine if element may occur multiple times
+    # @return Boolean
+    def multiple?: () -> untyped
+
+    # Determine if element may occur multiple times, accounting parents
+    # @return Boolean
+    def multiple_allowed?: () -> untyped
+  end
+end
+
+module XSD
+  module Named
+    @namespace: untyped
+
+    # Get definition namespace
+    # @return String
+    def namespace: () -> untyped
+
+    # Get absolute definition name
+    # @return String
+    def absolute_name: () -> (::String | nil)
+  end
+end
+
+module XSD
+  module Referenced
+    # Reference object
+    # @!attribute reference
+    # @return BaseObject
+    def self.included: (untyped obj) -> untyped
+
+    # Is object referenced?
+    # @return Boolean
+    def referenced?: () -> untyped
+  end
+end
+
+module XSD
+  # Provides object an ability to have simple type (nested or linked)
+  module SimpleTyped
+    # Get child/linked simple type
+    # @!attribute simple_type
+    # @return SimpleType, nil
+    def self.included: (untyped obj) -> untyped
+  end
+end
+
+module XSD
+  VERSION: "2.9.3"
+end
+
+module XSD
+  class XML
+    @options: untyped
+
+    # keyed by node identity, the parsed documents are treated as immutable
+    @object_cache: untyped
+
+    @schemas: untyped
+
+    @schemas_by_location: untyped
+
+    @chameleons: untyped
+
+    @default_logger: untyped
+
+    attr_reader options: untyped
+
+    attr_reader object_cache: untyped
+
+    attr_reader schemas: untyped
+
+    # Matches locations that have to be fetched over the network
+    REMOTE_LOCATION: ::Regexp
+
+    # Legacy resource resolver, kept for backwards compatibility. Resolves absolute paths and URLs only,
+    # relative locations are resolved by the reader itself, see #read_resource
+    DEFAULT_RESOURCE_RESOLVER: untyped
+
+    CLASS_MAP: { "schema" => untyped, "element" => untyped, "attribute" => untyped, "choice" => untyped, "complexType" => untyped, "sequence" => untyped, "simpleContent" => untyped, "complexContent" => untyped, "extension" => untyped, "import" => untyped, "include" => untyped, "simpleType" => untyped, "all" => untyped, "restriction" => untyped, "group" => untyped, "any" => untyped, "union" => untyped, "attributeGroup" => untyped, "list" => untyped, "unique" => untyped, "selector" => untyped, "field" => untyped, "annotation" => untyped, "documentation" => untyped, "appinfo" => untyped, "anyAttribute" => untyped, "key" => untyped, "keyref" => untyped, "minExclusive" => untyped, "minInclusive" => untyped, "maxExclusive" => untyped, "maxInclusive" => untyped, "totalDigits" => untyped, "fractionDigits" => untyped, "length" => untyped, "minLength" => untyped, "maxLength" => untyped, "enumeration" => untyped, "whiteSpace" => untyped, "pattern" => untyped }
+
+    # Create reader from a file path
+    # @param [String, Pathname] path
+    # @param [Hash] options
+    # @return XML
+    def self.open: (untyped path, **untyped options) -> untyped
+
+    def initialize: (**untyped options) -> void
+
+    def logger: () -> untyped
+
+    # Resolver used to fetch imported/included schemas
+    # @return Proc
+    def resource_resolver: () -> untyped
+
+    def tmp_dir: () -> untyped
+
+    def read_document: (untyped xml) -> untyped
+
+    # Add schema xml to reader instance
+    # @param [String] xml
+    # @param [String, nil] location Location the xml was read from, used to resolve relative imports
+    # @return Schema
+    def add_schema_xml: (untyped xml, ?location: untyped?) -> untyped
+
+    # Add schema node to reader instance
+    # @param [Nokogiri::XML::Node] node
+    # @param [String, nil] location Location the node was read from, used to resolve relative imports
+    # @return Schema
+    def add_schema_node: (untyped node, ?location: untyped?) -> untyped
+
+    # Load schema referenced by an import/include, reusing an already loaded one when possible.
+    #
+    # A location written with backslashes (`import\types.xsd`) is read as one written with slashes: a
+    # `schemaLocation` is a URI reference, where the separator is `/` alone, but schemas authored on Windows
+    # carry such locations, and the tools they were made with accept them. A custom resolver is handed the
+    # location so normalized.
+    # @param [String] location
+    # @param [String, nil] namespace
+    # @param [String, nil] base Location of the referencing schema
+    # @return Schema
+    def load_schema: (untyped location, ?namespace: untyped?, ?base: untyped?) -> untyped
+
+    # The schema already read from a location, relative to a base as an import or an include names it
+    # @param [String] location
+    # @param [String, nil] base Location of the referencing schema
+    # @return Schema, nil
+    def loaded_schema: (untyped location, ?base: untyped?) -> untyped
+
+    # Get first added (considered primary) schema
+    # @return Schema, nil
+    def schema: () -> untyped
+
+    # Get schemas by namespace: those that target it, and what they include — a chameleon schema (one with no
+    # target namespace of its own) as a view in this namespace
+    # @param [String, nil] namespace
+    # @return Array<Schema>
+    def schemas_for_namespace: (untyped namespace) -> untyped
+
+    # A schema with no target namespace, seen as part of the namespace of a schema that includes it ("chameleon"
+    # include): the same document, with everything it declares in that namespace. One view per schema and
+    # namespace, so a schema included into two namespaces declares two sets of definitions.
+    # @param [Schema] source
+    # @param [String] namespace
+    # @return Schema
+    def chameleon: (untyped source, untyped namespace) -> untyped
+
+    # The chameleon views made so far
+    # @return Array<Schema>
+    def chameleons: () -> untyped
+
+    # Every namespace the schemas declare definitions in, includes resolved. A schema with no target namespace
+    # stands for the absent namespace (nil) only when no schema includes it: otherwise what it declares is part
+    # of the namespaces including it.
+    # @return Array<String, nil>
+    def target_namespaces: () -> untyped
+
+    # The schemas that stand on their own, includes resolved: all but those only seen through a chameleon view,
+    # whose definitions belong to the namespaces including them
+    # @return Array<Schema>
+    def standalone_schemas: () -> untyped
+
+    def []: (*untyped args) -> (untyped | nil)
+
+    def elements: (*untyped args) -> untyped
+
+    def attributes: (*untyped args) -> untyped
+
+    def attribute_groups: () -> untyped
+
+    def complex_types: () -> untyped
+
+    def simple_types: () -> untyped
+
+    def groups: () -> untyped
+
+    private
+
+    # Read schema contents from an absolute path or URL
+    # @param [String] location
+    # @param [String, nil] namespace
+    # @return String
+    def read_resource: (untyped location, ?untyped? namespace) -> untyped
+
+    # Resolve a possibly relative location against the location of the referencing schema
+    # @param [String] location
+    # @param [String, nil] base
+    # @return String
+    def expand_location: (untyped location, untyped base) -> untyped
+
+    def collect: (untyped name, *untyped args) -> untyped
+
+    def default_logger: () -> untyped
+  end
+end

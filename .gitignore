@@ -4,7 +4,6 @@
 /vendor/bundle
 /lib/bundler/man/
 external
-Gemfile.lock
 Gemfile.*.lock
 .ruby-version
 
